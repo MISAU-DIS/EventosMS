@@ -1,103 +1,351 @@
+'use client';
+
+import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <>
+      <title>Eventos MS</title>
+      <meta name="description" content="Evento oficial do Ministério da Saúde: Countdown to 2030 - 2025 Country Annual Meeting" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      <main className="min-h-screen bg-gradient-to-b from-white to-green-50">
+        {/* Hero Section */}
+        <div className="flex flex-col items-center justify-center text-center px-4 py-20 pt-32">
+          <motion.h1
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-green-700 leading-tight"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Evento MISAU 2025
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="mt-4 text-lg md:text-xl max-w-2xl text-gray-700"
           >
-            Read our docs
-          </a>
+           Evento anual · Ministério da Saúde 2025  
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6, duration: 1 }}
+            className="mt-8 flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <Link
+              href="/agenda"
+              className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+            >
+              Ver Agenda
+            </Link>
+            <Link
+              href="/comentarios"
+              className="bg-white border border-green-600 text-green-700 hover:bg-green-50 px-6 py-3 rounded-full transition"
+            >
+              Ver Comentários
+            </Link>
+          </motion.div>
         </div>
+
+        {/* Banner informativo */}
+        {/* <div className="bg-gradient-to-r from-green-600 to-green-700 text-white py-6">
+          <div className="container mx-auto px-4 text-center">
+            <p className="text-base sm:text-lg font-medium flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6">
+              <span className="flex items-center gap-2">📍 Nairobi, Quénia</span>
+              <span className="flex items-center gap-2">🗓 16–20 de Junho de 2025</span>
+              <span className="flex items-center gap-2">👥 +500 Participantes</span>
+            </p>
+          </div>
+        </div> */}
+
+        {/* Sobre o evento com imagem */}
+        <section className="py-16 px-4 bg-white">
+          <div className="container mx-auto max-w-6xl">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="text-center lg:text-left"
+              >
+                <h2 className="text-3xl sm:text-4xl font-bold text-green-700 mb-6">Sobre o Evento</h2>
+                <p className="text-gray-700 text-lg mb-6 leading-relaxed">
+                  Produzindo estatísticas nacionais e subnacionais confiáveis sobre saúde materna, neonatal, infantil e adolescente, com foco também em nutrição. 
+                  Um encontro para alinhar ações e compromissos rumo à Agenda 2025.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-3 h-3 bg-green-600 rounded-full"></div>
+                    <span className="text-gray-600">Saúde Materna e Infantil</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-3 h-3 bg-green-600 rounded-full"></div>
+                    <span className="text-gray-600">Nutrição e Adolescentes</span>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="relative"
+              >
+                <div className="">
+                  <Image
+                    src="/MISAU.jpg"
+                    alt="Profissionais de saúde em reunião"
+                    width={500}
+                    height={350}
+                    className="rounded-xl shadow-lg w-full h-auto" 
+                    // bg-gradient-to-br rounded-2xl p-8 shadow-xl
+                  />
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Objetivos do MISAU */}
+        <section className="py-16 px-4 bg-gradient-to-b from-green-50 to-white">
+          <div className="container mx-auto max-w-6xl text-center">
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-3xl sm:text-4xl font-bold text-green-700 mb-12"
+            >
+              Objetivos Estratégicos
+            </motion.h2>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                {
+                  icon: "",
+                  title: "Fortalecimento do SNS",
+                  description: "Melhorar a qualidade e cobertura dos serviços de saúde em todo o território nacional."
+                },
+                {
+                  icon: "",
+                  title: "Saúde Materno-Infantil",
+                  description: "Reduzir a mortalidade materna, neonatal e infantil através de intervenções baseadas em evidências."
+                },
+                {
+                  icon: "",
+                  title: "Nutrição e Alimentação",
+                  description: "Combater a desnutrição e promover hábitos alimentares saudáveis em todas as faixas etárias."
+                },
+                {
+                  icon: "",
+                  title: "Sistemas de Informação",
+                  description: "Fortalecer os sistemas de informação em saúde para tomada de decisões baseada em dados."
+                },
+                {
+                  icon: "",
+                  title: "Agenda 2030",
+                  description: "Alinhar as ações nacionais com os Objetivos de Desenvolvimento Sustentável em saúde."
+                },
+                {
+                  icon: "",
+                  title: "Parcerias Estratégicas",
+                  description: "Fortalecer a colaboração com parceiros nacionais e internacionais no sector da saúde."
+                }
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                >
+                  <div className="text-4xl mb-4">{item.icon}</div>
+                  <h3 className="text-xl font-semibold text-green-700 mb-3">{item.title}</h3>
+                  <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Dados e Estatísticas */}
+        <section className="py-16 px-4 bg-green-700 text-white">
+          <div className="container mx-auto max-w-6xl text-center">
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-3xl sm:text-4xl font-bold mb-12"
+            >
+              Impacto do MISAU
+            </motion.h2>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                { number: "1,400+", label: "Unidades Sanitárias", icon: "" },
+                { number: "32M+", label: "População Coberta", icon: "" },
+                { number: "11", label: "Províncias Atendidas", icon: "" },
+                { number: "2025", label: "Meta dos ODS", icon: "" }
+              ].map((stat, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+                >
+                  <div className="text-3xl mb-2">{stat.icon}</div>
+                  <div className="text-3xl sm:text-4xl font-bold mb-2">{stat.number}</div>
+                  <div className="text-green-100">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Call to Action */}
+        <section className="py-16 px-4 bg-gradient-to-r from-green-600 to-green-700 text-white text-center">
+          <div className="container mx-auto max-w-4xl">
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-3xl sm:text-4xl font-bold mb-6"
+            >
+              Junte-se ao Movimento
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="text-xl mb-8 text-green-100"
+            >
+              Seja parte da transformação da saúde em Moçambique. Acompanhe as discussões e contribua para um futuro mais saudável.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+            >
+              <Link
+                href="/agenda"
+                className="bg-white text-green-700 hover:bg-green-50 px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+              >
+                Consultar Programa
+              </Link>
+              <Link
+                href="/contacto"
+                className="border-2 border-white text-white hover:bg-white hover:text-green-700 px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+              >
+                Contactar Organização
+              </Link>
+            </motion.div>
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    </>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 'use client';
+
+// import Link from "next/link";
+// import { motion } from "framer-motion";
+
+// export default function Home() {
+//   return (
+//     <>
+//       <title>Eventos MS</title>
+//       <meta name="description" content="Evento oficial do Ministério da Saúde: Countdown to 2030 - 2025 Country Annual Meeting" />
+//       <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+//       <main className="min-h-screen bg-gradient-to-b from-white to-green-100 text-gray-800">
+//         {/* Hero Section */}
+//         <div className="flex flex-col items-center justify-center text-center px-4 py-20">
+//           <motion.h1
+//             initial={{ opacity: 0, y: -30 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{ duration: 0.8 }}
+//             className="text-5xl md:text-6xl font-extrabold text-green-700"
+//           >
+//             Evento MISAU 2025
+//           </motion.h1>
+
+//           <motion.p
+//             initial={{ opacity: 0, y: 20 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{ delay: 0.3, duration: 0.8 }}
+//             className="mt-4 text-lg md:text-xl max-w-2xl text-gray-700"
+//           >
+//             2025 Country Annual Meeting · Ministério da Saúde
+//           </motion.p>
+
+//           <motion.div
+//             initial={{ opacity: 0 }}
+//             animate={{ opacity: 1 }}
+//             transition={{ delay: 0.6, duration: 1 }}
+//             className="mt-6 flex flex-wrap gap-4 justify-center"
+//           >
+//             <Link
+//               href="/agenda"
+//               className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full transition"
+//             >
+//               Ver Agenda
+//             </Link>
+            // <Link
+            //   href="/comentarios"
+            //   className="bg-white border border-green-600 text-green-700 hover:bg-green-50 px-6 py-3 rounded-full transition"
+            // >
+            //   Ver Comentários
+            // </Link>
+//           </motion.div>
+//         </div>
+
+//         {/* Banner informativo */}
+//         {/* <div className="bg-green-600 text-white py-4 text-center">
+//           <p className="text-lg font-medium">📍 Nairobi, Quénia · 🗓 16–20 de Junho de 2025</p>
+//         </div> */}
+
+//         {/* Sobre o evento */}
+//         <section className="py-16 px-6 bg-white text-center">
+//           <h2 className="text-3xl font-bold text-green-700 mb-4">Sobre o Evento</h2>
+//           <p className="max-w-3xl mx-auto text-gray-700 text-lg">
+//             Produzindo estatísticas nacionais e subnacionais confiáveis sobre saúde materna, neonatal, infantil e adolescente, com foco também em nutrição. 
+//             Um encontro para alinhar ações e compromissos rumo à Agenda 2030.
+//           </p>
+//         </section>
+//       </main>
+//     </>
+//   );
+// }
+
