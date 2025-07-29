@@ -2,7 +2,6 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useState } from 'react';
-import { FC } from 'react';
 
 interface Session {
     time: string;
@@ -22,7 +21,7 @@ interface AgendaData {
     [key: string]: DayData;
 }
 
-export default function Agenda() {
+const Agenda = () => {
     const [selectedDay, setSelectedDay] = useState<string>('dia1');
 
     const agendaData: AgendaData = {
@@ -513,7 +512,7 @@ export default function Agenda() {
     );
 }
 
-
+export default Agenda;
 
 
 
