@@ -36,7 +36,7 @@ export default function Contacto(): React.ReactElement {
           transition={{ duration: 0.7 }}
           className="text-4xl font-extrabold text-green-700 mb-4"
         >
-          Fale Conosco
+          Fale Connosco
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -53,20 +53,25 @@ export default function Contacto(): React.ReactElement {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-gray-700 font-medium mb-1">Nome *</label>
-              <input type="text" className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500" placeholder="Seu nome completo" required />
+              <input type="text" className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500 text-gray-700" placeholder="Seu nome completo" required />
             </div>
+
+
+
+
+            
             <div>
               <label className="block text-gray-700 font-medium mb-1">Email *</label>
-              <input type="email" className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500" placeholder="email@exemplo.com" required />
+              <input type="email" className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500 text-gray-700" placeholder="email@exemplo.com" required />
             </div>
           </div>
           <div>
             <label className="block text-gray-700 font-medium mb-1">Assunto</label>
-            <input type="text" className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500" placeholder="Ex: Participação no evento" />
+            <input type="text" className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500 text-gray-700" placeholder="Ex: Participação no evento" />
           </div>
           <div>
             <label className="block text-gray-700 font-medium mb-1">Mensagem *</label>
-            <textarea className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500 resize-none" rows={5} placeholder="Escreva sua mensagem aqui..." required></textarea>
+            <textarea className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500 text-gray-700 resize-none" rows={5} placeholder="Escreva sua mensagem aqui..." required></textarea>
           </div>
           <div className="text-center">
             <button type="submit" className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full font-semibold transition-all shadow-md hover:shadow-lg transform hover:scale-105">

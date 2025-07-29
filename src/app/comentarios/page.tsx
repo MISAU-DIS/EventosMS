@@ -214,7 +214,7 @@ export default function Comentarios(): React.ReactElement {
                       type="text"
                       value={newComment.name}
                       onChange={(e) => setNewComment({ ...newComment, name: e.target.value })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-gray-700"
                       placeholder="Ex: Dr. Maria Silva"
                       required
                     />
@@ -227,7 +227,7 @@ export default function Comentarios(): React.ReactElement {
                       type="text"
                       value={newComment.role}
                       onChange={(e) => setNewComment({ ...newComment, role: e.target.value })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-gray-700"
                       placeholder="Ex: Diretor de Saúde"
                     />
                   </div>
@@ -241,7 +241,7 @@ export default function Comentarios(): React.ReactElement {
                     type="text"
                     value={newComment.organization}
                     onChange={(e) => setNewComment({ ...newComment, organization: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-gray-700"
                     placeholder="Ex: MISAU - Província de Maputo"
                   />
                 </div>
@@ -274,7 +274,7 @@ export default function Comentarios(): React.ReactElement {
                     value={newComment.comment}
                     onChange={(e) => setNewComment({ ...newComment, comment: e.target.value })}
                     rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all resize-none text-gray-700"
                     placeholder="Compartilhe sua experiência sobre o evento..."
                     required
                   />
