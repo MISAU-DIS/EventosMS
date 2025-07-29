@@ -2,11 +2,30 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useState } from 'react';
+import { FC } from 'react';
+
+interface Session {
+    time: string;
+    title: string;
+    type: string;
+    speaker: string;
+    description: string;
+}
+
+interface DayData {
+    date: string;
+    theme: string;
+    sessions: Session[];
+}
+
+interface AgendaData {
+    [key: string]: DayData;
+}
 
 export default function Agenda() {
-    const [selectedDay, setSelectedDay] = useState('dia1');
+    const [selectedDay, setSelectedDay] = useState<string>('dia1');
 
-    const agendaData = {
+    const agendaData: AgendaData = {
         dia1: {
             date: '16 de Junho - Segunda-feira',
             theme: 'Abertura e Visão Estratégica',
@@ -284,7 +303,7 @@ export default function Agenda() {
         }
     };
 
-    const getSessionIcon = (type) => {
+    const getSessionIcon = (type: string): string => {
         const icons = {
             keynote: '🎯',
             panel: '💬',
@@ -298,11 +317,12 @@ export default function Agenda() {
             roundtable: '⭕',
             workgroup: '👥'
         };
-        return icons[type] || '📋';
+        return icons[type as keyof typeof icons] || '📋';
+
     };
 
-    const getSessionColor = (type) => {
-        const colors = {
+    const getSessionColor = (type: string): string => {
+        const colors: Record<string, string> = {
             keynote: 'bg-purple-100 border-purple-300 text-purple-800',
             panel: 'bg-blue-100 border-blue-300 text-blue-800',
             workshop: 'bg-green-100 border-green-300 text-green-800',
@@ -504,55 +524,3 @@ export default function Agenda() {
 
 
 
-
-// 'use client';
-// import { motion } from 'framer-motion';
-// import Link from 'next/link';
-
-// export default function Agenda () {
-//     return (
-//         <>
-//         <title>Eventos MS</title>
-//         <meta name="description" content="Evento oficial do Ministério da Saúde: Countdown to 2030 - 2025 Country Annual Meeting" />
-//         <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
-//         <main className="min-h-screen bg-gray-100">
-//             <div className="container mx-auto px-6 py-16 text-center">
-//             <motion.h1
-//                 initial={{ opacity: 0, y: -50 }}
-//                 animate={{ opacity: 1, y: 0 }}
-//                 transition={{ duration: 0.8 }}
-//                 className="text-5xl md:text-6xl font-extrabold text-green-700"
-//             >
-//                 Evento MISAU 2025
-//             </motion.h1>
-    
-//             <motion.p
-//                 initial={{ opacity: 0, y: 20 }}
-//                 animate={{ opacity: 1, y: 0 }}
-//                 transition={{ delay: 0.2, duration: 0.8 }}
-//                 className="mt-4 text-lg text-gray-600"
-//             >
-//                 Junte-se a nós para um encontro que moldará o futuro da saúde em Moçambique.
-//             </motion.p>
-    
-//             <motion.p
-//                 initial={{ opacity: 0, y: 20 }}
-//                 animate={{ opacity: 1, y: 0 }}
-//                 transition={{ delay: 0.4, duration: 0.8 }}
-//                 className="mt-2 text-lg text-gray-600"
-//             >
-//                 De 16 a 20 de Junho de 2025 em Nairobi, Quénia.
-//             </motion.p>
-//             </div>
-//             <div className="container mx-auto px-6 py-16">
-//                 <h2 className="text-3xl font-bold text-green-700 mb-8 text-center">Agenda do Evento</h2>
-               
-//                 <p className="text-lg text-gray-600">
-//                     Para mais detalhes, entre em contato conosco através da nossa página de <Link href="/contacto" className="text-green-600 hover:underline">Contato</Link>.
-//                 </p>
-//             </div>
-//         </main>
-//         </>
-//     );
-// }
