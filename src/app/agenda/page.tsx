@@ -27,295 +27,335 @@ export default function Agenda() {
 
     const agendaData: AgendaData = {
         dia1: {
-            date: '16 de Junho - Segunda-feira',
+            date: '12-13 de Setembro de 2025',
             theme: 'Abertura e Visão Estratégica',
             sessions: [
                 {
-                    time: '08:00 - 09:00',
-                    title: 'Credenciamento e Welcome Coffee',
+                    time: '08:30 - 09:00',
+                    title: 'Cerimónia de Abertura',
                     type: 'networking',
                     speaker: '',
-                    description: 'Recepção dos participantes e networking inicial'
+                    description: 'Leitura e aprovação da Síntese do 1º dia'
                 },
                 {
-                    time: '09:00 - 09:30',
+                    time: '09:00 - 10:25',
                     title: 'Cerimónia de Abertura',
                     type: 'ceremony',
                     speaker: 'Ministra da Saúde de Moçambique',
                     description: 'Discurso de abertura oficial e apresentação dos objetivos do evento'
                 },
                 {
-                    time: '09:30 - 10:30',
+                    time: '10:25 - 11:05',
                     title: 'Keynote: Rumo à Agenda 2030',
                     type: 'keynote',
                     speaker: 'Dr. Maria Santos - OMS África',
                     description: 'Visão estratégica para o alcance dos ODS em saúde na região'
                 },
                 {
-                    time: '10:30 - 11:00',
+                    time: '11:05 - 12:55',
                     title: 'Pausa para Café',
                     type: 'break',
                     speaker: '',
                     description: ''
                 },
                 {
-                    time: '11:00 - 12:30',
+                    time: '12:55 - 13:10',
                     title: 'Painel: Estado Atual da Saúde Materna em Moçambique',
                     type: 'panel',
                     speaker: 'Especialistas MISAU',
                     description: 'Análise dos indicadores atuais e desafios na saúde materna'
                 },
                 {
-                    time: '12:30 - 14:00',
+                    time: '13:10 - 13:25',
                     title: 'Almoço',
                     type: 'break',
                     speaker: '',
                     description: ''
                 },
                 {
-                    time: '14:00 - 15:30',
+                    time: '13:25 - 13:50',
                     title: 'Workshop: Sistemas de Informação em Saúde',
                     type: 'workshop',
                     speaker: 'Equipe Técnica MISAU',
                     description: 'Sessão prática sobre coleta e análise de dados de saúde'
                 },
                 {
-                    time: '15:30 - 16:00',
+                    time: '13:50 - 14:10',
                     title: 'Pausa para Café',
                     type: 'break',
                     speaker: '',
                     description: ''
                 },
                 {
-                    time: '16:00 - 17:00',
+                    time: '14:10 - 14:30h',
+                    title: 'Apresentação de Estudos de Caso',
+                    type: 'presentation',
+                    speaker: 'Diretores Provinciais',
+                    description: 'Experiências bem-sucedidas das províncias'
+                },
+                {
+                    time: '14:30 - 15:30',
+                    title: 'Apresentação de Estudos de Caso',
+                    type: 'presentation',
+                    speaker: 'Diretores Provinciais',
+                    description: 'Experiências bem-sucedidas das províncias'
+                },
+                {
+                    time: '15:30 - 15:40',
+                    title: 'Apresentação de Estudos de Caso',
+                    type: 'presentation',
+                    speaker: 'Diretores Provinciais',
+                    description: 'Experiências bem-sucedidas das províncias'
+                },
+                {
+                    time: '15:40 - 15:55',
+                    title: 'Apresentação de Estudos de Caso',
+                    type: 'presentation',
+                    speaker: 'Diretores Provinciais',
+                    description: 'Experiências bem-sucedidas das províncias'
+                },
+                {
+                    time: '15:55 - 16:05',
                     title: 'Apresentação de Estudos de Caso',
                     type: 'presentation',
                     speaker: 'Diretores Provinciais',
                     description: 'Experiências bem-sucedidas das províncias'
                 }
             ]
-        },
-        dia2: {
-            date: '17 de Junho - Terça-feira',
-            theme: 'Saúde Infantil e Nutrição',
-            sessions: [
-                {
-                    time: '09:00 - 10:30',
-                    title: 'Seminário: Desnutrição Infantil - Desafios e Soluções',
-                    type: 'seminar',
-                    speaker: 'Dr. João Mavie - UNICEF',
-                    description: 'Estratégias para combater a desnutrição em crianças menores de 5 anos'
-                },
-                {
-                    time: '10:30 - 11:00',
-                    title: 'Pausa para Café',
-                    type: 'break',
-                    speaker: '',
-                    description: ''
-                },
-                {
-                    time: '11:00 - 12:30',
-                    title: 'Mesa Redonda: Vacinação e Imunização',
-                    type: 'roundtable',
-                    speaker: 'Especialistas em Imunização',
-                    description: 'Discussão sobre cobertura vacinal e novos programas'
-                },
-                {
-                    time: '12:30 - 14:00',
-                    title: 'Almoço',
-                    type: 'break',
-                    speaker: '',
-                    description: ''
-                },
-                {
-                    time: '14:00 - 15:30',
-                    title: 'Workshop: Cuidados Neonatais Essenciais',
-                    type: 'workshop',
-                    speaker: 'Equipe de Pediatria MISAU',
-                    description: 'Práticas para redução da mortalidade neonatal'
-                },
-                {
-                    time: '15:30 - 16:00',
-                    title: 'Pausa para Café',
-                    type: 'break',
-                    speaker: '',
-                    description: ''
-                },
-                {
-                    time: '16:00 - 17:30',
-                    title: 'Grupo de Trabalho: Políticas de Nutrição',
-                    type: 'workgroup',
-                    speaker: 'Coordenadores de Nutrição',
-                    description: 'Desenvolvimento de estratégias provinciais de nutrição'
-                }
-            ]
-        },
-        dia3: {
-            date: '18 de Junho - Quarta-feira',
-            theme: 'Saúde Adolescente e Reprodutiva',
-            sessions: [
-                {
-                    time: '09:00 - 10:30',
-                    title: 'Conferência: Saúde Sexual e Reprodutiva dos Adolescentes',
-                    type: 'conference',
-                    speaker: 'Dra. Ana Macamo - UNFPA',
-                    description: 'Abordagem integral da saúde reprodutiva na adolescência'
-                },
-                {
-                    time: '10:30 - 11:00',
-                    title: 'Pausa para Café',
-                    type: 'break',
-                    speaker: '',
-                    description: ''
-                },
-                {
-                    time: '11:00 - 12:30',
-                    title: 'Painel: Prevenção de Gravidezes Precoces',
-                    type: 'panel',
-                    speaker: 'Especialistas em Saúde Reprodutiva',
-                    description: 'Estratégias de prevenção e educação sexual'
-                },
-                {
-                    time: '12:30 - 14:00',
-                    title: 'Almoço',
-                    type: 'break',
-                    speaker: '',
-                    description: ''
-                },
-                {
-                    time: '14:00 - 15:30',
-                    title: 'Workshop: Serviços Amigáveis aos Adolescentes',
-                    type: 'workshop',
-                    speaker: 'Coordenadores de Saúde Adolescente',
-                    description: 'Criação de espaços de atendimento adequados aos jovens'
-                },
-                {
-                    time: '15:30 - 16:00',
-                    title: 'Pausa para Café',
-                    type: 'break',
-                    speaker: '',
-                    description: ''
-                },
-                {
-                    time: '16:00 - 17:00',
-                    title: 'Sessão de Networking',
-                    type: 'networking',
-                    speaker: '',
-                    description: 'Oportunidade para estabelecer parcerias e trocar experiências'
-                }
-            ]
-        },
-        dia4: {
-            date: '19 de Junho - Quinta-feira',
-            theme: 'Fortalecimento do Sistema de Saúde',
-            sessions: [
-                {
-                    time: '09:00 - 10:30',
-                    title: 'Seminário: Recursos Humanos em Saúde',
-                    type: 'seminar',
-                    speaker: 'Direção de Recursos Humanos MISAU',
-                    description: 'Estratégias para formação e retenção de profissionais de saúde'
-                },
-                {
-                    time: '10:30 - 11:00',
-                    title: 'Pausa para Café',
-                    type: 'break',
-                    speaker: '',
-                    description: ''
-                },
-                {
-                    time: '11:00 - 12:30',
-                    title: 'Mesa Redonda: Financiamento da Saúde',
-                    type: 'roundtable',
-                    speaker: 'Parceiros de Desenvolvimento',
-                    description: 'Mobilização de recursos e sustentabilidade financeira'
-                },
-                {
-                    time: '12:30 - 14:00',
-                    title: 'Almoço',
-                    type: 'break',
-                    speaker: '',
-                    description: ''
-                },
-                {
-                    time: '14:00 - 15:30',
-                    title: 'Workshop: Gestão da Cadeia de Abastecimento',
-                    type: 'workshop',
-                    speaker: 'CMAM - Central de Medicamentos',
-                    description: 'Otimização da distribuição de medicamentos e equipamentos'
-                },
-                {
-                    time: '15:30 - 16:00',
-                    title: 'Pausa para Café',
-                    type: 'break',
-                    speaker: '',
-                    description: ''
-                },
-                {
-                    time: '16:00 - 17:30',
-                    title: 'Grupo de Trabalho: Qualidade dos Cuidados',
-                    type: 'workgroup',
-                    speaker: 'Coordenadores de Qualidade',
-                    description: 'Melhoria contínua da qualidade dos serviços de saúde'
-                }
-            ]
-        },
-        dia5: {
-            date: '20 de Junho - Sexta-feira',
-            theme: 'Compromissos e Próximos Passos',
-            sessions: [
-                {
-                    time: '09:00 - 10:30',
-                    title: 'Apresentação de Resultados dos Grupos de Trabalho',
-                    type: 'presentation',
-                    speaker: 'Coordenadores dos GTs',
-                    description: 'Síntese das discussões e recomendações dos grupos'
-                },
-                {
-                    time: '10:30 - 11:00',
-                    title: 'Pausa para Café',
-                    type: 'break',
-                    speaker: '',
-                    description: ''
-                },
-                {
-                    time: '11:00 - 12:00',
-                    title: 'Painel: Compromissos 2025-2030',
-                    type: 'panel',
-                    speaker: 'Liderança MISAU',
-                    description: 'Definição de metas e indicadores para os próximos 5 anos'
-                },
-                {
-                    time: '12:00 - 12:30',
-                    title: 'Cerimónia de Encerramento',
-                    type: 'ceremony',
-                    speaker: 'Ministro da Saúde',
-                    description: 'Discurso de encerramento e próximos passos'
-                },
-                {
-                    time: '12:30 - 14:00',
-                    title: 'Almoço de Despedida',
-                    type: 'networking',
-                    speaker: '',
-                    description: 'Networking final e despedidas'
-                }
-            ]
+        // },
+        // dia2: {
+        //     date: '17 de Junho - Terça-feira',
+        //     theme: 'Saúde Infantil e Nutrição',
+        //     sessions: [
+        //         {
+        //             time: '09:00 - 10:30',
+        //             title: 'Seminário: Desnutrição Infantil - Desafios e Soluções',
+        //             type: 'seminar',
+        //             speaker: 'Dr. João Mavie - UNICEF',
+        //             description: 'Estratégias para combater a desnutrição em crianças menores de 5 anos'
+        //         },
+        //         {
+        //             time: '10:30 - 11:00',
+        //             title: 'Pausa para Café',
+        //             type: 'break',
+        //             speaker: '',
+        //             description: ''
+        //         },
+        //         {
+        //             time: '11:00 - 12:30',
+        //             title: 'Mesa Redonda: Vacinação e Imunização',
+        //             type: 'roundtable',
+        //             speaker: 'Especialistas em Imunização',
+        //             description: 'Discussão sobre cobertura vacinal e novos programas'
+        //         },
+        //         {
+        //             time: '12:30 - 14:00',
+        //             title: 'Almoço',
+        //             type: 'break',
+        //             speaker: '',
+        //             description: ''
+        //         },
+        //         {
+        //             time: '14:00 - 15:30',
+        //             title: 'Workshop: Cuidados Neonatais Essenciais',
+        //             type: 'workshop',
+        //             speaker: 'Equipe de Pediatria MISAU',
+        //             description: 'Práticas para redução da mortalidade neonatal'
+        //         },
+        //         {
+        //             time: '15:30 - 16:00',
+        //             title: 'Pausa para Café',
+        //             type: 'break',
+        //             speaker: '',
+        //             description: ''
+        //         },
+        //         {
+        //             time: '16:00 - 17:30',
+        //             title: 'Grupo de Trabalho: Políticas de Nutrição',
+        //             type: 'workgroup',
+        //             speaker: 'Coordenadores de Nutrição',
+        //             description: 'Desenvolvimento de estratégias provinciais de nutrição'
+        //         }
+        //     ]
+        // },
+        // dia3: {
+        //     date: '18 de Junho - Quarta-feira',
+        //     theme: 'Saúde Adolescente e Reprodutiva',
+        //     sessions: [
+        //         {
+        //             time: '09:00 - 10:30',
+        //             title: 'Conferência: Saúde Sexual e Reprodutiva dos Adolescentes',
+        //             type: 'conference',
+        //             speaker: 'Dra. Ana Macamo - UNFPA',
+        //             description: 'Abordagem integral da saúde reprodutiva na adolescência'
+        //         },
+        //         {
+        //             time: '10:30 - 11:00',
+        //             title: 'Pausa para Café',
+        //             type: 'break',
+        //             speaker: '',
+        //             description: ''
+        //         },
+        //         {
+        //             time: '11:00 - 12:30',
+        //             title: 'Painel: Prevenção de Gravidezes Precoces',
+        //             type: 'panel',
+        //             speaker: 'Especialistas em Saúde Reprodutiva',
+        //             description: 'Estratégias de prevenção e educação sexual'
+        //         },
+        //         {
+        //             time: '12:30 - 14:00',
+        //             title: 'Almoço',
+        //             type: 'break',
+        //             speaker: '',
+        //             description: ''
+        //         },
+        //         {
+        //             time: '14:00 - 15:30',
+        //             title: 'Workshop: Serviços Amigáveis aos Adolescentes',
+        //             type: 'workshop',
+        //             speaker: 'Coordenadores de Saúde Adolescente',
+        //             description: 'Criação de espaços de atendimento adequados aos jovens'
+        //         },
+        //         {
+        //             time: '15:30 - 16:00',
+        //             title: 'Pausa para Café',
+        //             type: 'break',
+        //             speaker: '',
+        //             description: ''
+        //         },
+        //         {
+        //             time: '16:00 - 17:00',
+        //             title: 'Sessão de Networking',
+        //             type: 'networking',
+        //             speaker: '',
+        //             description: 'Oportunidade para estabelecer parcerias e trocar experiências'
+        //         }
+        //     ]
+        // },
+        // dia4: {
+        //     date: '19 de Junho - Quinta-feira',
+        //     theme: 'Fortalecimento do Sistema de Saúde',
+        //     sessions: [
+        //         {
+        //             time: '09:00 - 10:30',
+        //             title: 'Seminário: Recursos Humanos em Saúde',
+        //             type: 'seminar',
+        //             speaker: 'Direção de Recursos Humanos MISAU',
+        //             description: 'Estratégias para formação e retenção de profissionais de saúde'
+        //         },
+        //         {
+        //             time: '10:30 - 11:00',
+        //             title: 'Pausa para Café',
+        //             type: 'break',
+        //             speaker: '',
+        //             description: ''
+        //         },
+        //         {
+        //             time: '11:00 - 12:30',
+        //             title: 'Mesa Redonda: Financiamento da Saúde',
+        //             type: 'roundtable',
+        //             speaker: 'Parceiros de Desenvolvimento',
+        //             description: 'Mobilização de recursos e sustentabilidade financeira'
+        //         },
+        //         {
+        //             time: '12:30 - 14:00',
+        //             title: 'Almoço',
+        //             type: 'break',
+        //             speaker: '',
+        //             description: ''
+        //         },
+        //         {
+        //             time: '14:00 - 15:30',
+        //             title: 'Workshop: Gestão da Cadeia de Abastecimento',
+        //             type: 'workshop',
+        //             speaker: 'CMAM - Central de Medicamentos',
+        //             description: 'Otimização da distribuição de medicamentos e equipamentos'
+        //         },
+        //         {
+        //             time: '15:30 - 16:00',
+        //             title: 'Pausa para Café',
+        //             type: 'break',
+        //             speaker: '',
+        //             description: ''
+        //         },
+        //         {
+        //             time: '16:00 - 17:30',
+        //             title: 'Grupo de Trabalho: Qualidade dos Cuidados',
+        //             type: 'workgroup',
+        //             speaker: 'Coordenadores de Qualidade',
+        //             description: 'Melhoria contínua da qualidade dos serviços de saúde'
+        //         }
+        //     ]
+        // },
+        // dia5: {
+        //     date: '20 de Junho - Sexta-feira',
+        //     theme: 'Compromissos e Próximos Passos',
+        //     sessions: [
+        //         {
+        //             time: '09:00 - 10:30',
+        //             title: 'Apresentação de Resultados dos Grupos de Trabalho',
+        //             type: 'presentation',
+        //             speaker: 'Coordenadores dos GTs',
+        //             description: 'Síntese das discussões e recomendações dos grupos'
+        //         },
+        //         {
+        //             time: '10:30 - 11:00',
+        //             title: 'Pausa para Café',
+        //             type: 'break',
+        //             speaker: '',
+        //             description: ''
+        //         },
+        //         {
+        //             time: '11:00 - 12:00',
+        //             title: 'Painel: Compromissos 2025-2030',
+        //             type: 'panel',
+        //             speaker: 'Liderança MISAU',
+        //             description: 'Definição de metas e indicadores para os próximos 5 anos'
+        //         },
+        //         {
+        //             time: '12:00 - 12:30',
+        //             title: 'Cerimónia de Encerramento',
+        //             type: 'ceremony',
+        //             speaker: 'Ministro da Saúde',
+        //             description: 'Discurso de encerramento e próximos passos'
+        //         },
+        //         {
+        //             time: '12:30 - 14:00',
+        //             title: 'Almoço de Despedida',
+        //             type: 'networking',
+        //             speaker: '',
+        //             description: 'Networking final e despedidas'
+        //         }
+        //    ]
         }
     };
 
     const getSessionIcon = (type: string): string => {
         const icons = {
-            keynote: '🎯',
-            panel: '💬',
-            workshop: '🛠️',
-            seminar: '📚',
-            presentation: '📊',
-            ceremony: '🎭',
-            networking: '🤝',
-            break: '☕',
-            conference: '🎤',
-            roundtable: '⭕',
-            workgroup: '👥'
+            keynote: '',
+            panel: '',
+            workshop: '',
+            seminar: '',
+            presentation: '',
+            ceremony: '',
+            networking: '',
+            break: '',
+            conference: '',
+            roundtable: '',
+            workgroup: ''
+            
+            // keynote: '🎯',
+            // panel: '💬',
+            // workshop: '🛠️',
+            // seminar: '📚',
+            // presentation: '📊',
+            // ceremony: '🎭',
+            // networking: '🤝',
+            // break: '☕',
+            // conference: '🎤',
+            // roundtable: '⭕',
+            // workgroup: '👥'
         };
         return icons[type as keyof typeof icons] || '📋';
 
@@ -403,8 +443,8 @@ export default function Agenda() {
                         transition={{ duration: 0.5 }}
                         className="max-w-4xl mx-auto"
                     >
-                        {/* Cabeçalho do Dia */}
-                        <div className="bg-white rounded-2xl shadow-lg p-6 mb-8 border-l-4 border-green-600">
+                        {/* Cabeçalho do Dia  border-l-4 border-green-500*/}
+                        <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
                             <h2 className="text-2xl sm:text-3xl font-bold text-green-700 mb-2">
                                 {agendaData[selectedDay].date}
                             </h2>
@@ -421,11 +461,12 @@ export default function Agenda() {
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                                    className={`bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border-l-4 ${
-                                        session.type === 'break' 
-                                            ? 'border-gray-300 opacity-75' 
-                                            : 'border-green-500 hover:transform hover:scale-[1.02]'
-                                    }`}
+                                    className={`bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02]`}
+                                    // className={`bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02] border-l-4 ${
+                                    //     session.type === 'break' 
+                                    //         ? 'border-gray-300 opacity-75' 
+                                    //         : 'border-green-500 hover:transform hover:scale-[1.02]'
+                                    // }`}
                                 >
                                     <div className="p-6">
                                         <div className="flex flex-col sm:flex-row sm:items-start gap-4">
