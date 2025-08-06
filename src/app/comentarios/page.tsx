@@ -164,19 +164,19 @@ export default function Comentarios(): React.ReactElement {
             transition={{ duration: 0.8 }}
             className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
           >
-            <div className="bg-white rounded-xl shadow-lg p-6 text-center border-l-4 border-green-500">
-              <div className="text-3xl font-bold text-green-700">{comments.length}</div>
+            <div className="bg-white rounded-xl shadow-lg p-6 text-center">
+              <div className="text-3xl font-bold text-green-600">{comments.length}</div>
               <div className="text-gray-600 font-medium">Comentários</div>
             </div>
-            <div className="bg-white rounded-xl shadow-lg p-6 text-center border-l-4 border-yellow-500">
-              <div className="text-3xl font-bold text-yellow-600">{averageRating.toFixed(1)}</div>
+            <div className="bg-white rounded-xl shadow-lg p-6 text-center">
+              <div className="text-3xl font-bold text-green-600">{averageRating.toFixed(1)}</div>
               <div className="text-gray-600 font-medium">Avaliação Média</div>
               <div className="flex justify-center mt-2">
                 {renderStars(Math.round(averageRating))}
               </div>
             </div>
-            <div className="bg-white rounded-xl shadow-lg p-6 text-center border-l-4 border-blue-500">
-              <div className="text-3xl font-bold text-blue-700">98%</div>
+            <div className="bg-white rounded-xl shadow-lg p-6 text-center border-l-4">
+              <div className="text-3xl font-bold text-green-600">98%</div>
               <div className="text-gray-600 font-medium">Satisfação</div>
             </div>
           </motion.div>
@@ -201,20 +201,20 @@ export default function Comentarios(): React.ReactElement {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-white rounded-xl shadow-lg p-8 mb-12 border-l-4 border-green-500"
+              className="bg-white rounded-xl shadow-lg p-8 mb-12"
             >
               <h3 className="text-2xl font-bold text-green-700 mb-6">Deixe seu Comentário</h3>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-gray-700 font-medium mb-2">
-                      Nome Completo *
+                      Nome Completo <span className="text-red-500 text-sm">*</span>
                     </label>
                     <input
                       type="text"
                       value={newComment.name}
                       onChange={(e) => setNewComment({ ...newComment, name: e.target.value })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                      className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
                       placeholder="Ex: Dr. Maria Silva"
                       required
                     />
@@ -227,7 +227,7 @@ export default function Comentarios(): React.ReactElement {
                       type="text"
                       value={newComment.role}
                       onChange={(e) => setNewComment({ ...newComment, role: e.target.value })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                      className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
                       placeholder="Ex: Diretor de Saúde"
                     />
                   </div>
@@ -241,7 +241,7 @@ export default function Comentarios(): React.ReactElement {
                     type="text"
                     value={newComment.organization}
                     onChange={(e) => setNewComment({ ...newComment, organization: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                    className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
                     placeholder="Ex: MISAU - Província de Maputo"
                   />
                 </div>
@@ -268,13 +268,13 @@ export default function Comentarios(): React.ReactElement {
 
                 <div>
                   <label className="block text-gray-700 font-medium mb-2">
-                    Comentário *
+                    Comentário <span className="text-red-500 text-sm">*</span>
                   </label>
                   <textarea
                     value={newComment.comment}
                     onChange={(e) => setNewComment({ ...newComment, comment: e.target.value })}
                     rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all resize-none"
+                    className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all resize-none"
                     placeholder="Compartilhe sua experiência sobre o evento..."
                     required
                   />
@@ -311,7 +311,7 @@ export default function Comentarios(): React.ReactElement {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border-l-4 border-green-500"
+                className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6"
               >
                 <div className="flex flex-col md:flex-row md:items-start gap-4">
                   {/* Avatar */}
@@ -344,7 +344,7 @@ export default function Comentarios(): React.ReactElement {
             ))}
           </div>
 
-          {/* Call to Action */}
+          {/* Call to Action
           <div className="text-center mt-16 bg-gradient-to-r from-green-600 to-green-700 text-white py-12 px-6 rounded-2xl">
             <h3 className="text-2xl font-bold mb-4">Quer saber mais sobre o evento?</h3>
             <p className="text-lg mb-6 text-green-100">
@@ -356,60 +356,47 @@ export default function Comentarios(): React.ReactElement {
             >
               Entrar em Contato
             </Link>
-          </div>
+          </div> */}
         </div>
+
+        {/* Call to Action */}
+                <div className="bg-gradient-to-r from-green-600 to-green-700 text-white py-16 px-4 mt-16">
+                    <div className="container mx-auto text-center max-w-4xl">
+                        <motion.h2
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8 }}
+                            viewport={{ once: true }}
+                            className="text-3xl sm:text-4xl font-bold mb-6"
+                        >
+                            Precisa de Mais Informações?
+                        </motion.h2>
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            viewport={{ once: true }}
+                            className="text-xl mb-8 text-green-100"
+                        >
+                            Para mais informações sobre o MISAU 2025 e futuros eventos, entre em contato connosco.
+                        </motion.p>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.4 }}
+                            viewport={{ once: true }}
+                        >
+                            <Link
+                                href="/contacto"
+                                className="bg-white text-green-700 hover:bg-green-50 px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block"
+                            >
+                                Entrar em Contato
+                            </Link>
+                        </motion.div>
+                    </div>
+                </div>
       </main>
     </>
   );
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import Link from "next/link";
-
-// export default function Comentarios () {
-//     return (
-//         <>
-//         <title>Comentários do Evento</title>
-//         <meta name="description" content="Comentários e feedback sobre o Evento MISAU 2025" />
-//         <meta name="viewport" content="width=device-width, initial-scale=1" />
-    
-//         <main className="min-h-screen bg-gray-100">
-//             <div className="container mx-auto px-6 py-16 text-center">
-//             <h1 className="text-5xl md:text-6xl font-extrabold text-green-700">
-//                 Comentários do Evento MISAU 2025
-//             </h1>
-    
-//             <p className="mt-4 text-lg text-gray-600">
-//                 Compartilhe suas opiniões e experiências sobre o evento.
-//             </p>
-//             </div>
-//             <div className="container mx-auto px-6 py-16">
-//                 <h2 className="text-3xl font-bold text-green-700 mb-8 text-center">Deixe seu Comentário</h2>
-//                 <p className="text-lg text-gray-600 mb-4">
-//                     A seção de comentários está em desenvolvimento. Fique atento para mais informações!
-//                 </p>
-//                 <p className="text-lg text-gray-600">
-//                     Para mais detalhes, entre em contato conosco através da nossa página de <Link href="/contacto" className="text-green-600 hover:underline">Contato</Link>.
-//                 </p>
-//             </div>
-//         </main>
-//         </>
-//     );
-// }

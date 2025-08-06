@@ -28,7 +28,8 @@ export default function Contacto(): React.ReactElement {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-green-50 to-white pt-24 px-4">
+    <>
+    <main className="min-h-screen bg-gradient-to-b from-green-50 to-white pt-24 px-4 bg-white">
       <div className="container mx-auto max-w-4xl text-center mb-12">
         <motion.h1
           initial={{ opacity: 0, y: -40 }}
@@ -52,21 +53,21 @@ export default function Contacto(): React.ReactElement {
         <form className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-gray-700 font-medium mb-1">Nome *</label>
-              <input type="text" className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500" placeholder="Seu nome completo" required />
+              <label className="block text-gray-700 font-medium mb-1">Nome <span className="text-sm text-red-500">*</span></label>
+              <input type="text" className="w-full border text-gray-700 border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500" placeholder="Seu nome completo" required />
             </div>
             <div>
-              <label className="block text-gray-700 font-medium mb-1">Email *</label>
-              <input type="email" className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500" placeholder="email@exemplo.com" required />
+              <label className="block text-gray-700 font-medium mb-1">Email  <span className="text-sm text-red-500">*</span></label>
+              <input type="email" className="w-full border text-gray-700 border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500" placeholder="email@exemplo.com" required />
             </div>
           </div>
           <div>
             <label className="block text-gray-700 font-medium mb-1">Assunto</label>
-            <input type="text" className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500" placeholder="Ex: Participação no evento" />
+            <input type="text" className="w-full border text-gray-700 border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500" placeholder="Ex: Participação no evento" />
           </div>
           <div>
-            <label className="block text-gray-700 font-medium mb-1">Mensagem *</label>
-            <textarea className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500 resize-none" rows={5} placeholder="Escreva sua mensagem aqui..." required></textarea>
+            <label className="block text-gray-700 font-medium mb-1">Mensagem <span className="text-sm text-red-500">*</span></label>
+            <textarea className="w-full border text-gray-700 border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500 resize-none" rows={5} placeholder="Escreva sua mensagem aqui..." required></textarea>
           </div>
           <div className="text-center">
             <button type="submit" className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full font-semibold transition-all shadow-md hover:shadow-lg transform hover:scale-105">
@@ -81,13 +82,13 @@ export default function Contacto(): React.ReactElement {
         <h2 className="text-3xl font-bold text-center text-green-700 mb-8">Perguntas Frequentes</h2>
         <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <div key={index} className="bg-white shadow-md rounded-lg overflow-hidden border-l-4 border-green-500">
+            <div key={index} className="bg-white shadow-md rounded-lg overflow-hidden">
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full flex justify-between items-center px-6 py-4 text-left text-gray-800 font-medium hover:bg-green-50"
+                className="w-full flex justify-between items-center px-6 py-4 text-left text-gray-800 font-medium bg-green-500 hover:bg-green-600"
               >
                 {faq.question}
-                <span className="text-2xl text-green-600">{openFAQ === index ? '-' : '+'}</span>
+                <span className="text-2xl text-white">{openFAQ === index ? '-' : '+'}</span>
               </button>
               <AnimatePresence>
                 {openFAQ === index && (
@@ -106,18 +107,44 @@ export default function Contacto(): React.ReactElement {
           ))}
         </div>
       </div>
-
-      {/* Footer CTA */}
-      <div className="text-center bg-green-600 text-white py-12 px-6 rounded-2xl">
-        <h3 className="text-2xl font-bold mb-4">Acompanhe nossas atividades</h3>
-        <p className="text-green-100 mb-6">Fique por dentro de futuros eventos e novidades do MISAU.</p>
-        <Link
-          href="/agenda"
-          className="bg-white text-green-700 hover:bg-green-100 px-8 py-4 rounded-full font-semibold transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
-        >
-          Ver Eventos
-        </Link>
-      </div>
     </main>
+      
+      {/* Call to Action */}
+      <div className="bg-gradient-to-r from-green-600 to-green-700 text-white py-16 px-4 mt-16">
+        <div className="container mx-auto text-center max-w-4xl">
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-3xl sm:text-4xl font-bold mb-6"
+          >
+            Acompanhe nossas atividades
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-xl mb-8 text-green-100"
+          >
+            Fique por dentro de futuros eventos e novidades do MISAU.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            <Link
+              href="/agenda"
+              className="bg-white text-green-700 hover:bg-green-100 px-8 py-4 rounded-full font-semibold transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
+            >
+              Ver Eventos
+            </Link>
+          </motion.div>
+        </div>
+      </div>
+    </>
   );
 }
