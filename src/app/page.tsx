@@ -14,22 +14,66 @@ export default function Home() {
       <main className="min-h-screen bg-gradient-to-b from-white to-green-50">
         {/* Hero Section */}
         <div className="flex flex-col items-center justify-center text-center px-4 py-20 pt-32">
-          <motion.h1
+          <motion.div
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="mb-6"
+          >
+            <Image
+              src="/Emblem_of_Mozambique.svg"
+              alt="Logo do Evento"
+              width={110}
+              height={120}
+            />
+          </motion.div>
+          {/* <motion.h1
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-green-700 leading-tight"
           >
-            Evento MISAU 2025
+            REPÚBLICA DE MOÇAMBIQUE <br/>
+            MINISTÉRIO DA SAÚDE<br/>
+            DIRECÇÃO NACIONAL DE PLANIFICAÇÃO E COOPERAÇÃO<br/>   
+            XLIX Conselho Coordenador de Saúde<br/>
+            8  - 10  de Maio de 2024<br/>
+          </motion.h1> */}
+          <motion.h1
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-4xl sm:text-5xl lg:text-5xl font-extrabold text-green-700 leading-tight"
+          >
+            REPÚBLICA DE MOÇAMBIQUE 
           </motion.h1>
+
+          <motion.h1
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-4xl sm:text-5xl lg:text-4xl font-extrabold text-green-700 leading-tight"
+          >
+            DIRECÇÃO NACIONAL DE PLANIFICAÇÃO E COOPERAÇÃO<br/>   
+          </motion.h1>
+
+          <motion.h2
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-4xl sm:text-5xl lg:text-4xl font-extrabold text-green-700 leading-tight"
+          > 
+            XLIX Conselho Coordenador de Saúde<br/>
+            8  - 10  de Maio de 2024<br/>
+          </motion.h2>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="mt-4 text-lg md:text-xl max-w-2xl text-gray-700"
+            className="mt-4 text-lg md:text-xl max-w-3xl text-gray-700 font-bold"
           >
-           Evento anual · Ministério da Saúde 2025  
+           Lema: Por um Serviço Nacional de Saúde de Qualidade e Humanizado para Todos  
           </motion.p>
 
           <motion.div
@@ -77,10 +121,11 @@ export default function Home() {
               >
                 <h2 className="text-3xl sm:text-4xl font-bold text-green-700 mb-6">Sobre o Evento</h2>
                 <p className="text-gray-700 text-lg mb-6 leading-relaxed">
-                  Produzindo estatísticas nacionais e subnacionais confiáveis sobre saúde materna, neonatal, infantil e adolescente, com foco também em nutrição. 
-                  Um encontro para alinhar ações e compromissos rumo à Agenda 2025.
+                  Reunindo decisores e especialistas para debater os desafios da saúde digital e a prontidão do 
+                  setor diante de eventos climáticos extremos. O encontro visa alinhar prioridades estratégicas 
+                  e fortalecer o sistema nacional de saúde rumo ao PESS 2025-2034.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4">
+                {/* <div className="flex flex-col sm:flex-row gap-4">
                   <div className="flex items-center gap-3">
                     <div className="w-3 h-3 bg-green-600 rounded-full"></div>
                     <span className="text-gray-600">Saúde Materna e Infantil</span>
@@ -89,7 +134,7 @@ export default function Home() {
                     <div className="w-3 h-3 bg-green-600 rounded-full"></div>
                     <span className="text-gray-600">Nutrição e Adolescentes</span>
                   </div>
-                </div>
+                </div> */}
               </motion.div>
 
               <motion.div
@@ -192,10 +237,10 @@ export default function Home() {
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
-                { number: "1,400+", label: "Unidades Sanitárias", icon: "" },
-                { number: "32M+", label: "População Coberta", icon: "" },
+                { number: "1.856+", label: "Unidades Sanitárias", icon: "" },
+                { number: "32,4M+", label: "População Coberta", icon: "" },
                 { number: "11", label: "Províncias Atendidas", icon: "" },
-                { number: "2025", label: "Meta dos ODS", icon: "" }
+                { number: "2034", label: "Meta do PESOE", icon: "" }
               ].map((stat, index) => (
                 <motion.div
                   key={index}
