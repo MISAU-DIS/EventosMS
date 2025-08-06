@@ -1,5 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
+import { Mic } from 'lucide';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -31,94 +32,101 @@ const Agenda = () => {
             sessions: [
                 {
                     time: '08:30 - 09:00',
-                    title: 'Cerimónia de Abertura',
-                    type: 'networking',
-                    speaker: '',
+                    title: 'Leitura e aprovação da Síntese do 1º dia',
+                    type: 'Inicio',
+                    speaker: 'Secretariado',
                     description: 'Leitura e aprovação da Síntese do 1º dia'
                 },
                 {
                     time: '09:00 - 10:25',
-                    title: 'Cerimónia de Abertura',
-                    type: 'ceremony',
-                    speaker: 'Ministra da Saúde de Moçambique',
-                    description: 'Discurso de abertura oficial e apresentação dos objetivos do evento'
+                    title: 'Painel I: Desafios da Saúde Digital em Moçambique',
+                    type: 'Painel',
+                    speaker: 'Moderador, Facilitador, Painelistas, S. Excia o Ministro',
+                    description: 'Apresentação do painel, Apresentação do tema, Intervenções (3), Moderação do debate'
                 },
                 {
                     time: '10:25 - 11:05',
-                    title: 'Keynote: Rumo à Agenda 2030',
-                    type: 'keynote',
-                    speaker: 'Dr. Maria Santos - OMS África',
-                    description: 'Visão estratégica para o alcance dos ODS em saúde na região'
+                    title: 'Lanche da manhã',
+                    type: 'Lunche',
+                    speaker: '',
+                    description: 'Lanche da manhã'
                 },
                 {
                     time: '11:05 - 12:55',
-                    title: 'Pausa para Café',
-                    type: 'break',
-                    speaker: '',
-                    description: ''
+                    title: 'Painel II: Prontidão e resiliência aos eventos climáticos extremos na saúde',
+                    type: 'Painel',
+                    speaker: 'Moderador, Facilitador, Painelistas, S. Excia o Ministro',
+                    description: 'Apresentação do painel, Apresentação do tema, Intervenções (3), Moderação do debate'
                 },
                 {
                     time: '12:55 - 13:10',
-                    title: 'Painel: Estado Atual da Saúde Materna em Moçambique',
-                    type: 'panel',
-                    speaker: 'Especialistas MISAU',
-                    description: 'Análise dos indicadores atuais e desafios na saúde materna'
+                    title: 'Prioridades e acções estratégicas para o PESOE 2025 ',
+                    type: 'Painel',
+                    speaker: 'DPC',
+                    description: 'Prioridades e acções estratégicas para o PESOE 2025 '
                 },
                 {
                     time: '13:10 - 13:25',
-                    title: 'Almoço',
-                    type: 'break',
-                    speaker: '',
-                    description: ''
+                    title: 'Linhas gerais do PESS 2025-2034',
+                    type: 'Linhas gerais',
+                    speaker: 'DPC',
+                    description: 'Linhas gerais do PESS 2025-2034'
                 },
                 {
                     time: '13:25 - 13:50',
-                    title: 'Workshop: Sistemas de Informação em Saúde',
-                    type: 'workshop',
-                    speaker: 'Equipe Técnica MISAU',
-                    description: 'Sessão prática sobre coleta e análise de dados de saúde'
+                    title: 'Discussão',
+                    type: 'Discussão',
+                    speaker: 'S. Excia o Ministro',
+                    description: 'Discussão'
                 },
                 {
                     time: '13:50 - 14:10',
-                    title: 'Pausa para Café',
-                    type: 'break',
-                    speaker: '',
-                    description: ''
+                    title: 'Gestão de Recursos Humanos - desafios e perspectivas',
+                    type: 'Apresentação',
+                    speaker: 'DRH',
+                    description: 'Gestão de Recursos Humanos - desafios e perspectivas'
                 },
                 {
                     time: '14:10 - 14:30h',
-                    title: 'Apresentação de Estudos de Caso',
-                    type: 'presentation',
-                    speaker: 'Diretores Provinciais',
-                    description: 'Experiências bem-sucedidas das províncias'
+                    title: 'Discussão ',
+                    type: 'Discussão',
+                    speaker: 'S. Excia o Ministro',
+                    description: 'Discussão'
                 },
                 {
                     time: '14:30 - 15:30',
-                    title: 'Apresentação de Estudos de Caso',
-                    type: 'presentation',
-                    speaker: 'Diretores Provinciais',
-                    description: 'Experiências bem-sucedidas das províncias'
+                    title: 'Almoço',
+                    type: 'Intervalo',
+                    speaker: '',
+                    description: 'Almoço'
                 },
                 {
                     time: '15:30 - 15:40',
-                    title: 'Apresentação de Estudos de Caso',
-                    type: 'presentation',
-                    speaker: 'Diretores Provinciais',
-                    description: 'Experiências bem-sucedidas das províncias'
+                    title: 'Momento Cultural',
+                    type: 'Momento Cultural',
+                    speaker: 'Grupo Cultural',
+                    description: 'Momento Cultural'
                 },
                 {
                     time: '15:40 - 15:55',
-                    title: 'Apresentação de Estudos de Caso',
-                    type: 'presentation',
-                    speaker: 'Diretores Provinciais',
-                    description: 'Experiências bem-sucedidas das províncias'
+                    title: 'Leitura do Comunicado Final',
+                    type: 'Apresentação',
+                    speaker: 'Secretariado',
+                    description: 'Leitura do Comunicado Final'
                 },
                 {
                     time: '15:55 - 16:05',
-                    title: 'Apresentação de Estudos de Caso',
-                    type: 'presentation',
-                    speaker: 'Diretores Provinciais',
-                    description: 'Experiências bem-sucedidas das províncias'
+                    title: 'Discurso de Encerramento',
+                    type: 'Discurso',
+                    speaker: 'S. Excia o Ministro',
+                    description: 'Discurso de Encerramento do evento'
+                },
+                {
+                    time: '16:05',
+                    title: 'Fim do Conselho Coordenador',
+                    type: 'Ceremónia de enceramento',
+                    speaker: '',
+                    description: 'Fim do Conselho Coordenador'
                 }
             ]
         // },
@@ -356,7 +364,8 @@ const Agenda = () => {
             // roundtable: '⭕',
             // workgroup: '👥'
         };
-        return icons[type as keyof typeof icons] || '📋';
+        //return icons[type as keyof typeof icons] || '📋';
+        return icons[type as keyof typeof icons] || '';
 
     };
 
@@ -486,7 +495,8 @@ const Agenda = () => {
                                                         </h3>
                                                         {session.speaker && (
                                                             <p className="text-green-600 font-medium mb-2">
-                                                                👤 {session.speaker}
+                                                                {/* 👤 {session.speaker} */}
+                                                                🎤 {session.speaker}
                                                             </p>
                                                         )}
                                                         {session.description && (
