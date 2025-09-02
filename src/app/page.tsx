@@ -45,7 +45,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-4xl sm:text-5xl lg:text-5xl font-extrabold text-green-700 leading-tight"
           >
-            REPÚBLICA DE MOÇAMBIQUE 
+            REPÚBLICA DE MOÇAMBIQUE
           </motion.h1>
 
           <motion.h1

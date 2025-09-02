@@ -38,7 +38,7 @@ export default function Header() {
             className="rounded-full"
           />
           <Link href="/" className="text-xl md:text-2xl font-semibold tracking-tight hover:opacity-90 transition-opacity duration-200">
-            Eventos MS
+            Eventos MISAU
           </Link>
         </div>
 
