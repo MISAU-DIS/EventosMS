@@ -331,7 +331,7 @@ const Agenda = () => {
             theme: 'Sessões do XIII Conselho Hospitalar',
             sessions: [
                 { time: '08:30 - 09:00', title: 'Leitura e aprovação da Síntese do 1º dia', type: 'Leitura', speaker: 'Secretariado', description: '' },
-                { time: '09:00 - 09:30', title: 'Ponto de situação dos especialistas', type: 'Apresentação', speaker: 'DNAM', description: 'Apresentação conjunta entre DNAM, DNFPS e DRH' },
+                { time: '09:00 - 09:30', title: 'Ponto de situação dos especialistas', type: 'Apresentação', speaker: 'DNAM', description: 'situação actual,  desafios e próximos passos; apresentação conjuta entre DNAM, DNFPS  e DRH' },
                 { time: '09:30 - 10:00', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
                 { time: '10:00 - 10:20', title: 'Incluir Tema', type: 'Outro', speaker: '', description: '' },
                 { time: '10:20 - 10:35', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
@@ -351,33 +351,45 @@ const Agenda = () => {
         },
         dia3: {
             date: '12 de Setembro  - Sexta-feira',
-            theme: 'Sessões do L Conselho Coordenador',
+            theme: 'Sessões do XIII Conselho Hospitalar',
             sessions: [
-                { time: '08:30 - 09:00', title: 'Adopção da Agenda e do Programa', type: 'Sessão', speaker: 'DPC', description: '' },
-                { time: '09:00 - 09:30', title: 'Objectivos da reunião', type: 'Sessão', speaker: 'DPC', description: '' },
-                { time: '09:30 - 10:00', title: 'Matriz das Recomendações do CCS do XL', type: 'Sessão', speaker: 'DPC', description: '' },
-                { time: '10:00 - 10:20', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
-                { time: '10:20 - 10:35', title: 'Pausa para o café', type: 'Intervalo', speaker: '', description: '' },
-                { time: '10:35 - 11:00', title: 'Balanço do PES 2024', type: 'Sessão', speaker: 'DPC', description: '' },
-                { time: '11:00 - 11:30', title: 'Plano Económico Social e Orçamento para 2025', type: 'Sessão', speaker: 'DPC', description: '' },
-                { time: '11:30 - 12:30', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
-                { time: '12:30 - 13:30', title: 'Pausa para o almoço', type: 'Intervalo', speaker: '', description: '' },
-                { time: '13:30 - 15:00', title: 'Início dos Trabalhos em Grupos', type: 'Grupo', speaker: 'Todos os participantes', description: '' },
-                { time: '15:00 - 16:00', title: 'Pausa e continuação dos grupos', type: 'Grupo', speaker: 'Todos os participantes', description: '' },
-                { time: '16:30', title: 'Fim dos trabalhos do 3º dia', type: 'Encerramento', speaker: '', description: '' }
+                { time: '08:30 - 09:00h', title: 'Adopção da Agenda e do Programa', type: 'Sessão', speaker: 'DPC', description: '' },
+                { time: '09:00 - 09:30h', title: 'Objectivos da reunião', type: 'Sessão', speaker: 'DPC', description: '' },
+                { time: '09:30 - 10:00h', title: 'Matriz das Recomendações do CCS do XL', type: 'Sessão', speaker: 'DPC', description: '' },
+                { time: '10:00 - 10:20h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
+                { time: '10:20 - 10:35h', title: 'Balanço do desempenho do sector 2024 e Primeiro semestre 2025', type: 'Balanço', speaker: 'Área de Saúde Pública', description: '' },
+                { time: '10:35 - 10:50h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
+                { time: '10:50 - 11:05h', title: 'Pausa para a foto em família e café', type: 'Intervalo', speaker: '', description: '' },
+                { time: '11:05 - 11:20h', title: 'Balanço do desempenho do sector 2024 e Primeiro semestre 2025', type: 'Balanço', speaker: 'Área de apoio', description: '' },
+                { time: '11:20 - 11:35h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
+                { time: '11:35 - 11:50h', title: 'Incluir Tema', type: 'Outro', speaker: '', description: '' },
+                { time: '11:50 - 12:05h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
+                { time: '13:05 - 14:05h', title: 'Pausa para o almoço', type: 'Intervalo', speaker: '', description: '' },
+                { time: '14:05 - 15:05h', title: 'Socialização dos instrumentos orientadores do sector (ENDE, PQG, PESS, PESOE, EFSS)', type: 'Sessão', speaker: 'DPC', description: '' },
+                { time: '15:05 - 16:05h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
+                { time: '16:05h', title: 'Fim dos trabalhos', type: 'Encerramento', speaker: '', description: '' }
             ]
         },
         dia4: {
             date: '13 de Setembro - Sábado',
-            theme: 'Sessões do L Conselho Coordenador',
+            theme: 'Sessões do XIII Conselho Hospitalar',
             sessions: [
-                { time: '08:30 - 10:30', title: 'Continuação dos trabalhos de grupos', type: 'Grupo', speaker: 'Todos os participantes', description: '' },
-                { time: '10:30 - 11:00', title: 'Pausa para o café', type: 'Intervalo', speaker: '', description: '' },
-                { time: '11:00 - 12:30', title: 'Plenária', type: 'Plenária', speaker: 'Coordenação', description: '' },
-                { time: '12:30 - 13:30', title: 'Pausa para o almoço', type: 'Intervalo', speaker: '', description: '' },
-                { time: '13:30 - 14:30', title: 'Apresentação do Comunicado final', type: 'Leitura', speaker: 'Secretariado', description: '' },
-                { time: '14:30 - 15:00', title: 'Cerimónia de encerramento', type: 'Encerramento', speaker: 'S. Excia o Ministro', description: '' },
-                { time: '15:00', title: 'Fim do evento', type: 'Encerramento', speaker: '', description: '' }
+                { time: '08:30 - 09:00h', title: 'Leitura e aprovação da Síntese do 1º dia', type: 'Leitura', speaker: 'Secretariado', description: '' },
+                { time: '09:00 - 09:30h', title: 'Proposta do PESOE 2026: Prioridades e Linhas estratégicas', type: 'Sessão', speaker: 'DPC', description: '' },
+                { time: '09:30 - 10:00h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
+                { time: '10:00 - 10:20h', title: 'Partilha das inovações da Lei do Sistema Nacional de Saúde', type: 'Apresentação', speaker: 'URESS', description: '' },
+                { time: '10:20 - 10:35h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
+                { time: '10:35 - 10:55h', title: 'Pausa para o café', type: 'Intervalo', speaker: '', description: '' },
+                { time: '10:55 - 11:15h', title: 'Partilha de boas práticas nas províncias', type: 'Apresentação', speaker: 'Províncias', description: '' },
+                { time: '11:15 - 11:30h', title: 'RH/DAF/DNSP', type: 'Apresentação', speaker: 'RH/DAF/DNSP', description: '' },
+                { time: '11:30 - 11:45h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
+                { time: '11:45 - 12:00h', title: 'CMAM/ANARME/IGS/INS', type: 'Apresentação', speaker: 'CMAM/ANARME/IGS/INS', description: '' },
+                { time: '12:15 - 12:30h', title: 'Discussão', type: 'Discussão', speaker: '', description: '' },
+                { time: '12:30 - 13:30h', title: 'Pausa para o almoço', type: 'Intervalo', speaker: '', description: '' },
+                { time: '13:30 - 13:40h', title: 'Momento cultural', type: 'Cultural', speaker: 'Grupo Cultural', description: '' },
+                { time: '13:40 - 14:00h', title: 'Leitura do Comunicado final', type: 'Leitura', speaker: 'Secretariado', description: '' },
+                { time: '14:00 - 14:15h', title: 'Discurso de encerramento', type: 'Encerramento', speaker: 'S. Excia o Ministro', description: '' },
+                { time: '14:30h', title: 'Fim do evento', type: 'Encerramento', speaker: '', description: '' }
             ]
         }
     };
