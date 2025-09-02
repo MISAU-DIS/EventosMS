@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 export default function Home() {
   return (
     <>
-      <title>Eventos MS</title>
+      <title>Eventos MISAU</title>
       <meta name="description" content="Evento oficial do Ministério da Saúde: Countdown to 2030 - 2025 Country Annual Meeting" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
