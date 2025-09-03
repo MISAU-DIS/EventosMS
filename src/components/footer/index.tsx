@@ -8,7 +8,7 @@ export default function Footer() {
             Copyright &copy; {new Date().getFullYear()} MISAU. Todos os direitos reservados.
             </p>
             <Link
-             href="/privacy-policy" className="text-blue-400 hover:underline mt-2 block">
+             href="https://misau.gov.mz" className="text-blue-400 hover:underline mt-2 block">
             Política de Privacidade
             </Link>
         </div>

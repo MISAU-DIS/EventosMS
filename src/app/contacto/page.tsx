@@ -142,7 +142,7 @@ export default function Contacto(): React.ReactElement {
             viewport={{ once: true }}
           >
             <Link
-              href="/agenda"
+              href="/"
               className="bg-white text-green-700 hover:bg-green-100 px-8 py-4 rounded-full font-semibold transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
             >
               Ver Eventos

@@ -388,7 +388,7 @@ const Agenda = () => {
                 { time: '12:30 - 13:30h', title: 'Pausa para o almoço', type: 'Intervalo', speaker: '', description: '' },
                 { time: '13:30 - 13:40h', title: 'Momento cultural', type: 'Cultural', speaker: 'Grupo Cultural', description: '' },
                 { time: '13:40 - 14:00h', title: 'Leitura do Comunicado final', type: 'Leitura', speaker: 'Secretariado', description: '' },
-                { time: '14:00 - 14:15h', title: 'Discurso de encerramento', type: 'Encerramento', speaker: 'S. Excia o Ministro', description: '' },
+                { time: '14:00 - 14:15h', title: 'Discurso de encerramento', type: 'Discurso', speaker: 'S. Excia o Ministro', description: '' },
                 { time: '14:30h', title: 'Fim do evento', type: 'Encerramento', speaker: '', description: '' }
             ]
         }
@@ -435,7 +435,7 @@ const Agenda = () => {
             Apresentação: 'bg-gray-100 border-gray-300 text-gray-800',
             ceremony: 'bg-red-100 border-red-300 text-red-800',
             networking: 'bg-yellow-100 border-yellow-300 text-yellow-800',
-            Intervalo: 'bg-gray-100 border-red-300 text-red-600',
+            Intervalo: 'bg-gray-100 border-cyan-300 text-cyan-600',
             conference: 'bg-pink-100 border-pink-300 text-pink-800',
             Encerramento: 'bg-gray-100 border-red-300 text-red-600',
             workgroup: 'bg-cyan-100 border-cyan-300 text-cyan-800',
@@ -581,7 +581,7 @@ const Agenda = () => {
                 </div>
 
                 {/* Call to Action */}
-                <div className="bg-gradient-to-r from-green-600 to-green-700 text-white py-16 px-4 mt-16">
+                <div className="bg-gradient-to-r from-green-700 to-green-700 text-white py-16 px-4 mt-16">
                     <div className="container mx-auto text-center max-w-4xl">
                         <motion.h2
                             initial={{ opacity: 0, y: 30 }}
