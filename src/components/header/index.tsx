@@ -24,10 +24,10 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-green-700/95 backdrop-blur-sm shadow-lg py-2' : 'bg-green-700 py-4'
+        scrolled ? 'bg-green-700/95 backdrop-blur-sm shadow-lg py-2' : 'bg-green-700 py-5'
       } text-white`}
     >
-      <div className="container mx-auto flex items-center justify-between px-4 md:px-6">
+      <div className="container mx-auto flex items-center justify-between px-6 md:px-12">
         {/* Logo e título */}
         <div className="flex items-center space-x-2">
           <Image

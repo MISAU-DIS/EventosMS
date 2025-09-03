@@ -142,7 +142,7 @@ export default function Comentarios(): React.ReactElement {
               transition={{ delay: 0.2, duration: 0.8 }}
               className="text-xl sm:text-2xl mb-2 text-gray-700"
             >
-              MISAU 2025 - Feedback dos Participantes
+              XIII Conselho Hospitalar e L Conselho Coordenador <br/>de Saúde (CCS)- Feedback dos Participantes
             </motion.p>
 
             <motion.p
@@ -360,7 +360,7 @@ export default function Comentarios(): React.ReactElement {
         </div>
 
         {/* Call to Action */}
-                <div className="bg-gradient-to-r from-green-600 to-green-700 text-white py-16 px-4 mt-16">
+                <div className="bg-gradient-to-r from-green-700 to-green-700 text-white py-16 px-4 mt-16">
                     <div className="container mx-auto text-center max-w-4xl">
                         <motion.h2
                             initial={{ opacity: 0, y: 30 }}
@@ -378,7 +378,7 @@ export default function Comentarios(): React.ReactElement {
                             viewport={{ once: true }}
                             className="text-xl mb-8 text-green-100"
                         >
-                            Para mais informações sobre o MISAU 2025 e futuros eventos, entre em contato connosco.
+                            Para mais informações sobre o MISAU e futuros eventos, entre em contato connosco.
                         </motion.p>
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
