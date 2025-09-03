@@ -27,8 +27,9 @@ export default function Home() {
             <Image
               src="/Emblem_of_Mozambique.svg"
               alt="Logo do Evento"
-              width={110}
-              height={120}
+              width={80}
+              height={90}
+              className="sm:w-[110px] sm:h-[120px] w-[80px] h-[90px]" 
             />
           </motion.div>
 
@@ -36,7 +37,7 @@ export default function Home() {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-4xl sm:text-5xl lg:text-5xl font-extrabold text-green-700 leading-tight"
+            className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-green-700 leading-tight"
           >
             REPÚBLICA DE MOÇAMBIQUE
           </motion.h1>
@@ -45,7 +46,7 @@ export default function Home() {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-4xl sm:text-5xl lg:text-4xl font-extrabold text-green-700 leading-tight"
+            className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-green-700 leading-tight"
           >
             MINISTÉRIO DA SAÚDE
           </motion.h1>
@@ -54,7 +55,7 @@ export default function Home() {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-3xl sm:text-4xl lg:text-3xl font-extrabold text-green-700 leading-tight"
+            className="text-xl sm:text-3xl lg:text-3xl font-extrabold text-green-700 leading-tight"
           >
             XIII Conselho Hospitalar & L Conselho Coordenador de Saúde (CCS)
             <br />
@@ -65,7 +66,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="mt-4 text-lg md:text-xl max-w-3xl text-gray-700 font-bold"
+            className="mt-4 text-sm sm:text-base md:text-lg max-w-3xl text-gray-700 font-bold text-centerd"
           >
             Lema: Por um Serviço Nacional de Saúde de Qualidade e Humanizado para Todos
           </motion.p>
@@ -91,10 +92,8 @@ export default function Home() {
           </motion.div>
         </div>
 
-
-
         {/* Banner informativo */}
-        <div className="bg-gradient-to-r from-green-600 to-green-700 text-white py-6">
+        <div className="bg-gradient-to-r from-green-700 to-green-700 text-white py-10">
           <div className="container mx-auto px-4 text-center">
             <p className="text-base sm:text-lg font-medium flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
 

@@ -749,3 +749,369 @@ const agendaData: AgendaData = {
 //   );
 // }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 'use client';
+
+// import Link from "next/link";
+// import Image from "next/image";
+// import { motion } from "framer-motion";
+// import { MapPin, Calendar, Users, Sparkles } from "lucide-react";
+
+// export default function Home() {
+//   return (
+//     <>
+//       <title>Eventos MISAU</title>
+//       <meta
+//         name="description"
+//         content="XIII Conselho Hospitalar & L Conselho Coordenador de Saúde – MISAU Moçambique"
+//       />
+//       <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+//       <main className="min-h-screen bg-gradient-to-b from-white via-green-25 to-green-50">
+//         {/* Hero Section */}
+//         <div className="relative flex flex-col items-center justify-center text-center px-4 py-20 pt-32 overflow-hidden">
+//           {/* Decorative elements */}
+//           <div className="absolute inset-0 opacity-5">
+//             <div className="absolute top-20 left-10 w-32 h-32 bg-green-600 rounded-full blur-3xl"></div>
+//             <div className="absolute bottom-20 right-10 w-40 h-40 bg-green-400 rounded-full blur-3xl"></div>
+//             <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-green-500 rounded-full blur-2xl"></div>
+//           </div>
+
+//           <motion.div
+//             initial={{ opacity: 0, y: -30, scale: 0.8 }}
+//             animate={{ opacity: 1, y: 0, scale: 1 }}
+//             transition={{ duration: 0.8 }}
+//             className="mb-6 relative"
+//           >
+//             <div className="absolute inset-0 bg-green-200 rounded-full blur-xl opacity-30 animate-pulse"></div>
+//             <Image
+//               src="/Emblem_of_Mozambique.svg"
+//               alt="Logo do Evento"
+//               width={110}
+//               height={120}
+//               className="relative z-10"
+//             />
+//           </motion.div>
+
+//           <motion.h1
+//             initial={{ opacity: 0, y: -30 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{ duration: 0.8 }}
+//             className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-green-700 leading-tight"
+//           >
+//             REPÚBLICA DE MOÇAMBIQUE
+//           </motion.h1>
+
+//           <motion.h1
+//             initial={{ opacity: 0, y: -30 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{ duration: 0.8, delay: 0.1 }}
+//             className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-green-700 leading-tight mt-2"
+//           >
+//             MINISTÉRIO DA SAÚDE
+//           </motion.h1>
+
+//           <motion.div
+//             initial={{ opacity: 0, scale: 0.9 }}
+//             animate={{ opacity: 1, scale: 1 }}
+//             transition={{ duration: 0.8, delay: 0.2 }}
+//             className="mt-6 mb-4 bg-gradient-to-r from-green-600 to-green-700 rounded-2xl p-6 shadow-2xl border border-green-200"
+//           >
+//             <h2 className="text-lg sm:text-2xl lg:text-3xl font-extrabold text-white leading-tight">
+//               XIII Conselho Hospitalar & L Conselho Coordenador de Saúde (CCS)
+//             </h2>
+//             <div className="flex items-center justify-center mt-3 gap-2">
+//               <Sparkles className="w-5 h-5 text-yellow-300" />
+//               <span className="text-base sm:text-xl font-bold text-yellow-100">
+//                 10 a 13 de Setembro de 2025
+//               </span>
+//               <Sparkles className="w-5 h-5 text-yellow-300" />
+//             </div>
+//           </motion.div>
+
+//           <motion.div
+//             initial={{ opacity: 0, y: 20 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{ delay: 0.3, duration: 0.8 }}
+//             className="mt-4 bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-green-100 shadow-lg"
+//           >
+//             <p className="text-sm sm:text-lg md:text-xl max-w-3xl text-gray-700 font-bold">
+//               Lema: Por um Serviço Nacional de Saúde de Qualidade e Humanizado para Todos
+//             </p>
+//           </motion.div>
+
+//           <motion.div
+//             initial={{ opacity: 0 }}
+//             animate={{ opacity: 1 }}
+//             transition={{ delay: 0.6, duration: 1 }}
+//             className="mt-8 flex flex-col sm:flex-row gap-4 justify-center"
+//           >
+//             <Link
+//               href="/agenda"
+//               className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-8 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 font-semibold"
+//             >
+//               Ver Agenda
+//             </Link>
+//             <Link
+//               href="/comentarios"
+//               className="bg-white border-2 border-green-600 text-green-700 hover:bg-green-50 px-6 py-3 rounded-full transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 font-semibold"
+//             >
+//               Ver Comentários
+//             </Link>
+//           </motion.div>
+
+//           {/* Floating stats */}
+//           <motion.div
+//             initial={{ opacity: 0, y: 30 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{ delay: 0.8, duration: 0.8 }}
+//             className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl"
+//           >
+//             <div className="bg-white/70 backdrop-blur-sm rounded-lg p-3 border border-green-100 shadow-md">
+//               <div className="flex items-center justify-center gap-2 text-green-700">
+//                 <Calendar className="w-4 h-4" />
+//                 <span className="text-xs sm:text-sm font-semibold">4 Dias de Evento</span>
+//               </div>
+//             </div>
+//             <div className="bg-white/70 backdrop-blur-sm rounded-lg p-3 border border-green-100 shadow-md">
+//               <div className="flex items-center justify-center gap-2 text-green-700">
+//                 <Users className="w-4 h-4" />
+//                 <span className="text-xs sm:text-sm font-semibold">+160 Participantes</span>
+//               </div>
+//             </div>
+//             <div className="bg-white/70 backdrop-blur-sm rounded-lg p-3 border border-green-100 shadow-md">
+//               <div className="flex items-center justify-center gap-2 text-green-700">
+//                 <MapPin className="w-4 h-4" />
+//                 <span className="text-xs sm:text-sm font-semibold">Maputo, ICS</span>
+//               </div>
+//             </div>
+//           </motion.div>
+//         </div>
+
+//         {/* Banner informativo */}
+//         <div className="bg-gradient-to-r from-green-700 to-green-700 text-white py-9">
+//           <div className="container mx-auto px-4 text-center">
+//             <p className="text-base sm:text-lg font-medium flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
+
+//               {/* Data */}
+//               <span className="flex items-center gap-2">
+//                 <Calendar className="w-5 h-5" />
+//                 10 - 13 de Setembro de 2025
+//               </span>
+
+//               {/* Local */}
+//               <span className="flex items-center gap-2">
+//                 <MapPin className="w-5 h-5" />
+//                 Cidade de Maputo - Instituto de Ciências de Saúde do Infulene
+//               </span>
+
+//               {/* Participantes */}
+//               <span className="flex items-center gap-2">
+//                 <Users className="w-5 h-5" />
+//                 +160 Participantes
+//               </span>
+//             </p>
+//           </div>
+//         </div>
+
+//         {/* Sobre o evento */}
+//         <section className="py-16 px-4 bg-white">
+//           <div className="container mx-auto max-w-6xl">
+//             <div className="grid lg:grid-cols-2 gap-12 items-center">
+//               <motion.div
+//                 initial={{ opacity: 0, x: -50 }}
+//                 whileInView={{ opacity: 1, x: 0 }}
+//                 transition={{ duration: 0.8 }}
+//                 viewport={{ once: true }}
+//                 className="text-center lg:text-left"
+//               >
+//                 <h2 className="text-3xl sm:text-4xl font-bold text-green-700 mb-6">
+//                   Sobre o Evento
+//                 </h2>
+//                 <p className="text-gray-700 text-lg mb-6 leading-relaxed">
+//                   O Ministério da Saúde (MISAU) realiza dois eventos estratégicos: o Conselho Hospitalar,
+//                   que avalia normas, protocolos clínicos e desempenho hospitalar,
+//                   e o Conselho Coordenador de Saúde, que articula órgãos centrais e locais,
+//                   analisando planos e estratégias para melhorar o Sistema Nacional de Saúde no âmbito
+//                   do Programa Quinquenal do Governo e da Estratégia Sectorial 2025 - 2034.
+//                 </p>
+//               </motion.div>
+
+//               <motion.div
+//                 initial={{ opacity: 0, x: 50 }}
+//                 whileInView={{ opacity: 1, x: 0 }}
+//                 transition={{ duration: 0.8 }}
+//                 viewport={{ once: true }}
+//                 className="relative"
+//               >
+//                 <Image
+//                   src="/MISAU.jpg"
+//                   alt="Profissionais de saúde em reunião"
+//                   width={500}
+//                   height={350}
+//                   className="rounded-xl shadow-lg w-full h-auto"
+//                 />
+//               </motion.div>
+//             </div>
+//           </div>
+//         </section>
+
+//         {/* Objetivos */}
+//         <section className="py-16 px-4 bg-gradient-to-b from-green-50 to-white">
+//           <div className="container mx-auto max-w-6xl text-center">
+//             <motion.h2
+//               initial={{ opacity: 0, y: 30 }}
+//               whileInView={{ opacity: 1, y: 0 }}
+//               transition={{ duration: 0.8 }}
+//               viewport={{ once: true }}
+//               className="text-3xl sm:text-4xl font-bold text-green-700 mb-12"
+//             >
+//               Objetivos do Encontro
+//             </motion.h2>
+
+//             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+//               {[
+//                 {
+//                   title: "Desempenho do Sector",
+//                   description: "Analisar o desempenho e desafios do sector de saúde."
+//                 },
+//                 {
+//                   title: "Gestão Hospitalar",
+//                   description: "Avaliar a gestão e o desempenho dos hospitais."
+//                 },
+//                 {
+//                   title: "Instrumentos Orientadores",
+//                   description: "Partilhar ENDE, PQG, PESS e PESOE."
+//                 },
+//                 {
+//                   title: "Prioridades 2026",
+//                   description: "Aprovar as prioridades e linhas estratégicas do PESOE 2026."
+//                 },
+//                 {
+//                   title: "Harmonização",
+//                   description: "Harmonizar intervenções para garantir eficiência e sustentabilidade."
+//                 },
+//               ].map((item, index) => (
+//                 <motion.div
+//                   key={index}
+//                   initial={{ opacity: 0, y: 30 }}
+//                   whileInView={{ opacity: 1, y: 0 }}
+//                   transition={{ duration: 0.8, delay: index * 0.1 }}
+//                   viewport={{ once: true }}
+//                   className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+//                 >
+//                   <h3 className="text-xl font-semibold text-green-700 mb-3">{item.title}</h3>
+//                   <p className="text-gray-600 leading-relaxed">{item.description}</p>
+//                 </motion.div>
+//               ))}
+//             </div>
+//           </div>
+//         </section>
+
+//         {/* Call to Action */}
+//         <section className="py-16 px-4 bg-gradient-to-r from-green-700 to-green-700 text-white text-center">
+//           <div className="container mx-auto max-w-4xl">
+//             <motion.h2
+//               initial={{ opacity: 0, y: 30 }}
+//               whileInView={{ opacity: 1, y: 0 }}
+//               transition={{ duration: 0.8 }}
+//               viewport={{ once: true }}
+//               className="text-3xl sm:text-4xl font-bold mb-6"
+//             >
+//               Junte-se ao Movimento
+//             </motion.h2>
+//             <motion.p
+//               initial={{ opacity: 0, y: 20 }}
+//               whileInView={{ opacity: 1, y: 0 }}
+//               transition={{ duration: 0.8, delay: 0.2 }}
+//               viewport={{ once: true }}
+//               className="text-xl mb-8 text-green-100"
+//             >
+//               Participe no XIII Conselho Hospitalar & L Conselho Coordenador de Saúde
+//               e contribua para um Sistema Nacional de Saúde mais forte e humanizado.
+//             </motion.p>
+//             <motion.div
+//               initial={{ opacity: 0, y: 20 }}
+//               whileInView={{ opacity: 1, y: 0 }}
+//               transition={{ duration: 0.8, delay: 0.4 }}
+//               viewport={{ once: true }}
+//               className="flex flex-col sm:flex-row gap-4 justify-center"
+//             >
+//               <Link
+//                 href="/agenda"
+//                 className="bg-white text-green-700 hover:bg-green-50 px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+//               >
+//                 Consultar Programa
+//               </Link>
+//               <Link
+//                 href="/contacto"
+//                 className="border-2 border-white text-white hover:bg-white hover:text-green-700 px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+//               >
+//                 Contactar Organização
+//               </Link>
+//             </motion.div>
+//           </div>
+//         </section>
+//       </main>
+//     </>
+//   );
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
