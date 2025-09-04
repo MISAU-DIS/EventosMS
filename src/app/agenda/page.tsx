@@ -158,7 +158,7 @@ const Agenda = () => {
                     <div className="container mx-auto mt-20 px-4 py-8">
                         <div className="text-center">
                             <h1 className="text-3xl md:text-4xl font-bold text-green-700 mb-2">
-                                Agenda do Evento
+                                Agenda do XIII Conselho Hospitalar & L Conselho Coordenador de Saúde
                             </h1>
                             <div className="flex flex-wrap justify-center items-center gap-4 text-sm text-gray-600">
                                 <div className="flex items-center gap-1">
