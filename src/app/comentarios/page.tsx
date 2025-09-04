@@ -360,7 +360,7 @@ export default function Comentarios(): React.ReactElement {
         </div>
 
         {/* Call to Action */}
-                <div className="bg-gradient-to-r from-green-700 to-green-700 text-white py-16 px-4 mt-16">
+                <div className="bg-gradient-to-r from-emerald-700 to-emerald-700 text-white py-16 px-4 mt-16">
                     <div className="container mx-auto text-center max-w-4xl">
                         <motion.h2
                             initial={{ opacity: 0, y: 30 }}

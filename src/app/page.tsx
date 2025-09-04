@@ -93,7 +93,7 @@ export default function Home() {
         </div>
 
         {/* Banner informativo */}
-        <div className="bg-gradient-to-r from-green-700 to-green-700 text-white py-10">
+        <div className="bg-gradient-to-r from-emerald-700 to-emerald-700 text-white py-10">
           <div className="container mx-auto px-4 text-center">
             <p className="text-base sm:text-lg font-medium flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
 
@@ -224,7 +224,7 @@ export default function Home() {
         </section>
 
         {/* Call to Action */}
-        <section className="py-16 px-4 bg-gradient-to-r from-green-700 to-green-700 text-white text-center">
+        <section className="py-16 px-4 bg-gradient-to-r from-emerald-700 to-emerald-700 text-white text-center">
           <div className="container mx-auto max-w-4xl">
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
