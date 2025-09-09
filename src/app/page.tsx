@@ -104,10 +104,21 @@ export default function Home() {
               </span>
 
               {/* Local */}
-              <span className="flex items-center gap-2">
+              {/* <span className="flex items-center gap-2">
                 <MapPin className="w-5 h-5" />
                 Cidade de Maputo - Instituto de Ciências de Saúde do Infulene
-              </span>
+              </span> */}
+
+              {/* Local */}
+              <a 
+                href="https://maps.google.com/maps?q=Instituto+de+Ciências+de+Saúde+do+Infulene,+Maputo,+Moçambique"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:text-green-200 transition-colors duration-200 cursor-pointer"
+              >
+                <MapPin className="w-5 h-5" />
+                Cidade de Maputo - Instituto de Ciências de Saúde do Infulene
+              </a>
 
               {/* Participantes */}
               <span className="flex items-center gap-2">
@@ -171,6 +182,7 @@ export default function Home() {
           </div>
         </section>
 
+        
         {/* Objetivos */}
         <section className="py-16 px-4 bg-gradient-to-b from-green-50 to-white">
           <div className="container mx-auto max-w-6xl text-center">
@@ -220,6 +232,62 @@ export default function Home() {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Localização do Evento */}
+        <section className="py-16 px-4 bg-white">
+          <div className="container mx-auto max-w-6xl">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              {/* Ícone */}
+              <div className="flex justify-center mb-8">
+                <div className="bg-emerald-100 rounded-full p-4">
+                  <MapPin className="w-12 h-12 text-emerald-600" />
+                </div>
+              </div>
+
+              {/* Título */}
+              <motion.h2
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                viewport={{ once: true }}
+                className="text-4xl sm:text-2xl font-black text-green-700 mb-4"
+              >
+                Local do evento
+              </motion.h2>
+
+              <h3 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
+                Instituto de Ciências de Saúde do Infulene
+              </h3>
+              <p className="text-xl text-gray-600 font-semibold mb-6">
+                Cidade de Maputo, Moçambique
+              </p>
+
+              {/* Botão */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <a
+                  href="https://maps.google.com/maps?q=Instituto+de+Ciências+de+Saúde+do+Infulene,+Maputo,+Moçambique"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-4 bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+                >
+                  <MapPin className="w-8 h-8" />
+                  <span>Ver no Google Maps</span>
+                </a>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
 
