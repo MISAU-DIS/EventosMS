@@ -10,7 +10,7 @@ interface Session {
     type: string;
     speaker: string;
     description: string;
-    fileUrl?: string; // <- campo opcional
+    fileUrl?: string; 
 }
 
 interface DayData {
@@ -220,6 +220,14 @@ const Agenda = () => {
                                     </h2>
                                     <p className="text-gray-600">{agendaData[selectedDay].theme}</p>
                                 </div>
+                                <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=XIII+Conselho+Hospitalar+e+L+Conselho+Cordenador&details=O+Ministerio+da+Saude+realiza+dois+eventos+estrategicos:+Conselho+Hospitalar+e+Conselho+Coordenador+de+Saude,+avaliando+normas,+desempenho+hospitalar+e+estrategias+para+melhorar+o+Sistema+Nacional+de+Saude+(2025-2034).&details=Evento+MISAU&location=Instituto+de+Ciências+de+Saúde+do+Infulene" target="_blank" rel="noopener noreferrer"
+                                    className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-semibold text-sm bg-green-600 text-white hover:bg-blue-700 transition-all duration-300 shadow-lg"
+                                >
+                                    <Calendar className="w-4 h-4" />
+                                    <span>
+                                    Adicionar ao Google Calendar
+                                    </span>
+                                </a>
                                 <div className="text-sm text-gray-500 bg-gray-50 px-4 py-2 rounded-lg">
                                     Dia {getDayInfo(selectedDay).number} de {getDayInfo(selectedDay).total}
                                 </div>
