@@ -23,6 +23,7 @@ import {
   Shield
 } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface DashboardStats {
   totalParticipants: number;
@@ -119,10 +120,22 @@ export default function AdminDashboard(): React.ReactElement {
     <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-xl transform transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:inset-0`}>
       <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200">
         <div className="flex items-center gap-3">
-          <div className="bg-emerald-600 p-2 rounded-lg">
+          {/* <div className="bg-emerald-600 p-2 rounded-lg">
             <Shield className="w-5 h-5 text-white" />
+          </div> */}
+
+          <div>
+            <Image
+              src="/Emblem_of_Mozambique.svg"
+              alt="Emblema de Moçambique"
+              width={48}
+              height={48}
+              className="w-8 h-8"
+              priority
+            />
           </div>
-          <h1 className="text-lg font-bold text-gray-900">MISAU Admin</h1>
+
+          <h1 className="text-lg font-bold text-gray-900">Dashboard</h1>
         </div>
         <button
           onClick={() => setSidebarOpen(false)}
@@ -137,7 +150,7 @@ export default function AdminDashboard(): React.ReactElement {
           {menuItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
-            
+
             return (
               <button
                 key={item.id}
@@ -145,11 +158,10 @@ export default function AdminDashboard(): React.ReactElement {
                   setActiveTab(item.id);
                   setSidebarOpen(false);
                 }}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-200 ${
-                  isActive
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-200 ${isActive
                     ? 'bg-emerald-50 text-emerald-600 border border-emerald-200'
                     : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                }`}
+                  }`}
               >
                 <Icon className="w-5 h-5" />
                 <span className="font-medium">{item.label}</span>
@@ -241,10 +253,9 @@ export default function AdminDashboard(): React.ReactElement {
               transition={{ delay: index * 0.1 }}
               className="flex items-center gap-4 p-3 hover:bg-gray-50 rounded-lg"
             >
-              <div className={`p-2 rounded-lg ${
-                activity.type === 'comment' ? 'bg-blue-100' :
-                activity.type === 'registration' ? 'bg-green-100' : 'bg-purple-100'
-              }`}>
+              <div className={`p-2 rounded-lg ${activity.type === 'comment' ? 'bg-blue-100' :
+                  activity.type === 'registration' ? 'bg-green-100' : 'bg-purple-100'
+                }`}>
                 {activity.type === 'comment' && <MessageSquare className="w-4 h-4 text-blue-600" />}
                 {activity.type === 'registration' && <Users className="w-4 h-4 text-green-600" />}
                 {activity.type === 'session' && <Calendar className="w-4 h-4 text-purple-600" />}
@@ -321,13 +332,12 @@ export default function AdminDashboard(): React.ReactElement {
                         ))}
                       </div>
                     </div>
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      comment.status === 'approved' ? 'bg-green-100 text-green-800' :
-                      comment.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
-                      'bg-red-100 text-red-800'
-                    }`}>
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${comment.status === 'approved' ? 'bg-green-100 text-green-800' :
+                        comment.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                          'bg-red-100 text-red-800'
+                      }`}>
                       {comment.status === 'approved' ? 'Aprovado' :
-                       comment.status === 'pending' ? 'Pendente' : 'Rejeitado'}
+                        comment.status === 'pending' ? 'Pendente' : 'Rejeitado'}
                     </span>
                   </div>
                   <p className="text-gray-700 mb-3">{comment.comment}</p>
@@ -427,7 +437,7 @@ export default function AdminDashboard(): React.ReactElement {
                   {menuItems.find(item => item.id === activeTab)?.label || 'Dashboard'}
                 </h1>
               </div>
-              
+
               <div className="flex items-center gap-4">
                 <button className="relative p-2 text-gray-400 hover:text-gray-600 rounded-lg">
                   <Bell className="w-6 h-6" />

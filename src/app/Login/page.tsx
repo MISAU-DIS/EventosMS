@@ -31,28 +31,26 @@ export default function Login(): React.ReactElement {
     if (error) setError('');
   };
 
-  const handleSubmit = async (e: React.FormEvent): Promise<void> => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError('');
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsLoading(true);
 
-    // Simulate API call
-    try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Mock validation
-      if (formData.username === 'admin' && formData.password === 'admin123') {
-        // Redirect to dashboard (in real app, use router.push)
-        window.location.href = '/AdminDashboard';
-      } else {
-        setError('Credenciais inválidas. Tente novamente.');
-      }
-    } catch (err) {
-      setError('Erro ao fazer login. Tente novamente.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const res = await fetch('/api/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(formData)
+  });
+
+  if (res.ok) {
+    window.location.href = '/AdminDashboard'; // redireciona
+  } else {
+    const data = await res.json();
+    setError(data.message || 'Erro no login');
+  }
+
+  setIsLoading(false);
+};
+
 
   return (
     <>
@@ -63,24 +61,7 @@ export default function Login(): React.ReactElement {
       <main className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-green-50 flex items-center justify-center p-4">
         <div className="w-full max-w-md">
           {/* Logo e Header */}
-          <motion.div
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-8"
-          >
-            <div className="flex justify-center mb-4">
-              <div className="bg-emerald-600 p-4 rounded-full shadow-lg">
-                <Shield className="w-8 h-8 text-white" />
-              </div>
-            </div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">
-              Painel Administrativo
-            </h1>
-            <p className="text-gray-600 text-sm">
-              Sistema de Gestão MISAU 2025
-            </p>
-          </motion.div>
+          
 
           {/* Formulário de Login */}
           <motion.div
@@ -89,6 +70,32 @@ export default function Login(): React.ReactElement {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100"
           >
+            <motion.div
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-8"
+          >
+            <div className="flex justify-center mb-4">
+              <div>
+                <Image
+                  src="/Emblem_of_Mozambique.svg"
+                  alt="Emblema de Moçambique"
+                  width={48}
+                  height={48}
+                  className="w-16 h-16"
+                  priority
+                />
+              </div>
+            </div>
+
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">
+              Login
+            </h1>
+            <p className="text-gray-600 text-sm">
+              Sistema de Gestão de Eventos
+            </p>
+          </motion.div>
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Username Field */}
               <div>
