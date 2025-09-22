@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 import {
   Users,
   Calendar,
@@ -53,6 +54,13 @@ interface Comment {
 export default function AdminDashboard(): React.ReactElement {
   const [activeTab, setActiveTab] = useState<string>('overview');
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+
+  const router = useRouter();
+
+const handleLogout = async () => {
+  await fetch('/api/logout', { method: 'POST' });
+  router.push('/Login');
+};
 
   // Mock data
   const stats: DashboardStats = {
@@ -159,8 +167,8 @@ export default function AdminDashboard(): React.ReactElement {
                   setSidebarOpen(false);
                 }}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-200 ${isActive
-                    ? 'bg-emerald-50 text-emerald-600 border border-emerald-200'
-                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                  ? 'bg-emerald-50 text-emerald-600 border border-emerald-200'
+                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                   }`}
               >
                 <Icon className="w-5 h-5" />
@@ -171,7 +179,7 @@ export default function AdminDashboard(): React.ReactElement {
         </div>
       </nav>
 
-      <div className="absolute bottom-6 left-4 right-4">
+      {/* <div className="absolute bottom-6 left-4 right-4">
         <Link
           href="/Login"
           className="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-colors"
@@ -179,7 +187,27 @@ export default function AdminDashboard(): React.ReactElement {
           <LogOut className="w-5 h-5" />
           <span className="font-medium">Sair</span>
         </Link>
+      </div> */}
+
+
+      <div className="absolute bottom-6 left-4 right-4">
+        <button
+          onClick={handleLogout}
+          className="w-full flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-colors"
+        >
+          <LogOut className="w-5 h-5" />
+          <span className="font-medium">Sair</span>
+        </button>
       </div>
+
+
+
+
+
+
+
+
+
     </div>
   );
 
@@ -254,7 +282,7 @@ export default function AdminDashboard(): React.ReactElement {
               className="flex items-center gap-4 p-3 hover:bg-gray-50 rounded-lg"
             >
               <div className={`p-2 rounded-lg ${activity.type === 'comment' ? 'bg-blue-100' :
-                  activity.type === 'registration' ? 'bg-green-100' : 'bg-purple-100'
+                activity.type === 'registration' ? 'bg-green-100' : 'bg-purple-100'
                 }`}>
                 {activity.type === 'comment' && <MessageSquare className="w-4 h-4 text-blue-600" />}
                 {activity.type === 'registration' && <Users className="w-4 h-4 text-green-600" />}
@@ -333,8 +361,8 @@ export default function AdminDashboard(): React.ReactElement {
                       </div>
                     </div>
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${comment.status === 'approved' ? 'bg-green-100 text-green-800' :
-                        comment.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
-                          'bg-red-100 text-red-800'
+                      comment.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                        'bg-red-100 text-red-800'
                       }`}>
                       {comment.status === 'approved' ? 'Aprovado' :
                         comment.status === 'pending' ? 'Pendente' : 'Rejeitado'}
