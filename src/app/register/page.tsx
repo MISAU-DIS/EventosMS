@@ -21,7 +21,7 @@ export default function RegisterPage(): React.ReactElement {
     password: '',
     confirmPassword: ''
   });
-  
+
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -40,7 +40,7 @@ export default function RegisterPage(): React.ReactElement {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validações básicas
     if (formData.password !== formData.confirmPassword) {
       setMessage('As senhas não coincidem');
@@ -58,8 +58,8 @@ export default function RegisterPage(): React.ReactElement {
 
     try {
       const userCredential = await createUserWithEmailAndPassword(
-        auth, 
-        formData.email, 
+        auth,
+        formData.email,
         formData.password
       );
       const user = userCredential.user;
@@ -72,18 +72,21 @@ export default function RegisterPage(): React.ReactElement {
 
       setMessage("Usuário cadastrado com sucesso!");
       setMessageType('success');
-      
+
       // Limpar formulário
       setFormData({
         email: '',
         password: '',
         confirmPassword: ''
       });
-      
-    } catch (error: string | any) {
+
+    }
+
+    catch (error: unknown) {
+      const err = error as { code?: string; message?: string };
       let errorMessage = "Erro ao cadastrar usuário";
-      
-      switch (error.code) {
+
+      switch (err.code) {
         case 'auth/email-already-in-use':
           errorMessage = 'Este email já está em uso';
           break;
@@ -94,14 +97,35 @@ export default function RegisterPage(): React.ReactElement {
           errorMessage = 'Senha muito fraca';
           break;
         default:
-          errorMessage = error.message;
+          errorMessage = err.message || errorMessage;
       }
-      
+
       setMessage(errorMessage);
       setMessageType('error');
-    } finally {
-      setIsLoading(false);
     }
+
+    //catch (error: any) {
+    //   let errorMessage = "Erro ao cadastrar usuário";
+
+    //   switch (error.code) {
+    //     case 'auth/email-already-in-use':
+    //       errorMessage = 'Este email já está em uso';
+    //       break;
+    //     case 'auth/invalid-email':
+    //       errorMessage = 'Email inválido';
+    //       break;
+    //     case 'auth/weak-password':
+    //       errorMessage = 'Senha muito fraca';
+    //       break;
+    //     default:
+    //       errorMessage = error.message;
+    //   }
+
+    //   setMessage(errorMessage);
+    //   setMessageType('error');
+    // } finally {
+    //   setIsLoading(false);
+    // }
   };
 
   return (
@@ -112,7 +136,7 @@ export default function RegisterPage(): React.ReactElement {
 
       <main className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-green-50 flex items-center justify-center p-4">
         <div className="w-full max-w-md">
-          
+
 
           {/* Formulário de Cadastro */}
           <motion.div
@@ -122,34 +146,34 @@ export default function RegisterPage(): React.ReactElement {
             className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100"
           >
             <form onSubmit={handleRegister} className="space-y-6">
-                {/* Logo e Header */}
-          <motion.div
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-8"
-          >
-            <div className="flex justify-center mb-4">
-              <div>
-                <Image
-                  src="/Emblem_of_Mozambique.svg"
-                  alt="Emblema de Moçambique"
-                  width={48}
-                  height={48}
-                  className="w-16 h-16"
-                  priority
-                />
-              </div>
-            </div>
+              {/* Logo e Header */}
+              <motion.div
+                initial={{ opacity: 0, y: -30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="text-center mb-8"
+              >
+                <div className="flex justify-center mb-4">
+                  <div>
+                    <Image
+                      src="/Emblem_of_Mozambique.svg"
+                      alt="Emblema de Moçambique"
+                      width={48}
+                      height={48}
+                      className="w-16 h-16"
+                      priority
+                    />
+                  </div>
+                </div>
 
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">
-              Cadastro de Usuário
-            </h1>
-            <p className="text-gray-600 text-sm">
-              Sistema de Gestão de Eventos - MISAU
-            </p>
-          </motion.div>
-          
+                <h1 className="text-2xl font-bold text-gray-900 mb-2">
+                  Cadastro de Usuário
+                </h1>
+                <p className="text-gray-600 text-sm">
+                  Sistema de Gestão de Eventos - MISAU
+                </p>
+              </motion.div>
+
               {/* Email Field */}
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
@@ -244,15 +268,13 @@ export default function RegisterPage(): React.ReactElement {
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
-                  className={`border rounded-lg p-3 ${
-                    messageType === 'success'
+                  className={`border rounded-lg p-3 ${messageType === 'success'
                       ? 'bg-green-50 border-green-200'
                       : 'bg-red-50 border-red-200'
-                  }`}
+                    }`}
                 >
-                  <p className={`text-sm font-medium ${
-                    messageType === 'success' ? 'text-green-600' : 'text-red-600'
-                  }`}>
+                  <p className={`text-sm font-medium ${messageType === 'success' ? 'text-green-600' : 'text-red-600'
+                    }`}>
                     {message}
                   </p>
                 </motion.div>
@@ -264,11 +286,10 @@ export default function RegisterPage(): React.ReactElement {
                 disabled={isLoading}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className={`w-full py-3 px-4 rounded-xl font-semibold text-white transition-all duration-300 shadow-lg flex items-center justify-center ${
-                  isLoading
+                className={`w-full py-3 px-4 rounded-xl font-semibold text-white transition-all duration-300 shadow-lg flex items-center justify-center ${isLoading
                     ? 'bg-gray-400 cursor-not-allowed'
                     : 'bg-emerald-600 hover:bg-emerald-700 hover:shadow-xl'
-                }`}
+                  }`}
               >
                 {isLoading ? (
                   <div className="flex items-center justify-center">

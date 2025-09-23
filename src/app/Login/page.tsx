@@ -49,12 +49,18 @@ export default function Login(): React.ReactElement {
     // Redirecionar
     window.location.href = '/AdminDashboard';
 
-  } catch (error: string | any) {
-    console.error("Erro no login:", error.message);
-    setError("Email ou senha inválidos");
-  } finally {
-    setIsLoading(false);
-  }
+  } 
+  catch (error: unknown) {
+  const err = error as { message?: string };
+  console.error("Erro no login:", err.message);
+  setError("Email ou senha inválidos");
+}
+  //catch (error: any) {
+  //   console.error("Erro no login:", error.message);
+  //   setError("Email ou senha inválidos");
+  // } finally {
+  //   setIsLoading(false);
+  // }
 };
 
 
