@@ -9,11 +9,9 @@ import {
   MessageSquare,
   Settings,
   BarChart3,
-  FileText,
   Bell,
   Search,
   Download,
-  Plus,
   Edit,
   Trash2,
   Eye,
@@ -21,7 +19,6 @@ import {
   Menu,
   X,
   Home,
-  Shield
 } from 'lucide-react';
 import Image from 'next/image';
 import { auth } from '@/lib/firebase';
@@ -69,23 +66,12 @@ const handleLogout = async () => {
   }
 };
 
-// useEffect(() => {
-//   const unsubscribe = onAuthStateChanged(auth, (user) => {
-//     if (!user) {
-//       router.push('/Login');
-//     }
-//   });
-
-//   return () => unsubscribe();
-// }, []);
-
-
 useEffect(() => {
   const unsubscribe = onAuthStateChanged(auth, (user) => {
     if (!user) {
       router.push('/Login');
     } else {
-      setLoading(false); // Usuário autenticado, liberar a UI
+      setLoading(false); 
     }
   });
 
@@ -208,17 +194,6 @@ useEffect(() => {
           })}
         </div>
       </nav>
-
-      {/* <div className="absolute bottom-6 left-4 right-4">
-        <Link
-          href="/Login"
-          className="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-colors"
-        >
-          <LogOut className="w-5 h-5" />
-          <span className="font-medium">Sair</span>
-        </Link>
-      </div> */}
-
 
       <div className="absolute bottom-6 left-4 right-4">
         <button
