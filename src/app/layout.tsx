@@ -1,22 +1,28 @@
+"use client";
 import Header from "@/components/header";
 import "./globals.css";
 import Footer from "@/components/footer";
-
+import { usePathname } from 'next/navigation';
 
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) 
+
+{
+  const pathname = usePathname();
+  const noHeaderFooterRoutes = ['/Login', '/AdminDashboard', '/register'];
+  const hideHeaderFooter = noHeaderFooterRoutes.includes(pathname);
   return (
     <html lang="en">
       <body
         className={`antialiased`}
       >
-        <Header />
+        {!hideHeaderFooter && <Header />}
         {children}
-        <Footer />
+        {!hideHeaderFooter && <Footer />}
       </body>
     </html>
   );

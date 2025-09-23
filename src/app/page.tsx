@@ -310,8 +310,9 @@ export default function Home() {
               viewport={{ once: true }}
               className="text-xl mb-8 text-green-100"
             >
-              Participe no XIII Conselho Hospitalar & L Conselho Coordenador de Saúde
-              e contribua para um Sistema Nacional de Saúde mais forte e humanizado.
+              Contribua para um Sistema Nacional de Saúde mais forte e humanizado.
+              {/* Participe no XIII Conselho Hospitalar & L Conselho Coordenador de Saúde */}
+              {/* e contribua para um Sistema Nacional de Saúde mais forte e humanizado. */}
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}

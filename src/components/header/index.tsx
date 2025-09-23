@@ -53,7 +53,7 @@ export default function Header() {
                 href="/" 
                 className="relative py-2 px-1 hover:text-green-200 transition-all duration-300 group"
               >
-                Home
+                Início
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-green-200 transition-all duration-300 group-hover:w-full"></span>
               </Link>
             </li>
@@ -80,7 +80,7 @@ export default function Header() {
                 href="/contacto" 
                 className="relative py-2 px-1 hover:text-green-200 transition-all duration-300 group"
               >
-                Contato
+                Contacto
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-green-200 transition-all duration-300 group-hover:w-full"></span>
               </Link>
             </li>
