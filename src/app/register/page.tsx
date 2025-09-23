@@ -80,7 +80,7 @@ export default function RegisterPage(): React.ReactElement {
         confirmPassword: ''
       });
       
-    } catch (error: any) {
+    } catch (error: string | any) {
       let errorMessage = "Erro ao cadastrar usuário";
       
       switch (error.code) {

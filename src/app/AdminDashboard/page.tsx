@@ -76,7 +76,7 @@ useEffect(() => {
   });
 
   return () => unsubscribe();
-}, []);
+}, [router]);
 
   // Mock data
   const stats: DashboardStats = {
@@ -210,7 +210,7 @@ useEffect(() => {
   const StatsCard = ({ title, value, icon: Icon, color }: {
     title: string;
     value: string | number;
-    icon: any;
+    icon: string | React.ElementType;
     color: string;
   }) => (
     <motion.div
