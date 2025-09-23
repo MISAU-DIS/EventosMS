@@ -13,7 +13,7 @@ export default function RootLayout({
 
 {
   const pathname = usePathname();
-  const noHeaderFooterRoutes = ['/Login', '/AdminDashboard'];
+  const noHeaderFooterRoutes = ['/Login', '/AdminDashboard', '/register'];
   const hideHeaderFooter = noHeaderFooterRoutes.includes(pathname);
   return (
     <html lang="en">

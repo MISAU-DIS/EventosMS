@@ -2,18 +2,21 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Eye, EyeOff, Lock, User, Shield } from 'lucide-react';
+import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/lib/firebase"; 
+
 
 interface LoginForm {
-  username: string;
   password: string;
+  email: string;
 }
 
 export default function Login(): React.ReactElement {
   const [formData, setFormData] = useState<LoginForm>({
-    username: '',
+    email: '',
     password: ''
   });
   
@@ -35,21 +38,25 @@ export default function Login(): React.ReactElement {
   e.preventDefault();
   setIsLoading(true);
 
-  const res = await fetch('/api/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData)
-  });
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      formData.email,
+      formData.password
+    );
 
-  if (res.ok) {
-    window.location.href = '/AdminDashboard'; // redireciona
-  } else {
-    const data = await res.json();
-    setError(data.message || 'Erro no login');
+    console.log("Usuário logado:", userCredential.user.email);
+    // Redirecionar
+    window.location.href = '/AdminDashboard';
+
+  } catch (error: any) {
+    console.error("Erro no login:", error.message);
+    setError("Email ou senha inválidos");
+  } finally {
+    setIsLoading(false);
   }
-
-  setIsLoading(false);
 };
+
 
 
   return (
@@ -59,9 +66,7 @@ export default function Login(): React.ReactElement {
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
       <main className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-green-50 flex items-center justify-center p-4">
-        <div className="w-full max-w-md">
-          {/* Logo e Header */}
-          
+        <div className="w-full max-w-md">          
 
           {/* Formulário de Login */}
           <motion.div
@@ -99,21 +104,21 @@ export default function Login(): React.ReactElement {
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Username Field */}
               <div>
-                <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
-                  Nome de Usuário
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                  Email
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <User className="h-5 w-5 text-gray-400" />
+                    <Mail className="h-5 w-5 text-gray-400" />
                   </div>
                   <input
-                    id="username"
-                    name="username"
-                    type="text"
-                    value={formData.username}
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
                     onChange={handleInputChange}
                     className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all text-gray-900 placeholder-gray-500"
-                    placeholder="Digite seu usuário"
+                    placeholder="Digite seu email"
                     required
                   />
                 </div>
@@ -206,15 +211,6 @@ export default function Login(): React.ReactElement {
                 )}
               </motion.button>
             </form>
-
-            {/* Demo Credentials Info */}
-            <div className="mt-6 p-4 bg-emerald-50 rounded-xl border border-emerald-200">
-              <p className="text-xs text-emerald-700 font-medium mb-2">Credenciais de Demonstração:</p>
-              <p className="text-xs text-emerald-600">
-                <strong>Usuário:</strong> admin<br />
-                <strong>Senha:</strong> admin123
-              </p>
-            </div>
           </motion.div>
 
           {/* Footer */}

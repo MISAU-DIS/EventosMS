@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import {
@@ -23,8 +23,10 @@ import {
   Home,
   Shield
 } from 'lucide-react';
-import Link from 'next/link';
 import Image from 'next/image';
+import { auth } from '@/lib/firebase';
+import { signOut } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 
 interface DashboardStats {
   totalParticipants: number;
@@ -54,13 +56,41 @@ interface Comment {
 export default function AdminDashboard(): React.ReactElement {
   const [activeTab, setActiveTab] = useState<string>('overview');
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+  const [loading, setLoading] = useState(true);
 
   const router = useRouter();
 
 const handleLogout = async () => {
-  await fetch('/api/logout', { method: 'POST' });
-  router.push('/Login');
+  try {
+    await signOut(auth);
+    router.push('/Login');
+  } catch (error) {
+    console.error('Erro ao fazer logout:', error);
+  }
 };
+
+// useEffect(() => {
+//   const unsubscribe = onAuthStateChanged(auth, (user) => {
+//     if (!user) {
+//       router.push('/Login');
+//     }
+//   });
+
+//   return () => unsubscribe();
+// }, []);
+
+
+useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      router.push('/Login');
+    } else {
+      setLoading(false); // Usuário autenticado, liberar a UI
+    }
+  });
+
+  return () => unsubscribe();
+}, []);
 
   // Mock data
   const stats: DashboardStats = {
@@ -199,15 +229,6 @@ const handleLogout = async () => {
           <span className="font-medium">Sair</span>
         </button>
       </div>
-
-
-
-
-
-
-
-
-
     </div>
   );
 
@@ -430,6 +451,65 @@ const handleLogout = async () => {
         return <OverviewTab />;
     }
   };
+
+  if (loading) {
+  return( 
+    <>
+      <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-green-50 flex items-center justify-center">
+        <div className="text-center">
+          {/* Spinner Principal */}
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{
+              duration: 1,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            className="mx-auto mb-6 w-16 h-16 border-4 border-emerald-200 border-t-emerald-600 rounded-full"
+          />
+          
+          {/* Texto de Carregamento */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="text-emerald-700"
+          >
+            <h2 className="text-xl font-semibold mb-2">Carregando...</h2>
+            <p className="text-sm text-emerald-600">
+              Aguarde um momento, por favor
+            </p>
+          </motion.div>
+          
+          {/* Pontos animados */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="flex justify-center space-x-1 mt-4"
+          >
+            {[0, 1, 2].map((index) => (
+              <motion.div
+                key={index}
+                animate={{
+                  y: [-4, 4, -4],
+                  opacity: [0.5, 1, 0.5]
+                }}
+                transition={{
+                  duration: 1.2,
+                  repeat: Infinity,
+                  delay: index * 0.2,
+                  ease: "easeInOut"
+                }}
+                className="w-2 h-2 bg-emerald-500 rounded-full"
+              />
+            ))}
+          </motion.div>
+        </div>
+      </div>
+    </> 
+    );
+}
 
   return (
     <>
