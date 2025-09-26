@@ -198,7 +198,7 @@ useEffect(() => {
       <div className="absolute bottom-6 left-4 right-4">
         <button
           onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-colors"
+          className="w-full flex items-center gap-3 px-4 py-3 bg-red-500 hover:bg-red-700 rounded-xl transition-colors"
         >
           <LogOut className="w-5 h-5" />
           <span className="font-medium">Sair</span>

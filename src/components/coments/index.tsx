@@ -2039,3 +2039,1053 @@
 //     </>
 //   );
 // }
+
+
+//'use client';
+
+// import { useState, useEffect } from 'react';
+// import { motion } from 'framer-motion';
+// import { useRouter } from 'next/navigation';
+// import {
+//   Users,
+//   Calendar,
+//   MessageSquare,
+//   Settings,
+//   BarChart3,
+//   Bell,
+//   Search,
+//   Download,
+//   Edit,
+//   Trash2,
+//   Eye,
+//   LogOut,
+//   Menu,
+//   X,
+//   Home,
+//   Plus,
+//   Clock,
+//   MapPin,
+//   Save,
+//   FileText,
+//   Link,
+// } from 'lucide-react';
+// import Image from 'next/image';
+// import { auth } from '@/lib/firebase';
+// import { signOut } from 'firebase/auth';
+// import { onAuthStateChanged } from 'firebase/auth';
+
+// interface DashboardStats {
+//   totalParticipants: number;
+//   totalComments: number;
+//   totalSessions: number;
+//   avgRating: number;
+// }
+
+// interface RecentActivity {
+//   id: number;
+//   type: 'comment' | 'registration' | 'session';
+//   description: string;
+//   time: string;
+//   user?: string;
+// }
+
+// interface Comment {
+//   id: number;
+//   name: string;
+//   organization: string;
+//   rating: number;
+//   comment: string;
+//   date: string;
+//   status: 'approved' | 'pending' | 'rejected';
+// }
+
+// interface Session {
+//   id: string;
+//   time: string;
+//   title: string;
+//   type: string;
+//   speaker: string;
+//   description: string;
+//   fileUrl?: string;
+// }
+
+// interface DayData {
+//   id: string;
+//   date: string;
+//   theme: string;
+//   sessions: Session[];
+// }
+
+// interface AgendaData {
+//   [key: string]: DayData;
+// }
+
+// export default function AdminDashboard(): React.ReactElement {
+//   const [activeTab, setActiveTab] = useState<string>('overview');
+//   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+//   const [loading, setLoading] = useState(true);
+  
+//   // Estados para gestão da agenda
+//   const [agendaData, setAgendaData] = useState<AgendaData>({});
+//   const [showAddDayModal, setShowAddDayModal] = useState<boolean>(false);
+//   const [showAddSessionModal, setShowAddSessionModal] = useState<boolean>(false);
+//   const [selectedDayForSession, setSelectedDayForSession] = useState<string>('');
+//   const [editingSession, setEditingSession] = useState<Session | null>(null);
+
+//   const router = useRouter();
+
+//   // Inicializar dados da agenda com os dados do seu arquivo
+//   useEffect(() => {
+//     const initialAgendaData: AgendaData = {
+//       dia1: {
+//         id: 'dia1',
+//         date: '10 de Setembro de 2025',
+//         theme: 'Sessões do XIII Conselho Hospitalar',
+//         sessions: [
+//           { id: '1', time: '08:00 - 08:40h', title: 'Registo dos participantes/entrada para sala de reuniões', type: 'Entrada', speaker: 'Protocolo', description: '' },
+//           { id: '2', time: '08:40', title: 'Chegada do Excelentíssimo Presidente do Município da Cidade de Maputo', type: 'Protocolo', speaker: 'Protocolo', description: '' },
+//           { id: '3', time: '08:45', title: 'Chegada de S. Excia Secretário de Estado da Cidade de Maputo', type: 'Protocolo', speaker: 'Protocolo', description: '' },
+//           { id: '4', time: '09:05 - 09:15', title: 'Intervenção do Excelentíssimo Presidente do Município da Cidade de Maputo', type: 'Discurso', speaker: 'Presidente do Município', description: '' },
+//           { id: '5', time: '10:40 - 11:40', title: 'Ponto de situação dos indicadores de desempenho hospitalar 2023 e 2024', type: 'Apresentação', speaker: 'DNAM', description: '', fileUrl: 'www.google.com'}
+//         ]
+//       },
+//       dia2: {
+//         id: 'dia2',
+//         date: '11 de Setembro - Quinta-feira',
+//         theme: 'Sessões do XIII Conselho Hospitalar',
+//         sessions: [
+//           { id: '6', time: '08:30 - 09:00', title: 'Leitura e aprovação da Síntese do 1º dia', type: 'Leitura', speaker: 'Secretariado', description: '' },
+//           { id: '7', time: '09:00 - 09:30', title: 'Ponto de situação dos especialistas', type: 'Apresentação', speaker: 'DNAM', description: 'situação actual, desafios e próximos passos; apresentação conjuta entre DNAM, DNFPS e DRH' }
+//         ]
+//       }
+//     };
+//     setAgendaData(initialAgendaData);
+//   }, []);
+
+//   // Funções para gerenciar a agenda
+//   const addNewDay = (dayData: Omit<DayData, 'id' | 'sessions'>) => {
+//     const newId = `dia${Object.keys(agendaData).length + 1}`;
+//     setAgendaData(prev => ({
+//       ...prev,
+//       [newId]: {
+//         ...dayData,
+//         id: newId,
+//         sessions: []
+//       }
+//     }));
+//   };
+
+//   const addNewSession = (dayId: string, sessionData: Omit<Session, 'id'>) => {
+//     const newId = Date.now().toString();
+//     setAgendaData(prev => ({
+//       ...prev,
+//       [dayId]: {
+//         ...prev[dayId],
+//         sessions: [...prev[dayId].sessions, { ...sessionData, id: newId }]
+//       }
+//     }));
+//   };
+
+//   const updateSession = (dayId: string, sessionId: string, sessionData: Omit<Session, 'id'>) => {
+//     setAgendaData(prev => ({
+//       ...prev,
+//       [dayId]: {
+//         ...prev[dayId],
+//         sessions: prev[dayId].sessions.map(session =>
+//           session.id === sessionId ? { ...sessionData, id: sessionId } : session
+//         )
+//       }
+//     }));
+//   };
+
+//   const deleteSession = (dayId: string, sessionId: string) => {
+//     setAgendaData(prev => ({
+//       ...prev,
+//       [dayId]: {
+//         ...prev[dayId],
+//         sessions: prev[dayId].sessions.filter(session => session.id !== sessionId)
+//       }
+//     }));
+//   };
+
+//   const deleteDay = (dayId: string) => {
+//     setAgendaData(prev => {
+//       const newData = { ...prev };
+//       delete newData[dayId];
+//       return newData;
+//     });
+//   };
+
+//   const handleLogout = async () => {
+//     try {
+//       await signOut(auth);
+//       router.push('/Login');
+//     } catch (error) {
+//       console.error('Erro ao fazer logout:', error);
+//     }
+//   };
+
+//   useEffect(() => {
+//     const unsubscribe = onAuthStateChanged(auth, (user) => {
+//       if (!user) {
+//         router.push('/Login');
+//       } else {
+//         setLoading(false); 
+//       }
+//     });
+
+//     return () => unsubscribe();
+//   }, [router]);
+
+//   // Mock data
+//   const stats: DashboardStats = {
+//     totalParticipants: 164,
+//     totalComments: 12,
+//     totalSessions: Object.values(agendaData).reduce((total, day) => total + day.sessions.length, 0),
+//     avgRating: 4.8
+//   };
+
+//   const recentActivity: RecentActivity[] = [
+//     {
+//       id: 1,
+//       type: 'comment',
+//       description: 'Novo comentário recebido',
+//       time: '2 min atrás',
+//       user: 'Dr. João Silva'
+//     },
+//     {
+//       id: 2,
+//       type: 'registration',
+//       description: 'Nova inscrição no evento',
+//       time: '15 min atrás',
+//       user: 'Enf. Maria Santos'
+//     },
+//     {
+//       id: 3,
+//       type: 'session',
+//       description: 'Sessão atualizada na agenda',
+//       time: '1 hora atrás',
+//       user: 'Admin'
+//     }
+//   ];
+
+//   const comments: Comment[] = [
+//     {
+//       id: 1,
+//       name: 'Dr. Carlos Muthemba',
+//       organization: 'UEM',
+//       rating: 5,
+//       comment: 'Evento de alta qualidade técnica! As apresentações foram muito informativas.',
+//       date: '2025-06-18',
+//       status: 'approved'
+//     },
+//     {
+//       id: 2,
+//       name: 'Enf. Ana Santos',
+//       organization: 'Hospital Central',
+//       rating: 4,
+//       comment: 'Muito bom evento! Gostei especialmente das sessões sobre cuidados neonatais.',
+//       date: '2025-06-19',
+//       status: 'pending'
+//     }
+//   ];
+
+//   const menuItems = [
+//     { id: 'overview', label: 'Visão Geral', icon: Home },
+//     { id: 'participants', label: 'Participantes', icon: Users },
+//     { id: 'agenda', label: 'Agenda', icon: Calendar },
+//     { id: 'comments', label: 'Comentários', icon: MessageSquare },
+//     { id: 'reports', label: 'Relatórios', icon: BarChart3 },
+//     { id: 'settings', label: 'Configurações', icon: Settings }
+//   ];
+
+//   const Sidebar = () => (
+//     <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-xl transform transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:inset-0`}>
+//       <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200">
+//         <div className="flex items-center gap-3">
+//           <div>
+//             <Image
+//               src="/Emblem_of_Mozambique.svg"
+//               alt="Emblema de Moçambique"
+//               width={48}
+//               height={48}
+//               className="w-8 h-8"
+//               priority
+//             />
+//           </div>
+//           <h1 className="text-lg font-bold text-gray-900">Dashboard</h1>
+//         </div>
+//         <button
+//           onClick={() => setSidebarOpen(false)}
+//           className="lg:hidden p-1 rounded-md text-gray-400 hover:text-gray-600"
+//         >
+//           <X className="w-6 h-6" />
+//         </button>
+//       </div>
+
+//       <nav className="mt-8 px-4">
+//         <div className="space-y-2">
+//           {menuItems.map((item) => {
+//             const Icon = item.icon;
+//             const isActive = activeTab === item.id;
+
+//             return (
+//               <button
+//                 key={item.id}
+//                 onClick={() => {
+//                   setActiveTab(item.id);
+//                   setSidebarOpen(false);
+//                 }}
+//                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-200 ${isActive
+//                   ? 'bg-emerald-50 text-emerald-600 border border-emerald-200'
+//                   : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+//                   }`}
+//               >
+//                 <Icon className="w-5 h-5" />
+//                 <span className="font-medium">{item.label}</span>
+//               </button>
+//             );
+//           })}
+//         </div>
+//       </nav>
+
+//       <div className="absolute bottom-6 left-4 right-4">
+//         <button
+//           onClick={handleLogout}
+//           className="w-full flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-colors"
+//         >
+//           <LogOut className="w-5 h-5" />
+//           <span className="font-medium">Sair</span>
+//         </button>
+//       </div>
+//     </div>
+//   );
+
+//   const StatsCard = ({ title, value, icon: Icon, color }: {
+//     title: string;
+//     value: string | number;
+//     icon: React.ElementType;
+//     color: string;
+//   }) => (
+//     <motion.div
+//       initial={{ opacity: 0, y: 20 }}
+//       animate={{ opacity: 1, y: 0 }}
+//       className="bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+//     >
+//       <div className="flex items-center justify-between">
+//         <div>
+//           <p className="text-gray-600 text-sm font-medium">{title}</p>
+//           <p className="text-3xl font-bold text-gray-900 mt-2">{value}</p>
+//         </div>
+//         <div className={`p-3 rounded-lg ${color}`}>
+//           <Icon className="w-6 h-6 text-white" />
+//         </div>
+//       </div>
+//     </motion.div>
+//   );
+
+//   const AgendaTab = () => {
+//     const [newDay, setNewDay] = useState({ date: '', theme: '' });
+//     const [newSession, setNewSession] = useState({
+//       time: '',
+//       title: '',
+//       type: '',
+//       speaker: '',
+//       description: '',
+//       fileUrl: ''
+//     });
+
+//     const sessionTypes = [
+//       'Protocolo', 'Discurso', 'Apresentação', 'Sessão', 'Discussão', 
+//       'Cultural', 'Intervalo', 'Encerramento', 'Entrada', 'Leitura', 
+//       'Balanço', 'Outro'
+//     ];
+
+//     const AddDayModal = () => (
+//       <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+//         <motion.div
+//           initial={{ opacity: 0, scale: 0.95 }}
+//           animate={{ opacity: 1, scale: 1 }}
+//           className="bg-white rounded-xl shadow-xl p-6 w-full max-w-md"
+//         >
+//           <h3 className="text-lg font-bold text-gray-900 mb-4">Adicionar Novo Dia</h3>
+//           <div className="space-y-4">
+//             <div>
+//               <label className="block text-sm font-medium text-gray-700 mb-2">Data</label>
+//               <input
+//                 type="text"
+//                 placeholder="Ex: 10 de Setembro de 2025"
+//                 value={newDay.date}
+//                 onChange={(e) => setNewDay(prev => ({ ...prev, date: e.target.value }))}
+//                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+//               />
+//             </div>
+//             <div>
+//               <label className="block text-sm font-medium text-gray-700 mb-2">Tema do Dia</label>
+//               <input
+//                 type="text"
+//                 placeholder="Ex: Sessões do XIII Conselho Hospitalar"
+//                 value={newDay.theme}
+//                 onChange={(e) => setNewDay(prev => ({ ...prev, theme: e.target.value }))}
+//                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+//               />
+//             </div>
+//           </div>
+//           <div className="flex gap-3 mt-6">
+//             <button
+//               onClick={() => {
+//                 if (newDay.date && newDay.theme) {
+//                   addNewDay(newDay);
+//                   setNewDay({ date: '', theme: '' });
+//                   setShowAddDayModal(false);
+//                 }
+//               }}
+//               className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+//             >
+//               Salvar
+//             </button>
+//             <button
+//               onClick={() => setShowAddDayModal(false)}
+//               className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-medium transition-colors"
+//             >
+//               Cancelar
+//             </button>
+//           </div>
+//         </motion.div>
+//       </div>
+//     );
+
+//     const AddSessionModal = () => (
+//       <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+//         <motion.div
+//           initial={{ opacity: 0, scale: 0.95 }}
+//           animate={{ opacity: 1, scale: 1 }}
+//           className="bg-white rounded-xl shadow-xl p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto"
+//         >
+//           <h3 className="text-lg font-bold text-gray-900 mb-4">
+//             {editingSession ? 'Editar Sessão' : 'Adicionar Nova Sessão'}
+//           </h3>
+//           <div className="space-y-4">
+//             <div>
+//               <label className="block text-sm font-medium text-gray-700 mb-2">Horário</label>
+//               <input
+//                 type="text"
+//                 placeholder="Ex: 08:00 - 08:40h"
+//                 value={newSession.time}
+//                 onChange={(e) => setNewSession(prev => ({ ...prev, time: e.target.value }))}
+//                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+//               />
+//             </div>
+//             <div>
+//               <label className="block text-sm font-medium text-gray-700 mb-2">Título da Sessão</label>
+//               <input
+//                 type="text"
+//                 placeholder="Título da apresentação/sessão"
+//                 value={newSession.title}
+//                 onChange={(e) => setNewSession(prev => ({ ...prev, title: e.target.value }))}
+//                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+//               />
+//             </div>
+//             <div>
+//               <label className="block text-sm font-medium text-gray-700 mb-2">Tipo</label>
+//               <select
+//                 value={newSession.type}
+//                 onChange={(e) => setNewSession(prev => ({ ...prev, type: e.target.value }))}
+//                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+//               >
+//                 <option value="">Selecionar tipo</option>
+//                 {sessionTypes.map(type => (
+//                   <option key={type} value={type}>{type}</option>
+//                 ))}
+//               </select>
+//             </div>
+//             <div>
+//               <label className="block text-sm font-medium text-gray-700 mb-2">Palestrante/Responsável</label>
+//               <input
+//                 type="text"
+//                 placeholder="Ex: DNAM, Protocolo, S. Excia o Ministro"
+//                 value={newSession.speaker}
+//                 onChange={(e) => setNewSession(prev => ({ ...prev, speaker: e.target.value }))}
+//                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+//               />
+//             </div>
+//             <div>
+//               <label className="block text-sm font-medium text-gray-700 mb-2">Descrição (opcional)</label>
+//               <textarea
+//                 placeholder="Descrição adicional da sessão"
+//                 value={newSession.description}
+//                 onChange={(e) => setNewSession(prev => ({ ...prev, description: e.target.value }))}
+//                 rows={3}
+//                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+//               />
+//             </div>
+//             <div>
+//               <label className="block text-sm font-medium text-gray-700 mb-2">Link do Arquivo (opcional)</label>
+//               <input
+//                 type="url"
+//                 placeholder="https://..."
+//                 value={newSession.fileUrl}
+//                 onChange={(e) => setNewSession(prev => ({ ...prev, fileUrl: e.target.value }))}
+//                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+//               />
+//             </div>
+//           </div>
+//           <div className="flex gap-3 mt-6">
+//             <button
+//               onClick={() => {
+//                 if (newSession.time && newSession.title && newSession.type) {
+//                   if (editingSession) {
+//                     updateSession(selectedDayForSession, editingSession.id, newSession);
+//                   } else {
+//                     addNewSession(selectedDayForSession, newSession);
+//                   }
+//                   setNewSession({ time: '', title: '', type: '', speaker: '', description: '', fileUrl: '' });
+//                   setShowAddSessionModal(false);
+//                   setEditingSession(null);
+//                 }
+//               }}
+//               className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+//             >
+//               <Save className="w-4 h-4" />
+//               {editingSession ? 'Atualizar' : 'Salvar'}
+//             </button>
+//             <button
+//               onClick={() => {
+//                 setShowAddSessionModal(false);
+//                 setEditingSession(null);
+//                 setNewSession({ time: '', title: '', type: '', speaker: '', description: '', fileUrl: '' });
+//               }}
+//               className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-medium transition-colors"
+//             >
+//               Cancelar
+//             </button>
+//           </div>
+//         </motion.div>
+//       </div>
+//     );
+
+//     const getSessionColor = (type: string): string => {
+//       const colors: Record<string, string> = {
+//         Protocolo: 'bg-purple-100 text-purple-800 border-purple-200',
+//         Discurso: 'bg-blue-100 text-blue-800 border-blue-200',
+//         Apresentação: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+//         Sessão: 'bg-teal-100 text-teal-800 border-teal-200',
+//         Discussão: 'bg-orange-100 text-orange-800 border-orange-200',
+//         Cultural: 'bg-pink-100 text-pink-800 border-pink-200',
+//         Intervalo: 'bg-gray-100 text-gray-800 border-gray-200',
+//         Encerramento: 'bg-red-100 text-red-800 border-red-200',
+//         Entrada: 'bg-indigo-100 text-indigo-800 border-indigo-200',
+//         Leitura: 'bg-cyan-100 text-cyan-800 border-cyan-200',
+//         Balanço: 'bg-violet-100 text-violet-800 border-violet-200',
+//         Outro: 'bg-slate-100 text-slate-800 border-slate-200'
+//       };
+//       return colors[type] || 'bg-gray-100 text-gray-800 border-gray-200';
+//     };
+
+//     return (
+//       <div className="space-y-6">
+//         {/* Header */}
+//         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+//           <h2 className="text-2xl font-bold text-gray-900">Gestão da Agenda</h2>
+//           <div className="flex gap-3">
+//             <button
+//               onClick={() => setShowAddDayModal(true)}
+//               className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2"
+//             >
+//               <Plus className="w-4 h-4" />
+//               Adicionar Dia
+//             </button>
+//             <button
+//               onClick={() => {
+//                 const agendaJson = JSON.stringify(agendaData, null, 2);
+//                 const blob = new Blob([agendaJson], { type: 'application/json' });
+//                 const url = URL.createObjectURL(blob);
+//                 const a = document.createElement('a');
+//                 a.href = url;
+//                 a.download = 'agenda_backup.json';
+//                 a.click();
+//                 URL.revokeObjectURL(url);
+//               }}
+//               className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2"
+//             >
+//               <Download className="w-4 h-4" />
+//               Exportar
+//             </button>
+//           </div>
+//         </div>
+
+//         {/* Dias da Agenda */}
+//         <div className="space-y-6">
+//           {Object.entries(agendaData).map(([dayId, dayData]) => (
+//             <div key={dayId} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+//               <div className="bg-emerald-50 px-6 py-4 border-b border-gray-200">
+//                 <div className="flex items-center justify-between">
+//                   <div>
+//                     <h3 className="text-lg font-semibold text-gray-900">{dayData.date}</h3>
+//                     <p className="text-sm text-gray-600">{dayData.theme}</p>
+//                   </div>
+//                   <div className="flex items-center gap-2">
+//                     <button
+//                       onClick={() => {
+//                         setSelectedDayForSession(dayId);
+//                         setShowAddSessionModal(true);
+//                       }}
+//                       className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded-lg font-medium transition-colors flex items-center gap-2 text-sm"
+//                     >
+//                       <Plus className="w-4 h-4" />
+//                       Adicionar Sessão
+//                     </button>
+//                     <button
+//                       onClick={() => deleteDay(dayId)}
+//                       className="bg-red-100 hover:bg-red-200 text-red-600 p-2 rounded-lg transition-colors"
+//                     >
+//                       <Trash2 className="w-4 h-4" />
+//                     </button>
+//                   </div>
+//                 </div>
+//               </div>
+
+//               <div className="p-6">
+//                 {dayData.sessions.length === 0 ? (
+//                   <div className="text-center py-8 text-gray-500">
+//                     <Calendar className="w-12 h-12 mx-auto mb-4 text-gray-300" />
+//                     <p>Nenhuma sessão adicionada para este dia</p>
+//                     <button
+//                       onClick={() => {
+//                         setSelectedDayForSession(dayId);
+//                         setShowAddSessionModal(true);
+//                       }}
+//                       className="mt-3 text-emerald-600 hover:text-emerald-700 font-medium"
+//                     >
+//                       Adicionar primeira sessão
+//                     </button>
+//                   </div>
+//                 ) : (
+//                   <div className="space-y-4">
+//                     {dayData.sessions.map((session, index) => (
+//                       <motion.div
+//                         key={session.id}
+//                         initial={{ opacity: 0, y: 10 }}
+//                         animate={{ opacity: 1, y: 0 }}
+//                         transition={{ delay: index * 0.05 }}
+//                         className="border border-gray-200 rounded-lg p-4 hover:shadow-sm transition-all"
+//                       >
+//                         <div className="flex items-start justify-between gap-4">
+//                           <div className="flex-grow">
+//                             <div className="flex items-start gap-3 mb-3">
+//                               <div className="bg-emerald-50 text-emerald-700 px-3 py-1 rounded-lg font-bold text-sm flex items-center gap-1">
+//                                 <Clock className="w-3 h-3" />
+//                                 {session.time}
+//                               </div>
+//                               <span className={`px-2 py-1 rounded-full text-xs font-medium border ${getSessionColor(session.type)}`}>
+//                                 {session.type}
+//                               </span>
+//                             </div>
+//                             <h4 className="font-semibold text-gray-900 mb-2">{session.title}</h4>
+//                             {session.speaker && (
+//                               <p className="text-sm text-emerald-600 font-medium mb-1">
+//                                 👤 {session.speaker}
+//                               </p>
+//                             )}
+//                             {session.description && (
+//                               <p className="text-sm text-gray-600 mb-2">{session.description}</p>
+//                             )}
+//                             {session.fileUrl && (
+//                               <div className="flex items-center gap-1 text-sm text-blue-600">
+//                                 <Link className="w-3 h-3" />
+//                                 <a href={session.fileUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">
+//                                   Arquivo anexado
+//                                 </a>
+//                               </div>
+//                             )}
+//                           </div>
+//                           <div className="flex gap-2">
+//                             <button
+//                               onClick={() => {
+//                                 setEditingSession(session);
+//                                 setNewSession({
+//                                   time: session.time,
+//                                   title: session.title,
+//                                   type: session.type,
+//                                   speaker: session.speaker,
+//                                   description: session.description,
+//                                   fileUrl: session.fileUrl || ''
+//                                 });
+//                                 setSelectedDayForSession(dayId);
+//                                 setShowAddSessionModal(true);
+//                               }}
+//                               className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+//                             >
+//                               <Edit className="w-4 h-4" />
+//                             </button>
+//                             <button
+//                               onClick={() => deleteSession(dayId, session.id)}
+//                               className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+//                             >
+//                               <Trash2 className="w-4 h-4" />
+//                             </button>
+//                           </div>
+//                         </div>
+//                       </motion.div>
+//                     ))}
+//                   </div>
+//                 )}
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+
+//         {/* Modais */}
+//         {showAddDayModal && <AddDayModal />}
+//         {showAddSessionModal && <AddSessionModal />}
+
+//         {/* Estatísticas */}
+//         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+//           <h3 className="text-lg font-semibold text-gray-900 mb-4">Estatísticas da Agenda</h3>
+//           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+//             <div className="bg-emerald-50 p-4 rounded-lg">
+//               <p className="text-emerald-600 text-sm font-medium">Total de Dias</p>
+//               <p className="text-2xl font-bold text-emerald-700">{Object.keys(agendaData).length}</p>
+//             </div>
+//             <div className="bg-blue-50 p-4 rounded-lg">
+//               <p className="text-blue-600 text-sm font-medium">Total de Sessões</p>
+//               <p className="text-2xl font-bold text-blue-700">
+//                 {Object.values(agendaData).reduce((total, day) => total + day.sessions.length, 0)}
+//               </p>
+//             </div>
+//             <div className="bg-purple-50 p-4 rounded-lg">
+//               <p className="text-purple-600 text-sm font-medium">Sessões com Arquivos</p>
+//               <p className="text-2xl font-bold text-purple-700">
+//                 {Object.values(agendaData).reduce((total, day) => 
+//                   total + day.sessions.filter(session => session.fileUrl).length, 0
+//                 )}
+//               </p>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     );
+//   };
+
+//   const OverviewTab = () => (
+//     <div className="space-y-6">
+//       {/* Stats Grid */}
+//       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+//         <StatsCard
+//           title="Total Participantes"
+//           value={stats.totalParticipants}
+//           icon={Users}
+//           color="bg-blue-500"
+//         />
+//         <StatsCard
+//           title="Comentários"
+//           value={stats.totalComments}
+//           icon={MessageSquare}
+//           color="bg-green-500"
+//         />
+//         <StatsCard
+//           title="Sessões do Evento"
+//           value={stats.totalSessions}
+//           icon={Calendar}
+//           color="bg-purple-500"
+//         />
+//         <StatsCard
+//           title="Avaliação Média"
+//           value={stats.avgRating}
+//           icon={BarChart3}
+//           color="bg-orange-500"
+//         />
+//       </div>
+
+//       {/* Recent Activity */}
+//       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+//         <div className="flex items-center justify-between mb-6">
+//           <h3 className="text-lg font-semibold text-gray-900">Atividade Recente</h3>
+//           <button className="text-emerald-600 hover:text-emerald-700 font-medium text-sm">
+//             Ver todos
+//           </button>
+//         </div>
+//         <div className="space-y-4">
+//           {recentActivity.map((activity, index) => (
+//             <motion.div
+//               key={activity.id}
+//               initial={{ opacity: 0, x: -20 }}
+//               animate={{ opacity: 1, x: 0 }}
+//               transition={{ delay: index * 0.1 }}
+//               className="flex items-center gap-4 p-3 hover:bg-gray-50 rounded-lg"
+//             >
+//               <div className={`p-2 rounded-lg ${activity.type === 'comment' ? 'bg-blue-100' :
+//                 activity.type === 'registration' ? 'bg-green-100' : 'bg-purple-100'
+//                 }`}>
+//                 {activity.type === 'comment' && <MessageSquare className="w-4 h-4 text-blue-600" />}
+//                 {activity.type === 'registration' && <Users className="w-4 h-4 text-green-600" />}
+//                 {activity.type === 'session' && <Calendar className="w-4 h-4 text-purple-600" />}
+//               </div>
+//               <div className="flex-grow">
+//                 <p className="text-sm font-medium text-gray-900">{activity.description}</p>
+//                 {activity.user && (
+//                   <p className="text-xs text-gray-500">por {activity.user}</p>
+//                 )}
+//               </div>
+//               <span className="text-xs text-gray-400">{activity.time}</span>
+//             </motion.div>
+//           ))}
+//         </div>
+//       </div>
+//     </div>
+//   );
+
+//   const CommentsTab = () => (
+//     <div className="space-y-6">
+//       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+//         <h2 className="text-2xl font-bold text-gray-900">Gestão de Comentários</h2>
+//         <div className="flex gap-3">
+//           <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2">
+//             <Download className="w-4 h-4" />
+//             Exportar
+//           </button>
+//         </div>
+//       </div>
+
+//       <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+//         <div className="p-6 border-b border-gray-200">
+//           <div className="flex flex-col sm:flex-row gap-4">
+//             <div className="relative flex-grow">
+//               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+//               <input
+//                 type="text"
+//                 placeholder="Buscar comentários..."
+//                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+//               />
+//             </div>
+//             <select className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500">
+//               <option>Todos os status</option>
+//               <option>Aprovados</option>
+//               <option>Pendentes</option>
+//               <option>Rejeitados</option>
+//             </select>
+//           </div>
+//         </div>
+
+//         <div className="divide-y divide-gray-200">
+//           {comments.map((comment, index) => (
+//             <motion.div
+//               key={comment.id}
+//               initial={{ opacity: 0 }}
+//               animate={{ opacity: 1 }}
+//               transition={{ delay: index * 0.1 }}
+//               className="p-6"
+//             >
+//               <div className="flex flex-col lg:flex-row lg:items-start gap-4">
+//                 <div className="flex-grow">
+//                   <div className="flex items-start justify-between mb-3">
+//                     <div>
+//                       <h4 className="font-semibold text-gray-900">{comment.name}</h4>
+//                       <p className="text-sm text-gray-600">{comment.organization}</p>
+//                       <div className="flex items-center gap-1 mt-1">
+//                         {Array.from({ length: 5 }, (_, i) => (
+//                           <span
+//                             key={i}
+//                             className={`text-sm ${i < comment.rating ? 'text-yellow-400' : 'text-gray-300'}`}
+//                           >
+//                             ⭐
+//                           </span>
+//                         ))}
+//                       </div>
+//                     </div>
+//                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${comment.status === 'approved' ? 'bg-green-100 text-green-800' :
+//                       comment.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+//                         'bg-red-100 text-red-800'
+//                       }`}>
+//                       {comment.status === 'approved' ? 'Aprovado' :
+//                         comment.status === 'pending' ? 'Pendente' : 'Rejeitado'}
+//                     </span>
+//                   </div>
+//                   <p className="text-gray-700 mb-3">{comment.comment}</p>
+//                   <p className="text-sm text-gray-500">
+//                     Enviado em {new Date(comment.date).toLocaleDateString('pt-PT')}
+//                   </p>
+//                 </div>
+//                 <div className="flex gap-2 lg:flex-col">
+//                   <button className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+//                     <Eye className="w-4 h-4" />
+//                   </button>
+//                   <button className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors">
+//                     <Edit className="w-4 h-4" />
+//                   </button>
+//                   <button className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+//                     <Trash2 className="w-4 h-4" />
+//                   </button>
+//                 </div>
+//               </div>
+//             </motion.div>
+//           ))}
+//         </div>
+//       </div>
+//     </div>
+//   );
+
+//   const renderContent = () => {
+//     switch (activeTab) {
+//       case 'overview':
+//         return <OverviewTab />;
+//       case 'agenda':
+//         return <AgendaTab />;
+//       case 'comments':
+//         return <CommentsTab />;
+//       case 'participants':
+//         return (
+//           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+//             <h2 className="text-xl font-bold text-gray-900 mb-4">Gestão de Participantes</h2>
+//             <p className="text-gray-600">Funcionalidade em desenvolvimento...</p>
+//           </div>
+//         );
+//       case 'reports':
+//         return (
+//           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+//             <h2 className="text-xl font-bold text-gray-900 mb-4">Relatórios e Análises</h2>
+//             <p className="text-gray-600">Funcionalidade em desenvolvimento...</p>
+//           </div>
+//         );
+//       case 'settings':
+//         return (
+//           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+//             <h2 className="text-xl font-bold text-gray-900 mb-4">Configurações do Sistema</h2>
+//             <p className="text-gray-600">Funcionalidade em desenvolvimento...</p>
+//           </div>
+//         );
+//       default:
+//         return <OverviewTab />;
+//     }
+//   };
+
+//   if (loading) {
+//     return( 
+//       <>
+//         <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-green-50 flex items-center justify-center">
+//           <div className="text-center">
+//             {/* Spinner Principal */}
+//             <motion.div
+//               animate={{ rotate: 360 }}
+//               transition={{
+//                 duration: 1,
+//                 repeat: Infinity,
+//                 ease: "linear"
+//               }}
+//               className="mx-auto mb-6 w-16 h-16 border-4 border-emerald-200 border-t-emerald-600 rounded-full"
+//             />
+            
+//             {/* Texto de Carregamento */}
+//             <motion.div
+//               initial={{ opacity: 0 }}
+//               animate={{ opacity: 1 }}
+//               transition={{ delay: 0.2, duration: 0.5 }}
+//               className="text-emerald-700"
+//             >
+//               <h2 className="text-xl font-semibold mb-2">Carregando...</h2>
+//               <p className="text-sm text-emerald-600">
+//                 Aguarde um momento, por favor
+//               </p>
+//             </motion.div>
+            
+//             {/* Pontos animados */}
+//             <motion.div
+//               initial={{ opacity: 0 }}
+//               animate={{ opacity: 1 }}
+//               transition={{ delay: 0.4, duration: 0.5 }}
+//               className="flex justify-center space-x-1 mt-4"
+//             >
+//               {[0, 1, 2].map((index) => (
+//                 <motion.div
+//                   key={index}
+//                   animate={{
+//                     y: [-4, 4, -4],
+//                     opacity: [0.5, 1, 0.5]
+//                   }}
+//                   transition={{
+//                     duration: 1.2,
+//                     repeat: Infinity,
+//                     delay: index * 0.2,
+//                     ease: "easeInOut"
+//                   }}
+//                   className="w-2 h-2 bg-emerald-500 rounded-full"
+//                 />
+//               ))}
+//             </motion.div>
+//           </div>
+//         </div>
+//       </> 
+//     );
+//   }
+
+//   return (
+//     <>
+//       <title>Dashboard Administrativo - MISAU</title>
+//       <meta name="description" content="Painel administrativo para gestão do sistema MISAU" />
+//       <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+//       <div className="flex h-screen bg-gray-50">
+//         {/* Sidebar */}
+//         <Sidebar />
+
+//         {/* Overlay para mobile */}
+//         {sidebarOpen && (
+//           <div
+//             className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+//             onClick={() => setSidebarOpen(false)}
+//           />
+//         )}
+
+//         {/* Main Content */}
+//         <div className="flex-1 flex flex-col overflow-hidden">
+//           {/* Header */}
+//           <header className="bg-white border-b border-gray-200 px-6 py-4">
+//             <div className="flex items-center justify-between">
+//               <div className="flex items-center gap-4">
+//                 <button
+//                   onClick={() => setSidebarOpen(true)}
+//                   className="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-600"
+//                 >
+//                   <Menu className="w-6 h-6" />
+//                 </button>
+//                 <h1 className="text-2xl font-bold text-gray-900 capitalize">
+//                   {menuItems.find(item => item.id === activeTab)?.label || 'Dashboard'}
+//                 </h1>
+//               </div>
+
+//               <div className="flex items-center gap-4">
+//                 <button className="relative p-2 text-gray-400 hover:text-gray-600 rounded-lg">
+//                   <Bell className="w-6 h-6" />
+//                   <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+//                     3
+//                   </span>
+//                 </button>
+//                 <div className="flex items-center gap-3">
+//                   <div className="text-right">
+//                     <p className="text-sm font-medium text-gray-900">Admin User</p>
+//                     <p className="text-xs text-gray-500">Administrador</p>
+//                   </div>
+//                   <div className="w-8 h-8 bg-emerald-600 rounded-full flex items-center justify-center">
+//                     <span className="text-white text-sm font-medium">A</span>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           </header>
+
+//           {/* Main Content Area */}
+//           <main className="flex-1 overflow-auto p-6">
+//             <motion.div
+//               key={activeTab}
+//               initial={{ opacity: 0, y: 20 }}
+//               animate={{ opacity: 1, y: 0 }}
+//               transition={{ duration: 0.3 }}
+//             >
+//               {renderContent()}
+//             </motion.div>
+//           </main>
+//         </div>
+//       </div>
+//     </>
+//   );
+// }
