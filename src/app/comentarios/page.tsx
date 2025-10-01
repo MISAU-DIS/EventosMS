@@ -208,7 +208,7 @@ export default function Comentarios(): React.ReactElement {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-gray-700 font-medium mb-2">
-                      Nome Completo <span className="text-red-500 text-sm">*</span>
+                      Nome Completo <span className="text-gray-500 text-sm">(opcional)</span>
                     </label>
                     <input
                       type="text"
@@ -216,12 +216,11 @@ export default function Comentarios(): React.ReactElement {
                       onChange={(e) => setNewComment({ ...newComment, name: e.target.value })}
                       className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
                       placeholder="Ex: Dr. Maria Silva"
-                      required
                     />
                   </div>
                   <div>
                     <label className="block text-gray-700 font-medium mb-2">
-                      Cargo/Função
+                      Cargo/Função <span className="text-gray-500 text-sm">(opcional)</span>
                     </label>
                     <input
                       type="text"
@@ -235,7 +234,7 @@ export default function Comentarios(): React.ReactElement {
 
                 <div>
                   <label className="block text-gray-700 font-medium mb-2">
-                    Organização/Instituição
+                    Organização/Instituição <span className="text-gray-500 text-sm">(opcional)</span>
                   </label>
                   <input
                     type="text"
