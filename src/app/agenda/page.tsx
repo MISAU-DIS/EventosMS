@@ -1,3 +1,152 @@
+"use client";
+import { motion } from 'framer-motion';
+import { Calendar, MapPin } from 'lucide-react';
+
+const AgendaSimplificada = () => {
+    const agendaDias = [
+        {
+            dia: '08 de Outubro de 2025',
+            diaNumero: 'Dia 1',
+            tema: 'XIII Conselho Hospitalar',
+            subtema: 'Abertura Oficial e Análise de Desempenho Hospitalar'
+        },
+        {
+            dia: '09 de Outubro de 2025',
+            diaNumero: 'Dia 2',
+            tema: 'XIII Conselho Hospitalar',
+            subtema: 'Aprovisionamento de Medicamentos e Prevenção e Controle de Infecções'
+        },
+        {
+            dia: '10 de Outubro de 2025',
+            diaNumero: 'Dia 3',
+            tema: 'L Conselho Coordenador de Saúde',
+            subtema: 'Balanço de Desempenho do Sector 2024 e Primeiro Semestre 2025'
+        },
+        {
+            dia: '11 de Outubro de 2025',
+            diaNumero: 'Dia 4',
+            tema: 'L Conselho Coordenador de Saúde',
+            subtema: 'Mecanismos de Financiamento e Documentos Estratégicos'
+        }
+    ];
+
+    return (
+        <main className="min-h-screen bg-gradient-to-br from-slate-50 to-emerald-50">
+            {/* Header */}
+            <div className="bg-white shadow-sm border-b">
+                <div className="container mx-auto mt-20 px-4 py-8">
+                    <div className="text-center">
+                        <h1 className="text-3xl md:text-5xl font-bold text-emerald-700 mb-4">
+                            Agenda do Evento
+                        </h1>
+                        <p className="text-gray-600 text-lg mb-6">
+                            XIII Conselho Hospitalar e L Conselho Coordenador de Saúde
+                        </p>
+                        <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-gray-600">
+                            <div className="flex items-center gap-2 bg-emerald-50 px-4 py-2 rounded-full">
+                                <Calendar className="w-5 h-5 text-emerald-600" />
+                                <span className="font-semibold">08 - 11 Outubro de 2025</span>
+                            </div>
+                            <div className="flex items-center gap-2 bg-emerald-50 px-4 py-2 rounded-full">
+                                <MapPin className="w-5 h-5 text-emerald-600" />
+                                <span className="font-semibold">Maputo, Moçambique</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Agenda Cards */}
+            <div className="container mx-auto px-4 py-12">
+                <div className="max-w-4xl mx-auto">
+                    <div className="grid gap-6">
+                        {agendaDias.map((item, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                className="group"
+                            >
+                                <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border-l-4 border-emerald-500">
+                                    <div className="p-8">
+                                        <div className="flex flex-col md:flex-row md:items-center gap-6">
+                                            {/* Número do Dia */}
+                                            <div className="flex-shrink-0">
+                                                <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-2xl p-6 text-center shadow-lg">
+                                                    <div className="text-sm font-semibold opacity-90 mb-1">
+                                                        {item.diaNumero.split(' ')[0]}
+                                                    </div>
+                                                    <div className="text-4xl font-bold">
+                                                        {item.diaNumero.split(' ')[1]}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* Conteúdo */}
+                                            <div className="flex-grow">
+                                                <div className="mb-3">
+                                                    <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                                                        <Calendar className="w-4 h-4" />
+                                                        <span>{item.dia}</span>
+                                                    </div>
+                                                    <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors">
+                                                        {item.tema}
+                                                    </h3>
+                                                    <p className="text-gray-600 leading-relaxed">
+                                                        {item.subtema}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Informação adicional */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.5 }}
+                    className="max-w-4xl mx-auto mt-12"
+                >
+                    <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-2xl shadow-xl p-8 text-center">
+                        <h3 className="text-2xl font-bold mb-3">
+                            Lema do Evento
+                        </h3>
+                        <p className="text-xl text-emerald-50 italic">
+                            "Por um Serviço Nacional de Saúde de Qualidade e Humanizado para Todos!"
+                        </p>
+                    </div>
+                </motion.div>
+
+                {/* Botão de contato */}
+                <div className="text-center mt-12">
+                    <a
+                        href="/contacto"
+                        className="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl"
+                    >
+                        Precisa de mais informações? Entre em contacto
+                    </a>
+                </div>
+            </div>
+        </main>
+    );
+};
+
+export default AgendaSimplificada;
+
+
+
+
+
+
+
+
+
 // 'use client';
 // import { motion, AnimatePresence } from 'framer-motion';
 // import { Calendar, MapPin, ChevronRight } from 'lucide-react';
@@ -607,143 +756,3 @@
 
 
 
-"use client";
-import { motion } from 'framer-motion';
-import { Calendar, MapPin } from 'lucide-react';
-
-const AgendaSimplificada = () => {
-    const agendaDias = [
-        {
-            dia: '08 de Outubro de 2025',
-            diaNumero: 'Dia 1',
-            tema: 'XIII Conselho Hospitalar',
-            subtema: 'Abertura Oficial e Análise de Desempenho Hospitalar'
-        },
-        {
-            dia: '09 de Outubro de 2025',
-            diaNumero: 'Dia 2',
-            tema: 'XIII Conselho Hospitalar',
-            subtema: 'Aprovisionamento de Medicamentos e Prevenção e Controle de Infecções'
-        },
-        {
-            dia: '10 de Outubro de 2025',
-            diaNumero: 'Dia 3',
-            tema: 'L Conselho Coordenador de Saúde',
-            subtema: 'Balanço de Desempenho do Sector 2024 e Primeiro Semestre 2025'
-        },
-        {
-            dia: '11 de Outubro de 2025',
-            diaNumero: 'Dia 4',
-            tema: 'L Conselho Coordenador de Saúde',
-            subtema: 'Mecanismos de Financiamento e Documentos Estratégicos'
-        }
-    ];
-
-    return (
-        <main className="min-h-screen bg-gradient-to-br from-slate-50 to-emerald-50">
-            {/* Header */}
-            <div className="bg-white shadow-sm border-b">
-                <div className="container mx-auto mt-20 px-4 py-8">
-                    <div className="text-center">
-                        <h1 className="text-3xl md:text-5xl font-bold text-emerald-700 mb-4">
-                            Agenda do Evento
-                        </h1>
-                        <p className="text-gray-600 text-lg mb-6">
-                            XIII Conselho Hospitalar e L Conselho Coordenador de Saúde
-                        </p>
-                        <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-gray-600">
-                            <div className="flex items-center gap-2 bg-emerald-50 px-4 py-2 rounded-full">
-                                <Calendar className="w-5 h-5 text-emerald-600" />
-                                <span className="font-semibold">08 - 11 Outubro de 2025</span>
-                            </div>
-                            <div className="flex items-center gap-2 bg-emerald-50 px-4 py-2 rounded-full">
-                                <MapPin className="w-5 h-5 text-emerald-600" />
-                                <span className="font-semibold">Maputo, Moçambique</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Agenda Cards */}
-            <div className="container mx-auto px-4 py-12">
-                <div className="max-w-4xl mx-auto">
-                    <div className="grid gap-6">
-                        {agendaDias.map((item, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 30 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                className="group"
-                            >
-                                <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border-l-4 border-emerald-500">
-                                    <div className="p-8">
-                                        <div className="flex flex-col md:flex-row md:items-center gap-6">
-                                            {/* Número do Dia */}
-                                            <div className="flex-shrink-0">
-                                                <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-2xl p-6 text-center shadow-lg">
-                                                    <div className="text-sm font-semibold opacity-90 mb-1">
-                                                        {item.diaNumero.split(' ')[0]}
-                                                    </div>
-                                                    <div className="text-4xl font-bold">
-                                                        {item.diaNumero.split(' ')[1]}
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            {/* Conteúdo */}
-                                            <div className="flex-grow">
-                                                <div className="mb-3">
-                                                    <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
-                                                        <Calendar className="w-4 h-4" />
-                                                        <span>{item.dia}</span>
-                                                    </div>
-                                                    <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors">
-                                                        {item.tema}
-                                                    </h3>
-                                                    <p className="text-gray-600 leading-relaxed">
-                                                        {item.subtema}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Informação adicional */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.5 }}
-                    className="max-w-4xl mx-auto mt-12"
-                >
-                    <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-2xl shadow-xl p-8 text-center">
-                        <h3 className="text-2xl font-bold mb-3">
-                            Lema do Evento
-                        </h3>
-                        <p className="text-xl text-emerald-50 italic">
-                            "Por um Serviço Nacional de Saúde de Qualidade e Humanizado para Todos!"
-                        </p>
-                    </div>
-                </motion.div>
-
-                {/* Botão de contato */}
-                <div className="text-center mt-12">
-                    <a
-                        href="/contacto"
-                        className="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl"
-                    >
-                        Precisa de mais informações? Entre em contacto
-                    </a>
-                </div>
-            </div>
-        </main>
-    );
-};
-
-export default AgendaSimplificada;
