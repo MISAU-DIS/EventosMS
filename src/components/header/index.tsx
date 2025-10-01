@@ -68,6 +68,15 @@ export default function Header() {
             </li>
             <li>
               <Link 
+                href="/programa" 
+                className="relative py-2 px-1 hover:text-green-200 transition-all duration-300 group"
+              >
+                Programa
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-green-200 transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+            </li>
+            <li>
+              <Link 
                 href="/comentarios" 
                 className="relative py-2 px-1 hover:text-green-200 transition-all duration-300 group"
               >

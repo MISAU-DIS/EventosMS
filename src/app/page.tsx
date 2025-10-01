@@ -37,7 +37,7 @@ export default function Home() {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-green-700 leading-tight"
+            className="text-2xl sm:text-4xl lg:text-4xl font-extrabold text-green-700 leading-tight"
           >
             REPÚBLICA DE MOÇAMBIQUE
           </motion.h1>
@@ -46,7 +46,7 @@ export default function Home() {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-green-700 leading-tight"
+            className="text-2xl sm:text-4xl lg:text-4xl font-extrabold text-green-700 leading-tight"
           >
             MINISTÉRIO DA SAÚDE
           </motion.h1>
@@ -57,19 +57,19 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-xl sm:text-3xl lg:text-3xl font-extrabold text-green-700 leading-tight"
           >
-            XIII Conselho Hospitalar & L Conselho Coordenador de Saúde (CCS)
+            XIII Conselho Hospitalar <br />&<br /> L Conselho Coordenador de Saúde
             <br />
-            10 a 13 de Setembro de 2025
+            08 - 11 Outubro de 2025
           </motion.h2>
 
-          <motion.p
+            <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
             className="mt-4 text-sm sm:text-base md:text-lg max-w-3xl text-gray-700 font-bold text-centerd"
-          >
-            Lema: Por um Serviço Nacional de Saúde de Qualidade e Humanizado para Todos
-          </motion.p>
+            >
+            Lema:<i> Por um Serviço Nacional de Saúde de Qualidade e Humanizado para Todos</i>
+            </motion.p>
 
           <motion.div
             initial={{ opacity: 0 }}
@@ -100,7 +100,7 @@ export default function Home() {
               {/* Data */}
               <span className="flex items-center gap-2">
                 <Calendar className="w-5 h-5" />
-                10 - 13 de Setembro de 2025
+                08 - 11 Outubro de 2025
               </span>
 
               {/* Local */}
@@ -171,7 +171,7 @@ export default function Home() {
                 className="relative"
               >
                 <Image
-                  src="/MISAU.jpg"
+                  src="/iscisa2.jpg"
                   alt="Profissionais de saúde em reunião"
                   width={500}
                   height={350}
