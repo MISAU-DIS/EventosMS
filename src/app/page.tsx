@@ -223,7 +223,7 @@ export default function Home() {
                 },
                 {
                   title: "Instrumentos Orientadores",
-                  description: "Partilhar ENDE, PQG, PESS e PESOE."
+                  description: "Partilhar os principais instrumentos orientadores do sector."
                 },
                 {
                   title: "Prioridades 2026",
