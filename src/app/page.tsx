@@ -3,6 +3,7 @@
 //Depois adicionar botoes de avaliar evento e ver programa
 //no programa 
 //elsaguibunda@gmail.com
+
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -43,7 +44,7 @@ export default function Home() {
             className="text-xl sm:text-2xl lg:text-2xl font-extrabold text-green-700 leading-tight"
           >
             {/* REPÚBLICA DE MOÇAMBIQUE */}
-            República de Mocambique
+            República de Moçambique
           </motion.h1>
 
           <motion.h1
@@ -185,7 +186,7 @@ export default function Home() {
                 className="relative"
               >
                 <Image
-                  src="/iscisa2.jpg"
+                  src="/Iscisa.png"
                   alt="Profissionais de saúde em reunião"
                   width={500}
                   height={350}
