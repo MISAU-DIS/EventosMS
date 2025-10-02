@@ -1,37 +1,92 @@
-"use client";
-import { motion } from 'framer-motion';
-import { Calendar, MapPin } from 'lucide-react';
+'use client';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Calendar, MapPin, ChevronRight } from 'lucide-react';
+import { useState } from 'react';
 
-const AgendaSimplificada = () => {
-    const agendaDias = [
-        {
-            dia: '08 de Outubro de 2025',
-            diaNumero: 'Dia 1',
+const AgendaTemas = () => {
+    const [selectedDay, setSelectedDay] = useState<DiaKey>('dia1');
+    type DiaKey = 'dia1' | 'dia2' | 'dia3' | 'dia4';
+
+    interface Dia {
+        data: string;
+        tema: string;
+        subtemas: string[];
+    }
+
+
+    const agendaData : Record<DiaKey, Dia> = {
+        dia1: {
+            data: '08 de Outubro de 2025',
             tema: 'XIII Conselho Hospitalar',
-            subtema: 'Abertura Oficial e Análise de Desempenho Hospitalar'
+            subtemas: [
+                'Cerimónia de Abertura Oficial',
+                'Adopção da Agenda e Objectivos da Reunião',
+                'Cumprimento das Recomendações do XII Conselho',
+                'Taxa de Ocupação de Camas',
+                'Rendimento Médio por Cama',
+                'Tempo Médio de Internamento',
+                'Taxa de Mortalidade Geral Intra-Hospitalar',
+                'Rácio de Mortalidade Materna Intra-Hospitalar',
+                'Mortalidade por Serviço e Discussão de Óbitos',
+                'Rendimento por Sala Operatória',
+                'Rendimento por Cirurgião',
+                'Consulta por Médico'
+            ]
         },
-        {
-            dia: '09 de Outubro de 2025',
-            diaNumero: 'Dia 2',
+        dia2: {
+            data: '09 de Outubro de 2025',
             tema: 'XIII Conselho Hospitalar',
-            subtema: 'Aprovisionamento de Medicamentos e Prevenção e Controle de Infecções'
+            subtemas: [
+                'Aprovação da Síntese do 1º Dia',
+                'Aprovisionamento de Medicamentos: Desafios e Oportunidades',
+                'Prevenção e Controle de Infecções (PCI)',
+                'Abordagem dos 5S',
+                'Gestão de Lixo Biomédico',
+                'Processos de Esterilização',
+                'Enfermaria Modelo',
+                'Estratégias do Programa de PCI',
+                'Apetrechamento e Manutenção de Equipamentos',
+                'Balanço de Actividades Inspectivas e Auditorias 2024',
+                'Comunicado Final e Encerramento'
+            ]
         },
-        {
-            dia: '10 de Outubro de 2025',
-            diaNumero: 'Dia 3',
+        dia3: {
+            data: '10 de Outubro de 2025',
             tema: 'L Conselho Coordenador de Saúde',
-            subtema: 'Balanço de Desempenho do Sector 2024 e Primeiro Semestre 2025'
+            subtemas: [
+                'Objectivos da Reunião',
+                'Cumprimento das Recomendações do XLIX CCS',
+                'Desempenho do Sector 2024 e 1º Semestre 2025 - Áreas Programáticas',
+                'Balanço de Desempenho - DAF/DNFPS',
+                'Balanço de Desempenho - ANARME/INS',
+                'Balanço de Desempenho - DRH',
+                'Regulamento do Subsistema de Planificação de Pessoal',
+                'Regulamento do Subsistema de Administração de Pessoal',
+                'Regulamento do Subsistema de Desenvolvimento Profissional',
+                'Sobrevivência Materno Infantil: Desafios e Oportunidades'
+            ]
         },
-        {
-            dia: '11 de Outubro de 2025',
-            diaNumero: 'Dia 4',
+        dia4: {
+            data: '11 de Outubro de 2025',
             tema: 'L Conselho Coordenador de Saúde',
-            subtema: 'Mecanismos de Financiamento e Documentos Estratégicos'
+            subtemas: [
+                'Aprovação da Síntese do 1º Dia',
+                'Painel: Mecanismos de Aumento do Financiamento do Sector',
+                'Proposta do PESOE 2026: Prioridades e Linhas Estratégicas',
+                'Apresentação dos Documentos Estratégicos (END, PQG, PESS, PECS)',
+                'Estratégia de Integração das Brigadas Móveis na Província',
+                'Experiência da Digitalização do Hospital de Mavalane',
+                'Momento Cultural',
+                'Comunicado Final',
+                'Discurso de Encerramento'
+            ]
         }
-    ];
+    };
+
+    const dias = Object.keys(agendaData) as DiaKey[];
 
     return (
-        <main className="min-h-screen bg-gradient-to-br from-slate-50 to-emerald-50">
+        <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50">
             {/* Header */}
             <div className="bg-white shadow-sm border-b">
                 <div className="container mx-auto mt-20 px-4 py-8">
@@ -56,62 +111,107 @@ const AgendaSimplificada = () => {
                 </div>
             </div>
 
-            {/* Agenda Cards */}
             <div className="container mx-auto px-4 py-12">
-                <div className="max-w-4xl mx-auto">
-                    <div className="grid gap-6">
-                        {agendaDias.map((item, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 30 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                className="group"
-                            >
-                                <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border-l-4 border-emerald-500">
-                                    <div className="p-8">
-                                        <div className="flex flex-col md:flex-row md:items-center gap-6">
-                                            {/* Número do Dia */}
-                                            <div className="flex-shrink-0">
-                                                <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-2xl p-6 text-center shadow-lg">
-                                                    <div className="text-sm font-semibold opacity-90 mb-1">
-                                                        {item.diaNumero.split(' ')[0]}
-                                                    </div>
-                                                    <div className="text-4xl font-bold">
-                                                        {item.diaNumero.split(' ')[1]}
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            {/* Conteúdo */}
-                                            <div className="flex-grow">
-                                                <div className="mb-3">
-                                                    <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
-                                                        <Calendar className="w-4 h-4" />
-                                                        <span>{item.dia}</span>
-                                                    </div>
-                                                    <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors">
-                                                        {item.tema}
-                                                    </h3>
-                                                    <p className="text-gray-600 leading-relaxed">
-                                                        {item.subtema}
-                                                    </p>
-                                                </div>
-                                            </div>
+                {/* Seletor de Dias */}
+                <div className="max-w-4xl mx-auto mb-12">
+                    <div className="bg-white rounded-2xl shadow-lg p-3">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                            {dias.map((dia, index) => {
+                                const isActive = selectedDay === dia;
+                                const diaInfo = agendaData[dia];
+                                return (
+                                    <motion.button
+                                        key={dia}
+                                        onClick={() => setSelectedDay(dia)}
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        className={`relative p-4 rounded-xl transition-all duration-300 ${isActive
+                                                ? 'bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-xl'
+                                                : 'bg-gray-50 text-gray-600 hover:bg-emerald-50 hover:text-emerald-600'
+                                            }`}
+                                    >
+                                        <div className="text-xs opacity-80 mb-1 font-medium">Dia</div>
+                                        <div className="text-2xl font-bold mb-2">{index + 1}</div>
+                                        <div className={`text-xs ${isActive ? 'text-emerald-100' : 'text-gray-500'}`}>
+                                            {diaInfo.data.split(' ')[0]} {diaInfo.data.split(' ')[2]}
                                         </div>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        ))}
+                                    </motion.button>
+                                );
+                            })}
+                        </div>
                     </div>
                 </div>
 
-                {/* Informação adicional */}
+                {/* Conteúdo do Dia Selecionado */}
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={selectedDay}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3 }}
+                        className="max-w-4xl mx-auto"
+                    >
+                        {/* Header do Dia */}
+                        <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-2xl shadow-xl p-8 mb-8">
+                            <div className="flex items-center gap-2 text-emerald-100 mb-3">
+                                <Calendar className="w-5 h-5" />
+                                <span className="text-lg font-semibold">{agendaData[selectedDay].data}</span>
+                            </div>
+                            <h2 className="text-3xl md:text-4xl font-bold mb-2">
+                                {agendaData[selectedDay].tema}
+                            </h2>
+                        </div>
+
+                        {/* Lista de Subtemas */}
+                        <div className="bg-white rounded-2xl shadow-lg p-8">
+                            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                <div className="w-1 h-8 bg-emerald-500 rounded-full"></div>
+                                Temas do Dia
+                            </h3>
+
+                            <div className="space-y-3">
+                                {agendaData[selectedDay].subtemas.map((subtema: string, index: number) => (
+                                    <motion.div
+                                        key={index}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ duration: 0.3, delay: index * 0.05 }}
+                                        className="group"
+                                    >
+                                        <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-emerald-50 transition-all duration-300 border border-transparent hover:border-emerald-200">
+                                            <div className="flex-shrink-0 mt-1">
+                                                <div className="w-8 h-8 bg-emerald-100 group-hover:bg-emerald-500 text-emerald-600 group-hover:text-white rounded-lg flex items-center justify-center font-bold text-sm transition-all duration-300">
+                                                    {index + 1}
+                                                </div>
+                                            </div>
+                                            <div className="flex-grow">
+                                                <p className="text-gray-800 font-medium leading-relaxed group-hover:text-emerald-700 transition-colors">
+                                                    {subtema}
+                                                </p>
+                                            </div>
+                                            <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-emerald-500 transition-colors flex-shrink-0 mt-1" />
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Contador de Temas */}
+                        <div className="mt-6 text-center">
+                            <div className="inline-block bg-emerald-50 text-emerald-700 px-6 py-3 rounded-xl font-semibold">
+                                Total de {agendaData[selectedDay].subtemas.length} temas programados
+                            </div>
+                        </div>
+                    </motion.div>
+                </AnimatePresence>
+
+                {/* Lema do Evento */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.5 }}
-                    className="max-w-4xl mx-auto mt-12"
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    className="max-w-4xl mx-auto mt-16"
                 >
                     <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-2xl shadow-xl p-8 text-center">
                         <h3 className="text-2xl font-bold mb-3">
@@ -123,11 +223,11 @@ const AgendaSimplificada = () => {
                     </div>
                 </motion.div>
 
-                {/* Botão de contato */}
+                {/* CTA */}
                 <div className="text-center mt-12">
                     <a
                         href="/contacto"
-                        className="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl"
+                        className="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
                     >
                         Precisa de mais informações? Entre em contacto
                     </a>
@@ -137,97 +237,43 @@ const AgendaSimplificada = () => {
     );
 };
 
-export default AgendaSimplificada;
+export default AgendaTemas;
 
 
+// "use client";
+// import { motion } from 'framer-motion';
+// import { Calendar, MapPin } from 'lucide-react';
 
-
-
-
-
-
-
-// 'use client';
-// import { motion, AnimatePresence } from 'framer-motion';
-// import { Calendar, MapPin, ChevronRight } from 'lucide-react';
-// import { useState } from 'react';
-
-// const AgendaTemas = () => {
-//     const [selectedDay, setSelectedDay] = useState('dia1');
-
-//     const agendaData = {
-//         dia1: {
-//             data: '08 de Outubro de 2025',
+// const AgendaSimplificada = () => {
+//     const agendaDias = [
+//         {
+//             dia: '08 de Outubro de 2025',
+//             diaNumero: 'Dia 1',
 //             tema: 'XIII Conselho Hospitalar',
-//             subtemas: [
-//                 'Cerimónia de Abertura Oficial',
-//                 'Adopção da Agenda e Objectivos da Reunião',
-//                 'Cumprimento das Recomendações do XII Conselho',
-//                 'Taxa de Ocupação de Camas',
-//                 'Rendimento Médio por Cama',
-//                 'Tempo Médio de Internamento',
-//                 'Taxa de Mortalidade Geral Intra-Hospitalar',
-//                 'Rácio de Mortalidade Materna Intra-Hospitalar',
-//                 'Mortalidade por Serviço e Discussão de Óbitos',
-//                 'Rendimento por Sala Operatória',
-//                 'Rendimento por Cirurgião',
-//                 'Consulta por Médico'
-//             ]
+//             subtema: 'Abertura Oficial e Análise de Desempenho Hospitalar'
 //         },
-//         dia2: {
-//             data: '09 de Outubro de 2025',
+//         {
+//             dia: '09 de Outubro de 2025',
+//             diaNumero: 'Dia 2',
 //             tema: 'XIII Conselho Hospitalar',
-//             subtemas: [
-//                 'Aprovação da Síntese do 1º Dia',
-//                 'Aprovisionamento de Medicamentos: Desafios e Oportunidades',
-//                 'Prevenção e Controle de Infecções (PCI)',
-//                 'Abordagem dos 5S',
-//                 'Gestão de Lixo Biomédico',
-//                 'Processos de Esterilização',
-//                 'Enfermaria Modelo',
-//                 'Estratégias do Programa de PCI',
-//                 'Apetrechamento e Manutenção de Equipamentos',
-//                 'Balanço de Actividades Inspectivas e Auditorias 2024',
-//                 'Comunicado Final e Encerramento'
-//             ]
+//             subtema: 'Aprovisionamento de Medicamentos e Prevenção e Controle de Infecções'
 //         },
-//         dia3: {
-//             data: '10 de Outubro de 2025',
+//         {
+//             dia: '10 de Outubro de 2025',
+//             diaNumero: 'Dia 3',
 //             tema: 'L Conselho Coordenador de Saúde',
-//             subtemas: [
-//                 'Objectivos da Reunião',
-//                 'Cumprimento das Recomendações do XLIX CCS',
-//                 'Desempenho do Sector 2024 e 1º Semestre 2025 - Áreas Programáticas',
-//                 'Balanço de Desempenho - DAF/DNFPS',
-//                 'Balanço de Desempenho - ANARME/INS',
-//                 'Balanço de Desempenho - DRH',
-//                 'Regulamento do Subsistema de Planificação de Pessoal',
-//                 'Regulamento do Subsistema de Administração de Pessoal',
-//                 'Regulamento do Subsistema de Desenvolvimento Profissional',
-//                 'Sobrevivência Materno Infantil: Desafios e Oportunidades'
-//             ]
+//             subtema: 'Balanço de Desempenho do Sector 2024 e Primeiro Semestre 2025'
 //         },
-//         dia4: {
-//             data: '11 de Outubro de 2025',
+//         {
+//             dia: '11 de Outubro de 2025',
+//             diaNumero: 'Dia 4',
 //             tema: 'L Conselho Coordenador de Saúde',
-//             subtemas: [
-//                 'Aprovação da Síntese do 1º Dia',
-//                 'Painel: Mecanismos de Aumento do Financiamento do Sector',
-//                 'Proposta do PESOE 2026: Prioridades e Linhas Estratégicas',
-//                 'Apresentação dos Documentos Estratégicos (END, PQG, PESS, PECS)',
-//                 'Estratégia de Integração das Brigadas Móveis na Província',
-//                 'Experiência da Digitalização do Hospital de Mavalane',
-//                 'Momento Cultural',
-//                 'Comunicado Final',
-//                 'Discurso de Encerramento'
-//             ]
+//             subtema: 'Mecanismos de Financiamento e Documentos Estratégicos'
 //         }
-//     };
-
-//     const dias = Object.keys(agendaData);
+//     ];
 
 //     return (
-//         <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50">
+//         <main className="min-h-screen bg-gradient-to-br from-slate-50 to-emerald-50">
 //             {/* Header */}
 //             <div className="bg-white shadow-sm border-b">
 //                 <div className="container mx-auto mt-20 px-4 py-8">
@@ -252,108 +298,62 @@ export default AgendaSimplificada;
 //                 </div>
 //             </div>
 
+//             {/* Agenda Cards */}
 //             <div className="container mx-auto px-4 py-12">
-//                 {/* Seletor de Dias */}
-//                 <div className="max-w-4xl mx-auto mb-12">
-//                     <div className="bg-white rounded-2xl shadow-lg p-3">
-//                         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-//                             {dias.map((dia, index) => {
-//                                 const isActive = selectedDay === dia;
-//                                 const diaInfo = agendaData[dia];
-//                                 return (
-//                                     <motion.button
-//                                         key={dia}
-//                                         onClick={() => setSelectedDay(dia)}
-//                                         whileHover={{ scale: 1.02 }}
-//                                         whileTap={{ scale: 0.98 }}
-//                                         className={`relative p-4 rounded-xl transition-all duration-300 ${
-//                                             isActive
-//                                                 ? 'bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-xl'
-//                                                 : 'bg-gray-50 text-gray-600 hover:bg-emerald-50 hover:text-emerald-600'
-//                                         }`}
-//                                     >
-//                                         <div className="text-xs opacity-80 mb-1 font-medium">Dia</div>
-//                                         <div className="text-2xl font-bold mb-2">{index + 1}</div>
-//                                         <div className={`text-xs ${isActive ? 'text-emerald-100' : 'text-gray-500'}`}>
-//                                             {diaInfo.data.split(' ')[0]} {diaInfo.data.split(' ')[2]}
+//                 <div className="max-w-4xl mx-auto">
+//                     <div className="grid gap-6">
+//                         {agendaDias.map((item, index) => (
+//                             <motion.div
+//                                 key={index}
+//                                 initial={{ opacity: 0, y: 30 }}
+//                                 animate={{ opacity: 1, y: 0 }}
+//                                 transition={{ duration: 0.5, delay: index * 0.1 }}
+//                                 className="group"
+//                             >
+//                                 <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border-l-4 border-emerald-500">
+//                                     <div className="p-8">
+//                                         <div className="flex flex-col md:flex-row md:items-center gap-6">
+//                                             {/* Número do Dia */}
+//                                             <div className="flex-shrink-0">
+//                                                 <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-2xl p-6 text-center shadow-lg">
+//                                                     <div className="text-sm font-semibold opacity-90 mb-1">
+//                                                         {item.diaNumero.split(' ')[0]}
+//                                                     </div>
+//                                                     <div className="text-4xl font-bold">
+//                                                         {item.diaNumero.split(' ')[1]}
+//                                                     </div>
+//                                                 </div>
+//                                             </div>
+
+//                                             {/* Conteúdo */}
+//                                             <div className="flex-grow">
+//                                                 <div className="mb-3">
+//                                                     <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
+//                                                         <Calendar className="w-4 h-4" />
+//                                                         <span>{item.dia}</span>
+//                                                     </div>
+//                                                     <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors">
+//                                                         {item.tema}
+//                                                     </h3>
+//                                                     <p className="text-gray-600 leading-relaxed">
+//                                                         {item.subtema}
+//                                                     </p>
+//                                                 </div>
+//                                             </div>
 //                                         </div>
-//                                     </motion.button>
-//                                 );
-//                             })}
-//                         </div>
+//                                     </div>
+//                                 </div>
+//                             </motion.div>
+//                         ))}
 //                     </div>
 //                 </div>
 
-//                 {/* Conteúdo do Dia Selecionado */}
-//                 <AnimatePresence mode="wait">
-//                     <motion.div
-//                         key={selectedDay}
-//                         initial={{ opacity: 0, y: 20 }}
-//                         animate={{ opacity: 1, y: 0 }}
-//                         exit={{ opacity: 0, y: -20 }}
-//                         transition={{ duration: 0.3 }}
-//                         className="max-w-4xl mx-auto"
-//                     >
-//                         {/* Header do Dia */}
-//                         <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-2xl shadow-xl p-8 mb-8">
-//                             <div className="flex items-center gap-2 text-emerald-100 mb-3">
-//                                 <Calendar className="w-5 h-5" />
-//                                 <span className="text-lg font-semibold">{agendaData[selectedDay].data}</span>
-//                             </div>
-//                             <h2 className="text-3xl md:text-4xl font-bold mb-2">
-//                                 {agendaData[selectedDay].tema}
-//                             </h2>
-//                         </div>
-
-//                         {/* Lista de Subtemas */}
-//                         <div className="bg-white rounded-2xl shadow-lg p-8">
-//                             <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-//                                 <div className="w-1 h-8 bg-emerald-500 rounded-full"></div>
-//                                 Temas do Dia
-//                             </h3>
-                            
-//                             <div className="space-y-3">
-//                                 {agendaData[selectedDay].subtemas.map((subtema, index) => (
-//                                     <motion.div
-//                                         key={index}
-//                                         initial={{ opacity: 0, x: -20 }}
-//                                         animate={{ opacity: 1, x: 0 }}
-//                                         transition={{ duration: 0.3, delay: index * 0.05 }}
-//                                         className="group"
-//                                     >
-//                                         <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-emerald-50 transition-all duration-300 border border-transparent hover:border-emerald-200">
-//                                             <div className="flex-shrink-0 mt-1">
-//                                                 <div className="w-8 h-8 bg-emerald-100 group-hover:bg-emerald-500 text-emerald-600 group-hover:text-white rounded-lg flex items-center justify-center font-bold text-sm transition-all duration-300">
-//                                                     {index + 1}
-//                                                 </div>
-//                                             </div>
-//                                             <div className="flex-grow">
-//                                                 <p className="text-gray-800 font-medium leading-relaxed group-hover:text-emerald-700 transition-colors">
-//                                                     {subtema}
-//                                                 </p>
-//                                             </div>
-//                                             <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-emerald-500 transition-colors flex-shrink-0 mt-1" />
-//                                         </div>
-//                                     </motion.div>
-//                                 ))}
-//                             </div>
-//                         </div>
-
-//                         {/* Contador de Temas */}
-//                         <div className="mt-6 text-center">
-//                             <div className="inline-block bg-emerald-50 text-emerald-700 px-6 py-3 rounded-xl font-semibold">
-//                                 Total de {agendaData[selectedDay].subtemas.length} temas programados
-//                             </div>
-//                         </div>
-//                     </motion.div>
-//                 </AnimatePresence>
-
-//                 {/* Lema do Evento */}
+//                 {/* Informação adicional */}
 //                 <motion.div
 //                     initial={{ opacity: 0, y: 30 }}
 //                     animate={{ opacity: 1, y: 0 }}
-//                     transition={{ duration: 0.5, delay: 0.3 }}
-//                     className="max-w-4xl mx-auto mt-16"
+//                     transition={{ duration: 0.5, delay: 0.5 }}
+//                     className="max-w-4xl mx-auto mt-12"
 //                 >
 //                     <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-2xl shadow-xl p-8 text-center">
 //                         <h3 className="text-2xl font-bold mb-3">
@@ -365,11 +365,11 @@ export default AgendaSimplificada;
 //                     </div>
 //                 </motion.div>
 
-//                 {/* CTA */}
+//                 {/* Botão de contato */}
 //                 <div className="text-center mt-12">
 //                     <a
 //                         href="/contacto"
-//                         className="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+//                         className="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl"
 //                     >
 //                         Precisa de mais informações? Entre em contacto
 //                     </a>
@@ -379,10 +379,7 @@ export default AgendaSimplificada;
 //     );
 // };
 
-// export default AgendaTemas;
-
-
-
+// export default AgendaSimplificada;
 
 
 
