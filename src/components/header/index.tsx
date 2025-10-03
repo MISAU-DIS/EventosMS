@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -24,7 +24,9 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-green-700/95 backdrop-blur-sm shadow-lg py-2' : 'bg-green-700 py-5'
+        scrolled
+          ? "bg-green-700/95 backdrop-blur-sm shadow-lg py-2"
+          : "bg-green-700 py-5"
       } text-white`}
     >
       <div className="container mx-auto flex items-center justify-between px-6 md:px-12">
@@ -38,19 +40,20 @@ export default function Header() {
             className="rounded-full"
           />
           {/* <Link href="/" className="text-xl md:text-2xl font-semibold tracking-tight hover:opacity-90 transition-opacity duration-200">*/}
-            <Link href="/" className="text-base md:text-lg font-semibold tracking-tight hover:opacity-90 transition-opacity duration-200">
-            XIII Conselho Hospitalar & L Conselho Coordenador de Saúde 
-            </Link>
-  
-        
+          <Link
+            href="/"
+            className="text-base md:text-lg font-semibold tracking-tight hover:opacity-90 transition-opacity duration-200"
+          >
+            XIII Conselho Hospitalar & L Conselho Coordenador de Saúde
+          </Link>
         </div>
 
         {/* Menu desktop */}
         <nav className="hidden md:block">
           <ul className="flex space-x-8 text-base font-medium">
             <li>
-              <Link 
-                href="/" 
+              <Link
+                href="/"
                 className="relative py-2 px-1 hover:text-green-200 transition-all duration-300 group"
               >
                 Início
@@ -58,8 +61,8 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <Link 
-                href="/agenda" 
+              <Link
+                href="/agenda"
                 className="relative py-2 px-1 hover:text-green-200 transition-all duration-300 group"
               >
                 Agenda
@@ -67,8 +70,8 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <Link 
-                href="/programa" 
+              <Link
+                href="/programa"
                 className="relative py-2 px-1 hover:text-green-200 transition-all duration-300 group"
               >
                 Programa
@@ -76,8 +79,8 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <Link 
-                href="/comentarios" 
+              <Link
+                href="/comentarios"
                 className="relative py-2 px-1 hover:text-green-200 transition-all duration-300 group"
               >
                 Comentários
@@ -85,8 +88,8 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <Link 
-                href="/contacto" 
+              <Link
+                href="/contacto"
                 className="relative py-2 px-1 hover:text-green-200 transition-all duration-300 group"
               >
                 Contacto
@@ -102,21 +105,35 @@ export default function Header() {
           className="md:hidden flex flex-col space-y-1 p-2"
           aria-label="Toggle menu"
         >
-          <span className={`w-6 h-0.5 bg-white transform transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
-          <span className={`w-6 h-0.5 bg-white transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
-          <span className={`w-6 h-0.5 bg-white transform transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
+          <span
+            className={`w-6 h-0.5 bg-white transform transition-all duration-300 ${
+              isMenuOpen ? "rotate-45 translate-y-1.5" : ""
+            }`}
+          ></span>
+          <span
+            className={`w-6 h-0.5 bg-white transition-all duration-300 ${
+              isMenuOpen ? "opacity-0" : ""
+            }`}
+          ></span>
+          <span
+            className={`w-6 h-0.5 bg-white transform transition-all duration-300 ${
+              isMenuOpen ? "-rotate-45 -translate-y-1.5" : ""
+            }`}
+          ></span>
         </button>
       </div>
 
       {/* Menu mobile */}
-      <div className={`md:hidden absolute top-full left-0 w-full bg-green-700/95 backdrop-blur-sm shadow-lg transition-all duration-300 ${
-        isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-      }`}>
+      <div
+        className={`md:hidden absolute top-full left-0 w-full bg-green-700/95 backdrop-blur-sm shadow-lg transition-all duration-300 ${
+          isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+        }`}
+      >
         <nav className="container mx-auto px-4">
           <ul className="py-4 space-y-2">
             <li>
-              <Link 
-                href="/" 
+              <Link
+                href="/"
                 className="block py-3 px-4 text-base font-medium hover:bg-green-600/50 hover:text-green-200 rounded-lg transition-all duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -124,8 +141,8 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <Link 
-                href="/agenda" 
+              <Link
+                href="/agenda"
                 className="block py-3 px-4 text-base font-medium hover:bg-green-600/50 hover:text-green-200 rounded-lg transition-all duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -133,8 +150,17 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <Link 
-                href="/comentarios" 
+              <Link
+                href="/programa"
+                className="block py-3 px-4 text-base font-medium hover:bg-green-600/50 hover:text-green-200 rounded-lg transition-all duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Programa
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/comentarios"
                 className="block py-3 px-4 text-base font-medium hover:bg-green-600/50 hover:text-green-200 rounded-lg transition-all duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -142,8 +168,8 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <Link 
-                href="/contacto" 
+              <Link
+                href="/contacto"
                 className="block py-3 px-4 text-base font-medium hover:bg-green-600/50 hover:text-green-200 rounded-lg transition-all duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -156,18 +182,6 @@ export default function Header() {
     </header>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 // 'use client';
 
@@ -229,19 +243,6 @@ export default function Header() {
 //     </header>
 //   );
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import Link from "next/link";
 
