@@ -170,6 +170,7 @@ const AgendaTemas = () => {
                 {/* Conteúdo do Dia Selecionado */}
                 <AnimatePresence mode="wait">
                     <motion.div
+
                         key={selectedDay}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -186,6 +187,15 @@ const AgendaTemas = () => {
                             <h2 className="text-3xl md:text-4xl font-bold mb-2">
                                 {agendaData[selectedDay].tema}
                             </h2>
+                              <a
+                                     href="https://www.google.com/calendar/render?action=TEMPLATE&text=XIII+Conselho+Hospitalar+e+L+Conselho+Cordenador&details=O+Ministerio+da+Saude+realiza+dois+eventos+estrategicos:+Conselho+Hospitalar+e+Conselho+Coordenador+de+Saude,+avaliando+normas,+desempenho+hospitalar+e+estrategias+para+melhorar+o+Sistema+Nacional+de+Saude+(2025-2034).&location=Instituto+de+Ciências+de+Saúde+do+Infulene&dates=20251008T080000Z/20251011T180000Z"
+                                     target="_blank"
+                                     rel="noopener noreferrer"
+                                     className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-semibold text-sm bg-green-600 text-white hover:bg-blue-700 transition-all duration-300 shadow-lg"
+                                 >
+                                     <Calendar className="w-4 h-4" />
+                                     <span>Adicionar ao Google Calendar</span>
+                                 </a>
                         </div>
 
                         {/* Lista de Subtemas */}

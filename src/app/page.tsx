@@ -170,11 +170,10 @@ export default function Home() {
                   Sobre o Evento
                 </h2>
                 <p className="text-gray-700 text-lg mb-6 leading-relaxed">
-                  O Ministério da Saúde (MISAU) realiza dois eventos estratégicos: o Conselho Hospitalar,
-                  que avalia normas, protocolos clínicos e desempenho hospitalar,
-                  e o Conselho Coordenador de Saúde, que articula órgãos centrais e locais,
-                  analisando planos e estratégias para melhorar o Sistema Nacional de Saúde no âmbito
-                  do Programa Quinquenal do Governo e da Estratégia Sectorial 2025 - 2034.
+                  O Ministério da Saúde (MISAU) realiza dois eventos de elevada importância: o Conselho Hospitalar, focado na avaliação da gestão, produtividade e qualidade dos serviços hospitalares, e o Conselho Coordenador de Saúde, espaço de articulação entre órgãos centrais e locais para análise do desempenho do sector, definição de prioridades e alinhamento estratégico.
+
+Ambos integram o processo de implementação do Programa Quinquenal do Governo e da Estratégia Sectorial 2025-2034, constituindo momentos chave para harmonizar intervenções, aprovar linhas estratégicas para 2026 e reforçar a humanização e eficiência do Sistema Nacional de Saúde.
+
                 </p>
               </motion.div>
 
