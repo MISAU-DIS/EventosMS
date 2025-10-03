@@ -1,4 +1,8 @@
 'use client';
+// ver se tem um site para avaliar eventos gratuito com graficos ....
+//Depois adicionar botoes de avaliar evento e ver programa
+//no programa 
+//elsaguibunda@gmail.com
 
 import Link from "next/link";
 import Image from "next/image";
@@ -37,29 +41,40 @@ export default function Home() {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-2xl sm:text-4xl lg:text-4xl font-extrabold text-green-700 leading-tight"
+            className="text-xl sm:text-2xl lg:text-2xl font-extrabold text-green-700 leading-tight"
           >
-            REPÚBLICA DE MOÇAMBIQUE
+            {/* REPÚBLICA DE MOÇAMBIQUE */}
+            República de Moçambique
           </motion.h1>
 
           <motion.h1
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-2xl sm:text-4xl lg:text-4xl font-extrabold text-green-700 leading-tight"
+            className="text-2xl sm:text-4xl lg:text-3xl font-extrabold text-green-700 leading-tight"
           >
-            MINISTÉRIO DA SAÚDE
+            {/* MINISTÉRIO DA SAÚDE */}
+            Ministério da Saúde 
           </motion.h1>
 
           <motion.h2
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-xl sm:text-3xl lg:text-3xl font-extrabold text-green-700 leading-tight"
+            className="text-xl sm:text-3xl mt-4 lg:text-4xl font-extrabold text-green-700 leading-tight"
           >
-            XIII Conselho Hospitalar <br />&<br /> L Conselho Coordenador de Saúde
-            <br />
-            08 - 11 Outubro de 2025
+            XIII CONSELHO  HOSPITALAR<br /> L CONSELHO COORDENADOR DE SAÚDE
+            {/* <br />
+            08 - 11 Outubro de 2025 */}
+          </motion.h2>
+
+          <motion.h2
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-xl sm:text-1xl lg:text-2xl mt-4 font-extrabold text-green-700 leading-tight"
+          >
+            Cidade de Maputo, 08-11 de Outubro de 2025
           </motion.h2>
 
             <motion.p
@@ -155,11 +170,10 @@ export default function Home() {
                   Sobre o Evento
                 </h2>
                 <p className="text-gray-700 text-lg mb-6 leading-relaxed">
-                  O Ministério da Saúde (MISAU) realiza dois eventos estratégicos: o Conselho Hospitalar,
-                  que avalia normas, protocolos clínicos e desempenho hospitalar,
-                  e o Conselho Coordenador de Saúde, que articula órgãos centrais e locais,
-                  analisando planos e estratégias para melhorar o Sistema Nacional de Saúde no âmbito
-                  do Programa Quinquenal do Governo e da Estratégia Sectorial 2025 - 2034.
+                  O Ministério da Saúde (MISAU) realiza dois eventos de elevada importância: o Conselho Hospitalar, focado na avaliação da gestão, produtividade e qualidade dos serviços hospitalares, e o Conselho Coordenador de Saúde, espaço de articulação entre órgãos centrais e locais para análise do desempenho do sector, definição de prioridades e alinhamento estratégico.
+
+Ambos integram o processo de implementação do Programa Quinquenal do Governo e da Estratégia Sectorial 2025-2034, constituindo momentos chave para harmonizar intervenções, aprovar linhas estratégicas para 2026 e reforçar a humanização e eficiência do Sistema Nacional de Saúde.
+
                 </p>
               </motion.div>
 
@@ -171,7 +185,7 @@ export default function Home() {
                 className="relative"
               >
                 <Image
-                  src="/iscisa2.jpg"
+                  src="/Iscisa.png"
                   alt="Profissionais de saúde em reunião"
                   width={500}
                   height={350}
@@ -193,7 +207,7 @@ export default function Home() {
               viewport={{ once: true }}
               className="text-3xl sm:text-4xl font-bold text-green-700 mb-12"
             >
-              Objetivos do Encontro
+              Objectivos do Encontro
             </motion.h2>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -208,7 +222,7 @@ export default function Home() {
                 },
                 {
                   title: "Instrumentos Orientadores",
-                  description: "Partilhar ENDE, PQG, PESS e PESOE."
+                  description: "Partilhar os principais instrumentos orientadores do sector."
                 },
                 {
                   title: "Prioridades 2026",
