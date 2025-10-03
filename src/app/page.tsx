@@ -1,7 +1,7 @@
-'use client';
+"use client";
 // ver se tem um site para avaliar eventos gratuito com graficos ....
 //Depois adicionar botoes de avaliar evento e ver programa
-//no programa 
+//no programa
 //elsaguibunda@gmail.com
 
 import Link from "next/link";
@@ -33,7 +33,7 @@ export default function Home() {
               alt="Logo do Evento"
               width={80}
               height={90}
-              className="sm:w-[110px] sm:h-[120px] w-[80px] h-[90px]" 
+              className="sm:w-[110px] sm:h-[120px] w-[80px] h-[90px]"
             />
           </motion.div>
 
@@ -54,7 +54,7 @@ export default function Home() {
             className="text-2xl sm:text-4xl lg:text-3xl font-extrabold text-green-700 leading-tight"
           >
             {/* MINISTÉRIO DA SAÚDE */}
-            Ministério da Saúde 
+            Ministério da Saúde
           </motion.h1>
 
           <motion.h2
@@ -63,7 +63,8 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-xl sm:text-3xl mt-4 lg:text-4xl font-extrabold text-green-700 leading-tight"
           >
-            XIII CONSELHO  HOSPITALAR<br /> L CONSELHO COORDENADOR DE SAÚDE
+            XIII CONSELHO HOSPITALAR
+            <br /> L CONSELHO COORDENADOR DE SAÚDE
             {/* <br />
             08 - 11 Outubro de 2025 */}
           </motion.h2>
@@ -77,14 +78,19 @@ export default function Home() {
             Cidade de Maputo, 08-11 de Outubro de 2025
           </motion.h2>
 
-            <motion.p
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
             className="mt-4 text-sm sm:text-base md:text-lg max-w-3xl text-gray-700 font-bold text-centerd"
-            >
-            Lema:<i> Por um Serviço Nacional de Saúde de Qualidade e Humanizado para Todos</i>
-            </motion.p>
+          >
+            Lema:
+            <i>
+              {" "}
+              Por um Serviço Nacional de Saúde de Qualidade e Humanizado para
+              Todos
+            </i>
+          </motion.p>
 
           <motion.div
             initial={{ opacity: 0 }}
@@ -99,10 +105,10 @@ export default function Home() {
               Ver Agenda
             </Link>
             <Link
-              href="/comentarios"
+              href="/programa"
               className="bg-white border border-green-600 text-green-700 hover:bg-green-50 px-6 py-3 rounded-full transition"
             >
-              Ver Comentários
+              Ver Programa
             </Link>
           </motion.div>
         </div>
@@ -111,7 +117,6 @@ export default function Home() {
         <div className="bg-gradient-to-r from-emerald-700 to-emerald-700 text-white py-10">
           <div className="container mx-auto px-4 text-center">
             <p className="text-base sm:text-lg font-medium flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
-
               {/* Data */}
               <span className="flex items-center gap-2">
                 <Calendar className="w-5 h-5" />
@@ -125,7 +130,7 @@ export default function Home() {
               </span> */}
 
               {/* Local */}
-              <a 
+              <a
                 href="https://maps.google.com/maps?q=Instituto+de+Ciências+de+Saúde+do+Infulene,+Maputo,+Moçambique"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -169,11 +174,18 @@ export default function Home() {
                 <h2 className="text-3xl sm:text-4xl font-bold text-green-700 mb-6">
                   Sobre o Evento
                 </h2>
-                <p className="text-gray-700 text-lg mb-6 leading-relaxed">
-                  O Ministério da Saúde (MISAU) realiza dois eventos de elevada importância: o Conselho Hospitalar, focado na avaliação da gestão, produtividade e qualidade dos serviços hospitalares, e o Conselho Coordenador de Saúde, espaço de articulação entre órgãos centrais e locais para análise do desempenho do sector, definição de prioridades e alinhamento estratégico.
-
-Ambos integram o processo de implementação do Programa Quinquenal do Governo e da Estratégia Sectorial 2025-2034, constituindo momentos chave para harmonizar intervenções, aprovar linhas estratégicas para 2026 e reforçar a humanização e eficiência do Sistema Nacional de Saúde.
-
+                <p className="text-gray-700 text-lg mb-6 leading-relaxed text-justify">
+                  O Ministério da Saúde (MISAU) realiza dois eventos de elevada
+                  importância: o Conselho Hospitalar, focado na avaliação da
+                  gestão, produtividade e qualidade dos serviços hospitalares, e
+                  o Conselho Coordenador de Saúde, espaço de articulação entre
+                  órgãos centrais e locais para análise do desempenho do sector,
+                  definição de prioridades e alinhamento estratégico. Ambos
+                  integram o processo de implementação do Programa Quinquenal do
+                  Governo e da Estratégia Sectorial 2025-2034, constituindo
+                  momentos chave para harmonizar intervenções, aprovar linhas
+                  estratégicas para 2026 e reforçar a humanização e eficiência
+                  do Sistema Nacional de Saúde.
                 </p>
               </motion.div>
 
@@ -196,7 +208,6 @@ Ambos integram o processo de implementação do Programa Quinquenal do Governo e
           </div>
         </section>
 
-        
         {/* Objetivos */}
         <section className="py-16 px-4 bg-gradient-to-b from-green-50 to-white">
           <div className="container mx-auto max-w-6xl text-center">
@@ -214,23 +225,27 @@ Ambos integram o processo de implementação do Programa Quinquenal do Governo e
               {[
                 {
                   title: "Desempenho do Sector",
-                  description: "Analisar o desempenho e desafios do sector de saúde."
+                  description:
+                    "Analisar o desempenho e desafios do sector de saúde.",
                 },
                 {
                   title: "Gestão Hospitalar",
-                  description: "Avaliar a gestão e o desempenho dos hospitais."
+                  description: "Avaliar a gestão e o desempenho dos hospitais.",
                 },
                 {
                   title: "Instrumentos Orientadores",
-                  description: "Partilhar os principais instrumentos orientadores do sector."
+                  description:
+                    "Partilhar os principais instrumentos orientadores do sector.",
                 },
                 {
                   title: "Prioridades 2026",
-                  description: "Aprovar as prioridades e linhas estratégicas do PESOE 2026."
+                  description:
+                    "Aprovar as prioridades e linhas estratégicas do PESOE 2026.",
                 },
                 {
                   title: "Harmonização",
-                  description: "Harmonizar intervenções para garantir eficiência e sustentabilidade."
+                  description:
+                    "Harmonizar intervenções para garantir eficiência e sustentabilidade.",
                 },
               ].map((item, index) => (
                 <motion.div
@@ -241,8 +256,12 @@ Ambos integram o processo de implementação do Programa Quinquenal do Governo e
                   viewport={{ once: true }}
                   className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                 >
-                  <h3 className="text-xl font-semibold text-green-700 mb-3">{item.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                  <h3 className="text-xl font-semibold text-green-700 mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    {item.description}
+                  </p>
                 </motion.div>
               ))}
             </div>
@@ -308,15 +327,6 @@ Ambos integram o processo de implementação do Programa Quinquenal do Governo e
         {/* Call to Action */}
         <section className="py-16 px-4 bg-gradient-to-r from-emerald-700 to-emerald-700 text-white text-center">
           <div className="container mx-auto max-w-4xl">
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="text-3xl sm:text-4xl font-bold mb-6"
-            >
-              Junte-se ao Movimento
-            </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -324,7 +334,8 @@ Ambos integram o processo de implementação do Programa Quinquenal do Governo e
               viewport={{ once: true }}
               className="text-xl mb-8 text-green-100"
             >
-              Contribua para um Sistema Nacional de Saúde mais forte e humanizado.
+              Contribua para um Sistema Nacional de Saúde mais forte e
+              humanizado.
               {/* Participe no XIII Conselho Hospitalar & L Conselho Coordenador de Saúde */}
               {/* e contribua para um Sistema Nacional de Saúde mais forte e humanizado. */}
             </motion.p>
