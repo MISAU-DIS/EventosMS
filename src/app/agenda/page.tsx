@@ -1,6 +1,6 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, MapPin, ChevronRight } from "lucide-react";
+import { Calendar, MapPin } from "lucide-react";
 import { useState } from "react";
 
 const AgendaTemas = () => {
@@ -43,7 +43,7 @@ const AgendaTemas = () => {
       data: "08 de Outubro de 2025",
       tema: "XIII Conselho Hospitalar",
       subtemas: [
-        "Grau de cumprimento da matriz do 12º Conselho Hospitalar",
+        "Grau de cumprimento da matriz do XII Conselho Hospitalar",
         "Análise do desempenho hospitalar (2023,2024, I Semestre 2025)",
       ],
     },
@@ -171,7 +171,7 @@ const AgendaTemas = () => {
                 {agendaData[selectedDay].tema}
               </h2>
               <a
-                href="https://www.google.com/calendar/render?action=TEMPLATE&text=XIII+Conselho+Hospitalar+e+L+Conselho+Cordenador&details=O+Ministerio+da+Saude+realiza+dois+eventos+estrategicos:+Conselho+Hospitalar+e+Conselho+Coordenador+de+Saude,+avaliando+normas,+desempenho+hospitalar+e+estrategias+para+melhorar+o+Sistema+Nacional+de+Saude+(2025-2034).&location=Instituto+de+Ciências+de+Saúde+do+Infulene&dates=20251008T080000Z/20251011T180000Z"
+                href="https://www.google.com/calendar/render?action=TEMPLATE&text=XIII+Conselho+Hospitalar+e+L+Conselho+Coordenador&details=O+Ministerio+da+Saude+realiza+dois+eventos+estrategicos:+Conselho+Hospitalar+e+Conselho+Coordenador+de+Saude,+avaliando+normas,+desempenho+hospitalar+e+estrategias+para+melhorar+o+Sistema+Nacional+de+Saude+(2025-2034).&location=Instituto+de+Ciências+de+Saúde+do+Infulene&dates=20251008T060000Z/20251011T150000Z"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-semibold text-sm bg-green-600 text-white hover:bg-blue-700 transition-all duration-300 shadow-lg"
@@ -209,7 +209,7 @@ const AgendaTemas = () => {
                             {subtema}
                           </p>
                         </div>
-                        <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-emerald-500 transition-colors flex-shrink-0 mt-1" />
+                        {/* <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-emerald-500 transition-colors flex-shrink-0 mt-1" /> */}
                       </div>
                     </motion.div>
                   )

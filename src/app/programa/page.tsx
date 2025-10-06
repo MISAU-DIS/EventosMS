@@ -1,6 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
-import { Clock, Calendar, Users, MapPin } from 'lucide-react';
+import { Clock, Calendar, Users, MapPin, X } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -25,6 +25,35 @@ interface AgendaData {
 
 const Programa = () => {
     const [selectedDay, setSelectedDay] = useState<string>('dia1');
+
+    const [showPasswordModal, setShowPasswordModal] = useState(false);
+    const [passwordInput, setPasswordInput] = useState('');
+    const [currentFileUrl, setCurrentFileUrl] = useState('');
+    const [errorMsg, setErrorMsg] = useState('');
+
+     const PASSWORD = "CHCCO2025#";
+
+    const handleDownloadClick = (fileUrl: string) => {
+        setCurrentFileUrl(fileUrl);
+        setShowPasswordModal(true);
+        setPasswordInput('');
+        setErrorMsg('');
+    };
+
+    const handlePasswordSubmit = () => {
+        if(passwordInput === PASSWORD) {
+            window.open(currentFileUrl, '_blank');
+            setShowPasswordModal(false);
+        } else {
+            setErrorMsg('Senha incorreta. Tente novamente!');
+        }
+    };
+
+    const handleCloseModal = () => {
+        setShowPasswordModal(false);
+        setPasswordInput('');
+        setErrorMsg('');
+    };
 
    const agendaData: AgendaData = {
     dia1: {
@@ -260,6 +289,42 @@ const Programa = () => {
             <meta name="description" content="Agenda completa do Evento MISAU 2025 - Conselho Coordenador de Saúde" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+
+
+            {/* Modal de senha */}
+            {showPasswordModal && (
+                <div className="fixed inset-0 bg-black/20 backdrop-blur-md flex items-center justify-center z-10">
+                    <motion.div 
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        exit={{ scale: 0.8, opacity: 0 }}
+                        className="bg-white rounded-2xl p-6 w-80 shadow-lg relative"
+                    >
+                        <button 
+                            onClick={handleCloseModal}
+                            className="absolute top-3 right-3 text-gray-400 hover:text-gray-600"
+                        >
+                            <X className="w-5 h-5" />
+                        </button>
+                        <h3 className="text-lg font-bold mb-4 text-gray-800">Digite a senha para baixar</h3>
+                        <input
+                            type="password"
+                            value={passwordInput}
+                            onChange={(e) => setPasswordInput(e.target.value)}
+                            className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                            placeholder="Senha"
+                        />
+                        {errorMsg && <p className="text-red-500 text-sm mb-2">{errorMsg}</p>}
+                        <button
+                            onClick={handlePasswordSubmit}
+                            className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-lg font-semibold transition-all duration-300"
+                        >
+                            Confirmar
+                        </button>
+                    </motion.div>
+                </div>
+            )}
+
             <main className="min-h-screen bg-slate-50">
                 {/* Header compacto */}
                 <div className="bg-white shadow-sm border-b">
@@ -383,7 +448,7 @@ const Programa = () => {
                                                             {/* Botão de download */}
                                                             {session.fileUrl && (
                                                                 <button
-                                                                    onClick={() => window.open(session.fileUrl, '_blank')}
+                                                                    onClick={() => handleDownloadClick(session.fileUrl!)}
                                                                     className="absolute right-6 bottom-6 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-2 py-1 rounded-2xl shadow-md transition-all duration-300 flex items-center gap-1 text-xs"
                                                                 >
                                                                     <svg
