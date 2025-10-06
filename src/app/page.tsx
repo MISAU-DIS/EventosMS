@@ -334,8 +334,8 @@ export default function Home() {
               viewport={{ once: true }}
               className="text-xl mb-8 text-green-100"
             >
-              Contribua para um Sistema Nacional de Saúde mais forte e
-              humanizado.
+              Por um Serviço Nacional de Saúde de Qualidade e Humanizado para
+              Todos
               {/* Participe no XIII Conselho Hospitalar & L Conselho Coordenador de Saúde */}
               {/* e contribua para um Sistema Nacional de Saúde mais forte e humanizado. */}
             </motion.p>
