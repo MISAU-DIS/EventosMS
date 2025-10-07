@@ -140,23 +140,25 @@ const Programa = () => {
         theme: 'L Conselho Coordenador de Saúde',
         sessions: [
             { time: '08:30 - 09:00h', title: 'Leitura e aprovação da Síntese do 1º dia', type: 'Leitura', speaker: 'Secretariado', description: '' },
-            { time: '09:00 - 09:05h', title: 'Apresentação do painel', type: 'Sessão', speaker: 'Moderador', description: 'Painel II: Mecanismo de aumento do Financiamento do Sector de Saúde' },
-            { time: '09:05 - 09:20h', title: 'Apresentação do tema', type: 'Apresentação', speaker: 'Salomão Lourenço', description: '' },
-            { time: '09:20 - 09:40h', title: 'Intervenções (4)', type: 'Apresentação', speaker: 'Dra Maria, Dr. Jose Manuel, Dr. Mucopo, Dr. Daniel Chemane', description: '' },
-            { time: '09:40 - 10:40h', title: 'Moderação do debate', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
+            { time: '09:00 - 09:05h', title: 'Painel I: Mecanismo de aumento do Financiamento do Sector de Saúde', type: 'Sessão', speaker: 'José Manuel', description: 'Apresentador do painel' },
+            { time: '09:05 - 09:20h', title: 'Painel I: Mecanismo de aumento do Financiamento do Sector de Saúde', type: 'Apresentação', speaker: 'DPC', description: 'Apresentação do tema' },
+            { time: '09:20 - 09:45h', title: 'Painel I: Mecanismo de aumento do Financiamento do Sector de Saúde', type: 'Apresentação', speaker: 'Nelida Cabral, Daniel Chemane, Salomão Lourenço e Munira Abodou', description: 'Intervenções' },
+            { time: '09:45 - 10:40h', title: 'Debate', type: 'Debate', speaker: 'S. Excia o Ministro', description: '' },
             { time: '10:40 - 11:00h', title: 'Pausa para o café', type: 'Intervalo', speaker: '', description: '' },
-            { time: '11:00 - 11:20h', title: 'Proposta do PESOE 2026: Prioridades e Linhas estratégicas', type: 'Apresentação', speaker: 'DPC', description: '' },
+            { time: '11:00 - 11:20h', title: 'Prioridades de Moçambique na Agenda de Lusaka', type: 'Apresentação', speaker: 'DPC', description: '' },
             { time: '11:20 - 11:50h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
-            { time: '11:50 - 12:50h', title: 'Apresentação dos Documentos Estratégicos do sector: END, PQG, PESS e PECS', type: 'Apresentação', speaker: 'DPC', description: '' },
-            { time: '12:50 - 13:30h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
-            { time: '13:30 - 13:45h', title: 'Estratégia de Integração das brigadas Móveis na Província', type: 'Apresentação', speaker: 'Tete', description: '' },
+            { time: '11:50 - 12:10h', title: 'Desafios e oportunidades para a sobrevivência materno infantil', type: 'Apresentação', speaker: 'DNSP', description: '' },
+            { time: '12:10 - 13:30h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
+            { time: '12:40 - 13:00h', title: 'Regulamento do Subsistema de Planificação de Pessoal (SPP), Regulamento do Subsistema de Administração de Pessoal (SAP) e Regulamento do Subsistema de Desenvolvimento Profissional na Administração  Pública (SDPAP)', type: 'Apresentação', speaker: 'MAEFP', description: '' },
+            { time: '13:00 - 13:30h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
+            { time: '13:00 - 13:45h', title: 'Estratégia de integração das brigadas móveis na província ', type: 'Apresentação', speaker: 'Província de Tete', description: '' },
             { time: '13:45 - 14:00h', title: 'Experiência da digitalização do Hospital de Mavalane', type: 'Apresentação', speaker: 'Cidade de Maputo', description: '' },
             { time: '14:00 - 14:20h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
-            { time: '14:20 - 15:20h', title: 'Pausa para o almoço', type: 'Intervalo', speaker: '', description: '' },
+            { time: '14:20 - 15:20h', title: 'Pausa para o almoço', type: 'Intervalo', speaker: '', description: '' }, 
             { time: '15:20 - 15:30h', title: 'Momento cultural', type: 'Cultural', speaker: 'Grupo Cultural', description: '' },
             { time: '15:30 - 15:50h', title: 'Leitura do Comunicado final', type: 'Leitura', speaker: 'Secretariado', description: '' },
             { time: '15:50 - 16:10h', title: 'Discurso de encerramento', type: 'Discurso', speaker: 'S. Excia o Ministro', description: '' },
-            { time: '16:10h', title: 'Fim do evento', type: 'Encerramento', speaker: '', description: '' }
+            { time: '16:10', title: 'Fim do evento', type: 'Encerramento', speaker: '', description: '' }
         ]
     }
 };
