@@ -29,7 +29,7 @@ export default function Home() {
             className="mb-6"
           >
             <Image
-              src="/Emblem_of_Mozambique.svg"
+              src="Emblem_of_Mozambique.svg"
               alt="Logo do Evento"
               width={80}
               height={90}
@@ -197,7 +197,7 @@ export default function Home() {
                 className="relative"
               >
                 <Image
-                  src="/Iscisa.png"
+                  src="isc.svg"
                   alt="Profissionais de saúde em reunião"
                   width={500}
                   height={350}
