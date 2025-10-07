@@ -57,8 +57,8 @@ const Programa = () => {
 
    const agendaData: AgendaData = {
     dia1: {
-        date: '08 de Outubro de 2025',
-        theme: 'XIII Conselho Hospitalar',
+        date: 'XIII Conselho Hospitalar',
+        theme: '08 de Outubro de 2025',
         sessions: [
             { time: '08:00 - 08:40', title: 'Registo dos participantes', type: 'Entrada', speaker: 'Protocolo', description: '' },
             { time: '08:50', title: 'Chegada de S. Excia Ministro da Saúde', type: 'Protocolo', speaker: 'Protocolo', description: '' },
@@ -81,8 +81,8 @@ const Programa = () => {
         ]
     },
     dia2: {
-        date: '09 de Outubro de 2025',
-        theme: 'XIII Conselho Hospitalar',
+        date: 'XIII Conselho Hospitalar',
+        theme: '09 de Outubro de 2025',
         sessions: [
             { time: '08:30 - 09:00h', title: 'Leitura e aprovação da Síntese do 1º dia', type: 'Leitura', speaker: 'Secretariado', description: '' },
             { time: '09:00 - 09:40h', title: 'Aprovisionamento dos Medicamentos: Desafios e Oportunidades de Melhoria', type: 'Apresentação', speaker: 'CMAM', description: '' },
@@ -106,8 +106,8 @@ const Programa = () => {
         ]
     },
     dia3: {
-        date: '10 de Outubro de 2025',
-        theme: 'L Conselho Coordenador de Saúde',
+        date: 'L Conselho Coordenador de Saúde',
+        theme: '10 de Outubro de 2025',
         sessions: [
             { time: "08:00 - 08:40h", title: "Registo dos participantes", type: "Entrada", speaker: "Protocolo", description: "" },
             { time: "08:40h", title: "Chegada de S. Excia Presidente do Município da Cidade de Maputo", type: "Protocolo", "speaker": "Protocolo", "description": "" },
@@ -123,49 +123,28 @@ const Programa = () => {
             { time: "10:00 - 10:30h", title: "Pausa para a foto de Família e café", "type": "Intervalo", "speaker": "", "description": "" },
             { time: "10:30 - 10:35h", title: "Adopção da Agenda e do Programa", "type": "Sessão", "speaker": "S. Excia Ministro", "description": "" },
             { time: "10:35 - 10:40h", title: "Objectivos da reunião", "type": "Sessão", "speaker": "DPC", "description": "" },
-            { time: "10:40 - 10:55h", title: "Grau de cumprimento das Recomendações do XLIX CCS", "type": "Apresentação", "speaker": "DPC", "description": "" },
+            { time: "10:40 - 10:55h", title: "Grau de cumprimento das Recomendações do XLIX CCS", "type": "Apresentação", "speaker": "DPC", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=17IcZQ0n_TGl96FslF6fCyI3VTZwy4MG7" },
             { time: "10:55 - 11:15h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
             { time: "11:15 - 11:45h", title: "Balanço do desempenho do sector 2024 e Primeiro semestre 2025 (áreas programáticas)", "type": "Balanço", "speaker": "DPC", "description": "Áreas programáticas" },
             { time: "11:45 - 12:15h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
-            { time: "12:15 - 12:55h", title: "Balanço do desempenho do ano 2024 e Primeiro semestre 2025", "type": "Balanço", "speaker": "DAF/DNFPS", "description": "" },
+            { time: "12:15 - 12:55h", title: "Balanço do desempenho do ano 2024 e Primeiro semestre 2025", "type": "Balanço", "speaker": "DAF", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1AQWqArEA7rU_bT1wBqZI584vK0dwldUt" },
+            { time: "12:15 - 12:55h", title: "Balanço do desempenho do ano 2024 e Primeiro semestre 2025", "type": "Balanço", "speaker": "DNFPS", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1U7eR1OutJeJZC8-o4RwjVF_6Y3IwPFj7" },
             { time: "12:55 - 13:25h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
             { time: "13:25 - 14:20h", title: "Pausa para o almoço", "type": "Intervalo", "speaker": "", "description": "" },
-            { time: "14:20 - 14:40h", title: "Balanço do desempenho do ano 2024 e primeiro semestre 2025", "type": "Balanço", "speaker": "ANARME", "description": "" },
+            { time: "14:20 - 14:40h", title: "Balanço do desempenho do ano 2024 e primeiro semestre 2025", "type": "Balanço", "speaker": "ANARME", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1Ci3Mq0Lm6VHdY_eQSnoVKZoUzG_-OWmc" },
             { time: "14:40 - 15:00h", title: "Balanço do desempenho do ano 2024 e primeiro semestre 2025", "type": "Balanço", "speaker": "INS", "description": "" },
             { time: "15:00 - 15:30h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
-            { time: "15:30 - 15:50h", title: "Balanço do desempenho do ano 2024 e Primeiro semestre 2025", "type": "Balanço", "speaker": "DRH", "description": "" },
+            { time: "15:30 - 15:50h", title: "Balanço do desempenho do ano 2024 e Primeiro semestre 2025", "type": "Balanço", "speaker": "DRH", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1GxIJJr0UEskvfDV0W1jvl5ZtngwIxKYn" },
             { time: "15:50 - 16:10h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
             { time: "16:10 - 16:30h", title: "Estratégia Nacional de Desenvolvimento (ENDE)", "type": "Apresentação", "speaker": "MPD", "description": "" },
-            { time: "16:30 - 16:50h", title: "Proposta do PESOE 2026: Prioridades e Linhas estratégicas", "type": "Apresentação", "speaker": "DPC", "description": "" },
+            { time: "16:30 - 16:50h", title: "Proposta do PESOE 2026: Prioridades e Linhas estratégicas", "type": "Apresentação", "speaker": "DPC", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1chsuNm63_b5lkz7gfYr8o4aQv6p5Ynfy" },
             { time: "16:50 - 17:20h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
             { time: "17:20h", title: "Fim dos trabalhos", type: "Encerramento", speaker: "", "description": "" }
         ]
-
-
-        // sessions: [
-        //     { time: '08:30 - 08:40h', title: 'Objectivos da reunião', type: 'Sessão', speaker: 'DPC', description: '' },
-        //     { time: '08:40 - 09:05h', title: 'Grau de cumprimento das Recomendações do XLIX CCS', type: 'Apresentação', speaker: 'DPC', description: '' },
-        //     { time: '09:05 - 09:35h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
-        //     { time: '09:35 - 10:15h', title: 'Balanço do desempenho do sector 2024 e Primeiro semestre 2025', type: 'Balanço', speaker: 'DPC', description: 'Áreas programáticas' },
-        //     { time: '10:15 - 11:10h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
-        //     { time: '11:10 - 11:30h', title: 'Pausa para o café', type: 'Intervalo', speaker: '', description: '' },
-        //     { time: '11:30 - 12:10h', title: 'Balanço do Desempenho do ano 2024 e Primeiro semestre 2025', type: 'Balanço', speaker: 'DAF/DNFPS', description: '' },
-        //     { time: '12:10 - 12:50h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
-        //     { time: '12:50 - 13:50h', title: 'Pausa para o almoço', type: 'Intervalo', speaker: '', description: '' },
-        //     { time: '13:50 - 14:30h', title: 'Balanço do Desempenho do ano 2024 e Primeiro semestre 2025', type: 'Balanço', speaker: 'ANARME/INS', description: '' },
-        //     { time: '14:30 - 15:10h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
-        //     { time: '15:10 - 15:30h', title: 'Balanço do Desempenho do ano 2024 e Primeiro semestre 2025', type: 'Balanço', speaker: 'DRH', description: '' },
-        //     { time: '15:30 - 15:50h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
-        //     { time: '15:50 - 16:20h', title: 'Regulamento do Subsistema de Planificação de Pessoal (SPP)', type: 'Apresentação', speaker: 'MAEFP', description: 'Regulamento do Subsistema de Administração de Pessoal (SAP); e Regulamento do Subsistema de Desenvolvimento Profissional na Administração Pública (SDPAP)' },
-        //     { time: '16:20 - 16:40h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
-        //     { time: '16:40 - 16:55h', title: 'Sobrevivência materno infantil: Desafios e oportunidades', type: 'Apresentação', speaker: 'DNSP', description: '' },
-        //     { time: '16:55 - 17:10h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
-        //     { time: '17:10h', title: 'Fim dos trabalhos', type: 'Encerramento', speaker: '', description: '' }
-        // ]
     },
     dia4: {
-        date: '11 de Outubro de 2025',
-        theme: 'L Conselho Coordenador de Saúde',
+        date: 'L Conselho Coordenador de Saúde',
+        theme: '11 de Outubro de 2025',
         sessions: [
             { time: '08:30 - 09:00h', title: 'Leitura e aprovação da Síntese do 1º dia', type: 'Leitura', speaker: 'Secretariado', description: '' },
             { time: '09:00 - 09:05h', title: 'Painel I: Mecanismo de aumento do Financiamento do Sector de Saúde', type: 'Sessão', speaker: 'José Manuel', description: 'Apresentador do painel' },
@@ -175,12 +154,12 @@ const Programa = () => {
             { time: '10:40 - 11:00h', title: 'Pausa para o café', type: 'Intervalo', speaker: '', description: '' },
             { time: '11:00 - 11:20h', title: 'Prioridades de Moçambique na Agenda de Lusaka', type: 'Apresentação', speaker: 'DPC', description: '' },
             { time: '11:20 - 11:50h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
-            { time: '11:50 - 12:10h', title: 'Desafios e oportunidades para a sobrevivência materno infantil', type: 'Apresentação', speaker: 'DNSP', description: '' },
+            { time: '11:50 - 12:10h', title: 'Desafios e oportunidades para a sobrevivência materno infantil', type: 'Apresentação', speaker: 'DNSP', description: '', fileUrl: "https://drive.google.com/uc?export=download&id=1PLXUgOmZ22_eQ_oJQZa-niM7ObycNjGh" },
             { time: '12:10 - 13:30h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
             { time: '12:40 - 13:00h', title: 'Regulamento do Subsistema de Planificação de Pessoal (SPP), Regulamento do Subsistema de Administração de Pessoal (SAP) e Regulamento do Subsistema de Desenvolvimento Profissional na Administração  Pública (SDPAP)', type: 'Apresentação', speaker: 'MAEFP', description: '' },
             { time: '13:00 - 13:30h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
             { time: '13:00 - 13:45h', title: 'Estratégia de integração das brigadas móveis na província ', type: 'Apresentação', speaker: 'Província de Tete', description: '' },
-            { time: '13:45 - 14:00h', title: 'Experiência da digitalização do Hospital de Mavalane', type: 'Apresentação', speaker: 'Cidade de Maputo', description: '' },
+            { time: '13:45 - 14:00h', title: 'Experiência da digitalização do Hospital de Mavalane', type: 'Apresentação', speaker: 'Cidade de Maputo', description: '', fileUrl: "https://drive.google.com/uc?export=download&id=1uNCjxMssVE_s7naRXJHC28oy7thSC5Hb" },
             { time: '14:00 - 14:20h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
             { time: '14:20 - 15:20h', title: 'Pausa para o almoço', type: 'Intervalo', speaker: '', description: '' }, 
             { time: '15:20 - 15:30h', title: 'Momento cultural', type: 'Cultural', speaker: 'Grupo Cultural', description: '' },
@@ -190,104 +169,6 @@ const Programa = () => {
         ]
     }
 };
-
-    // const agendaData: AgendaData = {
-    //     dia1: {
-    //         date: '08 de Outubro de 2025',
-    //         theme: 'Conselho Hospitalar',
-    //         sessions: [
-    //             { time: '08:00 - 08:40h', title: 'Registo dos participantes', type: 'Entrada', speaker: 'Protocolo', description: '' },
-    //             { time: '08:40', title: 'Chegada do Excelentíssimo Presidente do Município da Cidade de Maputo', type: 'Chegada', speaker: 'Protocolo', description: '' },
-    //             { time: '08:45', title: 'Chegada de S. Excia Secretário de Estado da Cidade de Maputo', type: 'Protocolo', speaker: 'Protocolo', description: '' },
-    //             { time: '08:50', title: 'Chegada de S. Excia Ministro da Saúde', type: 'Protocolo', speaker: 'Protocolo', description: '' },
-    //             { time: '08:55', title: 'Entrada do Presidium', type: 'Protocolo', speaker: 'Protocolo', description: '' },
-    //             { time: '09:05', title: 'Hino Nacional', type: 'Protocolo', speaker: 'Protocolo', description: '' },
-    //             { time: '09:05 - 09:15', title: 'Intervenção do Excelentíssimo Presidente do Município da Cidade de Maputo', type: 'Discurso', speaker: 'S. Excia. Presidente do Município', description: '' },
-    //             { time: '09:15 - 09:25', title: 'Intervenção do Parceiro de 1º Contacto', type: 'Discurso', speaker: 'Parceiro de 1º Contacto', description: '' },
-    //             { time: '09:25 - 09:35', title: 'Momento Cultural', type: 'Cultural', speaker: 'Grupo Cultural', description: '' },
-    //             { time: '09:35 - 09:45', title: 'Intervenção de S. Excia Secretário de Estado da Cidade de Maputo', type: 'Discurso', speaker: 'S. Excia. Secretário de Estado', description: '' },
-    //             { time: '09:45 - 10:00', title: 'Discurso de Abertura por S. Excia Ministro da Saúde', type: 'Discurso', speaker: 'S. Excia o Ministro', description: '' },
-    //             { time: '10:00 - 10:30', title: 'Pausa para a foto de Família e café', type: 'Intervalo', speaker: '', description: '' },
-    //             { time: '10:30 - 10:35', title: 'Adopção da Agenda e do Programa', type: 'Sessão', speaker: 'S. Excia o Ministro', description: '' },
-    //             { time: '10:35 - 10:40', title: 'Objectivos da reunião', type: 'Sessão', speaker: 'DNAM', description: '' },
-    //             { time: '10:40 - 11:00', title: 'Grau de cumprimento das recomendações matriz do XII Conselho Hospitalar', type: 'Apresentação', speaker: 'DNAM', description: '', fileUrl: 'www.google.com'},
-    //             { time: '11:11 - 11:30', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
-    //             { time: '11:30 - 12:00', title: 'Análise de desempenho hospitalar', type: 'discussão', speaker: 'DNAM', description: '1. Taxa de ocupação  de camas 2. Rendimento Medio por cama 3. Tempo médio de internamento ' },
-    //             { time: '12:00 - 13:00', title: 'Pausa para o almoço', type: 'Intervalo', speaker: '', description: '' },
-    //             { time: '13:00 - 14:30', title: 'Análise de desempenho hospitalar', type: 'Apresentação', speaker: 'DNAM', description: '4. Taxa de rotatividade de camas 5. Rácio de Mortalidade Materna Intra-Hospitalar 6. Mortalidade por Serviço e Discussão de Óbitos' },
-    //             { time: '14:30 - 15:30', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
-    //             { time: '15:30 - 16:00', title: 'Análise de desempenho hospitalar', type: 'Apresentação', speaker: 'DNAM', description: '7. Rendimento por Sala Operatória 8. Rendimento por Cirurgião 9. Consulta por Médico' },
-    //             { time: '16:00 - 17:00', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
-    //             { time: '17:00h', title: 'Fim dos trabalhos do 1º dia', type: 'Encerramento', speaker: '', description: '' }
-    //         ]
-    //     },
-    //     dia2: {
-    //         date: '09 de Outubro - Quinta-feira',
-    //         theme: 'Conselho Hospitalar',
-    //         sessions: [
-    //             { time: '08:30 - 09:00', title: 'Leitura e aprovação da Síntese do 1º dia', type: 'Leitura', speaker: 'Secretariado', description: '' },
-    //             { time: '09:00 - 09:30', title: 'Ponto de situação dos especialistas', type: 'Apresentação', speaker: 'DNAM', description: 'situação actual,  desafios e próximos passos; apresentação conjuta entre DNAM, DNFPS  e DRH' },
-    //             { time: '09:30 - 10:00', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
-    //             { time: '10:00 - 10:20', title: 'Incluir Tema', type: 'Outro', speaker: '', description: '' },
-    //             { time: '10:20 - 10:35', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
-    //             { time: '10:35 - 10:50', title: 'Pausa para o café', type: 'Intervalo', speaker: '', description: '' },
-    //             { time: '11:05 - 11:20', title: 'Apetrechamento dos hospitais versus utilização e manutenção dos equipamentos', type: 'Apresentação', speaker: 'DNAM', description: '' },
-    //             { time: '11:20 - 11:35', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
-    //             { time: '11:35 - 11:50', title: 'Incluir Tema', type: 'Outro', speaker: '', description: '' },
-    //             { time: '11:50 - 12:05', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
-    //             { time: '13:05 - 14:05', title: 'Pausa para o almoço', type: 'Intervalo', speaker: '', description: '' },
-    //             { time: '14:05 - 14:25', title: 'Fontes alternativas ao Financiamento dos Hospitais', type: 'Apresentação', speaker: 'DNAM', description: '' },
-    //             { time: '14:25 - 14:55', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
-    //             { time: '14:55 - 15:25', title: 'Incluir Tema', type: 'Outro', speaker: '', description: '' },
-    //             { time: '15:25 - 16:00', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
-    //             { time: '16:00 - 16:30', title: 'Apresentação do Comunicado final', type: 'Leitura', speaker: 'Secretariado', description: '' },
-    //             { time: '16:35h', title: 'Fim dos trabalhos do 2º dia', type: 'Encerramento', speaker: '', description: '' }
-    //         ]
-    //     },
-    //     dia3: {
-    //         date: '10 de Outubro  - Sexta-feira',
-    //         theme: 'Conselho Hospitalar',
-    //         sessions: [
-    //             { time: '08:30 - 09:00h', title: 'Adopção da Agenda e do Programa', type: 'Sessão', speaker: 'DPC', description: '' },
-    //             { time: '09:00 - 09:30h', title: 'Objectivos da reunião', type: 'Sessão', speaker: 'DPC', description: '' },
-    //             { time: '09:30 - 10:00h', title: 'Matriz das Recomendações do CCS do XL', type: 'Sessão', speaker: 'DPC', description: '' },
-    //             { time: '10:00 - 10:20h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
-    //             { time: '10:20 - 10:35h', title: 'Balanço do desempenho do sector 2024 e Primeiro semestre 2025', type: 'Balanço', speaker: 'Área de Saúde Pública', description: '' },
-    //             { time: '10:35 - 10:50h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
-    //             { time: '10:50 - 11:05h', title: 'Pausa para a foto em família e café', type: 'Intervalo', speaker: '', description: '' },
-    //             { time: '11:05 - 11:20h', title: 'Balanço do desempenho do sector 2024 e Primeiro semestre 2025', type: 'Balanço', speaker: 'Área de apoio', description: '' },
-    //             { time: '11:20 - 11:35h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
-    //             { time: '11:35 - 11:50h', title: 'Incluir Tema', type: 'Outro', speaker: '', description: '' },
-    //             { time: '11:50 - 12:05h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
-    //             { time: '13:05 - 14:05h', title: 'Pausa para o almoço', type: 'Intervalo', speaker: '', description: '' },
-    //             { time: '14:05 - 15:05h', title: 'Socialização dos instrumentos orientadores do sector (ENDE, PQG, PESS, PESOE, EFSS)', type: 'Sessão', speaker: 'DPC', description: '' },
-    //             { time: '15:05 - 16:05h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
-    //             { time: '16:05h', title: 'Fim dos trabalhos', type: 'Encerramento', speaker: '', description: '' }
-    //         ]
-    //     },
-    //     dia4: {
-    //         date: '11 de Outubro- Sábado',
-    //         theme: 'XIII Conselho Hospitalar',
-    //         sessions: [
-    //             { time: '08:30 - 09:00h', title: 'Leitura e aprovação da Síntese do 1º dia', type: 'Leitura', speaker: 'Secretariado', description: '' },
-    //             { time: '09:00 - 09:30h', title: 'Proposta do PESOE 2026: Prioridades e Linhas estratégicas', type: 'Sessão', speaker: 'DPC', description: '' },
-    //             { time: '09:30 - 10:00h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
-    //             { time: '10:00 - 10:20h', title: 'Partilha das inovações da Lei do Sistema Nacional de Saúde', type: 'Apresentação', speaker: 'URESS', description: '' },
-    //             { time: '10:20 - 10:35h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
-    //             { time: '10:35 - 10:55h', title: 'Pausa para o café', type: 'Intervalo', speaker: '', description: '' },
-    //             { time: '10:55 - 11:15h', title: 'Partilha de boas práticas nas províncias', type: 'Apresentação', speaker: 'Províncias', description: '' },
-    //             { time: '11:15 - 11:30h', title: 'RH/DAF/DNSP', type: 'Apresentação', speaker: 'RH/DAF/DNSP', description: '' },
-    //             { time: '11:30 - 11:45h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia o Ministro', description: '' },
-    //             { time: '11:45 - 12:00h', title: 'CMAM/ANARME/IGS/INS', type: 'Apresentação', speaker: 'CMAM/ANARME/IGS/INS', description: '' },
-    //             { time: '12:15 - 12:30h', title: 'Discussão', type: 'Discussão', speaker: '', description: '' },
-    //             { time: '12:30 - 13:30h', title: 'Pausa para o almoço', type: 'Intervalo', speaker: '', description: '' },
-    //             { time: '13:30 - 13:40h', title: 'Momento cultural', type: 'Cultural', speaker: 'Grupo Cultural', description: '' },
-    //             { time: '13:40 - 14:00h', title: 'Leitura do Comunicado final', type: 'Leitura', speaker: 'Secretariado', description: '' },
-    //             { time: '14:00 - 14:15h', title: 'Discurso de encerramento', type: 'Discurso', speaker: 'S. Excia o Ministro', description: '' },
-    //             { time: '14:30h', title: 'Fim do evento', type: 'Encerramento', speaker: '', description: '' }
-    //         ]
-    //     }
-    // };
 
     const getSessionColor = (type: string): string => {
         const colors: Record<string, string> = {
