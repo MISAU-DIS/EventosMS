@@ -3,6 +3,7 @@ import Header from "@/components/header";
 import "./globals.css";
 import Footer from "@/components/footer";
 import { usePathname } from 'next/navigation';
+import { Toaster } from "react-hot-toast";
 
 
 export default function RootLayout({
@@ -22,6 +23,7 @@ export default function RootLayout({
       >
         {!hideHeaderFooter && <Header />}
         {children}
+        <Toaster position="top-right" />
         {!hideHeaderFooter && <Footer />}
       </body>
     </html>

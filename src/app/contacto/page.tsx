@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import React from 'react';
 import emailjs from '@emailjs/browser'; 
-import { Link } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 export default function Contacto(): React.ReactElement {
   const faqs = [
@@ -38,11 +38,11 @@ export default function Contacto(): React.ReactElement {
       e.currentTarget,
       'BiomUSw2GrN1Rk-q9' // Sua Public Key do EmailJS
     ).then(() => {
-      alert('Mensagem enviada com sucesso!');
+      toast.success('Mensagem enviada com sucesso!');
       e.currentTarget.reset();
       setSending(false);
     }).catch((err) => {
-      alert('Erro ao enviar mensagem: ' + err.text);
+      console.log('Erro ao enviar mensagem: ' + err.text);
       setSending(false);
     });
   };
