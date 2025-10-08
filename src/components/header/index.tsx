@@ -33,7 +33,7 @@ export default function Header() {
         {/* Logo e título */}
         <div className="flex items-center space-x-2">
           <Image
-            src="Emblem_of_Mozambique.svg"
+            src="/Emblem_of_Mozambique.svg"
             alt="Logo Moçambique"
             width={40}
             height={40}
