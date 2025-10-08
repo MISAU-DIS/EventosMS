@@ -55,7 +55,7 @@ const Programa = () => {
         setErrorMsg('');
     };
 
-   const agendaData: AgendaData = {
+const agendaData: AgendaData = {
     dia1: {
         date: 'XIII Conselho Hospitalar',
         theme: '08 de Outubro de 2025',
@@ -67,7 +67,7 @@ const Programa = () => {
             { time: '09:00 - 09:10', title: 'Objectivos da reunião ', type: 'Apresentação', speaker: 'DNAM', description: '',  fileUrl: "https://drive.google.com/uc?export=download&id=1NLh69dIeeDwMyVyYc1_lQXxPjWKLPVqY" },
             { time: '09:10 - 09:30', title: 'Discurso de abertura por S. Excia Ministro da Saúde', type: 'Discurso', speaker: 'S. Excia. Ministro', description: "" },
             { time: '09:30 - 09:35', title: 'Adopção da agenda e do programa', type: 'Apresentação', speaker: 'S. Excia. Ministro', description: '' },
-            { time: '09:35 - 09:55', title: 'Grau de cumprimento das recomendações matriz do XII Conselho Hospitalar', type: 'Apresentação', speaker: 'DNAM', description: '', fileUrl: 'https://drive.google.com/uc?export=download&id=1OdUOsyry_XatKq2TAu5JJyJjB-pUBncg' },            
+            { time: '09:35 - 09:55', title: 'Grau de cumprimento das recomendações matriz do XII Conselho Hospitalar', type: 'Apresentação', speaker: 'DNAM', description: '', fileUrl: 'https://drive.google.com/uc?export=download&id=1xNIiIaKBzXUa_F4Bpv3YK2GUV9DbHtKa' },            
             { time: '09:55 - 10:25', title: 'Discussão ', type: 'Apresentação', speaker: '', description: '' },
             { time: '10:25 - 10:55', title: 'Pausa para a foto de Família e café', type: 'Intervalo', speaker: '', description: '' },
             { time: '10:55 - 11:25', title: 'Análise de desempenho hospitalar: ', type: 'Sessão', speaker: 'DNAM', description: '1. Taxa de ocupação  de camas 2. Rendimento médio por cama 3. Tempo médio de internamento', fileUrl: "https://drive.google.com/uc?export=download&id=1J7NjeZ0sxfZdynRgFtGrnoTsZdTD12ZC" },
