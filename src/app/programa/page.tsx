@@ -55,8 +55,7 @@ const Programa = () => {
         setErrorMsg('');
     };
 
-   
-   const agendaData: AgendaData = {
+const agendaData: AgendaData = {
     dia1: {
         date: 'XIII Conselho Hospitalar',
         theme: '08 de Outubro de 2025',
@@ -223,6 +222,11 @@ const Programa = () => {
                             type="password"
                             value={passwordInput}
                             onChange={(e) => setPasswordInput(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    handlePasswordSubmit();
+                                }
+                            }}
                             className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                             placeholder="Senha"
                         />
