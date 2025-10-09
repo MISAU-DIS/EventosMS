@@ -85,7 +85,7 @@ const agendaData: AgendaData = {
         theme: '09 de Outubro de 2025',
         sessions: [
             { time: '08:30 - 09:00h', title: 'Leitura e aprovação da Síntese do 1º dia', type: 'Leitura', speaker: 'Secretariado', description: '' },
-            { time: '09:00 - 09:40h', title: 'Aprovisionamento dos Medicamentos: Desafios e Oportunidades de Melhoria', type: 'Apresentação', speaker: 'CMAM', description: '' },
+            { time: '09:00 - 09:40h', title: 'Aprovisionamento dos Medicamentos: Desafios e Oportunidades de Melhoria', type: 'Apresentação', speaker: 'CMAM', description: '',  fileUrl: "https://drive.google.com/uc?export=download&id=1N_W4Geo640FtMZs-Z1nOkq0rLB89yh4g" },
             { time: '09:40 - 10:30h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
             { time: '10:30 - 10:50h', title: 'Pausa para o café', type: 'Intervalo', speaker: '', description: '' },
             { time: '10:50 - 11:00h', title: 'Prevenção e Controle de Infecções (PCI)', type: 'Apresentação', speaker: 'Provincia de Gaza', description: 'Iniciativas de Melhoria da Qualidade', fileUrl: "https://drive.google.com/uc?export=download&id=10_uN_qcmBdle1_tVqXRAC9oU6AH8_1ld" },
