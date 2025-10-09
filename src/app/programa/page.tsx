@@ -137,7 +137,7 @@ const agendaData: AgendaData = {
             { time: "15:30 - 15:50h", title: "Balanço do desempenho do ano 2024 e Primeiro semestre 2025", "type": "Balanço", "speaker": "DRH", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1GxIJJr0UEskvfDV0W1jvl5ZtngwIxKYn" },
             { time: "15:50 - 16:10h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
             { time: "16:10 - 16:30h", title: "Estratégia Nacional de Desenvolvimento (ENDE)", "type": "Apresentação", "speaker": "MPD", "description": "" },
-            { time: "16:30 - 16:50h", title: "Proposta do PESOE 2026: Prioridades e Linhas estratégicas", "type": "Apresentação", "speaker": "DPC", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1chsuNm63_b5lkz7gfYr8o4aQv6p5Ynfy" },
+            { time: "16:30 - 16:50h", title: "Proposta do PESOE 2026: Prioridades e Linhas estratégicas", "type": "Apresentação", "speaker": "DPC", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1IdNUErbWJyd1xzWsHrCtJxFbqmr1JKNY" },
             { time: "16:50 - 17:20h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
             { time: "17:20h", title: "Fim dos trabalhos", type: "Encerramento", speaker: "", "description": "" }
         ]
