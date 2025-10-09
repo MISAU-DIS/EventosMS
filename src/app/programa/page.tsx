@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion';
 import { Clock, Calendar, Users, MapPin, X } from 'lucide-react';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface Session {
     time: string;
@@ -25,6 +25,28 @@ interface AgendaData {
 
 const Programa = () => {
     const [selectedDay, setSelectedDay] = useState<string>('dia1');
+
+useEffect(() => {
+  const today = new Date();
+  const day = today.getDate();
+  const month = today.getMonth() + 1; // meses começam em 0
+
+  // Mapeamento das datas do programa
+  const dayMapping: Record<string, string> = {
+    "8-10": "dia1", // 8 de outubro → Dia 1
+    "9-10": "dia2", // 9 de outubro → Dia 2
+    "10-10": "dia3", // 10 de outubro → Dia 3
+    "11-10": "dia4", // 11 de outubro → Dia 4
+  };
+
+  const key = `${day}-${month}`;
+  const targetDay = dayMapping[key];
+
+  if (targetDay) {
+    setSelectedDay(targetDay);
+  }
+}, []);
+
 
     const [showPasswordModal, setShowPasswordModal] = useState(false);
     const [passwordInput, setPasswordInput] = useState('');
@@ -158,7 +180,7 @@ const agendaData: AgendaData = {
             { time: '12:10 - 13:30h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
             { time: '12:40 - 13:00h', title: 'Regulamento do Subsistema de Planificação de Pessoal (SPP), Regulamento do Subsistema de Administração de Pessoal (SAP) e Regulamento do Subsistema de Desenvolvimento Profissional na Administração  Pública (SDPAP)', type: 'Apresentação', speaker: 'MAEFP', description: '' },
             { time: '13:00 - 13:30h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
-            { time: '13:00 - 13:45h', title: 'Estratégia de integração das brigadas móveis na província ', type: 'Apresentação', speaker: 'Província de Tete', description: '', fileUrl: "https://drive.google.com/uc?export=download&id=1RtqUJk1OkIr9tyuSAYAiJBUBJj9EvJfx" },
+            { time: '13:00 - 13:45h', title: 'Estratégia de integração das brigadas móveis na província ', type: 'Apresentação', speaker: 'Província de Tete', description: '', fileUrl: "https://drive.google.com/uc?export=download&id=11u6WaiKLgAySM4gyIZ69f3Y3OJFMzHgw" },
             { time: '13:45 - 14:00h', title: 'Experiência da digitalização do Hospital de Mavalane', type: 'Apresentação', speaker: 'Cidade de Maputo', description: '', fileUrl: "https://drive.google.com/uc?export=download&id=1uNCjxMssVE_s7naRXJHC28oy7thSC5Hb" },
             { time: '14:00 - 14:20h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
             { time: '14:20 - 15:20h', title: 'Pausa para o almoço', type: 'Intervalo', speaker: '', description: '' }, 
