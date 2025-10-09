@@ -123,7 +123,7 @@ const agendaData: AgendaData = {
             { time: "10:00 - 10:30h", title: "Pausa para a foto de Família e café", "type": "Intervalo", "speaker": "", "description": "" },
             { time: "10:30 - 10:35h", title: "Adopção da Agenda e do Programa", "type": "Sessão", "speaker": "S. Excia Ministro", "description": "" },
             { time: "10:35 - 10:40h", title: "Objectivos da reunião", "type": "Sessão", "speaker": "DPC", "description": "" },
-            { time: "10:40 - 10:55h", title: "Grau de cumprimento das Recomendações do XLIX CCS", "type": "Apresentação", "speaker": "DPC", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1MPHltOgpDSstc_YdiGRgj62w17DfmJL2" },
+            { time: "10:40 - 10:55h", title: "Grau de cumprimento das Recomendações do XLIX CCS", "type": "Apresentação", "speaker": "DPC", "description": "" },
             { time: "10:55 - 11:15h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
             { time: "11:15 - 11:45h", title: "Balanço do desempenho do sector 2024 e Primeiro semestre 2025 (áreas programáticas)", "type": "Balanço", "speaker": "DPC", "description": "Áreas programáticas" },
             { time: "11:45 - 12:15h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
