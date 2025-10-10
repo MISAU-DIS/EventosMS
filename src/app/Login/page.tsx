@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
 import Link from 'next/link';
@@ -34,6 +34,11 @@ export default function Login(): React.ReactElement {
     if (error) setError('');
   };
 
+  useEffect(() => {
+  setIsLoading(false);
+}, []);
+
+
   const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
   setIsLoading(true);
@@ -55,6 +60,9 @@ export default function Login(): React.ReactElement {
   console.error("Erro no login:", err.message);
   setError("Email ou senha inválidos");
 }
+  finally {
+    setIsLoading(false);
+  }
   //catch (error: any) {
   //   console.error("Erro no login:", error.message);
   //   setError("Email ou senha inválidos");
@@ -90,7 +98,7 @@ export default function Login(): React.ReactElement {
             <div className="flex justify-center mb-4">
               <div>
                 <Image
-                  src="/Emblem_of_Mozambique.svg"
+                  src="Emblem_of_Mozambique.svg"
                   alt="Emblema de Moçambique"
                   width={48}
                   height={48}
