@@ -149,7 +149,7 @@ const agendaData: AgendaData = {
             { time: "10:55 - 11:15h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
             { time: "11:15 - 11:45h", title: "Balanço do desempenho do sector 2024 e Primeiro semestre 2025 (áreas programáticas)", "type": "Balanço", "speaker": "DPC", "description": "Áreas programáticas", fileUrl: "https://drive.google.com/uc?export=download&id=1G_3LrEMhGl0vjfGBA9ZdJjw64TTl-YRp" },
             { time: "11:45 - 12:15h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
-            { time: "12:15 - 12:55h", title: "Balanço do desempenho do ano 2024 e Primeiro semestre 2025", "type": "Balanço", "speaker": "DAF", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1AQWqArEA7rU_bT1wBqZI584vK0dwldUt" },
+            { time: "12:15 - 12:55h", title: "Balanço do desempenho do ano 2024 e Primeiro semestre 2025", "type": "Balanço", "speaker": "DAF", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=13EjrtJWCHzh0ddWWNLASmWogZ-QFwtYk" },
             { time: "12:15 - 12:55h", title: "Balanço do desempenho do ano 2024 e Primeiro semestre 2025", "type": "Balanço", "speaker": "DNFPS", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1U7eR1OutJeJZChttps://drive.google.com/uc?export=download&id=1CGVAUtEreY5S5vDjkbJglYzadfPMGprk8-o4RwjVF_6Y3IwPFj7" },
             { time: "12:55 - 13:25h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
             { time: "13:25 - 14:20h", title: "Pausa para o almoço", "type": "Intervalo", "speaker": "", "description": "" },
