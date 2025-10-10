@@ -176,7 +176,7 @@ const agendaData: AgendaData = {
             { time: "11:00 - 1:15h", title: "Estratégia Nacional de Desenvolvimento (ENDE)", "type": "Apresentação", "speaker": "MPD", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1lLxMMZxYbmjJUvxTj5OLcOuGCUI0bomX" },
             { time: "11:15 - 11:35h", title: "Proposta do PESOE 2026: Prioridades e Linhas estratégicas", "type": "Apresentação", "speaker": "DPC", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1_VOoogSmxpZ9KQGnOKjZbrPwM4Roe2Uv" },
             { time: '11:35 - 12:05h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
-            { time: '12:05 - 12:25h', title: 'Prioridades de Moçambique na Agenda de Lusaka', type: 'Apresentação', speaker: 'DPC', description: '', fileUrl: "https://docs.google.com/presentation/d/1anJmRG9RiRtuqsAy6bJ-V5yF1eCX_aSn/export/pptx" },
+            { time: '12:05 - 12:25h', title: 'Prioridades de Moçambique na Agenda de Lusaka', type: 'Apresentação', speaker: 'DPC', description: '', fileUrl: "https://docs.google.com/presentation/d/1ypBPT1MjUq-MB-Z5QMEGuM8vh5VQeJeg/export/pptx" },
             { time: '12:25 - 12:55h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
             { time: '12:55 - 13:15h', title: 'Desafios e oportunidades para a sobrevivência materno infantil', type: 'Apresentação', speaker: 'DNSP', description: '', fileUrl: "https://drive.google.com/uc?export=download&id=1V8kM0jUdddfgRGeXjk6Mw5xjFNBT_2vv" },
             { time: '13:15 - 13:35h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },           
