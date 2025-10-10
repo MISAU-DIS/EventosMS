@@ -168,10 +168,7 @@ const agendaData: AgendaData = {
         theme: '11 de Outubro de 2025',
         sessions: [
             { time: '08:30 - 09:00h', title: 'Leitura e aprovação da Síntese do 1º dia', type: 'Leitura', speaker: 'Secretariado', description: '' },
-            { time: '09:00 - 09:05h', title: 'Painel I: Mecanismo de aumento do Financiamento do Sector de Saúde', type: 'Sessão', speaker: 'José Manuel', description: 'Apresentador do painel' },
-            { time: '09:05 - 09:20h', title: 'Painel I: Mecanismo de aumento do Financiamento do Sector de Saúde', type: 'Apresentação', speaker: 'DPC', description: 'Apresentação do tema' },
-            { time: '09:20 - 09:45h', title: 'Painel I: Mecanismo de aumento do Financiamento do Sector de Saúde', type: 'Apresentação', speaker: 'Nelida Cabral, Daniel Chemane, Salomão Lourenço e Munira Abodou', description: 'Intervenções' },
-            { time: '09:45 - 10:40h', title: 'Considerações finais', type: 'Debate', speaker: 'S. Excia o Ministro', description: '' },
+            { time: '09:00 - 10:40h', title: 'Painel I: Mecanismo de aumento do Financiamento do Sector de Saúde', type: 'Sessão', speaker: 'José Manuel, DPC, Nelida Cabral, Daniel Chemane, Salomão Lourenço e Munira Abodou', description: 'Apresentador do painel, Apresentação do tema, Intervenções, Considerações finais' },
             { time: '10:40 - 11:00h', title: 'Pausa para o café', type: 'Intervalo', speaker: '', description: '' },
             { time: "11:00 - 1:15h", title: "Estratégia Nacional de Desenvolvimento (ENDE)", "type": "Apresentação", "speaker": "MPD", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1lLxMMZxYbmjJUvxTj5OLcOuGCUI0bomX" },
             { time: "11:15 - 11:35h", title: "Proposta do PESOE 2026: Prioridades e Linhas estratégicas", "type": "Apresentação", "speaker": "DPC", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1_VOoogSmxpZ9KQGnOKjZbrPwM4Roe2Uv" },
