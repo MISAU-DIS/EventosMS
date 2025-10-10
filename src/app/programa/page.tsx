@@ -144,7 +144,7 @@ const agendaData: AgendaData = {
             { time: "09:45 - 10:00h", title: "Discurso de abertura por S. Excia Ministro da Saúde", "type": "Discurso", "speaker": "S. Excia Ministro", "description": "" },
             { time: "10:00 - 10:30h", title: "Pausa para a foto de Família e café", "type": "Intervalo", "speaker": "", "description": "" },
             { time: "10:30 - 10:35h", title: "Adopção da Agenda e do Programa", "type": "Sessão", "speaker": "S. Excia Ministro", "description": "" },
-            { time: "10:35 - 10:40h", title: "Objectivos da reunião", "type": "Sessão", "speaker": "DPC", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=19pHcb9nQq6I95hVo5OW5CeVKUYQ4wr8l" },
+            { time: "10:35 - 10:40h", title: "Objectivos da reunião", "type": "Sessão", "speaker": "DPC", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=12R2IDUfx0HMG_ah2BN7AuKMZTMNwrgQv" },
             { time: "10:40 - 10:55h", title: "Grau de cumprimento das Recomendações do XLIX CCS", "type": "Apresentação", "speaker": "DPC", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1Gf_mUhXaTqDE-Oc4Hgwb0bQoWq5kfSW-" },
             { time: "10:55 - 11:15h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
             { time: "11:15 - 11:45h", title: "Balanço do desempenho do sector 2024 e Primeiro semestre 2025 (áreas programáticas)", "type": "Balanço", "speaker": "DPC", "description": "Áreas programáticas", fileUrl: "https://drive.google.com/uc?export=download&id=13EjrtJWCHzh0ddWWNLASmWogZ-QFwtYk" },
