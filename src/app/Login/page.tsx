@@ -98,7 +98,7 @@ export default function Login(): React.ReactElement {
             <div className="flex justify-center mb-4">
               <div>
                 <Image
-                  src="/Emblem_of_Mozambique.svg"
+                  src="Emblem_of_Mozambique.svg"
                   alt="Emblema de Moçambique"
                   width={48}
                   height={48}
