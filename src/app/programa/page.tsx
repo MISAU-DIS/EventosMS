@@ -168,10 +168,7 @@ const agendaData: AgendaData = {
         theme: '11 de Outubro de 2025',
         sessions: [
             { time: '08:30 - 09:00h', title: 'Leitura e aprovação da Síntese do 1º dia', type: 'Leitura', speaker: 'Secretariado', description: '' },
-            { time: '09:00 - 09:05h', title: 'Painel I: Mecanismo de aumento do Financiamento do Sector de Saúde', type: 'Sessão', speaker: 'José Manuel', description: 'Apresentador do painel' },
-            { time: '09:05 - 09:20h', title: 'Painel I: Mecanismo de aumento do Financiamento do Sector de Saúde', type: 'Apresentação', speaker: 'DPC', description: 'Apresentação do tema' },
-            { time: '09:20 - 09:45h', title: 'Painel I: Mecanismo de aumento do Financiamento do Sector de Saúde', type: 'Apresentação', speaker: 'Nelida Cabral, Daniel Chemane, Salomão Lourenço e Munira Abodou', description: 'Intervenções' },
-            { time: '09:45 - 10:40h', title: 'Considerações finais', type: 'Debate', speaker: 'S. Excia o Ministro', description: '' },
+            { time: '09:00 - 10:40h', title: 'Painel I: Mecanismo de aumento do Financiamento do Sector de Saúde', type: 'Sessão', speaker: 'José Manuel, DPC, Nelida Cabral, Daniel Chemane, Salomão Lourenço e Munira Abodou', description: 'Apresentador do painel, Apresentação do tema, Intervenções, Considerações finais' },
             { time: '10:40 - 11:00h', title: 'Pausa para o café', type: 'Intervalo', speaker: '', description: '' },
             { time: "11:00 - 1:15h", title: "Estratégia Nacional de Desenvolvimento (ENDE)", "type": "Apresentação", "speaker": "MPD", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1lLxMMZxYbmjJUvxTj5OLcOuGCUI0bomX" },
             { time: "11:15 - 11:35h", title: "Proposta do PESOE 2026: Prioridades e Linhas estratégicas", "type": "Apresentação", "speaker": "DPC", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1_VOoogSmxpZ9KQGnOKjZbrPwM4Roe2Uv" },
@@ -189,6 +186,29 @@ const agendaData: AgendaData = {
             { time: '15:55 - 16:15h', title: 'Discurso de encerramento', type: 'Discurso', speaker: 'S. Excia o Ministro', description: '' },
             { time: '16:15', title: 'Fim do evento', type: 'Encerramento', speaker: '', description: '' }
         ]
+        // sessions: [
+        //     { time: '08:30 - 09:00h', title: 'Leitura e aprovação da Síntese do 1º dia', type: 'Leitura', speaker: 'Secretariado', description: '' },
+        //     { time: '09:00 - 09:05h', title: 'Painel I: Mecanismo de aumento do Financiamento do Sector de Saúde', type: 'Sessão', speaker: 'José Manuel', description: 'Apresentador do painel' },
+        //     { time: '09:05 - 09:20h', title: 'Painel I: Mecanismo de aumento do Financiamento do Sector de Saúde', type: 'Apresentação', speaker: 'DPC', description: 'Apresentação do tema' },
+        //     { time: '09:20 - 09:45h', title: 'Painel I: Mecanismo de aumento do Financiamento do Sector de Saúde', type: 'Apresentação', speaker: 'Nelida Cabral, Daniel Chemane, Salomão Lourenço e Munira Abodou', description: 'Intervenções' },
+        //     { time: '09:45 - 10:40h', title: 'Considerações finais', type: 'Debate', speaker: 'S. Excia o Ministro', description: '' },
+        //     { time: '10:40 - 11:00h', title: 'Pausa para o café', type: 'Intervalo', speaker: '', description: '' },
+        //     { time: "11:00 - 1:15h", title: "Estratégia Nacional de Desenvolvimento (ENDE)", "type": "Apresentação", "speaker": "MPD", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1lLxMMZxYbmjJUvxTj5OLcOuGCUI0bomX" },
+        //     { time: "11:15 - 11:35h", title: "Proposta do PESOE 2026: Prioridades e Linhas estratégicas", "type": "Apresentação", "speaker": "DPC", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1_VOoogSmxpZ9KQGnOKjZbrPwM4Roe2Uv" },
+        //     { time: '11:35 - 12:05h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
+        //     { time: '12:05 - 12:25h', title: 'Prioridades de Moçambique na Agenda de Lusaka', type: 'Apresentação', speaker: 'DPC', description: '', fileUrl: "https://docs.google.com/presentation/d/1ypBPT1MjUq-MB-Z5QMEGuM8vh5VQeJeg/export/pptx" },
+        //     { time: '12:25 - 12:55h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
+        //     { time: '12:55 - 13:15h', title: 'Desafios e oportunidades para a sobrevivência materno infantil', type: 'Apresentação', speaker: 'DNSP', description: '', fileUrl: "https://drive.google.com/uc?export=download&id=1V8kM0jUdddfgRGeXjk6Mw5xjFNBT_2vv" },
+        //     { time: '13:15 - 13:35h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },           
+        //     { time: '13:35 - 13:55h', title: 'Estratégia de integração das brigadas móveis na província ', type: 'Apresentação', speaker: 'Província de Tete', description: '', fileUrl: "https://drive.google.com/uc?export=download&id=1WVhFBy5wIZBOmpji4Ecyphi83LtVpXdt" },   
+        //     { time: '13:55 - 14:10h', title: 'Experiência da digitalização do Hospital de Mavalane', type: 'Apresentação', speaker: 'Cidade de Maputo', description: '', fileUrl: "https://drive.google.com/uc?export=download&id=1uNCjxMssVE_s7naRXJHC28oy7thSC5Hb" },
+        //     { time: '14:10 - 14:25h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
+        //     { time: '14:25 - 15:25h', title: 'Pausa para o almoço', type: 'Intervalo', speaker: '', description: '' }, 
+        //     { time: '15:25 - 15:35h', title: 'Momento cultural', type: 'Cultural', speaker: 'Grupo Cultural', description: '' },
+        //     { time: '15:35 - 15:55h', title: 'Leitura do Comunicado final', type: 'Leitura', speaker: 'Secretariado', description: '' },
+        //     { time: '15:55 - 16:15h', title: 'Discurso de encerramento', type: 'Discurso', speaker: 'S. Excia o Ministro', description: '' },
+        //     { time: '16:15', title: 'Fim do evento', type: 'Encerramento', speaker: '', description: '' }
+        // ]
     }
 };
 
