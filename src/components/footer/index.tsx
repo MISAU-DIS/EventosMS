@@ -32,6 +32,13 @@ export default function Footer() {
                     >
                         Política de Privacidade
                     </Link>
+                    <Link
+                    
+                        href="/Login"
+                        className="text-gray-400 hover:underline mt-2 block"
+                    >
+                        Entrar
+                    </Link>
                 </div>
             </footer>
 
