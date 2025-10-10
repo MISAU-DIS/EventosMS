@@ -149,22 +149,19 @@ const agendaData: AgendaData = {
             { time: "10:55 - 11:15h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
             { time: "11:15 - 11:45h", title: "Balanço do desempenho do sector 2024 e Primeiro semestre 2025 (áreas programáticas)", "type": "Balanço", "speaker": "DPC", "description": "Áreas programáticas", fileUrl: "https://drive.google.com/uc?export=download&id=13EjrtJWCHzh0ddWWNLASmWogZ-QFwtYk" },
             { time: "11:45 - 12:15h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
-            { time: "12:15 - 12:55h", title: "Balanço do desempenho do ano 2024 e Primeiro semestre 2025", "type": "Balanço", "speaker": "DAF", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1AQWqArEA7rU_bT1wBqZI584vK0dwldUt" },
+            { time: "12:15 - 12:55h", title: "Balanço do desempenho do ano 2024 e Primeiro semestre 2025", "type": "Balanço", "speaker": "DAF", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=17ckbpcoM5vuFwyEChTve4C11BJ2TiPnD" },
+            { time: "12:55 - 12:55h", title: "Balanço do desempenho do ano 2024 e Primeiro semestre 2025", "type": "Balanço", "speaker": "DNFPS", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1gc-hhcB9tOIBtx8MezJHtJWs2rgy01xM" },
             { time: "12:55 - 13:25h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
             { time: "13:25 - 14:20h", title: "Pausa para o almoço", "type": "Intervalo", "speaker": "", "description": "" },
-            { time: "14:20 - 14:40h", title: "Balanço do desempenho do ano 2024 e primeiro semestre 2025", "type": "Balanço", "speaker": "ANARME", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1Ci3Mq0Lm6VHdY_eQSnoVKZoUzG_-OWmc" },
+            { time: "14:20 - 14:40h", title: "Balanço do desempenho do ano 2024 e primeiro semestre 2025", "type": "Balanço", "speaker": "ANARME", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1CtnKxAO06CPSk22qsI-Nk1sR6fpH92Kt" },
             { time: "14:40 - 15:00h", title: "Balanço do desempenho do ano 2024 e primeiro semestre 2025", "type": "Balanço", "speaker": "INS", "description": "" },
             { time: "15:00 - 15:30h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
             { time: "15:30 - 15:50h", title: "Balanço do desempenho do ano 2024 e Primeiro semestre 2025", "type": "Balanço", "speaker": "DRH", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1o-pasde3tOUdf2RstSRDl9AKozdmtBH5" },
             { time: "15:50 - 16:10h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
-            { time: "16:10 - 16:30h", title: "Balanço do desempenho do ano 2024 e Primeiro semestre 2025", "type": "Balanço", "speaker": "DNFPS", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1gc-hhcB9tOIBtx8MezJHtJWs2rgy01xM" },
-            { time: "16:30 - 16:50h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
-            { time: "16:50 - 17:10h", title: "Regulamento do Subsistema de Planificação de Pessoal (SPP), Regulamento do Subsistema de Administração de Pessoal (SAP) e Regulamento do Subsistema de Desenvolvimento Profissional na Administração  Pública (SDPAP)", type: "Balanço", speaker: "DPS", description: ""},
-            { time: "17:10 - 17:30h", title: "Discussão", type: "Discussão", speaker: "S. Excia Ministro", description: "" },        
-            // { time: "12:55 - 13:25h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
-            // { time: "16:10 - 16:30h", title: "Estratégia Nacional de Desenvolvimento (ENDE)", "type": "Apresentação", "speaker": "MPD", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1LYYqKi7n6J_M8XeQEYsDVfU8qpSvfmE9" },
-            // { time: "16:30 - 16:50h", title: "Proposta do PESOE 2026: Prioridades e Linhas estratégicas", "type": "Apresentação", "speaker": "DPC", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1_VOoogSmxpZ9KQGnOKjZbrPwM4Roe2Uv" },
-            { time: "17:30h", title: "Fim dos trabalhos", type: "Encerramento", speaker: "", "description": "" }
+            { time: "16:10 - 16:30h", title: "Estratégia Nacional de Desenvolvimento (ENDE)", "type": "Apresentação", "speaker": "MPD", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1lLxMMZxYbmjJUvxTj5OLcOuGCUI0bomX" },
+            { time: "16:30 - 16:50h", title: "Proposta do PESOE 2026: Prioridades e Linhas estratégicas", "type": "Apresentação", "speaker": "DPC", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1_VOoogSmxpZ9KQGnOKjZbrPwM4Roe2Uv" },
+            { time: "16:50 - 17:20h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
+            { time: "17:20h", title: "Fim dos trabalhos", type: "Encerramento", speaker: "", "description": "" }
         ]
     },
     dia4: {
@@ -172,12 +169,10 @@ const agendaData: AgendaData = {
         theme: '11 de Outubro de 2025',
         sessions: [
             { time: '08:30 - 09:00h', title: 'Leitura e aprovação da Síntese do 1º dia', type: 'Leitura', speaker: 'Secretariado', description: '' },
-            { time: '09:00 - 09:05h', title: 'Painel I: Mecanismo de aumento do Financiamento do Sector de Saúde', type: 'Sessão', speaker: 'Dr. José Manuel', description: 'Apresentador do painel' },
+            { time: '09:00 - 09:05h', title: 'Painel I: Mecanismo de aumento do Financiamento do Sector de Saúde', type: 'Sessão', speaker: 'José Manuel', description: 'Apresentador do painel' },
             { time: '09:05 - 09:20h', title: 'Painel I: Mecanismo de aumento do Financiamento do Sector de Saúde', type: 'Apresentação', speaker: 'DPC', description: 'Apresentação do tema' },
-            { time: '09:20 - 09:45h', title: 'Painel I: Mecanismo de aumento do Financiamento do Sector de Saúde', type: 'Intervenções', speaker: 'Nelida Cabral, Daniel Chemane, Salomão Lourenço e Munira Abodou', description: 'Intervenções' },
-            { time: '09:45 - 10:40h', title: 'Considerações finais', type: 'Debate', speaker: 'S. Excia o Ministro', description: '' },
-
-            
+            { time: '09:20 - 09:45h', title: 'Painel I: Mecanismo de aumento do Financiamento do Sector de Saúde', type: 'Apresentação', speaker: 'Nelida Cabral, Daniel Chemane, Salomão Lourenço e Munira Abodou', description: 'Intervenções' },
+            { time: '09:45 - 10:40h', title: 'Debate', type: 'Debate', speaker: 'S. Excia o Ministro', description: '' },
             { time: '10:40 - 11:00h', title: 'Pausa para o café', type: 'Intervalo', speaker: '', description: '' },
             { time: '11:00 - 11:20h', title: 'Prioridades de Moçambique na Agenda de Lusaka', type: 'Apresentação', speaker: 'DPC', description: '', fileUrl: "https://drive.google.com/uc?export=download&id=1Q0UlGe3KDGtPLSziPtMF4hNv-BPsVH7a" },
             { time: '11:20 - 11:50h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
