@@ -153,7 +153,7 @@ const agendaData: AgendaData = {
             { time: "12:55 - 12:55h", title: "Balanço do desempenho do ano 2024 e Primeiro semestre 2025", "type": "Balanço", "speaker": "DNFPS", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1gc-hhcB9tOIBtx8MezJHtJWs2rgy01xM" },
             { time: "12:55 - 13:25h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
             { time: "13:25 - 14:20h", title: "Pausa para o almoço", "type": "Intervalo", "speaker": "", "description": "" },
-            { time: "14:20 - 14:40h", title: "Balanço do desempenho do ano 2024 e primeiro semestre 2025", "type": "Balanço", "speaker": "ANARME", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1Ci3Mq0Lm6VHdY_eQSnoVKZoUzG_-OWmc" },
+            { time: "14:20 - 14:40h", title: "Balanço do desempenho do ano 2024 e primeiro semestre 2025", "type": "Balanço", "speaker": "ANARME", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1CtnKxAO06CPSk22qsI-Nk1sR6fpH92Kt" },
             { time: "14:40 - 15:00h", title: "Balanço do desempenho do ano 2024 e primeiro semestre 2025", "type": "Balanço", "speaker": "INS", "description": "" },
             { time: "15:00 - 15:30h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
             { time: "15:30 - 15:50h", title: "Balanço do desempenho do ano 2024 e Primeiro semestre 2025", "type": "Balanço", "speaker": "DRH", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1o-pasde3tOUdf2RstSRDl9AKozdmtBH5" },
