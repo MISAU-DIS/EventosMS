@@ -1,11 +1,31 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, MapPin } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const AgendaTemas = () => {
-  const [selectedDay, setSelectedDay] = useState<DiaKey>("dia1");
-  type DiaKey = "dia1" | "dia2" | "dia3" | "dia4";
+  const [selectedDay, setSelectedDay] = useState<string>("dia1");
+  // type DiaKey = "dia1" | "dia2" | "dia3" | "dia4";
+  useEffect(() => {
+    const today = new Date();
+    const day = today.getDate();
+    const month = today.getMonth() + 1; // meses começam em 0
+  
+    // Mapeamento das datas do programa
+    const dayMapping: Record<string, string> = {
+      "8-10": "dia1", // 8 de outubro → Dia 1
+      "9-10": "dia2", // 9 de outubro → Dia 2
+      "10-10": "dia3", // 10 de outubro → Dia 3
+      "11-10": "dia4", // 11 de outubro → Dia 4
+    };
+  
+    const key = `${day}-${month}`;
+    const targetDay = dayMapping[key];
+  
+    if (targetDay) {
+      setSelectedDay(targetDay);
+    }
+  }, []);
 
   interface Dia {
     data: string;
@@ -38,7 +58,7 @@ const AgendaTemas = () => {
   //     </div>
   // </div>
 
-  const agendaData: Record<DiaKey, Dia> = {
+  const agendaData: Record<string, Dia> = {
     dia1: {
       data: "08 de Outubro de 2025",
       tema: "XIII Conselho Hospitalar",
@@ -91,7 +111,7 @@ const AgendaTemas = () => {
     },
   };
 
-  const dias = Object.keys(agendaData) as DiaKey[];
+  const dias = Object.keys(agendaData) as string[];
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50">
