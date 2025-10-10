@@ -6,20 +6,20 @@ import emailjs from '@emailjs/browser';
 import toast from 'react-hot-toast';
 
 export default function Contacto(): React.ReactElement {
-  const faqs = [
-    {
-      question: 'Como posso participar do próximo evento do MISAU?',
-      answer: 'Você pode se inscrever através do nosso site oficial ou entrar em contato diretamente conosco através do formulário abaixo.'
-    },
-    {
-      question: 'Os eventos são gratuitos?',
-      answer: 'A maioria dos nossos eventos é gratuita, mas alguns podem exigir inscrição paga. Verifique os detalhes na página do evento.'
-    },
-    {
-      question: 'Posso levar acompanhantes?',
-      answer: 'Sim, desde que todos estejam devidamente inscritos e a lotação do local permita.'
-    }
-  ];
+  // const faqs = [
+  //   {
+  //     question: 'Como posso participar do próximo evento do MISAU?',
+  //     answer: 'Você pode se inscrever através do nosso site oficial ou entrar em contato diretamente conosco através do formulário abaixo.'
+  //   },
+  //   {
+  //     question: 'Os eventos são gratuitos?',
+  //     answer: 'A maioria dos nossos eventos é gratuita, mas alguns podem exigir inscrição paga. Verifique os detalhes na página do evento.'
+  //   },
+  //   {
+  //     question: 'Posso levar acompanhantes?',
+  //     answer: 'Sim, desde que todos estejam devidamente inscritos e a lotação do local permita.'
+  //   }
+  // ];
 
   // const [openFAQ, setOpenFAQ] = useState<number | null>(null);
   const [sending, setSending] = useState(false);
