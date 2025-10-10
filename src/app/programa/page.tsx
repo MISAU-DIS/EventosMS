@@ -158,7 +158,7 @@ const agendaData: AgendaData = {
             { time: "15:00 - 15:30h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
             { time: "15:30 - 15:50h", title: "Balanço do desempenho do ano 2024 e Primeiro semestre 2025", "type": "Balanço", "speaker": "DRH", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1o-pasde3tOUdf2RstSRDl9AKozdmtBH5" },
             { time: "15:50 - 16:10h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
-            { time: '16:10 - 16:30h', title: 'Regulamento do Subsistema de Planificação de Pessoal (SPP), Regulamento do Subsistema de Administração de Pessoal (SAP) e Regulamento do Subsistema de Desenvolvimento Profissional na Administração  Pública (SDPAP)', type: 'Apresentação', speaker: 'MAEFP', description: '' },
+            { time: '16:10 - 16:30h', title: 'Regulamento do Subsistema de Planificação de Pessoal (SPP), Regulamento do Subsistema de Administração de Pessoal (SAP) e Regulamento do Subsistema de Desenvolvimento Profissional na Administração  Pública (SDPAP)', type: 'Apresentação', speaker: 'MAEFP', description: '', fileUrl: "https://docs.google.com/presentation/d/1jBLL96zAJyHkTrNPRVt0Y496BgMky3sB/export/pdf" },
             { time: "16:30 - 16:50h", title: "Discussão", "type": "Discussão", "speaker": "S. Excia Ministro", "description": "" },
             { time: "16:50h", title: "Fim dos trabalhos", type: "Encerramento", speaker: "", "description": "" }
         ]
