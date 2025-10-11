@@ -170,7 +170,7 @@ const agendaData: AgendaData = {
             { time: '08:30 - 09:00h', title: 'Leitura e aprovação da Síntese do 1º dia', type: 'Leitura', speaker: 'Secretariado', description: '' },
             { time: '09:00 - 10:40h', title: 'Painel I: Mecanismo de aumento do Financiamento do Sector de Saúde', type: 'Sessão', speaker: 'José Manuel, DPC, Nelida Cabral, Daniel Chemane, Salomão Lourenço e Munira Abodou', description: 'Apresentador do painel, Apresentação do tema, Intervenções, Considerações finais' },
             { time: '10:40 - 11:00h', title: 'Pausa para o café', type: 'Intervalo', speaker: '', description: '' },
-            { time: "11:00 - 1:15h", title: "Estratégia Nacional de Desenvolvimento (ENDE)", "type": "Apresentação", "speaker": "MPD", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1lLxMMZxYbmjJUvxTj5OLcOuGCUI0bomX" },
+            { time: "11:00 - 1:15h", title: "Estratégia Nacional de Desenvolvimento (ENDE)", "type": "Apresentação", "speaker": "MPD", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1jVBJHC7WaxHSZoiW6ws1yctp3aHW6fwe" },
             { time: "11:15 - 11:35h", title: "Proposta do PESOE 2026: Prioridades e Linhas estratégicas", "type": "Apresentação", "speaker": "DPC", "description": "", fileUrl: "https://drive.google.com/uc?export=download&id=1_VOoogSmxpZ9KQGnOKjZbrPwM4Roe2Uv" },
             { time: '11:35 - 12:05h', title: 'Discussão', type: 'Discussão', speaker: 'S. Excia Ministro', description: '' },
             { time: '12:05 - 12:25h', title: 'Prioridades de Moçambique na Agenda de Lusaka', type: 'Apresentação', speaker: 'DPC', description: '', fileUrl: "https://docs.google.com/presentation/d/1ypBPT1MjUq-MB-Z5QMEGuM8vh5VQeJeg/export/pptx" },
