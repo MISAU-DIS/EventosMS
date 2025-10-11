@@ -110,6 +110,12 @@ export default function Home() {
             >
               Ver Programa
             </Link>
+            <Link
+              href="https://docs.google.com/forms/d/e/1FAIpQLScp4lP7ToBXEzY1yAayCr4Vt2lUe1A1OEy1KEN2KnlWOlPSRA/viewform?usp=dialog"
+              className="bg-white border border-green-600 text-green-700 hover:bg-green-50 px-6 py-3 rounded-full transition"
+            >
+              Ver Programa
+            </Link>
           </motion.div>
         </div>
 
