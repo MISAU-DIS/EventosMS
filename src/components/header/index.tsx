@@ -139,7 +139,7 @@ export default function Header() {
                 Início
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link
                 href="/agenda"
                 className="block py-3 px-4 text-base font-medium hover:bg-blue-600/50 hover:text-blue-200 rounded-lg transition-all duration-200"
@@ -147,7 +147,7 @@ export default function Header() {
               >
                 Agenda
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link
                 href="/programa"

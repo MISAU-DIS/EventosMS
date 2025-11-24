@@ -158,9 +158,7 @@ export default function Home() {
                   Planificação e Cooperação (DPC), realiza a XVIII Reunião
                   Nacional de Planificação (RNP), visando discutir, harmonizar e
                   encontrar consensos sobre os principais desafios do Sector nas
-                  áreas de Planificação. Este evento sucede o Conselho
-                  Coordenador da Saúde, órgão competente para a tomada de
-                  decisão sobre os temas discutidos. Estando o sector no
+                  áreas de Planificação. Estando o sector no
                   primeiro ano de implementação do Programa Quinquenal do
                   Governo (PQG) 2025-2029, torna-se crucial garantir o
                   alinhamento das intervenções do sector e a unicidade do
