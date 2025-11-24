@@ -116,6 +116,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "DPC/DPES - Egidio/Atija",
           description: "",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1RwdzTG-cQV9PfCvNBVTshPLQK-xJLGbz/export/pptx",
         },
         {
           time: "09:50 - 10:05",
@@ -126,8 +128,8 @@ const Programa = () => {
         },
         {
           time: "10:05 - 10:35",
-          title: "Continuação da discussão",
-          type: "Discussão",
+          title: "Pausa para café",
+          type: "Intervalo",
           speaker: "Todos",
           description: "",
         },
@@ -138,6 +140,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "DPC/DPES - Amândio",
           description: "",
+          fileUrl:
+            "https://drive.google.com/uc?export=download&id=16PLNPBdhg4NH9a7qNTEl2TeG6A8-XxiA",
         },
         {
           time: "10:50 - 11:05",
@@ -153,6 +157,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "DPC/DPES - Sitão",
           description: "Prioridades nacionais - Nova matriz do PESOE Interno",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1O5ZFKyAxScemhbMK3b9Q9vSB3jHCbmoi/export/pptx",
         },
         {
           time: "11:20 - 11:35",
@@ -167,6 +173,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "DPC/DPES - Luís",
           description: "",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1hrLOqts3FUrJTITeWhW4aChwk8_0Vg4l/export/pptx",
         },
         {
           time: "11:50 - 12:05",
@@ -183,6 +191,8 @@ const Programa = () => {
           speaker: "DPC/DPES - Amândio",
           description:
             "Análise de duplicação e harmonização das actividades de planificação e orçamento",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1YRA3Bvjk_81wSu9ctbLi-ny3Db7KNqZ7/export/pptx",
         },
         {
           time: "13:00 - 14:00",
