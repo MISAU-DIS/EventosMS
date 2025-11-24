@@ -629,6 +629,18 @@ const Programa = () => {
     return { number: dayNumber, total: Object.keys(agendaData).length };
   };
 
+  // Função para obter a data formatada para cada dia
+  const getDayDate = (dayKey: string) => {
+    const dates: Record<string, string> = {
+      dia1: "24",
+      dia2: "25",
+      dia3: "26",
+      dia4: "27",
+      dia5: "28",
+    };
+    return dates[dayKey] || "";
+  };
+
   return (
     <>
       <title>Programa - XVIII RNP MISAU</title>
@@ -704,12 +716,13 @@ const Programa = () => {
         </div>
 
         <div className="container mx-auto px-4 py-8">
-          {/* Navegação por Dias */}
+          {/* Navegação por Dias - Atualizada com datas reais */}
           <div className="mb-8">
             <div className="bg-white rounded-2xl shadow-lg p-2 max-w-3xl mx-auto">
               <div className="grid grid-cols-5 gap-2">
                 {Object.keys(agendaData).map((day, index) => {
                   const isActive = selectedDay === day;
+                  const dayDate = getDayDate(day);
                   return (
                     <motion.button
                       key={day}
@@ -722,8 +735,8 @@ const Programa = () => {
                           : "bg-gray-50 text-gray-600 hover:bg-blue-50 hover:text-blue-600"
                       }`}
                     >
-                      <div className="text-xs opacity-80 mb-1">Dia</div>
-                      <div className="text-lg font-bold">{index + 1}</div>
+                      <div className="text-xs opacity-80 mb-1">Nov</div>
+                      <div className="text-lg font-bold">{dayDate}</div>
                     </motion.button>
                   );
                 })}
