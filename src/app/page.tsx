@@ -142,27 +142,36 @@ export default function Home() {
         {/* Sobre o evento */}
         <section className="py-16 px-4 bg-white">
           <div className="container mx-auto max-w-6xl">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, y: -30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true, amount: 0.2 }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-3xl sm:text-4xl font-bold text-blue-700">
+                Sobre o Evento
+              </h2>
+            </motion.div>
+
+            <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0.2 }}
                 className="text-center lg:text-left"
               >
-                <h2 className="text-3xl sm:text-4xl font-bold text-blue-700 mb-6">
-                  Sobre o Evento
-                </h2>
-                <p className="text-gray-700 text-lg mb-6 leading-relaxed text-justify">
+                <p className="text-gray-700 text-xl mb-6 leading-relaxed text-justify">
                   O Ministério da Saúde (MISAU), através da Direcção de
-                  Planificação e Cooperação (DPC), realiza a XVIII Reunião
-                  Nacional de Planificação (RNP), visando discutir, harmonizar e
-                  encontrar consensos sobre os principais desafios do Sector nas
-                  áreas de Planificação. Estando o sector no
-                  primeiro ano de implementação do Programa Quinquenal do
-                  Governo (PQG) 2025-2029, torna-se crucial garantir o
-                  alinhamento das intervenções do sector e a unicidade do
-                  Serviço Nacional de Saúde.
+                  Planificação e Cooperação (DPC), realiza a{" "}
+                  <strong>XVIII Reunião Nacional de Planificação (RNP)</strong>,
+                  visando discutir, harmonizar e encontrar consensos sobre os
+                  principais desafios do Sector nas áreas de Planificação.
+                  Estando o sector no primeiro ano de implementação do Programa
+                  Quinquenal do Governo (PQG) 2025-2029, torna-se crucial
+                  garantir o alinhamento das intervenções do sector e a
+                  unicidade do Serviço Nacional de Saúde.
                 </p>
               </motion.div>
 
@@ -170,16 +179,53 @@ export default function Home() {
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0.2 }}
                 className="relative"
               >
                 <Image
-                  src="isc.svg"
+                  src="RNP_1.svg"
                   alt="Profissionais de saúde em reunião de planificação"
-                  width={500}
-                  height={350}
+                  width={450}
+                  height={300}
                   className="rounded-xl shadow-lg w-full h-auto"
                 />
+              </motion.div>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true, amount: 0.2 }}
+                className="relative order-2 lg:order-1"
+              >
+                <Image
+                  src="RNP_2.svg"
+                  alt="Imagem do evento"
+                  width={450}
+                  height={300}
+                  className="rounded-xl shadow-lg w-full h-auto"
+                />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true, amount: 0.2 }}
+                className="text-center lg:text-left order-1 lg:order-2"
+              >
+                <p className="text-gray-700 text-xl mb-6 leading-relaxed text-justify">
+                  A Reunião Nacional de Planificação é uma plataforma essencial
+                  para o envolvimento de todas as partes interessadas, incluindo
+                  a sociedade civil e parceiros internacionais. O objetivo é
+                  fortalecer a capacidade do MISAU de responder aos desafios de
+                  saúde pública, garantindo que os planos operacionais estejam
+                  perfeitamente{" "}
+                  <strong>alinhados com as metas nacionais</strong> e os
+                  Objetivos de Desenvolvimento Sustentável (ODS).
+                </p>
               </motion.div>
             </div>
           </div>
