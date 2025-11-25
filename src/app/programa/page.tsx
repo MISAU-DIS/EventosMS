@@ -116,6 +116,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "DPC/DPES - Egidio/Atija",
           description: "",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1RwdzTG-cQV9PfCvNBVTshPLQK-xJLGbz/export/pptx",
         },
         {
           time: "09:50 - 10:05",
@@ -126,8 +128,8 @@ const Programa = () => {
         },
         {
           time: "10:05 - 10:35",
-          title: "Continuação da discussão",
-          type: "Discussão",
+          title: "Pausa para café",
+          type: "Intervalo",
           speaker: "Todos",
           description: "",
         },
@@ -138,6 +140,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "DPC/DPES - Amândio",
           description: "",
+          fileUrl:
+            "https://drive.google.com/uc?export=download&id=16PLNPBdhg4NH9a7qNTEl2TeG6A8-XxiA",
         },
         {
           time: "10:50 - 11:05",
@@ -153,6 +157,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "DPC/DPES - Sitão",
           description: "Prioridades nacionais - Nova matriz do PESOE Interno",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1hrLOqts3FUrJTITeWhW4aChwk8_0Vg4l/export/pptx",
         },
         {
           time: "11:20 - 11:35",
@@ -167,6 +173,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "DPC/DPES - Luís",
           description: "",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1hrLOqts3FUrJTITeWhW4aChwk8_0Vg4l/export/pptx",
         },
         {
           time: "11:50 - 12:05",
@@ -183,6 +191,8 @@ const Programa = () => {
           speaker: "DPC/DPES - Amândio",
           description:
             "Análise de duplicação e harmonização das actividades de planificação e orçamento",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1YRA3Bvjk_81wSu9ctbLi-ny3Db7KNqZ7/export/pptx",
         },
         {
           time: "13:00 - 14:00",
@@ -261,6 +271,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "DPC/DPES - Narguice",
           description: "",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1W45EpKhaqcHEsx_RWxWCGxaYYTWsQvXt/export/pptx",
         },
         {
           time: "11:15 - 11:30",
@@ -299,6 +311,8 @@ const Programa = () => {
           speaker: "DPC/M&A - Chadreque",
           description:
             "Metas e indicadores de desempenho - Métricas - harmonização de indicadores",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1nHVreImq6KqJnBI6sLEus9mXNIbnQvYJ/export/pptx",
         },
         {
           time: "14:30 - 15:00",
@@ -619,6 +633,18 @@ const Programa = () => {
     return { number: dayNumber, total: Object.keys(agendaData).length };
   };
 
+  // Função para obter a data formatada para cada dia
+  const getDayDate = (dayKey: string) => {
+    const dates: Record<string, string> = {
+      dia1: "24",
+      dia2: "25",
+      dia3: "26",
+      dia4: "27",
+      dia5: "28",
+    };
+    return dates[dayKey] || "";
+  };
+
   return (
     <>
       <title>Programa - XVIII RNP MISAU</title>
@@ -694,12 +720,13 @@ const Programa = () => {
         </div>
 
         <div className="container mx-auto px-4 py-8">
-          {/* Navegação por Dias */}
+          {/* Navegação por Dias - Atualizada com datas reais */}
           <div className="mb-8">
             <div className="bg-white rounded-2xl shadow-lg p-2 max-w-3xl mx-auto">
               <div className="grid grid-cols-5 gap-2">
                 {Object.keys(agendaData).map((day, index) => {
                   const isActive = selectedDay === day;
+                  const dayDate = getDayDate(day);
                   return (
                     <motion.button
                       key={day}
@@ -712,8 +739,8 @@ const Programa = () => {
                           : "bg-gray-50 text-gray-600 hover:bg-blue-50 hover:text-blue-600"
                       }`}
                     >
-                      <div className="text-xs opacity-80 mb-1">Dia</div>
-                      <div className="text-lg font-bold">{index + 1}</div>
+                      <div className="text-xs opacity-80 mb-1">Nov</div>
+                      <div className="text-lg font-bold">{dayDate}</div>
                     </motion.button>
                   );
                 })}

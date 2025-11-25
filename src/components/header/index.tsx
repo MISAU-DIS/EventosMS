@@ -60,13 +60,13 @@ export default function Header() {
               </Link>
             </li>
             <li>
-              <Link
+              {/* <Link
                 href="/agenda"
                 className="relative py-2 px-1 hover:text-blue-200 transition-all duration-300 group"
               >
                 Agenda
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-200 transition-all duration-300 group-hover:w-full"></span>
-              </Link>
+              </Link> */}
             </li>
             <li>
               <Link
@@ -139,7 +139,7 @@ export default function Header() {
                 Início
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link
                 href="/agenda"
                 className="block py-3 px-4 text-base font-medium hover:bg-blue-600/50 hover:text-blue-200 rounded-lg transition-all duration-200"
@@ -147,7 +147,7 @@ export default function Header() {
               >
                 Agenda
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link
                 href="/programa"
