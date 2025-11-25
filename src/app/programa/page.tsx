@@ -272,7 +272,7 @@ const Programa = () => {
           speaker: "DPC/DPES - Narguice",
           description: "",
           fileUrl:
-            "https://docs.google.com/presentation/d/1W45EpKhaqcHEsx_RWxWCGxaYYTWsQvXt/export/pptx",
+            "https://docs.google.com/presentation/d/1CNgWLf_LuAryKU641PPqvGrrT2Z82tZD/export/pptx",
         },
         {
           time: "11:15 - 11:30",
@@ -327,6 +327,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "DPC/DIS - Edson",
           description: "",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1nqJEB62K417OYl_cvdK0sWWmGQ022e79/export/pptx",
         },
         {
           time: "15:15 - 15:30",
