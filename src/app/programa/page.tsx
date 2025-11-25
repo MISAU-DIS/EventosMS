@@ -327,6 +327,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "DPC/DIS - Edson",
           description: "",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1nqJEB62K417OYl_cvdK0sWWmGQ022e79/export/pptx",
         },
         {
           time: "15:15 - 15:30",
