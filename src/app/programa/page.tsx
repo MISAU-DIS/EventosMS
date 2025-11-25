@@ -311,6 +311,8 @@ const Programa = () => {
           speaker: "DPC/M&A - Chadreque",
           description:
             "Metas e indicadores de desempenho - Métricas - harmonização de indicadores",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1nHVreImq6KqJnBI6sLEus9mXNIbnQvYJ/export/pptx",
         },
         {
           time: "14:30 - 15:00",
