@@ -271,6 +271,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "DPC/DPES - Narguice",
           description: "",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1W45EpKhaqcHEsx_RWxWCGxaYYTWsQvXt/export/pptx",
         },
         {
           time: "11:15 - 11:30",
