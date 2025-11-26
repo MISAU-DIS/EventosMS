@@ -475,6 +475,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "Consultor - Elias Mangujo",
           description: "",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1xKvEY1s3WsIAcVcG3p8QIx7sFFrHZ9hf/export/pptx",
         },
         {
           time: "15:30 - 15:45",
