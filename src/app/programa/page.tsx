@@ -518,6 +518,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "DPC/DM&A - Chadreque",
           description: "",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1oV3YSSyIX7ccjjPiYHCO0I-PLTIjlzbM/export/pptx",
         },
         {
           time: "09:15 - 09:30",
@@ -533,6 +535,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "DPC/DPES - Sitão",
           description: "",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1xPUWFlCMydCCH62w_x5_r5v31j1TqRaU/export/pptx",
         },
         {
           time: "09:45 - 10:00",
@@ -548,6 +552,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "DPC/DPES - Amândio",
           description: "",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1Koap8GgU_W_LFGBGFOYxxzDCqFuD397u/export/pptx",
         },
         {
           time: "10:15 - 10:45",
@@ -584,6 +590,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "DIEH - Mendonça",
           description: "",
+          fileUrl:
+            "https://docs.google.com/presentation/d/12_qGfd3MZZrnX8LNLvoSoWkb8LYNuGwB/export/pptx",
         },
         {
           time: "14:05 - 16:05",
