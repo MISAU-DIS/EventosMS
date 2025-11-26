@@ -385,6 +385,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "DPC/M&A - Chadreque",
           description: "",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1S5mZmznFxjnWmu5-NL0uKZ3cmRMynsIW/export/pptx",
         },
         {
           time: "09:45 - 10:00",
@@ -406,6 +408,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "DPC/DPES - Egidio/Atija",
           description: "",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1XhUFx8Xpefa14lsW5_xvXLNS_cS5LMZU/export/pptx",
         },
         {
           time: "11:30 - 11:45",
@@ -420,6 +424,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "DPC/DPES - Amândio",
           description: "",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1cNBOMfVJV2nfHvDEli4SPQw8XyrFy5wn/export/pptx",
         },
         {
           time: "12:15 - 12:45",
@@ -429,6 +435,8 @@ const Programa = () => {
           speaker: "DPC/M&A - Chadreque",
           description:
             "Metas e indicadores de desempenho - Métricas - harmonização de indicadores",
+          fileUrl:
+            "https://docs.google.com/presentation/d/19W9C8WEXQmRz2cSWRtwuY4xYst8fAkOQ/export/pptx",
         },
         {
           time: "12:45 - 13:15",
@@ -451,6 +459,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "DNSP/CSP - Olinda",
           description: "",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1xynSgkIpbZsaGoa4vJDJxJcLh0jpFW4C/export/pptx",
         },
         {
           time: "14:30 - 14:45",
