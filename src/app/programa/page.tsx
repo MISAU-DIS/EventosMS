@@ -655,6 +655,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "DPC/DIS - Edson",
           description: "",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1pxK4qgx_TGCql8avymKzEA45paua82-_/export/pptx",
         },
         {
           time: "10:05 - 10:20",
@@ -669,6 +671,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "DPC/DIS - Edson",
           description: "",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1wJXqZ_zxGJU9ZWHdrLV1TMVwqFxhm9mw/export/pptx",
         },
         {
           time: "10:40 - 11:00",
@@ -721,6 +725,8 @@ const Programa = () => {
           type: "Apresentação",
           speaker: "DPC - Dr. Candrinho",
           description: "",
+          fileUrl:
+            "https://docs.google.com/presentation/d/1Ym_t0Hn7CWPJW9cuU-fa15JwAzvvwzfx/export/pptx",
         },
         {
           time: "13:15 - 13:30",
