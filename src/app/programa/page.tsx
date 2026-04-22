@@ -607,7 +607,13 @@ const Programa = () => {
           {/* Navegação por Dias - Atualizada com datas reais */}
           <div className="mb-8">
             <div className="bg-white rounded-2xl shadow-lg p-2 max-w-3xl mx-auto">
-              <div className="grid grid-cols-5 gap-2">
+              <div
+                className="gap-2"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: `repeat(${Object.keys(agendaData).length}, minmax(0, 1fr))`,
+                }}
+              >
                 {Object.keys(agendaData).map((day, index) => {
                   const isActive = selectedDay === day;
                   const dayDate = getDayDate(day);
@@ -623,7 +629,7 @@ const Programa = () => {
                           : "bg-gray-50 text-gray-600 hover:bg-blue-50 hover:text-blue-600"
                       }`}
                     >
-                      <div className="text-xs opacity-80 mb-1">Nov</div>
+                      <div className="text-xs opacity-80 mb-1">Maio</div>
                       <div className="text-lg font-bold">{dayDate}</div>
                     </motion.button>
                   );
