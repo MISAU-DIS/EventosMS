@@ -33,11 +33,9 @@ const Programa = () => {
 
     // Mapeamento das datas do programa - RNP 2025
     const dayMapping: Record<string, string> = {
-      "24-11": "dia1", // 24 de novembro → Dia 1
-      "25-11": "dia2", // 25 de novembro → Dia 2
-      "26-11": "dia3", // 26 de novembro → Dia 3
-      "27-11": "dia4", // 27 de novembro → Dia 4
-      "28-11": "dia5", // 28 de novembro → Dia 5
+      "06-05": "dia1",
+      "07-05": "dia2",
+      "08-05": "dia3",
     };
 
     const key = `${day}-${month}`;
@@ -79,8 +77,8 @@ const Programa = () => {
 
   const agendaData: AgendaData = {
     dia1: {
-      date: "XVIII Reunião Nacional de Planificação",
-      theme: "24 de Novembro de 2025 - Encontro Técnico",
+      date: "A Transição do Financiamento em Moçambique",
+      theme: "06 de Maio de 2026",
       sessions: [
         {
           time: "08:30 - 09:00",
@@ -218,8 +216,8 @@ const Programa = () => {
       ],
     },
     dia2: {
-      date: "XVIII Reunião Nacional de Planificação",
-      theme: "25 de Novembro de 2025 - Encontro Técnico",
+      date: "A Transição do Financiamento em Moçambique",
+      theme: "07 de Maio de 2026",
       sessions: [
         {
           time: "08:30 - 08:45",
@@ -347,8 +345,8 @@ const Programa = () => {
       ],
     },
     dia3: {
-      date: "XVIII Reunião Nacional de Planificação",
-      theme: "26 de Novembro de 2025 - Sessão Plenária",
+      date: "A Transição do Financiamento em Moçambique",
+      theme: "08 de Maio de 2026",
       sessions: [
         {
           time: "08:30 - 08:45",
@@ -492,263 +490,6 @@ const Programa = () => {
         },
       ],
     },
-    dia4: {
-      date: "XVIII Reunião Nacional de Planificação",
-      theme: "27 de Novembro de 2025 - Sessão Plenária",
-      sessions: [
-        {
-          time: "08:30 - 08:45",
-          title: "Leitura da Síntese do primeiro dia",
-          type: "Leitura",
-          speaker: "Secretariado",
-          description: "",
-        },
-        {
-          time: "08:45 - 09:00",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "09:00 - 09:15",
-          title: "Apresentação do PECS",
-          type: "Apresentação",
-          speaker: "DPC/DM&A - Chadreque",
-          description: "",
-        },
-        {
-          time: "09:15 - 09:30",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "09:30 - 09:45",
-          title:
-            "Abordagem de Único Plano, Único Orçamento, Única Monitoria e Avaliação",
-          type: "Apresentação",
-          speaker: "DPC/DPES - Sitão",
-          description: "",
-        },
-        {
-          time: "09:45 - 10:00",
-          title: "Debate",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "10:00 - 10:15",
-          title:
-            "Apresentação de metodologia prática para a desduplicação e harmonização das actividades e orçamento",
-          type: "Apresentação",
-          speaker: "DPC/DPES - Amândio",
-          description: "",
-        },
-        {
-          time: "10:15 - 10:45",
-          title: "Pausa para Café",
-          type: "Intervalo",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "10:45 - 13:05",
-          title:
-            "Esclarecimentos e apresentação dos resultados do exercício prático da desduplicação e harmonização das actividades e orçamento",
-          type: "Apresentação",
-          speaker: "DPC/DPES - Amândio",
-          description: "",
-        },
-        {
-          time: "10:45 - 13:05",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "13:05 - 14:05",
-          title: "Pausa para almoço",
-          type: "Intervalo",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "14:05 - 16:05",
-          title: "Apresentação do ponto de situação das obras do sector",
-          type: "Apresentação",
-          speaker: "DIEH - Mendonça",
-          description: "",
-        },
-        {
-          time: "14:05 - 16:05",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "16:05",
-          title: "Fim dos trabalhos do quarto dia",
-          type: "Encerramento",
-          speaker: "",
-          description: "",
-        },
-      ],
-    },
-    dia5: {
-      date: "XVIII Reunião Nacional de Planificação",
-      theme: "28 de Novembro de 2025 - Sessão de Encerramento",
-      sessions: [
-        {
-          time: "08:30 - 08:45",
-          title: "Leitura da Síntese do segundo dia",
-          type: "Leitura",
-          speaker: "Secretariado",
-          description: "",
-        },
-        {
-          time: "08:45 - 09:00",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "09:00 - 09:20",
-          title: "Apresentação das áreas com lacunas de financiamento",
-          type: "Apresentação",
-          speaker: "DPC/DPES",
-          description: "",
-        },
-        {
-          time: "09:20 - 09:35",
-          title: "Prioridades e acções estratégicas da Agenda Lusaka (IMS)",
-          type: "Apresentação",
-          speaker: "DPC/DPES - Amandio",
-          description:
-            "Fortalecimento da resiliência da cadeia de abastecimento da Central de Medicamentos e Artigos Médicos, Planificação e financiamento integrado a nível distrital, Fortalecimento da gestão e eficiência das finanças públicas",
-        },
-        {
-          time: "09:35 - 09:50",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "09:50 - 10:05",
-          title: "Plano de melhoria de qualidade de dados",
-          type: "Apresentação",
-          speaker: "DPC/DIS - Edson",
-          description: "",
-        },
-        {
-          time: "10:05 - 10:20",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "10:20 - 10:40",
-          title: "Estratégia de Saúde Digital",
-          type: "Apresentação",
-          speaker: "DPC/DIS - Edson",
-          description: "",
-        },
-        {
-          time: "10:40 - 11:00",
-          title: "Pausa para Café",
-          type: "Intervalo",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "11:00 - 11:20",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "11:20 - 12:15",
-          title:
-            "Níveis de Execução dos fundos de projectos sob gestão no MISAU",
-          type: "Apresentação",
-          speaker: "DPC - DCP",
-          description:
-            "Unidade de Gestão do Fundo Global, Unidade de Gestão do Banco Mundial, Unidade de Gestão do GAVI, Unidade de Gestão do CDC",
-        },
-        {
-          time: "11:20 - 12:15",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "12:15 - 12:45",
-          title:
-            "Apresentação das acções priorizadas no âmbito do novo acordo de apoio de Governo dos Estados Unidos para Governo Moçambique (G2G)",
-          type: "Apresentação",
-          speaker: "DPC/DPES - Dr. Candrinho",
-          description: "",
-        },
-        {
-          time: "12:15 - 12:45",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "12:45 - 13:15",
-          title: "Apresentação do GC8 do Fundo Global",
-          type: "Apresentação",
-          speaker: "DPC - Dr. Candrinho",
-          description: "",
-        },
-        {
-          time: "13:15 - 13:30",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "13:30 - 14:00",
-          title: "Leitura do comunicado final",
-          type: "Leitura",
-          speaker: "Secretariado",
-          description: "",
-        },
-        {
-          time: "14:00 - 14:30",
-          title: "Notas de encerramento",
-          type: "Discurso",
-          speaker: "Excelentíssimo Sr. Secretário Permanente da Saúde",
-          description: "",
-        },
-        {
-          time: "14:30 - 15:30",
-          title: "Almoço e fecho do evento",
-          type: "Intervalo",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "15:30",
-          title: "Fim dos trabalhos do quinto dia e do evento",
-          type: "Encerramento",
-          speaker: "",
-          description: "",
-        },
-      ],
-    },
   };
 
   const getSessionColor = (type: string): string => {
@@ -773,7 +514,7 @@ const Programa = () => {
   };
 
   const getDayInfo = (dayKey: string) => {
-    const dayNumbers = { dia1: 1, dia2: 2, dia3: 3, dia4: 4, dia5: 5 };
+    const dayNumbers = { dia1: 1, dia2: 2, dia3: 3 };
     const dayNumber = dayNumbers[dayKey as keyof typeof dayNumbers];
     return { number: dayNumber, total: Object.keys(agendaData).length };
   };
@@ -781,11 +522,9 @@ const Programa = () => {
   // Função para obter a data formatada para cada dia
   const getDayDate = (dayKey: string) => {
     const dates: Record<string, string> = {
-      dia1: "24",
-      dia2: "25",
-      dia3: "26",
-      dia4: "27",
-      dia5: "28",
+      dia1: "06",
+      dia2: "07",
+      dia3: "08",
     };
     return dates[dayKey] || "";
   };
@@ -795,7 +534,7 @@ const Programa = () => {
       <title>Programa - XVIII RNP MISAU</title>
       <meta
         name="description"
-        content="Programa completo da XVIII Reunião Nacional de Planificação - MISAU 2025"
+        content="Programa completo da A Transição do Financiamento em Moçambique - MISAU 2025"
       />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -853,11 +592,11 @@ const Programa = () => {
               <div className="flex flex-wrap justify-center items-center gap-4 text-sm text-gray-600">
                 <div className="flex items-center gap-1">
                   <Calendar className="w-4 h-4" />
-                  <span>24 - 28 Novembro de 2025</span>
+                  <span>06, 07, 08 de Maio de 2026</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <MapPin className="w-4 h-4" />
-                  <span>Macaneta, Marracuene - Maputo</span>
+                  <span>Centro de Conferências Joaquim Chissano</span>
                 </div>
               </div>
             </div>
@@ -998,7 +737,7 @@ const Programa = () => {
                           <div className="flex-shrink-0">
                             <span
                               className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${getSessionColor(
-                                session.type
+                                session.type,
                               )} shadow-sm`}
                             >
                               {session.type}
