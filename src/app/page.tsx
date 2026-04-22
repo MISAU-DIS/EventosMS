@@ -386,7 +386,7 @@ export default function Home() {
                 viewport={{ once: true }}
               >
                 <a
-                  href="https://maps.google.com/maps?q=Macaneta,+Marracuene,+Maputo,+Moçambique"
+                  href="https://www.google.com/maps?q=Centro+de+Conferências+Joaquim+Chissano,+Maputo"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-4 bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
@@ -409,8 +409,7 @@ export default function Home() {
               viewport={{ once: true }}
               className="text-xl mb-8 text-blue-100"
             >
-              Um Plano Único, Um Orçamento Único e Uma Monitoria e Avaliação
-              Única
+              Financiar, Integrar e Reforma
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
