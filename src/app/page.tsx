@@ -96,12 +96,12 @@ export default function Home() {
             transition={{ delay: 0.6, duration: 1 }}
             className="mt-8 flex flex-col sm:flex-row gap-4 justify-center"
           >
-            {/* <Link
+            <Link
               href="/agenda"
               className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
             >
               Ver Agenda
-            </Link> */}
+            </Link>
             <Link
               href="/programa"
               className="bg-white border border-blue-600 text-blue-700 hover:bg-blue-50 px-6 py-3 rounded-full transition"
@@ -227,7 +227,7 @@ export default function Home() {
                 className="text-center lg:text-left order-1 lg:order-2"
               >
                 <p className="text-gray-700 text-xl mb-6 leading-relaxed text-justify">
-                  A Reunião Nacional de Planificação é uma plataforma essencial
+                  A Reunião  de Planificação é uma plataforma essencial
                   para o envolvimento de todas as partes interessadas, incluindo
                   a sociedade civil e parceiros internacionais. O objetivo é
                   fortalecer a capacidade do MISAU de responder aos desafios de
