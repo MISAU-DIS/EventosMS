@@ -43,7 +43,7 @@ export default function Header() {
             href="/"
             className="text-base md:text-lg font-semibold tracking-tight hover:opacity-90 transition-opacity duration-200"
           >
-            XVIII Reunião Nacional de Planificação (RNP)
+            Segundo Diálogo sobre o Financiamento da Saúde
           </Link>
         </div>
 
