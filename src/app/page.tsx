@@ -10,7 +10,7 @@ export default function Home() {
       <title>Eventos MISAU</title>
       <meta
         name="description"
-        content="XVIII Reunião Nacional de Planificação (RNP) – MISAU Moçambique"
+        content="Segundo Diálogo sobre o Financiamento da Saúde – MISAU Moçambique"
       />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -56,7 +56,15 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-xl sm:text-3xl mt-4 lg:text-4xl font-extrabold text-blue-700 leading-tight"
           >
-            XVIII REUNIÃO NACIONAL DE PLANIFICAÇÃO (RNP)
+            Segundo Diálogo sobre o Financiamento da Saúde:
+          </motion.h2>
+          <motion.h2
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-xl sm:text-3xl mt-4 lg:text-4xl font-extrabold text-blue-700 leading-tight"
+          >
+            A Transição do Financiamento em Moçambique
           </motion.h2>
 
           <motion.h2
@@ -65,20 +73,20 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-xl sm:text-1xl lg:text-2xl mt-4 font-extrabold text-blue-700 leading-tight"
           >
-            Macaneta, Marracuene - 24 a 28 de Novembro de 2025
+            Centro de Conferências Joaquim Chissano - 06, 07, 08 de Maio de 2026
           </motion.h2>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="mt-4 text-sm sm:text-base md:text-lg max-w-3xl text-gray-700 font-bold text-centerd"
+            className="mt-4 text-sm sm:text-base md:text-lg max-w-3xl text-gray-700 font-bold text-center"
           >
             Lema:
             <i>
-              {" "}
-              Um Plano Único, Um Orçamento Único e Uma Monitoria e Avaliação
-              Única
+              {
+                ' "Sustentar a Transição do Sistema de Saúde: Financiar, Integrar e Reformar" '
+              }
             </i>
           </motion.p>
 
@@ -116,7 +124,7 @@ export default function Home() {
               {/* Data */}
               <span className="flex items-center gap-2">
                 <Calendar className="w-5 h-5" />
-                24 - 28 Novembro de 2025
+                06, 07, 08 de Maio de 2026
               </span>
 
               {/* Local */}
@@ -127,14 +135,14 @@ export default function Home() {
                 className="flex items-center gap-2 hover:text-blue-200 transition-colors duration-200 cursor-pointer"
               >
                 <MapPin className="w-5 h-5" />
-                Macaneta, Marracuene - Província de Maputo
+                Centro de Conferências Joaquim Chissano - Província de Maputo
               </a>
 
               {/* Participantes */}
-              <span className="flex items-center gap-2">
+              {/* <span className="flex items-center gap-2">
                 <Users className="w-5 h-5" />
                 Participantes do Sector Saúde
-              </span>
+              </span> */}
             </p>
           </div>
         </div>
@@ -165,8 +173,10 @@ export default function Home() {
                 <p className="text-gray-700 text-xl mb-6 leading-relaxed text-justify">
                   O Ministério da Saúde (MISAU), através da Direcção de
                   Planificação e Cooperação (DPC), realiza a{" "}
-                  <strong>XVIII Reunião Nacional de Planificação (RNP)</strong>,
-                  visando discutir, harmonizar e encontrar consensos sobre os
+                  <strong>
+                    A Transição do Financiamento em Moçambique (RNP)
+                  </strong>
+                  , visando discutir, harmonizar e encontrar consensos sobre os
                   principais desafios do Sector nas áreas de Planificação.
                   Estando o sector no primeiro ano de implementação do Programa
                   Quinquenal do Governo (PQG) 2025-2029, torna-se crucial
@@ -363,7 +373,7 @@ export default function Home() {
               </motion.h2>
 
               <h3 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
-                Macaneta, Marracuene
+                Centro de Conferências Joaquim Chissano
               </h3>
               <p className="text-xl text-gray-600 font-semibold mb-6">
                 Província de Maputo, Moçambique
