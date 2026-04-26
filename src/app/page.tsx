@@ -10,7 +10,7 @@ export default function Home() {
       <title>Eventos MISAU</title>
       <meta
         name="description"
-        content="Segundo Diálogo sobre o Financiamento da Saúde – MISAU Moçambique"
+        content="II Diálogo sobre o Financiamento da Saúde – MISAU Moçambique"
       />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -56,7 +56,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-xl sm:text-3xl mt-4 lg:text-4xl font-extrabold text-blue-700 leading-tight"
           >
-            Segundo Diálogo sobre o Financiamento da Saúde:
+            II Diálogo sobre o Financiamento da Saúde:
           </motion.h2>
           <motion.h2
             initial={{ opacity: 0, y: -30 }}
