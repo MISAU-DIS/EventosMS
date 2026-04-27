@@ -22,7 +22,7 @@ const speakers: Speaker[] = [
     name: 'Dra. Maria Fernandes',
     role: 'Coordenadora de Vacinação',
     description: 'Lidera campanhas nacionais de imunização.',
-    image: 'https://i.pravatar.cc/150?img=5',
+    image: 'https://i.pravatar.cc/150?img=5', 
     link: '#'
   },
   {
