@@ -36,7 +36,7 @@ export default function Home() {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-xl sm:text-2xl lg:text-2xl font-extrabold text-blue-700 leading-tight"
+            className="text-xl sm:text-2xl lg:text-2xl font-extrabold text-blue-600 leading-tight"
           >
             República de Moçambique
           </motion.h1>
@@ -45,7 +45,7 @@ export default function Home() {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-2xl sm:text-4xl lg:text-3xl font-extrabold text-blue-700 leading-tight"
+            className="text-2xl sm:text-4xl lg:text-3xl font-extrabold text-blue-600 leading-tight"
           >
             Ministério da Saúde
           </motion.h1>
@@ -54,7 +54,8 @@ export default function Home() {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-xl sm:text-3xl mt-4 lg:text-4xl font-extrabold text-blue-700 leading-tight"
+            /*className="text-xl sm:text-3xl mt-4 lg:text-4xl font-extrabold text-blue-700 leading-tight"*/
+			className="text-xl sm:text-3xl mt-4 lg:text-4xl font-extrabold text-blue-800 leading-tight"
           >
             II Diálogo sobre o Financiamento da Saúde:
           </motion.h2>
@@ -62,7 +63,7 @@ export default function Home() {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-xl sm:text-3xl mt-4 lg:text-4xl font-extrabold text-blue-700 leading-tight"
+            className="text-xl sm:text-3xl mt-4 lg:text-4xl font-extrabold text-blue-800 leading-tight"
           >
             A Transição do Financiamento em Moçambique
           </motion.h2>
@@ -71,7 +72,7 @@ export default function Home() {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-xl sm:text-1xl lg:text-2xl mt-4 font-extrabold text-blue-700 leading-tight"
+            className="text-xl sm:text-1xl lg:text-2xl mt-4 font-extrabold text-blue-800 leading-tight"
           >
             Centro de Conferências Joaquim Chissano - 06, 07, 08 de Maio de 2026
           </motion.h2>
@@ -97,7 +98,7 @@ export default function Home() {
             className="mt-8 flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Link
-              href="/agenda"
+              href="/agenda"s
               className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
             >
               Ver Agenda

@@ -120,12 +120,12 @@ export default function Comentarios(): React.ReactElement {
   return (
     <>
       <title>Comentários do Evento - MISAU 2025</title>
-      <meta name="description" content="Comentários e feedback sobre o Evento MISAU 2025" />
+      <meta name="description" content="Comentários e feedback sobre o II Diálogo de Financiamento da Saúde" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-      <main className="min-h-screen bg-gradient-to-b from-green-50 to-white">
+      <main className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
         {/* Hero Section */}
-        <div className="pt-24 pb-16 px-4 bg-gradient-to-r text-green-700">
+        <div className="pt-24 pb-16 px-4 bg-gradient-to-r text-blue-800">
           <div className="container mx-auto text-center">
             <motion.h1
               initial={{ opacity: 0, y: -50 }}
@@ -142,14 +142,14 @@ export default function Comentarios(): React.ReactElement {
               transition={{ delay: 0.2, duration: 0.8 }}
               className="text-xl sm:text-2xl mb-2 text-gray-700"
             >
-              XIII Conselho Hospitalar e L Conselho Coordenador <br/>de Saúde (CCS)- Feedback dos Participantes
+              II Diálogo de Financiamento da Saúde- Feedback dos Participantes
             </motion.p>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-lg text-green-700"
+              className="text-lg text-blue-800"
             >
               Compartilhe sua experiência e leia os comentários de outros participantes
             </motion.p>
@@ -165,18 +165,18 @@ export default function Comentarios(): React.ReactElement {
             className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
           >
             <div className="bg-white rounded-xl shadow-lg p-6 text-center">
-              <div className="text-3xl font-bold text-green-600">{comments.length}</div>
+              <div className="text-3xl font-bold text-blue-800">{comments.length}</div>
               <div className="text-gray-600 font-medium">Comentários</div>
             </div>
             <div className="bg-white rounded-xl shadow-lg p-6 text-center">
-              <div className="text-3xl font-bold text-green-600">{averageRating.toFixed(1)}</div>
+              <div className="text-3xl font-bold text-blue-800">{averageRating.toFixed(1)}</div>
               <div className="text-gray-600 font-medium">Avaliação Média</div>
               <div className="flex justify-center mt-2">
                 {renderStars(Math.round(averageRating))}
               </div>
             </div>
             <div className="bg-white rounded-xl shadow-lg p-6 text-center border-l-4">
-              <div className="text-3xl font-bold text-green-600">98%</div>
+              <div className="text-3xl font-bold text-blue-800">98%</div>
               <div className="text-gray-600 font-medium">Satisfação</div>
             </div>
           </motion.div>
@@ -188,7 +188,7 @@ export default function Comentarios(): React.ReactElement {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
               onClick={() => setShowForm(!showForm)}
-              className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="bg-blue-800 hover:bg-blue-800 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
             >
               {showForm ? 'Cancelar' : 'Deixar Comentário'}
             </motion.button>
@@ -203,7 +203,7 @@ export default function Comentarios(): React.ReactElement {
               transition={{ duration: 0.5 }}
               className="bg-white rounded-xl shadow-lg p-8 mb-12"
             >
-              <h3 className="text-2xl font-bold text-green-700 mb-6">Deixe seu Comentário</h3>
+              <h3 className="text-2xl font-bold text-blue-800 mb-6">Deixe seu Comentário</h3>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
@@ -214,7 +214,7 @@ export default function Comentarios(): React.ReactElement {
                       type="text"
                       value={newComment.name}
                       onChange={(e) => setNewComment({ ...newComment, name: e.target.value })}
-                      className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                      className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                       placeholder="Ex: Dr. Maria Silva"
                     />
                   </div>
@@ -226,7 +226,7 @@ export default function Comentarios(): React.ReactElement {
                       type="text"
                       value={newComment.role}
                       onChange={(e) => setNewComment({ ...newComment, role: e.target.value })}
-                      className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                      className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                       placeholder="Ex: Diretor de Saúde"
                     />
                   </div>
@@ -240,7 +240,7 @@ export default function Comentarios(): React.ReactElement {
                     type="text"
                     value={newComment.organization}
                     onChange={(e) => setNewComment({ ...newComment, organization: e.target.value })}
-                    className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                    className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     placeholder="Ex: MISAU - Província de Maputo"
                   />
                 </div>
@@ -273,7 +273,7 @@ export default function Comentarios(): React.ReactElement {
                     value={newComment.comment}
                     onChange={(e) => setNewComment({ ...newComment, comment: e.target.value })}
                     rows={4}
-                    className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all resize-none"
+                    className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
                     placeholder="Compartilhe sua experiência sobre o evento..."
                     required
                   />
@@ -282,7 +282,7 @@ export default function Comentarios(): React.ReactElement {
                 <div className="flex gap-4">
                   <button
                     type="submit"
-                    className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
+                    className="bg-blue-800 hover:bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
                   >
                     Enviar Comentário
                   </button>
@@ -300,7 +300,7 @@ export default function Comentarios(): React.ReactElement {
 
           {/* Lista de comentários */}
           <div className="space-y-6">
-            <h3 className="text-3xl font-bold text-green-700 text-center mb-8">
+            <h3 className="text-3xl font-bold text-blue-800 text-center mb-8">
               Comentários dos Participantes
             </h3>
             
@@ -315,7 +315,7 @@ export default function Comentarios(): React.ReactElement {
                 <div className="flex flex-col md:flex-row md:items-start gap-4">
                   {/* Avatar */}
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-lg">
+                    <div className="w-16 h-16 bg-blue-800 text-white rounded-full flex items-center justify-center font-bold text-lg">
                       {comment.avatar}
                     </div>
                   </div>
@@ -325,7 +325,7 @@ export default function Comentarios(): React.ReactElement {
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
                       <div>
                         <h4 className="text-xl font-semibold text-gray-800">{comment.name}</h4>
-                        <p className="text-green-600 font-medium">{comment.role}</p>
+                        <p className="text-blue-800 font-medium">{comment.role}</p>
                         <p className="text-gray-500 text-sm">{comment.organization}</p>
                       </div>
                       <div className="flex flex-col items-start sm:items-end mt-2 sm:mt-0">
@@ -344,14 +344,14 @@ export default function Comentarios(): React.ReactElement {
           </div>
 
           {/* Call to Action
-          <div className="text-center mt-16 bg-gradient-to-r from-green-600 to-green-700 text-white py-12 px-6 rounded-2xl">
+          <div className="text-center mt-16 bg-gradient-to-r from-blue-800 to-blue-800 text-white py-12 px-6 rounded-2xl">
             <h3 className="text-2xl font-bold mb-4">Quer saber mais sobre o evento?</h3>
-            <p className="text-lg mb-6 text-green-100">
+            <p className="text-lg mb-6 text-blue-100">
               Para mais informações sobre o MISAU 2025 e futuros eventos, entre em contato connosco.
             </p>
             <Link
               href="/contacto"
-              className="bg-white text-green-700 hover:bg-green-50 px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block"
+              className="bg-white text-blue-800 hover:bg-blue-50 px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block"
             >
               Entrar em Contato
             </Link>
@@ -375,7 +375,7 @@ export default function Comentarios(): React.ReactElement {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
                             viewport={{ once: true }}
-                            className="text-xl mb-8 text-green-100"
+                            className="text-xl mb-8 text-blue-100"
                         >
                             Para mais informações sobre o MISAU e futuros eventos, entre em contato connosco.
                         </motion.p>
@@ -387,7 +387,7 @@ export default function Comentarios(): React.ReactElement {
                         >
                             <Link
                                 href="/contacto"
-                                className="bg-white text-green-700 hover:bg-green-50 px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block"
+                                className="bg-white text-blue-800 hover:bg-blue-50 px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block"
                             >
                                 Entrar em Contato
                             </Link>

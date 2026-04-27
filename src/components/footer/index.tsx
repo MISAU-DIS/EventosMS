@@ -21,31 +21,49 @@ export default function Footer() {
 
     return (
         <>
-            <footer className="bg-gray-800 text-white py-6">
-                <div className="container mx-auto text-center">
-                    <p className="text-sm">
-                        Copyright &copy; {new Date().getFullYear()} MISAU. Todos os direitos reservados.
-                    </p>
-                    <Link
-                        href="https://misau.gov.mz"
-                        className="text-blue-400 hover:underline mt-2 block"
-                    >
-                        Política de Privacidade
-                    </Link>
-                    <Link
+            {/* Footer principal */}
+            <footer className="bg-[#003E7E] text-white py-8 mt-12 border-t border-white/10">
+                
+                <div className="container mx-auto px-4 md:px-10 lg:px-16 text-center">
                     
-                        href="/Login"
-                        className="text-gray-400 hover:underline mt-2 block"
-                    >
-                        Entrar
-                    </Link>
+                    {/* Links */}
+                    <div className="flex flex-col md:flex-row justify-center items-center gap-2 md:gap-6 mb-4 text-sm">
+                        
+                        <Link
+                            href="https://misau.gov.mz"
+                            target="_blank"
+                            className="hover:text-blue-200 transition"
+                        >
+                            Política de Privacidade
+                        </Link>
+
+                        <Link
+                            href="/Login"
+                            className="hover:text-blue-200 transition"
+                        >
+                            Entrar
+                        </Link>
+
+                    </div>
+
+                    {/* Linha divisória */}
+                    <div className="w-full h-px bg-white/20 mb-4"></div>
+
+                    {/* Copyright */}
+                    <p className="text-sm text-white/80">
+                        © {new Date().getFullYear()} Ministério da Saúde (MISAU). 
+                        Todos os direitos reservados.
+                    </p>
+
                 </div>
+
             </footer>
 
+            {/* Botão voltar ao topo */}
             {showButton && (
                 <button
                     onClick={scrollToTop}
-                    className="fixed bottom-6 right-6 bg-emerald-500 text-white px-4 py-2 rounded-full shadow-lg hover:bg-emerald-600 transition" 
+                    className="fixed bottom-6 right-6 bg-[#0056A3] text-white px-4 py-2 rounded-full shadow-lg hover:bg-[#003E7E] transition-all duration-300"
                     aria-label="Voltar ao topo"
                 >
                     ↑
@@ -54,39 +72,3 @@ export default function Footer() {
         </>
     );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import Link from "next/link";
-
-// export default function Footer() {
-//     return (
-//         <footer className="bg-gray-800 text-white py-6">
-//         <div className="container mx-auto text-center">
-//             <p className="text-sm">
-//             Copyright &copy; {new Date().getFullYear()} MISAU. Todos os direitos reservados.
-//             </p>
-//             <Link
-//              href="https://misau.gov.mz" className="text-blue-400 hover:underline mt-2 block">
-//             Política de Privacidade
-//             </Link>
-//         </div>
-//         </footer>
-//     );
-// }
