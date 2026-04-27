@@ -1,6 +1,6 @@
 "use client";
 import Header from "@/components/header";
-import "./globals.css";
+import "./globals.css"; 
 import Footer from "@/components/footer";
 import { usePathname } from 'next/navigation';
 import { Toaster } from "react-hot-toast";
