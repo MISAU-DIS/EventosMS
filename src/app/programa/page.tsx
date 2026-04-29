@@ -33,9 +33,9 @@ const Programa = () => {
 
     // Mapeamento das datas do programa - RNP 2025
     const dayMapping: Record<string, string> = {
-      "06-05": "dia1",
-      "07-05": "dia2",
-      "08-05": "dia3",
+      "31-05": "dia1",
+      "01-06": "dia2",
+      "02-06": "dia3",
     };
 
     const key = `${day}-${month}`;
@@ -78,7 +78,7 @@ const Programa = () => {
   const agendaData: AgendaData = {
     dia1: {
       date: "A Transição do Financiamento em Moçambique",
-      theme: "06 de Maio de 2026",
+      theme: "31 de Maio de 2026",
       sessions: [
         {
           time: "08:30 - 09:00",
@@ -217,7 +217,7 @@ const Programa = () => {
     },
     dia2: {
       date: "A Transição do Financiamento em Moçambique",
-      theme: "07 de Maio de 2026",
+      theme: "01 de Junho de 2026",
       sessions: [
         {
           time: "08:30 - 08:45",
@@ -346,7 +346,7 @@ const Programa = () => {
     },
     dia3: {
       date: "A Transição do Financiamento em Moçambique",
-      theme: "08 de Maio de 2026",
+      theme: "02 de Junho de 2026",
       sessions: [
         {
           time: "08:30 - 08:45",
