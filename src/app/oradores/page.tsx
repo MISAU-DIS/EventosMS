@@ -65,6 +65,17 @@ export default function Oradores(): React.ReactElement {
         {/* 🎨 BACKGROUND DECORATIVO */}
 <div className="fixed inset-0 pointer-events-none z-0">
 
+ {/* Fundo centro */}
+  <img
+    src="/bg1.png"
+    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-80 opacity-10"
+  />
+    {/* Topo centro */}
+  <img
+    src="/bg2.png"
+    className="absolute top-0 left-1/2 -translate-x-1/2 w-72 opacity-10"
+  />
+  
   {/* Topo esquerdo */}
   <img
     src="/bg1.png"

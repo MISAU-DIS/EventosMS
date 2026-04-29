@@ -82,32 +82,23 @@ const Programa = () => {
       sessions: [
         {
           time: "08:30 - 09:00",
-          title: "Registo dos participantes",
+          title: "Chegada e Registo dos Participantes",
+          description: "Acolhimento e credenciação dos participantes",
           type: "Protocolo",
           speaker: "Protocolo",
-          description: "",
         },
+         
         {
-          time: "09:00 - 09:15",
-          title: "Apresentação dos participantes",
-          type: "Apresentação",
-          speaker: "Todos",
-          description: "",
+           time: "09:00 - 09:30",
+    title: "Sessão de Abertura",
+    description: "Discursos e intervenções de alto nível",
+    type: "Discurso",
+    speaker: "Altas Individualidades",
         },
-        {
-          time: "09:15 - 09:20",
-          title: "Notas de boas vindas",
-          type: "Discurso",
-          speaker: "DPC - Mestre de Cerimónias",
-          description: "",
-        },
-        {
-          time: "09:20 - 09:30",
-          title: "Sessão de abertura",
-          type: "Discurso",
-          speaker: "Director da DPC",
-          description: "",
-        },
+        
+
+        /*
+        
         {
           time: "09:30 - 09:50",
           title: "Apresentação do CFMP 2026-2028 Nacional",
@@ -116,378 +107,245 @@ const Programa = () => {
           description: "",
           fileUrl:
             "https://docs.google.com/presentation/d/1RwdzTG-cQV9PfCvNBVTshPLQK-xJLGbz/export/pptx",
-        },
+        },*/
         {
-          time: "09:50 - 10:05",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "10:05 - 10:35",
-          title: "Pausa para café",
-          type: "Intervalo",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "10:35 - 10:50",
-          title:
-            "Agenda Lusaka - Acções estratégicas das três prioridades do País",
-          type: "Apresentação",
-          speaker: "DPC/DPES - Amândio",
-          description: "",
-          fileUrl:
-            "https://drive.google.com/uc?export=download&id=16PLNPBdhg4NH9a7qNTEl2TeG6A8-XxiA",
-        },
-        {
-          time: "10:50 - 11:05",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "11:05 - 11:20",
-          title:
-            "Abordagem de Único Plano, Único Orçamento, Única Monitoria e Avaliação",
-          type: "Apresentação",
-          speaker: "DPC/DPES - Sitão",
-          description: "Prioridades nacionais - Nova matriz do PESOE Interno",
-          fileUrl:
-            "https://docs.google.com/presentation/d/1hrLOqts3FUrJTITeWhW4aChwk8_0Vg4l/export/pptx",
-        },
-        {
-          time: "11:20 - 11:35",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "11:35 - 11:50",
-          title: "Nova matriz de elaboração do PESOE Interno",
-          type: "Apresentação",
-          speaker: "DPC/DPES - Luís",
-          description: "",
-          fileUrl:
-            "https://docs.google.com/presentation/d/1hrLOqts3FUrJTITeWhW4aChwk8_0Vg4l/export/pptx",
-        },
-        {
-          time: "11:50 - 12:05",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "12:05 - 13:00",
-          title:
-            "Exercício prático para identificação de acções de impacto e lacuna por prioridade e programa",
-          type: "Exercício",
-          speaker: "DPC/DPES - Amândio",
-          description:
-            "Análise de duplicação e harmonização das actividades de planificação e orçamento",
-          fileUrl:
-            "https://docs.google.com/presentation/d/1YRA3Bvjk_81wSu9ctbLi-ny3Db7KNqZ7/export/pptx",
-        },
-        {
-          time: "13:00 - 14:00",
-          title: "Pausa para almoço",
-          type: "Intervalo",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "14:00 - 15:35",
-          title: "Continuação dos exercícios práticos",
-          type: "Exercício",
-          speaker: "Grupos de trabalho",
-          description: "",
-        },
-        {
-          time: "15:35",
-          title: "Fim dos trabalhos do primeiro dia",
-          type: "Encerramento",
-          speaker: "",
-          description: "",
-        },
+    time: "09:30 - 09:45",
+    title: "Enquadramento e Contextualização",
+    description:
+      "Apresentação do processo de diálogo e estrutura deste evento de alto nível",
+    type: "Apresentação",
+    speaker: "",
+  },
+  {
+    time: "09:45 - 10:00",
+    title:
+      "Ponto de Situação no Alcance dos Compromissos do 1º Diálogo (2023)",
+    description:
+      "Balanço da implementação dos compromissos assumidos em 2023 e lições aprendidas",
+    type: "Apresentação",
+    speaker: "",
+  },
+  {
+    time: "10:00 - 10:10",
+    title: "Fotografia Oficial",
+    description: "",
+    type: "Protocolo",
+    speaker: "",
+  },
+  {
+    time: "10:10 - 10:30",
+    title: "Pausa para Café",
+    description: "",
+    type: "Intervalo",
+    speaker: "Todos",
+  },
+  {
+    time: "10:30 - 11:00",
+    title: "O Estado do Financiamento da Saúde em Moçambique",
+    description:
+      "Situação actual, desafios, impactos da redução do financiamento externo e oportunidades",
+    type: "Apresentação",
+    speaker: "",
+  },
+  {
+    time: "11:00 - 12:00",
+    title: "Partilha de Experiências Internacionais",
+    description:
+      "Aprendendo como outros países estão a enfrentar a transição do financiamento",
+    type: "Apresentação",
+    speaker: "",
+  },
+  {
+    time: "12:00 - 13:00",
+    title: "Diálogo e Debate em Sessão Plenária",
+    description: "Reflexão e discussão sobre os temas apresentados",
+    type: "Discussão",
+    speaker: "Todos",
+  },
+  {
+    time: "13:00 - 13:15",
+    title: "Síntese do Dia e Nota de Encerramento",
+    description:
+      "Principais mensagens do dia, orientações para o dia seguinte e nota de encerramento",
+    type: "Encerramento",
+    speaker: "",
+  },
+  {
+    time: "13:15",
+    title: "Almoço",
+    description: "",
+    type: "Intervalo",
+    speaker: "Todos",
+  },
+        
       ],
     },
     dia2: {
       date: "A Transição do Financiamento em Moçambique",
       theme: "01 de Junho de 2026",
       sessions: [
-        {
-          time: "08:30 - 08:45",
-          title: "Leitura da Síntese do primeiro dia",
-          type: "Leitura",
-          speaker: "Secretariado",
-          description: "",
-        },
-        {
-          time: "08:45 - 09:00",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "09:00 - 10:00",
-          title: "Continuação dos exercícios práticos",
-          type: "Exercício",
-          speaker: "Grupos de trabalho",
-          description: "",
-        },
-        {
-          time: "10:00 - 10:30",
-          title: "Pausa para café",
-          type: "Intervalo",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "10:30 - 11:00",
-          title:
-            "Apresentação dos trabalhos em grupo sobre duplicação e harmonização das actividades",
-          type: "Apresentação",
-          speaker: "DPC/DPES",
-          description: "",
-        },
-        {
-          time: "10:30 - 11:00",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "11:00 - 11:15",
-          title:
-            "Apresentação da proposta de critérios de alocação de recursos financeiros no sector",
-          type: "Apresentação",
-          speaker: "DPC/DPES - Narguice",
-          description: "",
-          fileUrl:
-            "https://docs.google.com/presentation/d/1CNgWLf_LuAryKU641PPqvGrrT2Z82tZD/export/pptx",
-        },
-        {
-          time: "11:15 - 11:30",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "11:30 - 13:00",
-          title:
-            "Exercício Prático para colher subsídios para definição dos critérios de alocação de recursos financeiros",
-          type: "Exercício",
-          speaker: "DPC/DPES - Narguice",
-          description: "",
-        },
-        {
-          time: "11:30 - 13:00",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "13:00 - 14:00",
-          title: "Pausa para almoço",
-          type: "Intervalo",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "14:00 - 14:30",
-          title:
-            "Apresentação de Indicadores e Critérios para avaliação de desempenho",
-          type: "Apresentação",
-          speaker: "DPC/M&A - Chadreque",
-          description:
-            "Metas e indicadores de desempenho - Métricas - harmonização de indicadores",
-          fileUrl:
-            "https://docs.google.com/presentation/d/1nHVreImq6KqJnBI6sLEus9mXNIbnQvYJ/export/pptx",
-        },
-        {
-          time: "14:30 - 15:00",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "15:00 - 15:15",
-          title: "Apresentação do Plano de melhoria de qualidade de dados",
-          type: "Apresentação",
-          speaker: "DPC/DIS - Edson",
-          description: "",
-          fileUrl:
-            "https://docs.google.com/presentation/d/1nqJEB62K417OYl_cvdK0sWWmGQ022e79/export/pptx",
-        },
-        {
-          time: "15:15 - 15:30",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "15:30",
-          title: "Fim dos trabalhos técnicos",
-          type: "Encerramento",
-          speaker: "",
-          description: "",
-        },
+  {
+    time: "08:30 - 09:00",
+    title: "Chegada e Registo dos Participantes",
+    description: "Acolhimento e credenciação dos participantes",
+    type: "Protocolo",
+    speaker: "Protocolo",
+  },
+  {
+    time: "09:00 - 09:15",
+    title: "Sessão de Abertura do Dia",
+    description:
+      "Enquadramento do dia, apresentação dos grupos, seus facilitadores e instruções para o trabalho em grupo",
+    type: "Discurso",
+    speaker: "",
+  },
+  {
+    time: "09:15 - 10:15",
+    title: "Partilha de Experiências Internacionais",
+    description:
+      "Aprendendo como outros países estão a enfrentar a transição do financiamento",
+    type: "Apresentação",
+    speaker: "",
+  },
+  {
+    time: "10:15 - 10:45",
+    title: "Pausa para Café",
+    description: "",
+    type: "Intervalo",
+    speaker: "Todos",
+  },
+
+  // 🔵 BLOCO DE TRABALHO EM GRUPOS
+  {
+    time: "10:45 - 12:30",
+    title: "Metodologia de Trabalho em Grupos de Partes Interessadas",
+    description:
+      "Explicação dos objectivos e dinâmica das sessões por grupos de partes interessadas",
+    type: "Apresentação",
+    speaker: "",
+  },
+  {
+    time: "10:45 - 12:30",
+    title: "Trabalhos em Grupos – Clarificação de Evidência e Entendimento Comum",
+    description:
+      "Recapitulação do diagnóstico do financiamento do sector conforme sumarizado no Dia I, reorientada para o papel e responsabilidades específicas do grupo",
+    type: "Exercício",
+    speaker: "Grupos de trabalho",
+  },
+  {
+    time: "10:45 - 12:30",
+    title:
+      "Diálogo por Grupos – Formulação de Propostas de Mudança e Compromissos",
+    description:
+      "Diálogo com formulação de compromissos a serem assumidos por cada grupo",
+    type: "Discussão",
+    speaker: "Grupos de trabalho",
+  },
+
+  {
+    time: "12:30 - 13:00",
+    title: "Diálogo em Sessão Plenária",
+    description:
+      "Apresentação e diálogo sobre as propostas de compromissos a serem assumidos por cada grupo",
+    type: "Discussão",
+    speaker: "Todos",
+  },
+  {
+    time: "13:00 - 13:15",
+    title: "Síntese do Dia e Nota de Encerramento",
+    description:
+      "Principais mensagens do dia, orientações para o dia seguinte e nota de encerramento",
+    type: "Encerramento",
+    speaker: "",
+  },
+  {
+    time: "13:15",
+    title: "Almoço",
+    description: "",
+    type: "Intervalo",
+    speaker: "Todos",
+  },
       ],
     },
     dia3: {
       date: "A Transição do Financiamento em Moçambique",
       theme: "02 de Junho de 2026",
       sessions: [
-        {
-          time: "08:30 - 08:45",
-          title: "Registo dos participantes",
-          type: "Protocolo",
-          speaker: "Protocolo",
-          description: "",
-        },
-        {
-          time: "08:45 - 09:00",
-          title: "Apresentação dos participantes",
-          type: "Apresentação",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "09:00 - 09:15",
-          title: "Notas de boas vindas e contextualização da reunião",
-          type: "Discurso",
-          speaker: "Director da DPC",
-          description: "",
-        },
-        {
-          time: "09:15 - 09:30",
-          title: "Sessão de abertura",
-          type: "Discurso",
-          speaker: "Excelentíssimo Sr. Secretário Permanente da Saúde",
-          description: "",
-        },
-        {
-          time: "09:30 - 09:45",
-          title:
-            "Apresentação das Recomendações do L Conselho Coordenador de Saúde",
-          type: "Apresentação",
-          speaker: "DPC/M&A - Chadreque",
-          description: "",
-          fileUrl:
-            "https://docs.google.com/presentation/d/1S5mZmznFxjnWmu5-NL0uKZ3cmRMynsIW/export/pptx",
-        },
-        {
-          time: "09:45 - 10:00",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "10:00 - 10:30",
-          title: "Pausa para Café",
-          type: "Intervalo",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "10:30 - 11:30",
-          title: "Apresentação dos resultados do CFMP 2026-2028 Nacional",
-          type: "Apresentação",
-          speaker: "DPC/DPES - Egidio/Atija",
-          description: "",
-          fileUrl:
-            "https://docs.google.com/presentation/d/1XhUFx8Xpefa14lsW5_xvXLNS_cS5LMZU/export/pptx",
-        },
-        {
-          time: "11:30 - 11:45",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "11:45 - 12:15",
-          title: "Acções para aumentar o financiamento do sector de saúde",
-          type: "Apresentação",
-          speaker: "DPC/DPES - Amândio",
-          description: "",
-          fileUrl:
-            "https://docs.google.com/presentation/d/1cNBOMfVJV2nfHvDEli4SPQw8XyrFy5wn/export/pptx",
-        },
-        {
-          time: "12:15 - 12:45",
-          title:
-            "Apresentação de Indicadores e Critérios para avaliação de desempenho",
-          type: "Apresentação",
-          speaker: "DPC/M&A - Chadreque",
-          description:
-            "Metas e indicadores de desempenho - Métricas - harmonização de indicadores",
-          fileUrl:
-            "https://docs.google.com/presentation/d/19W9C8WEXQmRz2cSWRtwuY4xYst8fAkOQ/export/pptx",
-        },
-        {
-          time: "12:45 - 13:15",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "13:15 - 14:15",
-          title: "Pausa para almoço",
-          type: "Intervalo",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "14:15 - 14:30",
-          title:
-            "Plano de expansão da Estratégia do Subsistema Comunitário no âmbito de fortalecimento dos cuidados de saúde primários",
-          type: "Apresentação",
-          speaker: "DNSP/CSP - Olinda",
-          description: "",
-          fileUrl:
-            "https://docs.google.com/presentation/d/1xynSgkIpbZsaGoa4vJDJxJcLh0jpFW4C/export/pptx",
-        },
-        {
-          time: "14:30 - 14:45",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "14:45 - 15:30",
-          title: "Plano de Reforço de Sistema de Saúde",
-          type: "Apresentação",
-          speaker: "Consultor - Elias Mangujo",
-          description: "",
-        },
-        {
-          time: "15:30 - 15:45",
-          title: "Discussão",
-          type: "Discussão",
-          speaker: "Todos",
-          description: "",
-        },
-        {
-          time: "15:45",
-          title: "Fim dos trabalhos do terceiro dia",
-          type: "Encerramento",
-          speaker: "",
-          description: "",
-        },
+        
+  {
+    time: "08:30 - 09:00",
+    title: "Chegada e Registo dos Participantes",
+    description: "Acolhimento e credenciação dos participantes",
+    type: "Protocolo",
+    speaker: "Protocolo",
+  },
+  {
+    time: "08:45 - 09:00",
+    title: "Momento Cultural",
+    description: "",
+    type: "Cultural",
+    speaker: "",
+  },
+  {
+    time: "09:00 - 09:30",
+    title: "Sessão de Abertura do Diálogo de Alto Nível e Político",
+    description:
+      "Boas-vindas, enquadramento e discursos de alto nível",
+    type: "Discurso",
+    speaker: "Altas Individualidades",
+  },
+  {
+    time: "09:30 - 10:00",
+    title: "Apresentação sobre o Tema de Atenção Especial",
+    description:
+      "Saúde Sexual e Reprodutiva – Planeamento Familiar",
+    type: "Apresentação",
+    speaker: "",
+  },
+  {
+    time: "10:00 - 10:30",
+    title: "Apresentação das Propostas de Compromissos",
+    description:
+      "Intervenções dos representantes dos grupos de partes interessadas",
+    type: "Apresentação",
+    speaker: "",
+  },
+  {
+    time: "10:30 - 11:00",
+    title: "Pausa para Café",
+    description: "",
+    type: "Intervalo",
+    speaker: "Todos",
+  },
+  {
+    time: "11:00 - 12:00",
+    title: "Partilha de Experiências Internacionais",
+    description:
+      "Aprendendo como outros países estão a enfrentar a transição do financiamento",
+    type: "Apresentação",
+    speaker: "",
+  },
+  {
+    time: "12:00 - 12:30",
+    title: "Declaração de Compromissos",
+    description: "Leitura, validação e assinatura oficial",
+    type: "Encerramento",
+    speaker: "",
+  },
+  {
+    time: "12:30 - 13:00",
+    title: "Sessão de Encerramento",
+    description: "Considerações finais e encerramento",
+    type: "Encerramento",
+    speaker: "",
+  },
+  {
+    time: "13:00",
+    title: "Almoço",
+    description: "",
+    type: "Intervalo",
+    speaker: "Todos",
+  },
       ],
     },
   };
@@ -522,9 +380,9 @@ const Programa = () => {
   // Função para obter a data formatada para cada dia
   const getDayDate = (dayKey: string) => {
     const dates: Record<string, string> = {
-      dia1: "06",
-      dia2: "07",
-      dia3: "08",
+      dia1: "31",
+      dia2: "01",
+      dia3: "02",
     };
     return dates[dayKey] || "";
   };
@@ -581,13 +439,24 @@ const Programa = () => {
         </div>
       )}
 
-          <main className="relative z-10 min-h-screen bg-gradient-to-b from-white to-blue-50">
+          <main className="relative z-10 min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-100">
         
 
 
         {/* 🎨 BACKGROUND DECORATIVO */}
 <div className="fixed inset-0 pointer-events-none z-0">
 
+
+ {/* Fundo centro */}
+  <img
+    src="/bg1.png"
+    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-80 opacity-10"
+  />
+    {/* Topo centro */}
+  <img
+    src="/bg2.png"
+    className="absolute top-0 left-1/2 -translate-x-1/2 w-72 opacity-10"
+  />
   {/* Topo esquerdo */}
   <img
     src="/bg1.png"
@@ -672,7 +541,8 @@ const Programa = () => {
                           : "bg-gray-50 text-gray-600 hover:bg-blue-50 hover:text-blue-600"
                       }`}
                     >
-                      <div className="text-xs opacity-80 mb-1">Maio</div>
+                     <div className="text-xs opacity-80 mb-1">  {day === "dia1" ? "Maio" : "Junho"}
+                      </div>
                       <div className="text-lg font-bold">{dayDate}</div>
                     </motion.button>
                   );
@@ -739,20 +609,23 @@ const Programa = () => {
                           {/* Conteúdo */}
                           <div className="flex-grow">
                             <div className="mb-3">
-                              <h3 className="text-lg font-semibold text-gray-900 mb-2 leading-tight">
-                                {session.title}
-                              </h3>
-                              {session.speaker && (
-                                <div className="flex items-center gap-2 text-blue-600 text-sm font-medium">
-                                  <Users className="w-4 h-4" />
-                                  <span>{session.speaker}</span>
-                                </div>
-                              )}
-                              {session.description && (
-                                <p className="text-gray-600 text-sm mt-2">
-                                  {session.description}
-                                </p>
-                              )}
+  <h3 className="text-lg font-semibold tracking-tight text-blue-900 mb-1 leading-snug">
+  {session.title}
+</h3>
+
+
+
+ {session.description && (
+  <p className="text-gray-600 text-sm mb-2 leading-relaxed italic">
+    {session.description}
+  </p>
+)}
+{session.speaker && (
+  <div className="flex items-center gap-2 text-blue-700 text-sm font-medium">
+    <Users className="w-4 h-4" />
+    <span>{session.speaker}</span>
+  </div>
+)}
 
                               {/* Botão de download */}
                               {session.fileUrl && (
@@ -802,24 +675,7 @@ const Programa = () => {
           </motion.div>
         </div>
 
-        {/* CTA */}
-        <div className="bg-blue-700 text-white py-12 px-4 mt-16">
-          <div className="container mx-auto text-center max-w-2xl">
-            <h3 className="text-2xl font-bold mb-4">
-              Precisa de mais informações?
-            </h3>
-            <p className="text-blue-100 mb-6">
-              Entre em contacto connosco para esclarecimentos adicionais sobre o
-              evento.
-            </p>
-            <Link
-              href="/contacto"
-              className="bg-white text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-xl font-semibold transition-all duration-300 inline-block"
-            >
-              Entrar em Contacto
-            </Link>
-          </div>
-        </div>
+       
       </main>
     </>
   );

@@ -166,6 +166,17 @@ export default function Comentarios(): React.ReactElement {
     className="absolute bottom-0 right-0 w-80 opacity-10"
   />
 
+   {/* Fundo centro */}
+  <img
+    src="/bg1.png"
+    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-80 opacity-10"
+  />
+    {/* Topo centro */}
+  <img
+    src="/bg2.png"
+    className="absolute top-0 left-1/2 -translate-x-1/2 w-72 opacity-10"
+  />
+
 </div>
 
         {/* Hero Section */}
@@ -402,42 +413,7 @@ export default function Comentarios(): React.ReactElement {
           </div> */}
         </div>
 
-        {/* Call to Action */}
-                <div className="bg-gradient-to-r from-emerald-700 to-emerald-700 text-white py-16 px-4 mt-16">
-                    <div className="container mx-auto text-center max-w-4xl">
-                        <motion.h2
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8 }}
-                            viewport={{ once: true }}
-                            className="text-3xl sm:text-4xl font-bold mb-6"
-                        >
-                            Precisa de Mais Informações?
-                        </motion.h2>
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                            viewport={{ once: true }}
-                            className="text-xl mb-8 text-blue-100"
-                        >
-                            Para mais informações sobre o MISAU e futuros eventos, entre em contato connosco.
-                        </motion.p>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.4 }}
-                            viewport={{ once: true }}
-                        >
-                            <Link
-                                href="/contacto"
-                                className="bg-white text-blue-800 hover:bg-blue-50 px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block"
-                            >
-                                Entrar em Contato
-                            </Link>
-                        </motion.div>
-                    </div>
-                </div>
+       
       </main>
     </>
   );
