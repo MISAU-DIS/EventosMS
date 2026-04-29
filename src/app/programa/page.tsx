@@ -581,7 +581,50 @@ const Programa = () => {
         </div>
       )}
 
-      <main className="min-h-screen bg-slate-50">
+          <main className="relative z-10 min-h-screen bg-gradient-to-b from-white to-blue-50">
+        
+
+
+        {/* 🎨 BACKGROUND DECORATIVO */}
+<div className="fixed inset-0 pointer-events-none z-0">
+
+  {/* Topo esquerdo */}
+  <img
+    src="/bg1.png"
+    className="absolute top-0 left-0 w-64 opacity-10"
+  />
+
+  {/* Topo direito */}
+  <img
+    src="/bg2.png"
+    className="absolute top-0 right-0 w-64 opacity-10"
+  />
+
+  {/* Meio esquerdo */}
+  <img
+    src="/bg3.png"
+    className="absolute top-[40%] left-0 w-72 opacity-10"
+  />
+
+  {/* Meio direito */}
+  <img
+    src="/bg4.png"
+    className="absolute top-[40%] right-0 w-72 opacity-10"
+  />
+
+  {/* Fundo esquerdo */}
+  <img
+    src="/bg5.png"
+    className="absolute bottom-0 left-0 w-80 opacity-10"
+  />
+
+  {/* Fundo direito */}
+  <img
+    src="/bg6.png"
+    className="absolute bottom-0 right-0 w-80 opacity-10"
+  />
+
+</div>
         {/* Header compacto */}
         <div className="bg-white shadow-sm border-b">
           <div className="container mx-auto mt-20 px-4 py-8">
@@ -592,7 +635,7 @@ const Programa = () => {
               <div className="flex flex-wrap justify-center items-center gap-4 text-sm text-gray-600">
                 <div className="flex items-center gap-1">
                   <Calendar className="w-4 h-4" />
-                  <span>06, 07, 08 de Maio de 2026</span>
+                  <span>31 de Maio, 01, 02 de Junho de 2026</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <MapPin className="w-4 h-4" />

@@ -123,7 +123,51 @@ export default function Comentarios(): React.ReactElement {
       <meta name="description" content="Comentários e feedback sobre o II Diálogo de Financiamento da Saúde" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-      <main className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+      <main className="relative z-10 min-h-screen bg-gradient-to-b from-white to-blue-50">
+        
+
+
+        {/* 🎨 BACKGROUND DECORATIVO */}
+<div className="fixed inset-0 pointer-events-none z-0">
+
+  {/* Topo esquerdo */}
+  <img
+    src="/bg1.png"
+    className="absolute top-0 left-0 w-64 opacity-10"
+  />
+
+  {/* Topo direito */}
+  <img
+    src="/bg2.png"
+    className="absolute top-0 right-0 w-64 opacity-10"
+  />
+
+  {/* Meio esquerdo */}
+  <img
+    src="/bg3.png"
+    className="absolute top-[40%] left-0 w-72 opacity-10"
+  />
+
+  {/* Meio direito */}
+  <img
+    src="/bg4.png"
+    className="absolute top-[40%] right-0 w-72 opacity-10"
+  />
+
+  {/* Fundo esquerdo */}
+  <img
+    src="/bg5.png"
+    className="absolute bottom-0 left-0 w-80 opacity-10"
+  />
+
+  {/* Fundo direito */}
+  <img
+    src="/bg6.png"
+    className="absolute bottom-0 right-0 w-80 opacity-10"
+  />
+
+</div>
+
         {/* Hero Section */}
         <div className="pt-24 pb-16 px-4 bg-gradient-to-r text-blue-800">
           <div className="container mx-auto text-center">
