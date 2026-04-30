@@ -165,28 +165,7 @@ export default function Oradores(): React.ReactElement {
         ))}
       </div>
 
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16 px-4 mt-16">
-        <div className="container mx-auto text-center max-w-4xl">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold mb-6"
-          >
-            Participe dos nossos eventos
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="text-xl mb-8 text-blue-100"
-          >
-            Junte-se a nós e aprenda com profissionais experientes.
-          </motion.p>
-        </div>
-      </div>
+      
     </main>
   );
 }
