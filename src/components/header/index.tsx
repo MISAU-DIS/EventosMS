@@ -62,7 +62,15 @@ export default function Header() {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
               </Link>
             </li>
-
+ <li>
+              <Link
+                href="/evento"
+                className="relative py-2 px-1 hover:text-blue-200 transition-all duration-300 group"
+              >
+                O Evento
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+            </li>
             <li>
               <Link
                 href="/oradores"
@@ -73,12 +81,32 @@ export default function Header() {
               </Link>
             </li>
 
-            <li>
+
+<li>
               <Link
                 href="/programa"
                 className="relative py-2 px-1 hover:text-blue-200 transition-all duration-300 group"
               >
                 Programa
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                href="/documentos"
+                className="relative py-2 px-1 hover:text-blue-200 transition-all duration-300 group"
+              >
+                Documentos
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+            </li>
+ <li>
+              <Link
+                href="/sessoes"
+                className="relative py-2 px-1 hover:text-blue-200 transition-all duration-300 group"
+              >
+                Sessões
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
               </Link>
             </li>
@@ -93,15 +121,7 @@ export default function Header() {
               </Link>
             </li>
 
-            <li>
-              <Link
-                href="/contacto"
-                className="relative py-2 px-1 hover:text-blue-200 transition-all duration-300 group"
-              >
-                Contacto
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-            </li>
+           
 
           </ul>
         </nav>

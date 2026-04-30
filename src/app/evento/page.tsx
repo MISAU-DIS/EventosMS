@@ -168,7 +168,7 @@ export default function Home() {
                 className="flex items-center gap-2 hover:text-blue-200 transition-colors duration-200 cursor-pointer"
               >
                 <MapPin className="w-5 h-5" />
-                Centro de Conferências Joaquim Chissano - Província de Maputo
+                Centro de Conferências Joaquim Chissano - Cidade de Maputo
               </a>
  
             </p>

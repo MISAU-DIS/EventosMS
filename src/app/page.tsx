@@ -104,7 +104,7 @@ export default function Home() {
                   color: "blue",
                 },
                 {
-                  href: "/processo",
+                  href: "/#",
                   label: "Processo",
                   style: "top-[48%] left-[2%]",
                   color: "orange",
