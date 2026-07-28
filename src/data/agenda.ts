@@ -1,6 +1,6 @@
-import type { Ccs2026AgendaDay } from "./event";
+import type { EventAgendaDay } from "@/types/event";
 
-export const ccs2026Agenda: Ccs2026AgendaDay[] = [
+export const eventAgenda: EventAgendaDay[] = [
   {
     "id": "dia1",
     "label": "1° DIA: 05 de Agosto de 2026",
@@ -138,3 +138,6 @@ export const ccs2026Agenda: Ccs2026AgendaDay[] = [
     ]
   }
 ];
+
+/** @deprecated Use eventAgenda */
+export const ccs2026Agenda = eventAgenda;

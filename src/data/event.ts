@@ -1,4 +1,6 @@
-export const ccs2026Event = {
+import type { EventConfig } from "@/types/event";
+
+export const eventConfig = {
   title: "LI Conselho Coordenador de Saúde",
   shortTitle: "LI CCS",
   edition: 51,
@@ -32,32 +34,19 @@ export const ccs2026Event = {
     "Consensos sobre eficiência, vigilância e resposta a emergências",
     "Comunicado final do LI CCS aprovado",
   ],
-} as const;
+} as const satisfies EventConfig;
 
-export type Ccs2026Theme = {
-  order: number;
-  title: string;
-  responsible: string;
-};
+/** @deprecated Use eventConfig */
+export const ccs2026Event = eventConfig;
 
-export type Ccs2026AgendaDay = {
-  id: string;
-  label: string;
-  date: string;
-  themes: Ccs2026Theme[];
-};
-
-export type Ccs2026Session = {
-  order: number;
-  time: string;
-  title: string;
-  type: string;
-  speaker: string;
-};
-
-export type Ccs2026ProgramDay = {
-  id: string;
-  label: string;
-  date: string;
-  sessions: Ccs2026Session[];
-};
+export type {
+  EventTheme,
+  EventAgendaDay,
+  EventSession,
+  EventProgramDay,
+  EventConfig,
+  Ccs2026Theme,
+  Ccs2026AgendaDay,
+  Ccs2026Session,
+  Ccs2026ProgramDay,
+} from "@/types/event";
