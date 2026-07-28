@@ -3,7 +3,8 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import React from 'react';
-import { ccs2026Event } from "@/data";
+import { eventConfig } from "@/data";
+import DecorativeBackground from "@/components/layout/DecorativeBackground";
 
 interface Comment {
   id: number;
@@ -80,65 +81,12 @@ export default function Comentarios(): React.ReactElement {
 
   return (
     <>
-      <title>Comentários do Evento - {ccs2026Event.shortTitle} MISAU 2026</title>
-      <meta name="description" content={`Comentários e feedback sobre o ${ccs2026Event.title}`} />
+      <title>Comentários do Evento - {eventConfig.shortTitle} MISAU 2026</title>
+      <meta name="description" content={`Comentários e feedback sobre o ${eventConfig.title}`} />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
       <main className="relative z-10 min-h-screen bg-gradient-to-b from-white to-emerald-50">
-        
-
-
-        {/* 🎨 BACKGROUND DECORATIVO */}
-<div className="fixed inset-0 pointer-events-none z-0">
-
-  {/* Topo esquerdo */}
-  <img
-    src="/bg1.png"
-    className="absolute top-0 left-0 w-64 opacity-10"
-  />
-
-  {/* Topo direito */}
-  <img
-    src="/bg2.png"
-    className="absolute top-0 right-0 w-64 opacity-10"
-  />
-
-  {/* Meio esquerdo */}
-  <img
-    src="/bg3.png"
-    className="absolute top-[40%] left-0 w-72 opacity-10"
-  />
-
-  {/* Meio direito */}
-  <img
-    src="/bg4.png"
-    className="absolute top-[40%] right-0 w-72 opacity-10"
-  />
-
-  {/* Fundo esquerdo */}
-  <img
-    src="/bg5.png"
-    className="absolute bottom-0 left-0 w-80 opacity-10"
-  />
-
-  {/* Fundo direito */}
-  <img
-    src="/bg6.png"
-    className="absolute bottom-0 right-0 w-80 opacity-10"
-  />
-
-   {/* Fundo centro */}
-  <img
-    src="/bg1.png"
-    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-80 opacity-10"
-  />
-    {/* Topo centro */}
-  <img
-    src="/bg2.png"
-    className="absolute top-0 left-1/2 -translate-x-1/2 w-72 opacity-10"
-  />
-
-</div>
+        <DecorativeBackground variant="extended" />
 
         {/* Hero Section */}
         <div className="pt-24 pb-16 px-4 bg-gradient-to-r text-emerald-800">
@@ -158,7 +106,7 @@ export default function Comentarios(): React.ReactElement {
               transition={{ delay: 0.2, duration: 0.8 }}
               className="text-xl sm:text-2xl mb-2 text-gray-700"
             >
-              {ccs2026Event.title} — Feedback dos Participantes
+              {eventConfig.title} — Feedback dos Participantes
             </motion.p>
 
             <motion.p

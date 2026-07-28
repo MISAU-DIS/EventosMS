@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { ccs2026Event } from "@/data";
+import { eventConfig } from "@/data";
 
 const navLinks = [
   { href: "/", label: "Início" },
@@ -48,7 +48,7 @@ export default function Header() {
             href="/"
             className="text-sm md:text-base lg:text-lg font-semibold tracking-tight leading-tight hover:opacity-90 transition-opacity duration-200"
           >
-            {ccs2026Event.title}
+            {eventConfig.title}
           </Link>
         </div>
 

@@ -1,101 +1,38 @@
-'use client';
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import React from 'react';
-import emailjs from '@emailjs/browser'; 
-import toast from 'react-hot-toast';
-import { Calendar, MapPin } from 'lucide-react';
-import { ccs2026Event } from '@/data';
+"use client";
+
+import { useState } from "react";
+import { motion } from "framer-motion";
+import React from "react";
+import toast from "react-hot-toast";
+import { Calendar, MapPin } from "lucide-react";
+import { eventConfig } from "@/data";
+import { sendContactEmail } from "@/lib/emailjs";
+import DecorativeBackground from "@/components/layout/DecorativeBackground";
 
 export default function Contacto(): React.ReactElement {
-  // const faqs = [
-  //   {
-  //     question: 'Como posso participar do próximo evento do MISAU?',
-  //     answer: 'Você pode se inscrever através do nosso site oficial ou entrar em contato diretamente conosco através do formulário abaixo.'
-  //   },
-  //   {
-  //     question: 'Os eventos são gratuitos?',
-  //     answer: 'A maioria dos nossos eventos é gratuita, mas alguns podem exigir inscrição paga. Verifique os detalhes na página do evento.'
-  //   },
-  //   {
-  //     question: 'Posso levar acompanhantes?',
-  //     answer: 'Sim, desde que todos estejam devidamente inscritos e a lotação do local permita.'
-  //   }
-  // ];
-
-  // const [openFAQ, setOpenFAQ] = useState<number | null>(null);
   const [sending, setSending] = useState(false);
 
-  // const toggleFAQ = (index: number): void => {
-  //   setOpenFAQ(openFAQ === index ? null : index);
-  // };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSending(true);
 
-    emailjs.sendForm(
-      'service_ucltqqy', // Seu Service ID
-      'template_q9f18ji',  // Seu Template ID (crie no EmailJS)
-      e.currentTarget,
-      'BiomUSw2GrN1Rk-q9' // Sua Public Key do EmailJS
-    ).then(() => {
-      toast.success('Mensagem enviada com sucesso!');
+    try {
+      await sendContactEmail(e.currentTarget);
+      toast.success("Mensagem enviada com sucesso!");
       e.currentTarget.reset();
+    } catch (err) {
+      console.log("Erro ao enviar mensagem: ", err);
+    } finally {
       setSending(false);
-    }).catch((err) => {
-      console.log('Erro ao enviar mensagem: ' + err.text);
-      setSending(false);
-    });
+    }
   };
 
   return (
     <>
-        <main className="bg-gradient-to-b from-white to-blue-50">
-        
+      <main className="bg-gradient-to-b from-white to-blue-50">
+        <DecorativeBackground />
 
-
-        {/* 🎨 BACKGROUND DECORATIVO */}
-<div className="fixed inset-0 pointer-events-none z-0">
-
-  {/* Topo esquerdo */}
-  <img
-    src="/bg1.png"
-    className="absolute top-0 left-0 w-64 opacity-10"
-  />
-
-  {/* Topo direito */}
-  <img
-    src="/bg2.png"
-    className="absolute top-0 right-0 w-64 opacity-10"
-  />
-
-  {/* Meio esquerdo */}
-  <img
-    src="/bg3.png"
-    className="absolute top-[40%] left-0 w-72 opacity-10"
-  />
-
-  {/* Meio direito */}
-  <img
-    src="/bg4.png"
-    className="absolute top-[40%] right-0 w-72 opacity-10"
-  />
-
-  {/* Fundo esquerdo */}
-  <img
-    src="/bg5.png"
-    className="absolute bottom-0 left-0 w-80 opacity-10"
-  />
-
-  {/* Fundo direito */}
-  <img
-    src="/bg6.png"
-    className="absolute bottom-0 right-0 w-80 opacity-10"
-  />
-
-</div>
-<div className="container mx-auto max-w-4xl text-center mb-12 pt-24">
+        <div className="container mx-auto max-w-4xl text-center mb-12 pt-24">
           <motion.h1
             initial={{ opacity: 0, y: -40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -110,7 +47,7 @@ export default function Contacto(): React.ReactElement {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-gray-700 text-lg mb-6"
           >
-            Tem dúvidas ou sugestões sobre o {ccs2026Event.title}? Envie-nos uma
+            Tem dúvidas ou sugestões sobre o {eventConfig.title}? Envie-nos uma
             mensagem e responderemos em breve.
           </motion.p>
           <motion.div
@@ -121,11 +58,11 @@ export default function Contacto(): React.ReactElement {
           >
             <span className="inline-flex items-center gap-2 bg-emerald-50 px-4 py-2 rounded-full">
               <Calendar className="w-4 h-4 text-emerald-600" />
-              {ccs2026Event.dateRange}
+              {eventConfig.dateRange}
             </span>
             <span className="inline-flex items-center gap-2 bg-emerald-50 px-4 py-2 rounded-full">
               <MapPin className="w-4 h-4 text-emerald-600" />
-              {ccs2026Event.location}, {ccs2026Event.province}
+              {eventConfig.location}, {eventConfig.province}
             </span>
           </motion.div>
         </div>
@@ -148,7 +85,7 @@ export default function Contacto(): React.ReactElement {
 
               <div>
                 <label className="block text-gray-700 font-medium mb-1">
-                  Email  <span className="text-sm text-red-500">*</span>
+                  Email <span className="text-sm text-red-500">*</span>
                 </label>
                 <input
                   type="email"
@@ -161,7 +98,9 @@ export default function Contacto(): React.ReactElement {
             </div>
 
             <div>
-              <label className="block text-gray-700 font-medium mb-1">Assunto</label>
+              <label className="block text-gray-700 font-medium mb-1">
+                Assunto
+              </label>
               <input
                 type="text"
                 name="subject"
@@ -189,13 +128,13 @@ export default function Contacto(): React.ReactElement {
                 disabled={sending}
                 className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full font-semibold transition-all shadow-md hover:shadow-lg transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {sending ? 'Enviando...' : 'Enviar Mensagem'}
+                {sending ? "Enviando..." : "Enviar Mensagem"}
               </button>
             </div>
           </form>
         </div>
       </main>
-      {/* Call to Action */}
+
       <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 text-white py-16 px-4 mt-16">
         <div className="container mx-auto text-center max-w-4xl">
           <motion.h2
@@ -218,10 +157,6 @@ export default function Contacto(): React.ReactElement {
           </motion.p>
         </div>
       </div>
-      {/* Call to Action permanece igual */}
     </>
   );
 }
-
-
-
