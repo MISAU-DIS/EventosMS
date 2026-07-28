@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import emailjs from '@emailjs/browser'; 
 import toast from 'react-hot-toast';
+import { Calendar, MapPin } from 'lucide-react';
+import { ccs2026Event } from '@/data';
 
 export default function Contacto(): React.ReactElement {
   // const faqs = [
@@ -93,12 +95,12 @@ export default function Contacto(): React.ReactElement {
   />
 
 </div>
-<div className="container mx-auto max-w-4xl text-center mb-12">
+<div className="container mx-auto max-w-4xl text-center mb-12 pt-24">
           <motion.h1
             initial={{ opacity: 0, y: -40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="text-4xl font-extrabold text-green-700 mb-4"
+            className="text-4xl font-extrabold text-emerald-700 mb-4"
           >
             Fale Connosco
           </motion.h1>
@@ -106,10 +108,26 @@ export default function Contacto(): React.ReactElement {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-gray-700 text-lg"
+            className="text-gray-700 text-lg mb-6"
           >
-            Tem dúvidas ou sugestões? Envie-nos uma mensagem e responderemos em breve.
+            Tem dúvidas ou sugestões sobre o {ccs2026Event.title}? Envie-nos uma
+            mensagem e responderemos em breve.
           </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="flex flex-wrap justify-center gap-4 text-sm text-gray-600"
+          >
+            <span className="inline-flex items-center gap-2 bg-emerald-50 px-4 py-2 rounded-full">
+              <Calendar className="w-4 h-4 text-emerald-600" />
+              {ccs2026Event.dateRange}
+            </span>
+            <span className="inline-flex items-center gap-2 bg-emerald-50 px-4 py-2 rounded-full">
+              <MapPin className="w-4 h-4 text-emerald-600" />
+              {ccs2026Event.location}, {ccs2026Event.province}
+            </span>
+          </motion.div>
         </div>
 
         <div className="container mx-auto max-w-4xl bg-white rounded-xl shadow-lg p-8 mb-16">

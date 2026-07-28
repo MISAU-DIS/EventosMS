@@ -1,9 +1,9 @@
 'use client';
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import React from 'react';
+import { ccs2026Event } from "@/data";
 
 interface Comment {
   id: number;
@@ -25,48 +25,7 @@ interface NewComment {
 }
 
 export default function Comentarios(): React.ReactElement {
-  const [comments, setComments] = useState<Comment[]>([
-    {
-      id: 1,
-      name: "Dra. Maria Fernandes",
-      role: "Diretora Provincial de Saúde",
-      organization: "MISAU - Maputo",
-      rating: 5,
-      comment: "Evento extremamente bem organizado! As discussões sobre saúde materna foram muito enriquecedoras. Esperamos implementar as estratégias discutidas em nossa província.",
-      date: "2025-06-21",
-      avatar: "MF"
-    },
-    {
-      id: 2,
-      name: "Dr. João Macamo",
-      role: "Coordenador de Nutrição",
-      organization: "UNICEF Moçambique",
-      rating: 5,
-      comment: "Excelente iniciativa do MISAU! Os workshops práticos sobre desnutrição infantil foram muito úteis. Parabéns pela organização impecável.",
-      date: "2025-06-20",
-      avatar: "JM"
-    },
-    {
-      id: 3,
-      name: "Enfª. Ana Santos",
-      role: "Coordenadora de SMI",
-      organization: "Hospital Central de Maputo",
-      rating: 4,
-      comment: "Muito bom evento! Gostei especialmente das sessões sobre cuidados neonatais. Sugiro mais tempo para networking entre os participantes.",
-      date: "2025-06-19",
-      avatar: "AS"
-    },
-    {
-      id: 4,
-      name: "Dr. Carlos Muthemba",
-      role: "Especialista em Saúde Pública",
-      organization: "Universidade Eduardo Mondlane",
-      rating: 5,
-      comment: "Evento de alta qualidade técnica! As apresentações foram muito informativas e os palestrantes demonstraram grande conhecimento. Recomendo para todos os profissionais de saúde.",
-      date: "2025-06-18",
-      avatar: "CM"
-    }
-  ]);
+  const [comments, setComments] = useState<Comment[]>([]);
 
   const [newComment, setNewComment] = useState<NewComment>({
     name: "",
@@ -115,15 +74,17 @@ export default function Comentarios(): React.ReactElement {
     ));
   };
 
-  const averageRating = comments.reduce((acc, comment) => acc + comment.rating, 0) / comments.length;
+  const averageRating = comments.length
+    ? comments.reduce((acc, comment) => acc + comment.rating, 0) / comments.length
+    : 0;
 
   return (
     <>
-      <title>Comentários do Evento - MISAU 2025</title>
-      <meta name="description" content="Comentários e feedback sobre o II Diálogo de Financiamento da Saúde" />
+      <title>Comentários do Evento - {ccs2026Event.shortTitle} MISAU 2026</title>
+      <meta name="description" content={`Comentários e feedback sobre o ${ccs2026Event.title}`} />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-      <main className="relative z-10 min-h-screen bg-gradient-to-b from-white to-blue-50">
+      <main className="relative z-10 min-h-screen bg-gradient-to-b from-white to-emerald-50">
         
 
 
@@ -180,7 +141,7 @@ export default function Comentarios(): React.ReactElement {
 </div>
 
         {/* Hero Section */}
-        <div className="pt-24 pb-16 px-4 bg-gradient-to-r text-blue-800">
+        <div className="pt-24 pb-16 px-4 bg-gradient-to-r text-emerald-800">
           <div className="container mx-auto text-center">
             <motion.h1
               initial={{ opacity: 0, y: -50 }}
@@ -197,14 +158,14 @@ export default function Comentarios(): React.ReactElement {
               transition={{ delay: 0.2, duration: 0.8 }}
               className="text-xl sm:text-2xl mb-2 text-gray-700"
             >
-              II Diálogo de Financiamento da Saúde- Feedback dos Participantes
+              {ccs2026Event.title} — Feedback dos Participantes
             </motion.p>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-lg text-blue-800"
+              className="text-lg text-emerald-700"
             >
               Compartilhe sua experiência e leia os comentários de outros participantes
             </motion.p>
@@ -220,19 +181,23 @@ export default function Comentarios(): React.ReactElement {
             className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
           >
             <div className="bg-white rounded-xl shadow-lg p-6 text-center">
-              <div className="text-3xl font-bold text-blue-800">{comments.length}</div>
+              <div className="text-3xl font-bold text-emerald-800">{comments.length}</div>
               <div className="text-gray-600 font-medium">Comentários</div>
             </div>
             <div className="bg-white rounded-xl shadow-lg p-6 text-center">
-              <div className="text-3xl font-bold text-blue-800">{averageRating.toFixed(1)}</div>
+              <div className="text-3xl font-bold text-emerald-800">
+                {comments.length ? averageRating.toFixed(1) : "—"}
+              </div>
               <div className="text-gray-600 font-medium">Avaliação Média</div>
               <div className="flex justify-center mt-2">
                 {renderStars(Math.round(averageRating))}
               </div>
             </div>
             <div className="bg-white rounded-xl shadow-lg p-6 text-center border-l-4">
-              <div className="text-3xl font-bold text-blue-800">98%</div>
-              <div className="text-gray-600 font-medium">Satisfação</div>
+              <div className="text-3xl font-bold text-emerald-800">
+                {comments.length ? "100%" : "—"}
+              </div>
+              <div className="text-gray-600 font-medium">Participação</div>
             </div>
           </motion.div>
 
@@ -243,7 +208,7 @@ export default function Comentarios(): React.ReactElement {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
               onClick={() => setShowForm(!showForm)}
-              className="bg-blue-800 hover:bg-blue-800 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="bg-emerald-700 hover:bg-emerald-800 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
             >
               {showForm ? 'Cancelar' : 'Deixar Comentário'}
             </motion.button>
@@ -258,7 +223,7 @@ export default function Comentarios(): React.ReactElement {
               transition={{ duration: 0.5 }}
               className="bg-white rounded-xl shadow-lg p-8 mb-12"
             >
-              <h3 className="text-2xl font-bold text-blue-800 mb-6">Deixe seu Comentário</h3>
+              <h3 className="text-2xl font-bold text-emerald-800 mb-6">Deixe seu Comentário</h3>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
@@ -269,7 +234,7 @@ export default function Comentarios(): React.ReactElement {
                       type="text"
                       value={newComment.name}
                       onChange={(e) => setNewComment({ ...newComment, name: e.target.value })}
-                      className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
                       placeholder="Ex: Dr. Maria Silva"
                     />
                   </div>
@@ -281,7 +246,7 @@ export default function Comentarios(): React.ReactElement {
                       type="text"
                       value={newComment.role}
                       onChange={(e) => setNewComment({ ...newComment, role: e.target.value })}
-                      className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                      className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
                       placeholder="Ex: Diretor de Saúde"
                     />
                   </div>
@@ -295,7 +260,7 @@ export default function Comentarios(): React.ReactElement {
                     type="text"
                     value={newComment.organization}
                     onChange={(e) => setNewComment({ ...newComment, organization: e.target.value })}
-                    className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
                     placeholder="Ex: MISAU - Província de Maputo"
                   />
                 </div>
@@ -328,7 +293,7 @@ export default function Comentarios(): React.ReactElement {
                     value={newComment.comment}
                     onChange={(e) => setNewComment({ ...newComment, comment: e.target.value })}
                     rows={4}
-                    className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+                    className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all resize-none"
                     placeholder="Compartilhe sua experiência sobre o evento..."
                     required
                   />
@@ -337,7 +302,7 @@ export default function Comentarios(): React.ReactElement {
                 <div className="flex gap-4">
                   <button
                     type="submit"
-                    className="bg-blue-800 hover:bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
+                    className="bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
                   >
                     Enviar Comentário
                   </button>
@@ -355,9 +320,16 @@ export default function Comentarios(): React.ReactElement {
 
           {/* Lista de comentários */}
           <div className="space-y-6">
-            <h3 className="text-3xl font-bold text-blue-800 text-center mb-8">
+            <h3 className="text-3xl font-bold text-emerald-800 text-center mb-8">
               Comentários dos Participantes
             </h3>
+
+            {comments.length === 0 && (
+              <div className="bg-white rounded-xl shadow-lg p-8 text-center text-gray-600">
+                Ainda não há comentários publicados. Seja o primeiro a partilhar
+                a sua experiência sobre o evento.
+              </div>
+            )}
             
             {comments.map((comment, index) => (
               <motion.div
@@ -370,7 +342,7 @@ export default function Comentarios(): React.ReactElement {
                 <div className="flex flex-col md:flex-row md:items-start gap-4">
                   {/* Avatar */}
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-blue-800 text-white rounded-full flex items-center justify-center font-bold text-lg">
+                    <div className="w-16 h-16 bg-emerald-700 text-white rounded-full flex items-center justify-center font-bold text-lg">
                       {comment.avatar}
                     </div>
                   </div>
@@ -380,7 +352,7 @@ export default function Comentarios(): React.ReactElement {
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
                       <div>
                         <h4 className="text-xl font-semibold text-gray-800">{comment.name}</h4>
-                        <p className="text-blue-800 font-medium">{comment.role}</p>
+                        <p className="text-emerald-800 font-medium">{comment.role}</p>
                         <p className="text-gray-500 text-sm">{comment.organization}</p>
                       </div>
                       <div className="flex flex-col items-start sm:items-end mt-2 sm:mt-0">
@@ -401,12 +373,12 @@ export default function Comentarios(): React.ReactElement {
           {/* Call to Action
           <div className="text-center mt-16 bg-gradient-to-r from-blue-800 to-blue-800 text-white py-12 px-6 rounded-2xl">
             <h3 className="text-2xl font-bold mb-4">Quer saber mais sobre o evento?</h3>
-            <p className="text-lg mb-6 text-blue-100">
+            <p className="text-lg mb-6 text-emerald-100">
               Para mais informações sobre o MISAU 2025 e futuros eventos, entre em contato connosco.
             </p>
             <Link
               href="/contacto"
-              className="bg-white text-blue-800 hover:bg-blue-50 px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block"
+              className="bg-white text-emerald-800 hover:bg-emerald-50 px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block"
             >
               Entrar em Contato
             </Link>
