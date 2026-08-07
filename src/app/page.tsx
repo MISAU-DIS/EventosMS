@@ -6,6 +6,7 @@ import EventInfoBanner from "@/components/event/EventInfoBanner";
 import AboutEventSection from "@/components/event/AboutEventSection";
 import ObjectivesSection from "@/components/event/ObjectivesSection";
 import ExpectedResultsSection from "@/components/event/ExpectedResultsSection";
+import MethodologySection from "@/components/event/MethodologySection";
 import LocationSection from "@/components/event/LocationSection";
 import HomeCtaSection from "@/components/event/HomeCtaSection";
 
@@ -22,6 +23,7 @@ export default function Home() {
         <AboutEventSection />
         <ObjectivesSection />
         <ExpectedResultsSection />
+        <MethodologySection />
         <LocationSection />
         <HomeCtaSection />
       </main>

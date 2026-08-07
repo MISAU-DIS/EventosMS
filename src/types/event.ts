@@ -26,11 +26,19 @@ export type EventProgramDay = {
   sessions: EventSession[];
 };
 
+export type EventMethodology = {
+  readonly format: string;
+  readonly dynamics: readonly string[];
+  readonly plenaryTopics: readonly string[];
+  readonly documentation: readonly string[];
+};
+
 export type EventConfig = {
   readonly title: string;
   readonly shortTitle: string;
   readonly edition: number;
   readonly description: string;
+  readonly slogan: string;
   readonly lema: string;
   readonly location: string;
   readonly province: string;
@@ -44,8 +52,10 @@ export type EventConfig = {
   readonly calendarLocation: string;
   readonly calendarDates: string;
   readonly organizer: string;
-  readonly objectives: readonly string[];
+  readonly generalObjective: string;
+  readonly specificObjectives: readonly string[];
   readonly expectedResults: readonly string[];
+  readonly methodology: EventMethodology;
 };
 
 /** @deprecated Use EventTheme */

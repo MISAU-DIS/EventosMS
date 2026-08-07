@@ -41,6 +41,15 @@ export default function HomeHero() {
         Ministério da Saúde
       </motion.h1>
 
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.8 }}
+        className="mt-3 text-sm sm:text-base font-bold uppercase tracking-wide text-emerald-600"
+      >
+        {eventConfig.slogan}
+      </motion.p>
+
       <motion.h2
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
