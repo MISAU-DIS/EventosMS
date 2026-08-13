@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ClipboardList, FileText, Presentation, Users } from "lucide-react";
+import { ClipboardList, Presentation, Users } from "lucide-react";
 import { eventConfig } from "@/data";
 
 export default function MethodologySection() {
@@ -14,7 +14,7 @@ export default function MethodologySection() {
           Metodologia
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -24,7 +24,9 @@ export default function MethodologySection() {
           >
             <div className="flex items-center gap-3 mb-4">
               <Users className="w-6 h-6 text-misau-gold" />
-              <h3 className="text-xl font-bold text-misau-medium">Formato</h3>
+              <h3 className="text-xl font-bold text-misau-medium">
+                Formato da reunião
+              </h3>
             </div>
             <p className="text-gray-700 capitalize">{methodology.format}</p>
           </motion.div>
@@ -54,7 +56,7 @@ export default function MethodologySection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
-            className="bg-white rounded-xl p-6 shadow-lg"
+            className="bg-white rounded-xl p-6 shadow-lg md:col-span-2 lg:col-span-1"
           >
             <div className="flex items-center gap-3 mb-4">
               <ClipboardList className="w-6 h-6 text-misau-gold" />
@@ -64,32 +66,6 @@ export default function MethodologySection() {
             </div>
             <ul className="space-y-2">
               {methodology.plenaryTopics.map((item) => (
-                <li
-                  key={item}
-                  className="text-gray-700 leading-relaxed flex items-start gap-2"
-                >
-                  <span className="text-misau-gold mt-1">•</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            viewport={{ once: true }}
-            className="bg-white rounded-xl p-6 shadow-lg"
-          >
-            <div className="flex items-center gap-3 mb-4">
-              <FileText className="w-6 h-6 text-misau-gold" />
-              <h3 className="text-xl font-bold text-misau-medium">
-                Documentação da Reunião
-              </h3>
-            </div>
-            <ul className="space-y-2">
-              {methodology.documentation.map((item) => (
                 <li
                   key={item}
                   className="text-gray-700 leading-relaxed flex items-start gap-2"
