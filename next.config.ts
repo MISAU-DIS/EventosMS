@@ -1,12 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  // basePath: '/app',
-  // output: 'export',
-  // assetPrefix: './',
-  // trailingSlash: true,
-  // basePath: '/css',
+  async redirects() {
+    return [
+      {
+        source: "/programa",
+        destination: "/agenda",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
