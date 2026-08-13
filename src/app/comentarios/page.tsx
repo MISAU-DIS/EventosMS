@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { eventConfig } from "@/data";
 import InstitutionalBackground from "@/components/layout/InstitutionalBackground";
+import PageContainer from "@/components/layout/PageContainer";
 import EvaluationDayTabs from "@/components/event/EvaluationDayTabs";
 import StarRating, { StarRatingDisplay } from "@/components/event/StarRating";
 import { useDayComments } from "@/hooks/useDayComments";
@@ -12,10 +13,6 @@ import {
   type EvaluationDayId,
   type NewCommentInput,
 } from "@/types/comments";
-
-function renderStars(rating: number) {
-  return <StarRatingDisplay rating={rating} />;
-}
 
 const emptyComment: NewCommentInput = {
   name: "",
@@ -53,23 +50,22 @@ export default function ComentariosPage() {
 
   return (
     <>
-      <title>Comentários do Evento - {eventConfig.shortTitle} MISAU 2026</title>
+      <title>{`Comentários do Evento - ${eventConfig.shortTitle} MISAU 2026`}</title>
       <meta
         name="description"
         content={`Comentários e avaliações sobre o ${eventConfig.title}`}
       />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
 
       <main className="relative z-10 min-h-screen">
         <InstitutionalBackground variant="extended" />
 
-        <div className="relative pt-24 pb-16 px-4 text-misau-dark">
-          <div className="container mx-auto text-center">
+        <div className="relative pt-24 sm:pt-28 pb-10 sm:pb-16 px-4 sm:px-6 text-misau-dark">
+          <div className="max-w-4xl mx-auto text-center">
             <motion.h1
               initial={{ opacity: 0, y: -50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4"
+              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-3 sm:mb-4 leading-tight"
             >
               Avaliações da Reunião
             </motion.h1>
@@ -77,7 +73,7 @@ export default function ComentariosPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
-              className="text-xl sm:text-2xl mb-2 text-gray-700"
+              className="text-base sm:text-xl md:text-2xl mb-2 text-gray-700"
             >
               {eventConfig.title}
             </motion.p>
@@ -85,7 +81,7 @@ export default function ComentariosPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-lg text-misau-medium max-w-2xl mx-auto"
+              className="text-sm sm:text-base md:text-lg text-misau-medium max-w-2xl mx-auto"
             >
               Partilhe a sua avaliação por dia ou registe a avaliação geral do
               evento
@@ -93,55 +89,61 @@ export default function ComentariosPage() {
           </div>
         </div>
 
-        <div className="relative w-full max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-16 py-12">
+        <PageContainer className="relative pb-12">
           <EvaluationDayTabs
             selectedDay={selectedDay}
             onSelect={setSelectedDay}
           />
 
-          <p className="text-center text-gray-600 mb-8">{activeDay.description}</p>
+          <p className="text-center text-sm sm:text-base text-gray-600 mb-6 sm:mb-8 px-2">
+            {activeDay.description}
+          </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div className="bg-white rounded-xl border border-misau-100 p-6 text-center">
-              <div className="text-3xl font-bold text-misau-dark">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
+            <div className="bg-white rounded-xl border border-misau-100 p-5 sm:p-6 text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-misau-dark">
                 {comments.length}
               </div>
-              <div className="text-gray-600 font-medium">Avaliações</div>
+              <div className="text-gray-600 font-medium text-sm sm:text-base">Avaliações</div>
             </div>
-            <div className="bg-white rounded-xl border border-misau-100 p-6 text-center">
-              <div className="text-3xl font-bold text-misau-dark">
+            <div className="bg-white rounded-xl border border-misau-100 p-5 sm:p-6 text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-misau-dark">
                 {comments.length ? averageRating.toFixed(1) : "—"}
               </div>
-              <div className="text-gray-600 font-medium">Média — {activeDay.label}</div>
+              <div className="text-gray-600 font-medium text-sm sm:text-base">
+                Média — {activeDay.label}
+              </div>
               <div className="flex justify-center mt-2">
-                {renderStars(Math.round(averageRating))}
+                <StarRatingDisplay rating={Math.round(averageRating)} />
               </div>
             </div>
-            <div className="bg-white rounded-xl border border-misau-100 p-6 text-center">
-              <div className="text-3xl font-bold text-misau-dark">4</div>
-              <div className="text-gray-600 font-medium">Secções de avaliação</div>
+            <div className="bg-white rounded-xl border border-misau-100 p-5 sm:p-6 text-center">
+              <div className="text-2xl sm:text-3xl font-bold text-misau-dark">4</div>
+              <div className="text-gray-600 font-medium text-sm sm:text-base">
+                Secções de avaliação
+              </div>
             </div>
           </div>
 
-          <div className="text-center mb-12">
+          <div className="text-center mb-8 sm:mb-12">
             <button
               type="button"
               onClick={() => setShowForm(!showForm)}
-              className="bg-misau-medium hover:bg-misau-dark text-white px-8 py-4 rounded-full font-semibold transition-all duration-300"
+              className="bg-misau-medium hover:bg-misau-dark text-white px-5 sm:px-8 py-3.5 sm:py-4 rounded-full font-semibold transition-all duration-300 w-full sm:w-auto max-w-md mx-auto text-sm sm:text-base"
             >
               {showForm ? "Cancelar" : `Avaliar — ${activeDay.label}`}
             </button>
           </div>
 
           {showForm && (
-            <div className="bg-white rounded-xl border border-misau-100 p-8 mb-12">
-              <h3 className="text-2xl font-bold text-misau-dark mb-6">
+            <div className="bg-white rounded-xl border border-misau-100 p-5 sm:p-8 mb-8 sm:mb-12">
+              <h3 className="text-xl sm:text-2xl font-bold text-misau-dark mb-5 sm:mb-6">
                 Avaliação — {activeDay.label}
               </h3>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                   <div>
-                    <label className="block text-gray-700 font-medium mb-2">
+                    <label className="block text-gray-700 font-medium mb-2 text-sm sm:text-base">
                       Nome completo (opcional)
                     </label>
                     <input
@@ -155,7 +157,7 @@ export default function ComentariosPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-700 font-medium mb-2">
+                    <label className="block text-gray-700 font-medium mb-2 text-sm sm:text-base">
                       Cargo/função (opcional)
                     </label>
                     <input
@@ -169,7 +171,7 @@ export default function ComentariosPage() {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-gray-700 font-medium mb-2">
+                  <label className="block text-gray-700 font-medium mb-2 text-sm sm:text-base">
                     Organização (opcional)
                   </label>
                   <input
@@ -185,7 +187,7 @@ export default function ComentariosPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-700 font-medium mb-2">
+                  <label className="block text-gray-700 font-medium mb-2 text-sm sm:text-base">
                     Classificação *
                   </label>
                   <StarRating
@@ -196,7 +198,7 @@ export default function ComentariosPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-700 font-medium mb-2">
+                  <label className="block text-gray-700 font-medium mb-2 text-sm sm:text-base">
                     Comentário *
                   </label>
                   <textarea
@@ -212,7 +214,7 @@ export default function ComentariosPage() {
                 </div>
                 <button
                   type="submit"
-                  className="bg-misau-medium hover:bg-misau-dark text-white px-6 py-3 rounded-lg font-semibold"
+                  className="bg-misau-medium hover:bg-misau-dark text-white px-6 py-3 rounded-lg font-semibold w-full sm:w-auto"
                 >
                   Enviar avaliação
                 </button>
@@ -220,38 +222,40 @@ export default function ComentariosPage() {
             </div>
           )}
 
-          <div className="space-y-6">
-            <h3 className="text-3xl font-bold text-misau-dark text-center mb-8">
+          <div className="space-y-4 sm:space-y-6">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-misau-dark text-center mb-6 sm:mb-8">
               Avaliações — {activeDay.label}
             </h3>
             {comments.length === 0 ? (
-              <div className="bg-white rounded-xl border border-misau-100 p-8 text-center text-gray-600">
+              <div className="bg-white rounded-xl border border-misau-100 p-6 sm:p-8 text-center text-gray-600 text-sm sm:text-base">
                 Ainda não há avaliações para {activeDay.label.toLowerCase()}.
               </div>
             ) : (
               comments.map((comment) => (
                 <div
                   key={comment.id}
-                  className="bg-white rounded-xl border border-misau-100 p-6"
+                  className="bg-white rounded-xl border border-misau-100 p-5 sm:p-6"
                 >
-                  <div className="flex gap-4">
-                    <div className="w-14 h-14 bg-misau-medium text-white rounded-full flex items-center justify-center font-bold">
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-misau-medium text-white rounded-full flex items-center justify-center font-bold shrink-0">
                       {comment.avatar}
                     </div>
-                    <div className="flex-grow">
-                      <h4 className="text-lg font-semibold">
+                    <div className="flex-grow min-w-0">
+                      <h4 className="text-base sm:text-lg font-semibold break-words">
                         {comment.name || "Participante"}
                       </h4>
                       {comment.role && (
-                        <p className="text-misau-dark text-sm">{comment.role}</p>
+                        <p className="text-misau-dark text-sm break-words">{comment.role}</p>
                       )}
                       {comment.organization && (
-                        <p className="text-gray-500 text-sm">
+                        <p className="text-gray-500 text-sm break-words">
                           {comment.organization}
                         </p>
                       )}
-                      <div className="flex mt-2">{renderStars(comment.rating)}</div>
-                      <p className="text-gray-700 mt-3 leading-relaxed">
+                      <div className="flex mt-2">
+                        <StarRatingDisplay rating={comment.rating} />
+                      </div>
+                      <p className="text-gray-700 mt-3 leading-relaxed text-sm sm:text-base break-words">
                         {comment.comment}
                       </p>
                     </div>
@@ -260,7 +264,7 @@ export default function ComentariosPage() {
               ))
             )}
           </div>
-        </div>
+        </PageContainer>
       </main>
     </>
   );

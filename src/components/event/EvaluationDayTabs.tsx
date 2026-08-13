@@ -13,7 +13,7 @@ export default function EvaluationDayTabs({
   onSelect,
 }: EvaluationDayTabsProps) {
   return (
-    <div className="flex flex-wrap justify-center gap-3 mb-10">
+    <div className="grid grid-cols-2 sm:flex sm:flex-wrap sm:justify-center gap-2 sm:gap-3 mb-8 sm:mb-10">
       {evaluationDays.map((day) => {
         const isActive = selectedDay === day.id;
         return (
@@ -21,9 +21,9 @@ export default function EvaluationDayTabs({
             key={day.id}
             type="button"
             onClick={() => onSelect(day.id)}
-            className={`px-5 py-3 rounded-xl font-semibold text-sm sm:text-base transition-all duration-300 ${
+            className={`px-3 sm:px-5 py-3 sm:py-3.5 rounded-xl font-semibold text-sm sm:text-base transition-all duration-300 min-h-[48px] ${
               isActive
-                ? "bg-misau-gold text-white shadow-lg scale-105"
+                ? "bg-misau-gold text-white sm:scale-105"
                 : "bg-white text-misau-medium hover:bg-misau-50 border border-misau-100"
             }`}
           >
