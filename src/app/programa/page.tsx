@@ -24,7 +24,7 @@ export default function ProgramaPage() {
         <div className="bg-white shadow-sm border-b">
           <div className="container mx-auto mt-20 px-4 py-8">
             <div className="text-center">
-              <h1 className="text-3xl md:text-4xl font-bold text-emerald-700 mb-2">
+              <h1 className="text-3xl md:text-4xl font-bold text-orange-700 mb-2">
                 Programa
               </h1>
               <EventDateLocationBadges variant="inline" />

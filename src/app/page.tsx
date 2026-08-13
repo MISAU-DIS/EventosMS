@@ -17,7 +17,7 @@ export default function Home() {
       <meta name="description" content={eventConfig.description} />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-      <main className="min-h-screen bg-gradient-to-b from-white to-emerald-50">
+      <main className="min-h-screen bg-gradient-to-b from-white to-orange-50">
         <HomeHero />
         <EventInfoBanner />
         <AboutEventSection />

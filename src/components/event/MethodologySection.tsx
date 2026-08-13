@@ -8,9 +8,9 @@ export default function MethodologySection() {
   const { methodology } = eventConfig;
 
   return (
-    <section className="py-16 px-4 bg-gradient-to-b from-white to-emerald-50">
+    <section className="py-16 px-4 bg-gradient-to-b from-white to-orange-50">
       <div className="container mx-auto max-w-6xl">
-        <h2 className="text-3xl sm:text-4xl font-bold text-emerald-700 mb-12 text-center">
+        <h2 className="text-3xl sm:text-4xl font-bold text-orange-700 mb-12 text-center">
           Metodologia
         </h2>
 
@@ -23,8 +23,8 @@ export default function MethodologySection() {
             className="bg-white rounded-xl p-6 shadow-lg"
           >
             <div className="flex items-center gap-3 mb-4">
-              <Users className="w-6 h-6 text-emerald-600" />
-              <h3 className="text-xl font-bold text-emerald-700">Formato</h3>
+              <Users className="w-6 h-6 text-orange-600" />
+              <h3 className="text-xl font-bold text-orange-700">Formato</h3>
             </div>
             <p className="text-gray-700 capitalize">{methodology.format}</p>
           </motion.div>
@@ -37,8 +37,8 @@ export default function MethodologySection() {
             className="bg-white rounded-xl p-6 shadow-lg"
           >
             <div className="flex items-center gap-3 mb-4">
-              <Presentation className="w-6 h-6 text-emerald-600" />
-              <h3 className="text-xl font-bold text-emerald-700">Dinâmica</h3>
+              <Presentation className="w-6 h-6 text-orange-600" />
+              <h3 className="text-xl font-bold text-orange-700">Dinâmica</h3>
             </div>
             <ul className="space-y-2">
               {methodology.dynamics.map((item) => (
@@ -57,8 +57,8 @@ export default function MethodologySection() {
             className="bg-white rounded-xl p-6 shadow-lg"
           >
             <div className="flex items-center gap-3 mb-4">
-              <ClipboardList className="w-6 h-6 text-emerald-600" />
-              <h3 className="text-xl font-bold text-emerald-700">
+              <ClipboardList className="w-6 h-6 text-orange-600" />
+              <h3 className="text-xl font-bold text-orange-700">
                 Discussão em Plenária
               </h3>
             </div>
@@ -68,7 +68,7 @@ export default function MethodologySection() {
                   key={item}
                   className="text-gray-700 leading-relaxed flex items-start gap-2"
                 >
-                  <span className="text-emerald-600 mt-1">•</span>
+                  <span className="text-orange-600 mt-1">•</span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -83,8 +83,8 @@ export default function MethodologySection() {
             className="bg-white rounded-xl p-6 shadow-lg"
           >
             <div className="flex items-center gap-3 mb-4">
-              <FileText className="w-6 h-6 text-emerald-600" />
-              <h3 className="text-xl font-bold text-emerald-700">
+              <FileText className="w-6 h-6 text-orange-600" />
+              <h3 className="text-xl font-bold text-orange-700">
                 Documentação da Reunião
               </h3>
             </div>
@@ -94,7 +94,7 @@ export default function MethodologySection() {
                   key={item}
                   className="text-gray-700 leading-relaxed flex items-start gap-2"
                 >
-                  <span className="text-emerald-600 mt-1">•</span>
+                  <span className="text-orange-600 mt-1">•</span>
                   <span>{item}</span>
                 </li>
               ))}

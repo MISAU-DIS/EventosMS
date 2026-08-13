@@ -3,7 +3,7 @@ import { eventConfig } from "@/data";
 
 export default function EventInfoBanner() {
   return (
-    <div className="bg-gradient-to-r from-emerald-700 to-emerald-800 text-white py-10">
+    <div className="bg-gradient-to-r from-orange-700 to-orange-800 text-white py-10">
       <div className="container mx-auto px-4 text-center">
         <p className="text-base sm:text-lg font-medium flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
           <span className="flex items-center gap-2">
@@ -14,7 +14,7 @@ export default function EventInfoBanner() {
             href={eventConfig.mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 hover:text-emerald-100 transition-colors duration-200"
+            className="flex items-center gap-2 hover:text-orange-100 transition-colors duration-200"
           >
             <MapPin className="w-5 h-5" />
             {eventConfig.location}, {eventConfig.province}

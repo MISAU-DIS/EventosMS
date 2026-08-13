@@ -3,8 +3,8 @@ import type { EventAgendaDay } from "@/types/event";
 export const eventAgenda: EventAgendaDay[] = [
   {
     "id": "dia1",
-    "label": "1° DIA: 05 de Agosto de 2026",
-    "date": "05 de Agosto de 2026",
+    "label": "1° DIA: 09 de Setembro de 2026",
+    "date": "09 de Setembro de 2026",
     "themes": [
       {
         "order": 1,
@@ -50,8 +50,8 @@ export const eventAgenda: EventAgendaDay[] = [
   },
   {
     "id": "dia2",
-    "label": "2° DIA:  06 de Agosto de 2026",
-    "date": "06 de Agosto de 2026",
+    "label": "2° DIA:  10 de Setembro de 2026",
+    "date": "10 de Setembro de 2026",
     "themes": [
       {
         "order": 9,
@@ -112,8 +112,8 @@ export const eventAgenda: EventAgendaDay[] = [
   },
   {
     "id": "dia3",
-    "label": "3° DIA:  07 de Agosto de 2026",
-    "date": "07 de Agosto de 2026",
+    "label": "3° DIA:  11 de Setembro de 2026",
+    "date": "11 de Setembro de 2026",
     "themes": [
       {
         "order": 20,

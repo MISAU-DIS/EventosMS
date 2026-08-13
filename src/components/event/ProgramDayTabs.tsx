@@ -26,11 +26,11 @@ export default function ProgramDayTabs({
                 onClick={() => onSelectDay(day.id)}
                 className={`relative px-3 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
                   isActive
-                    ? "bg-emerald-600 text-white shadow-lg"
-                    : "bg-gray-50 text-gray-600 hover:bg-emerald-50 hover:text-emerald-600"
+                    ? "bg-orange-600 text-white shadow-lg"
+                    : "bg-gray-50 text-gray-600 hover:bg-orange-50 hover:text-orange-600"
                 }`}
               >
-                <div className="text-xs opacity-80 mb-1">Ago</div>
+                <div className="text-xs opacity-80 mb-1">Set</div>
                 <div className="text-lg font-bold">{dayNumber}</div>
               </button>
             );

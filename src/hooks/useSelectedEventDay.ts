@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 
 const DAY_MAPPING: Record<string, string> = {
-  "5-8": "dia1",
-  "6-8": "dia2",
-  "7-8": "dia3",
+  "9-9": "dia1",
+  "10-9": "dia2",
+  "11-9": "dia3",
 };
 
 export function useSelectedEventDay(defaultDay = "dia1") {

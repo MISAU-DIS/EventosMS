@@ -52,6 +52,7 @@ export type EventConfig = {
   readonly calendarLocation: string;
   readonly calendarDates: string;
   readonly organizer: string;
+  readonly aboutEventText: string;
   readonly generalObjective: string;
   readonly specificObjectives: readonly string[];
   readonly expectedResults: readonly string[];

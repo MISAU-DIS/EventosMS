@@ -21,18 +21,18 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="bg-emerald-900 text-white py-8 mt-12 border-t border-white/10">
+      <footer className="bg-orange-900 text-white py-8 mt-12 border-t border-white/10">
         <div className="container mx-auto px-4 md:px-10 lg:px-16 text-center">
           <div className="flex flex-col md:flex-row justify-center items-center gap-2 md:gap-6 mb-4 text-sm">
             <Link
               href="https://misau.gov.mz"
               target="_blank"
-              className="hover:text-emerald-200 transition"
+              className="hover:text-orange-200 transition"
             >
               Política de Privacidade
             </Link>
 
-            <Link href="/Login" className="hover:text-emerald-200 transition">
+            <Link href="/Login" className="hover:text-orange-200 transition">
               Entrar
             </Link>
           </div>
@@ -49,7 +49,7 @@ export default function Footer() {
       {showButton && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 bg-emerald-700 text-white px-4 py-2 rounded-full shadow-lg hover:bg-emerald-800 transition-all duration-300"
+          className="fixed bottom-6 right-6 bg-orange-700 text-white px-4 py-2 rounded-full shadow-lg hover:bg-orange-800 transition-all duration-300"
           aria-label="Voltar ao topo"
         >
           ↑

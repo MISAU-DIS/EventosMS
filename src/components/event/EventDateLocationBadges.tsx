@@ -27,12 +27,12 @@ export default function EventDateLocationBadges({
 
   return (
     <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-gray-600">
-      <div className="flex items-center gap-2 bg-emerald-50 px-4 py-2 rounded-full">
-        <Calendar className="w-5 h-5 text-emerald-600" />
+      <div className="flex items-center gap-2 bg-orange-50 px-4 py-2 rounded-full">
+        <Calendar className="w-5 h-5 text-orange-600" />
         <span className="font-semibold">{eventConfig.dateRange}</span>
       </div>
-      <div className="flex items-center gap-2 bg-emerald-50 px-4 py-2 rounded-full">
-        <MapPin className="w-5 h-5 text-emerald-600" />
+      <div className="flex items-center gap-2 bg-orange-50 px-4 py-2 rounded-full">
+        <MapPin className="w-5 h-5 text-orange-600" />
         <span className="font-semibold">
           {eventConfig.location}, {eventConfig.province}
         </span>

@@ -3,8 +3,8 @@ import type { EventProgramDay } from "@/types/event";
 export const eventProgram: EventProgramDay[] = [
   {
     "id": "dia1",
-    "label": "1° DIA: 05 de Agosto de 2026",
-    "date": "05 de Agosto de 2026",
+    "label": "1° DIA: 09 de Setembro de 2026",
+    "date": "09 de Setembro de 2026",
     "sessions": [
       {
         "order": 1,
@@ -248,8 +248,8 @@ export const eventProgram: EventProgramDay[] = [
   },
   {
     "id": "dia2",
-    "label": "2° DIA: 6 de Agosto de 2026",
-    "date": "6 de Agosto de 2026",
+    "label": "2° DIA: 10 de Setembro de 2026",
+    "date": "10 de Setembro de 2026",
     "sessions": [
       {
         "order": 34,
@@ -430,8 +430,8 @@ export const eventProgram: EventProgramDay[] = [
   },
   {
     "id": "dia3",
-    "label": "3° DIA: 7 de Agosto de 2026",
-    "date": "7 de Agosto de 2026",
+    "label": "3° DIA: 11 de Setembro de 2026",
+    "date": "11 de Setembro de 2026",
     "sessions": [
       {
         "order": 59,

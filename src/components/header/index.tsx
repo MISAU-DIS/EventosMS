@@ -30,8 +30,8 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b border-white/10 ${
         scrolled
-          ? "bg-emerald-800/95 backdrop-blur-sm shadow-lg py-2"
-          : "bg-emerald-700 py-4"
+          ? "bg-orange-800/95 backdrop-blur-sm shadow-lg py-2"
+          : "bg-orange-700 py-4"
       } text-white`}
     >
       <div className="container mx-auto flex items-center justify-between px-4 md:px-10 lg:px-16">
@@ -58,7 +58,7 @@ export default function Header() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="relative py-2 px-1 hover:text-emerald-100 transition-all duration-300 group"
+                  className="relative py-2 px-1 hover:text-orange-100 transition-all duration-300 group"
                 >
                   {link.label}
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
@@ -92,7 +92,7 @@ export default function Header() {
       </div>
 
       <div
-        className={`md:hidden absolute top-full left-0 w-full bg-emerald-800/95 backdrop-blur-sm shadow-lg transform transition-all duration-300 ${
+        className={`md:hidden absolute top-full left-0 w-full bg-orange-800/95 backdrop-blur-sm shadow-lg transform transition-all duration-300 ${
           isMenuOpen
             ? "opacity-100 visible translate-y-0"
             : "opacity-0 invisible -translate-y-2"
