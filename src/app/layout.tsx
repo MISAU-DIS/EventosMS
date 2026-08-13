@@ -6,6 +6,10 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Eventos MISAU",
   description: "Eventos do Ministério da Saúde de Moçambique",
+  icons: {
+    icon: [{ url: "/Emblem_of_Mozambique.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/Emblem_of_Mozambique.svg", type: "image/svg+xml" }],
+  },
 };
 
 export default function RootLayout({
