@@ -30,10 +30,10 @@ export type EventMethodology = {
   readonly format: string;
   readonly dynamics: readonly string[];
   readonly plenaryTopics: readonly string[];
-  readonly documentation: readonly string[];
 };
 
 export type EventConfig = {
+  readonly institutionName: string;
   readonly title: string;
   readonly shortTitle: string;
   readonly edition: number;

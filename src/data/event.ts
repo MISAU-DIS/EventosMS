@@ -1,6 +1,7 @@
 import type { EventConfig } from "@/types/event";
 
 export const eventConfig = {
+  institutionName: "Ministério da Saúde",
   title: "LI Conselho Coordenador de Saúde",
   shortTitle: "LI CCS",
   edition: 51,
@@ -50,10 +51,6 @@ export const eventConfig = {
       "Temas de prestação de contas",
       "Temas de planificação e discussão",
       "Temas informativos",
-    ],
-    documentation: [
-      "Síntese diárias com principais pontos discutidos e as decisões tomadas",
-      "Comunicado final e matriz das principais decisões",
     ],
   },
 } as const satisfies EventConfig;
