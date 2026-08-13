@@ -7,7 +7,8 @@ import toast from "react-hot-toast";
 import { Calendar, MapPin } from "lucide-react";
 import { eventConfig } from "@/data";
 import { sendContactEmail } from "@/lib/emailjs";
-import DecorativeBackground from "@/components/layout/DecorativeBackground";
+import InstitutionalBackground from "@/components/layout/InstitutionalBackground";
+import PageContainer from "@/components/layout/PageContainer";
 
 export default function Contacto(): React.ReactElement {
   const [sending, setSending] = useState(false);
@@ -29,15 +30,15 @@ export default function Contacto(): React.ReactElement {
 
   return (
     <>
-      <main className="bg-gradient-to-b from-white to-misau-50">
-        <DecorativeBackground />
+      <main className="relative min-h-screen bg-gradient-to-b from-white to-misau-50">
+        <InstitutionalBackground />
 
-        <div className="container mx-auto max-w-4xl text-center mb-12 pt-24">
+        <PageContainer className="relative z-10 max-w-4xl text-center mb-8 sm:mb-12 pt-24 sm:pt-28">
           <motion.h1
             initial={{ opacity: 0, y: -40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="text-4xl font-extrabold text-misau-medium mb-4"
+            className="text-2xl sm:text-4xl font-extrabold text-misau-medium mb-3 sm:mb-4"
           >
             Fale Connosco
           </motion.h1>
@@ -45,7 +46,7 @@ export default function Contacto(): React.ReactElement {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-gray-700 text-lg mb-6"
+            className="text-gray-700 text-base sm:text-lg mb-5 sm:mb-6 px-2"
           >
             Tem dúvidas ou sugestões sobre o {eventConfig.title}? Envie-nos uma
             mensagem e responderemos em breve.
@@ -54,24 +55,24 @@ export default function Contacto(): React.ReactElement {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="flex flex-wrap justify-center gap-4 text-sm text-gray-600"
+            className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 text-sm text-gray-600"
           >
-            <span className="inline-flex items-center gap-2 bg-misau-50 px-4 py-2 rounded-full">
-              <Calendar className="w-4 h-4 text-misau-gold" />
+            <span className="inline-flex items-center justify-center gap-2 bg-misau-50 px-4 py-2.5 rounded-full">
+              <Calendar className="w-4 h-4 text-misau-gold shrink-0" />
               {eventConfig.dateRange}
             </span>
-            <span className="inline-flex items-center gap-2 bg-misau-50 px-4 py-2 rounded-full">
-              <MapPin className="w-4 h-4 text-misau-gold" />
+            <span className="inline-flex items-center justify-center gap-2 bg-misau-50 px-4 py-2.5 rounded-full">
+              <MapPin className="w-4 h-4 text-misau-gold shrink-0" />
               {eventConfig.location}, {eventConfig.province}
             </span>
           </motion.div>
-        </div>
+        </PageContainer>
 
-        <div className="container mx-auto max-w-4xl bg-white rounded-xl shadow-lg p-8 mb-16">
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <PageContainer className="relative z-10 max-w-4xl bg-white rounded-xl border border-misau-100 p-5 sm:p-8 mb-12 sm:mb-16">
+          <form className="space-y-5 sm:space-y-6" onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               <div>
-                <label className="block text-gray-700 font-medium mb-1">
+                <label className="block text-gray-700 font-medium mb-1 text-sm sm:text-base">
                   Nome <span className="text-sm text-red-500">*</span>
                 </label>
                 <input
@@ -84,7 +85,7 @@ export default function Contacto(): React.ReactElement {
               </div>
 
               <div>
-                <label className="block text-gray-700 font-medium mb-1">
+                <label className="block text-gray-700 font-medium mb-1 text-sm sm:text-base">
                   Email <span className="text-sm text-red-500">*</span>
                 </label>
                 <input
@@ -98,7 +99,7 @@ export default function Contacto(): React.ReactElement {
             </div>
 
             <div>
-              <label className="block text-gray-700 font-medium mb-1">
+              <label className="block text-gray-700 font-medium mb-1 text-sm sm:text-base">
                 Assunto
               </label>
               <input
@@ -110,7 +111,7 @@ export default function Contacto(): React.ReactElement {
             </div>
 
             <div>
-              <label className="block text-gray-700 font-medium mb-1">
+              <label className="block text-gray-700 font-medium mb-1 text-sm sm:text-base">
                 Mensagem <span className="text-sm text-red-500">*</span>
               </label>
               <textarea
@@ -126,23 +127,23 @@ export default function Contacto(): React.ReactElement {
               <button
                 type="submit"
                 disabled={sending}
-                className="bg-misau-gold hover:bg-misau-medium text-white px-8 py-3 rounded-full font-semibold transition-all shadow-md hover:shadow-lg transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-misau-gold hover:bg-misau-medium text-white px-8 py-3 rounded-full font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
               >
                 {sending ? "Enviando..." : "Enviar Mensagem"}
               </button>
             </div>
           </form>
-        </div>
+        </PageContainer>
       </main>
 
-      <div className="bg-gradient-to-r from-misau-gold to-misau-medium text-white py-16 px-4 mt-16">
-        <div className="container mx-auto text-center max-w-4xl">
+      <div className="bg-gradient-to-r from-misau-gold to-misau-medium text-white py-12 sm:py-16 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto text-center">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold mb-6"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6"
           >
             Acompanhe nossas atividades
           </motion.h2>
@@ -151,7 +152,7 @@ export default function Contacto(): React.ReactElement {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-xl mb-8 text-misau-bright"
+            className="text-base sm:text-xl text-misau-bright"
           >
             Fique por dentro de futuros eventos e novidades do MISAU.
           </motion.p>
