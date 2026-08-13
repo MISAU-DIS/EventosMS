@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { eventConfig } from "@/data";
@@ -38,17 +37,8 @@ export default function HomeHero() {
         transition={{ duration: 0.8 }}
         className="text-2xl sm:text-4xl font-extrabold text-misau-dark leading-tight"
       >
-        Ministério da Saúde
+        {eventConfig.institutionName}
       </motion.h1>
-
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.8 }}
-        className="mt-3 text-sm sm:text-base font-bold uppercase tracking-wide text-misau-gold"
-      >
-        {eventConfig.slogan}
-      </motion.p>
 
       <motion.h2
         initial={{ opacity: 0, y: -30 }}
@@ -72,30 +62,10 @@ export default function HomeHero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.8 }}
-        className="mt-4 text-sm sm:text-base md:text-lg max-w-3xl text-gray-700 font-bold"
+        className="mt-6 text-base sm:text-lg md:text-xl max-w-4xl text-misau-dark font-bold"
       >
-        Lema: <i>{eventConfig.lema}</i>
+        Lema: <i className="text-misau-medium">{eventConfig.lema}</i>
       </motion.p>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6, duration: 1 }}
-        className="mt-8 flex flex-col sm:flex-row gap-4 justify-center"
-      >
-        <Link
-          href="/programa"
-          className="bg-misau-gold hover:bg-misau-medium text-white px-8 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl"
-        >
-          Ver Programa
-        </Link>
-        <Link
-          href="/agenda"
-          className="bg-white border border-misau-gold text-misau-medium hover:bg-misau-50 px-8 py-3 rounded-full transition"
-        >
-          Ver Agenda
-        </Link>
-      </motion.div>
     </div>
   );
 }
