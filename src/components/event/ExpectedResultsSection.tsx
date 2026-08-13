@@ -6,7 +6,7 @@ import { eventConfig } from "@/data";
 export default function ExpectedResultsSection() {
   return (
     <section className="py-16 px-4 bg-white">
-      <div className="container mx-auto max-w-6xl">
+      <div className="container mx-auto max-w-7xl">
         <h2 className="text-3xl sm:text-4xl font-bold text-misau-medium mb-12 text-center">
           Resultados Esperados
         </h2>

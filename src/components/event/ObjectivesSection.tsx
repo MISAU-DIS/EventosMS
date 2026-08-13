@@ -6,7 +6,7 @@ import { eventConfig } from "@/data";
 export default function ObjectivesSection() {
   return (
     <section className="py-16 px-4 bg-gradient-to-b from-misau-50 to-white">
-      <div className="container mx-auto max-w-6xl">
+      <div className="container mx-auto max-w-7xl">
         <h2 className="text-3xl sm:text-4xl font-bold text-misau-medium mb-12 text-center">
           Objectivos da Reunião
         </h2>
