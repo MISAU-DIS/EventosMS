@@ -5,13 +5,15 @@ export default function HomeCtaSection() {
   return (
     <section className="py-16 px-4 bg-gradient-to-r from-misau-medium to-misau-dark text-white text-center">
       <div className="container mx-auto max-w-4xl">
-        <p className="text-xl mb-8 text-misau-bright">{eventConfig.lema}</p>
+        <p className="text-2xl sm:text-3xl font-bold mb-8 text-misau-bright uppercase tracking-wide">
+          {eventConfig.slogan}
+        </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
-            href="/programa"
+            href="/agenda"
             className="bg-white text-misau-medium hover:bg-misau-50 px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg"
           >
-            Consultar Programa
+            Consultar Agenda
           </Link>
           <Link
             href="/contacto"
