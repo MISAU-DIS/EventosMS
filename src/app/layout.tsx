@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Toaster } from "react-hot-toast";
 import ClientLayout from "@/components/layout/ClientLayout";
 import "./globals.css";
@@ -12,6 +12,12 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -19,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt">
-      <body className="antialiased">
+      <body className="antialiased overflow-x-hidden">
         <ClientLayout>{children}</ClientLayout>
         <Toaster position="top-right" />
       </body>
