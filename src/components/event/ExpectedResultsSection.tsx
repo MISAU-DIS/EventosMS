@@ -20,7 +20,7 @@ export default function ExpectedResultsSection() {
               viewport={{ once: true }}
               className="bg-misau-50 border-l-4 border-misau-gold p-4 rounded-r-lg"
             >
-              <p className="text-gray-700">{result}</p>
+              <p className="text-gray-700 text-lg sm:text-xl leading-relaxed">{result}</p>
             </motion.div>
           ))}
         </div>

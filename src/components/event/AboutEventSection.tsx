@@ -13,7 +13,7 @@ export default function AboutEventSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true, amount: 0.2 }}
-          className="mb-14"
+          className="text-center mb-14"
         >
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-misau-medium">
             Sobre o Evento

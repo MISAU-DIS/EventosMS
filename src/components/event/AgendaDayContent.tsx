@@ -15,19 +15,19 @@ export default function AgendaDayContent({
 }: AgendaDayContentProps) {
   return (
     <>
-      <div className="bg-gradient-to-r from-misau-gold to-misau-medium text-white rounded-2xl border border-misau-gold/20 p-8 sm:p-10 mb-8">
-        <div className="flex items-center gap-2 text-misau-bright mb-4">
-          <Calendar className="w-6 h-6" />
-          <span className="text-xl md:text-2xl font-semibold">{day.date}</span>
+      <div className="bg-gradient-to-r from-misau-gold to-misau-medium text-white rounded-2xl border border-misau-gold/20 p-6 sm:p-8 mb-8">
+        <div className="flex items-center gap-2 text-misau-bright mb-3">
+          <Calendar className="w-5 h-5" />
+          <span className="text-lg md:text-xl font-semibold">{day.date}</span>
         </div>
-        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-5">
           Sessões do LI Conselho Coordenador
         </h2>
         <a
           href={calendarUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-base md:text-lg bg-white text-misau-medium hover:bg-misau-50 transition-all duration-300"
+          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm md:text-base bg-white text-misau-medium hover:bg-misau-50 transition-all duration-300"
         >
           <Calendar className="w-5 h-5" />
           <span>Adicionar ao Google Calendar</span>

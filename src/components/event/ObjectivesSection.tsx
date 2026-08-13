@@ -18,7 +18,7 @@ export default function ObjectivesSection() {
           viewport={{ once: true }}
           className="bg-misau-medium text-white rounded-xl p-6 sm:p-8 shadow-lg mb-10"
         >
-          <p className="text-lg leading-relaxed">{eventConfig.generalObjective}</p>
+          <p className="text-xl sm:text-2xl leading-relaxed">{eventConfig.generalObjective}</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6">
@@ -34,7 +34,7 @@ export default function ObjectivesSection() {
               <span className="inline-flex items-center justify-center w-8 h-8 bg-misau-bright text-misau-medium rounded-lg font-bold text-sm mb-3">
                 {index + 1}
               </span>
-              <p className="text-gray-600 leading-relaxed">{objective}</p>
+              <p className="text-gray-600 text-lg sm:text-xl leading-relaxed">{objective}</p>
             </motion.div>
           ))}
         </div>

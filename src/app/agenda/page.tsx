@@ -51,15 +51,6 @@ export default function AgendaPage() {
         </AnimatePresence>
 
         <EventLemaBlock />
-
-        <div className="text-center mt-12">
-          <a
-            href="/contacto"
-            className="inline-block bg-misau-gold hover:bg-misau-medium text-white text-lg font-semibold px-10 py-4 rounded-xl transition-all duration-300"
-          >
-            Precisa de mais informações? Entre em contacto
-          </a>
-        </div>
       </div>
     </main>
   );
