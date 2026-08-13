@@ -6,8 +6,8 @@ import { eventConfig } from "@/data";
 
 export default function AboutEventSection() {
   return (
-    <section className="py-16 px-4 bg-white">
-      <div className="container mx-auto max-w-6xl">
+    <section className="py-20 sm:py-24 px-4 sm:px-8 bg-white">
+      <div className="container mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -15,12 +15,12 @@ export default function AboutEventSection() {
           viewport={{ once: true, amount: 0.2 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-misau-medium">
+          <h2 className="text-4xl sm:text-5xl font-bold text-misau-medium">
             Sobre o Evento
           </h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -28,7 +28,7 @@ export default function AboutEventSection() {
             viewport={{ once: true, amount: 0.2 }}
             className="text-center lg:text-left"
           >
-            <p className="text-gray-700 text-xl leading-relaxed text-justify">
+            <p className="text-gray-700 text-xl sm:text-2xl leading-relaxed text-justify">
               {eventConfig.aboutEventText}
             </p>
           </motion.div>
@@ -43,9 +43,9 @@ export default function AboutEventSection() {
             <Image
               src="/li-ccs-group-photo.png"
               alt="Reunião do Ministério da Saúde"
-              width={450}
-              height={300}
-              className="rounded-xl shadow-lg w-full h-auto object-cover"
+              width={600}
+              height={400}
+              className="rounded-2xl shadow-xl w-full h-auto object-cover min-h-[280px]"
             />
           </motion.div>
         </div>
