@@ -29,7 +29,7 @@ export default function Contacto(): React.ReactElement {
 
   return (
     <>
-      <main className="bg-gradient-to-b from-white to-orange-50">
+      <main className="bg-gradient-to-b from-white to-misau-50">
         <DecorativeBackground />
 
         <div className="container mx-auto max-w-4xl text-center mb-12 pt-24">
@@ -37,7 +37,7 @@ export default function Contacto(): React.ReactElement {
             initial={{ opacity: 0, y: -40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="text-4xl font-extrabold text-orange-700 mb-4"
+            className="text-4xl font-extrabold text-misau-medium mb-4"
           >
             Fale Connosco
           </motion.h1>
@@ -56,12 +56,12 @@ export default function Contacto(): React.ReactElement {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="flex flex-wrap justify-center gap-4 text-sm text-gray-600"
           >
-            <span className="inline-flex items-center gap-2 bg-orange-50 px-4 py-2 rounded-full">
-              <Calendar className="w-4 h-4 text-orange-600" />
+            <span className="inline-flex items-center gap-2 bg-misau-50 px-4 py-2 rounded-full">
+              <Calendar className="w-4 h-4 text-misau-gold" />
               {eventConfig.dateRange}
             </span>
-            <span className="inline-flex items-center gap-2 bg-orange-50 px-4 py-2 rounded-full">
-              <MapPin className="w-4 h-4 text-orange-600" />
+            <span className="inline-flex items-center gap-2 bg-misau-50 px-4 py-2 rounded-full">
+              <MapPin className="w-4 h-4 text-misau-gold" />
               {eventConfig.location}, {eventConfig.province}
             </span>
           </motion.div>
@@ -77,7 +77,7 @@ export default function Contacto(): React.ReactElement {
                 <input
                   type="text"
                   name="user_name"
-                  className="w-full border text-gray-700 border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-orange-500"
+                  className="w-full border text-gray-700 border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-misau-light"
                   placeholder="Seu nome completo"
                   required
                 />
@@ -90,7 +90,7 @@ export default function Contacto(): React.ReactElement {
                 <input
                   type="email"
                   name="user_email"
-                  className="w-full border text-gray-700 border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-orange-500"
+                  className="w-full border text-gray-700 border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-misau-light"
                   placeholder="email@exemplo.com"
                   required
                 />
@@ -104,7 +104,7 @@ export default function Contacto(): React.ReactElement {
               <input
                 type="text"
                 name="subject"
-                className="w-full border text-gray-700 border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-orange-500"
+                className="w-full border text-gray-700 border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-misau-light"
                 placeholder="Ex: Participação no evento"
               />
             </div>
@@ -115,7 +115,7 @@ export default function Contacto(): React.ReactElement {
               </label>
               <textarea
                 name="message"
-                className="w-full border text-gray-700 border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-orange-500 resize-none"
+                className="w-full border text-gray-700 border-gray-300 px-4 py-3 rounded-lg focus:ring-2 focus:ring-misau-light resize-none"
                 rows={5}
                 placeholder="Escreva sua mensagem aqui..."
                 required
@@ -126,7 +126,7 @@ export default function Contacto(): React.ReactElement {
               <button
                 type="submit"
                 disabled={sending}
-                className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-3 rounded-full font-semibold transition-all shadow-md hover:shadow-lg transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-misau-gold hover:bg-misau-medium text-white px-8 py-3 rounded-full font-semibold transition-all shadow-md hover:shadow-lg transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {sending ? "Enviando..." : "Enviar Mensagem"}
               </button>
@@ -135,7 +135,7 @@ export default function Contacto(): React.ReactElement {
         </div>
       </main>
 
-      <div className="bg-gradient-to-r from-orange-600 to-orange-700 text-white py-16 px-4 mt-16">
+      <div className="bg-gradient-to-r from-misau-gold to-misau-medium text-white py-16 px-4 mt-16">
         <div className="container mx-auto text-center max-w-4xl">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
@@ -151,7 +151,7 @@ export default function Contacto(): React.ReactElement {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-xl mb-8 text-orange-100"
+            className="text-xl mb-8 text-misau-bright"
           >
             Fique por dentro de futuros eventos e novidades do MISAU.
           </motion.p>

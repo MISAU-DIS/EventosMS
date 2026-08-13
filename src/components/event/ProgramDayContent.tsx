@@ -34,7 +34,7 @@ export default function ProgramDayContent({
       </div>
 
       <div className="relative">
-        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-orange-200" />
+        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-misau-200" />
 
         <div className="space-y-6">
           {day.sessions.map((session, index) => (
@@ -45,13 +45,13 @@ export default function ProgramDayContent({
               transition={{ duration: 0.5, delay: index * 0.03 }}
               className="relative pl-20"
             >
-              <div className="absolute left-6 top-6 w-4 h-4 bg-orange-500 rounded-full border-4 border-white shadow-lg" />
+              <div className="absolute left-6 top-6 w-4 h-4 bg-misau-light rounded-full border-4 border-white shadow-lg" />
 
               <div className="bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden">
                 <div className="p-6">
                   <div className="flex flex-col lg:flex-row gap-4">
                     <div className="lg:w-36 flex-shrink-0">
-                      <div className="inline-flex items-center gap-2 bg-orange-50 text-orange-700 px-3 py-2 rounded-lg font-bold text-sm">
+                      <div className="inline-flex items-center gap-2 bg-misau-50 text-misau-medium px-3 py-2 rounded-lg font-bold text-sm">
                         <Clock className="w-4 h-4" />
                         <span>{session.time}</span>
                       </div>
@@ -62,7 +62,7 @@ export default function ProgramDayContent({
                         {session.title}
                       </h3>
                       {session.speaker && (
-                        <div className="flex items-center gap-2 text-orange-600 text-sm font-medium">
+                        <div className="flex items-center gap-2 text-misau-gold text-sm font-medium">
                           <Users className="w-4 h-4" />
                           <span>{session.speaker}</span>
                         </div>

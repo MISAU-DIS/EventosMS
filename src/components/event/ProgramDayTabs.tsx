@@ -26,8 +26,8 @@ export default function ProgramDayTabs({
                 onClick={() => onSelectDay(day.id)}
                 className={`relative px-3 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
                   isActive
-                    ? "bg-orange-600 text-white shadow-lg"
-                    : "bg-gray-50 text-gray-600 hover:bg-orange-50 hover:text-orange-600"
+                    ? "bg-misau-gold text-white shadow-lg"
+                    : "bg-gray-50 text-gray-600 hover:bg-misau-50 hover:text-misau-gold"
                 }`}
               >
                 <div className="text-xs opacity-80 mb-1">Set</div>

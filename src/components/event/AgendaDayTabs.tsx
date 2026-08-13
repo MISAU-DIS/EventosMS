@@ -28,15 +28,15 @@ export default function AgendaDayTabs({
                 whileTap={{ scale: 0.98 }}
                 className={`relative p-4 rounded-xl transition-all duration-300 ${
                   isActive
-                    ? "bg-gradient-to-br from-orange-500 to-orange-600 text-white shadow-xl"
-                    : "bg-gray-50 text-gray-600 hover:bg-orange-50 hover:text-orange-600"
+                    ? "bg-gradient-to-br from-misau-light to-misau-gold text-white shadow-xl"
+                    : "bg-gray-50 text-gray-600 hover:bg-misau-50 hover:text-misau-gold"
                 }`}
               >
                 <div className="text-xs opacity-80 mb-1 font-medium">Dia</div>
                 <div className="text-2xl font-bold mb-2">{index + 1}</div>
                 <div
                   className={`text-xs ${
-                    isActive ? "text-orange-100" : "text-gray-500"
+                    isActive ? "text-misau-bright" : "text-gray-500"
                   }`}
                 >
                   {day.date.replace(" de Setembro de 2026", " Set")}

@@ -15,11 +15,11 @@ export default function AgendaPage() {
   const calendarUrl = buildGoogleCalendarUrl(eventConfig);
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-orange-50">
+    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-misau-50">
       <div className="bg-white shadow-sm border-b">
         <div className="container mx-auto mt-20 px-4 py-8">
           <div className="text-center">
-            <h1 className="text-3xl md:text-5xl font-bold text-orange-700 mb-4">
+            <h1 className="text-3xl md:text-5xl font-bold text-misau-medium mb-4">
               Agenda do Evento
             </h1>
             <p className="text-gray-600 text-lg mb-6">{eventConfig.title}</p>
@@ -53,7 +53,7 @@ export default function AgendaPage() {
         <div className="text-center mt-12">
           <a
             href="/contacto"
-            className="inline-block bg-orange-600 hover:bg-orange-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+            className="inline-block bg-misau-gold hover:bg-misau-medium text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
           >
             Precisa de mais informações? Entre em contacto
           </a>

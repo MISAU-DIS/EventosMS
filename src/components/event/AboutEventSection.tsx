@@ -15,7 +15,7 @@ export default function AboutEventSection() {
           viewport={{ once: true, amount: 0.2 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-orange-700">
+          <h2 className="text-3xl sm:text-4xl font-bold text-misau-medium">
             Sobre o Evento
           </h2>
         </motion.div>

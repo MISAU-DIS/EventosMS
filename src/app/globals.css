@@ -2,7 +2,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #ffffff;
+  --foreground: #171717;
 }
 
 @theme inline {
@@ -10,12 +10,25 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Paleta ouro MISAU */
+  --color-misau-shadow: #7d5f1a;
+  --color-misau-dark: #a8822a;
+  --color-misau-medium: #c59b27;
+  --color-misau-gold: #deb23b;
+  --color-misau-light: #f3c63f;
+  --color-misau-bright: #ffe270;
+
+  /* Tons derivados para fundos suaves */
+  --color-misau-50: #fffbf0;
+  --color-misau-100: #fff4d6;
+  --color-misau-200: #ffeab3;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #ffffff;
-    --foreground: #ededed;
+    --foreground: #171717;
   }
 }
 
@@ -24,6 +37,7 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
 p {
   hyphens: auto;
 }
