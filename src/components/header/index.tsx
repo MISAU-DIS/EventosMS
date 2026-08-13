@@ -4,14 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { eventConfig } from "@/data";
-
-const navLinks = [
-  { href: "/", label: "Início" },
-  { href: "/programa", label: "Programa" },
-  { href: "/agenda", label: "Agenda" },
-  { href: "/comentarios", label: "Comentários" },
-  { href: "/contacto", label: "Contacto" },
-];
+import { navLinks } from "@/config/navigation";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -48,7 +41,7 @@ export default function Header() {
             href="/"
             className="text-sm md:text-base lg:text-lg font-semibold tracking-tight leading-tight hover:opacity-90 transition-opacity duration-200"
           >
-            {eventConfig.title}
+            {eventConfig.institutionName}
           </Link>
         </div>
 
