@@ -16,19 +16,21 @@ export default function AgendaPage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-misau-50">
-      <div className="bg-white shadow-sm border-b">
-        <div className="container mx-auto mt-20 px-4 py-8">
-          <div className="text-center">
-            <h1 className="text-3xl md:text-5xl font-bold text-misau-medium mb-4">
+      <div className="bg-white border-b">
+        <div className="w-full max-w-[1600px] mx-auto mt-20 px-6 sm:px-10 lg:px-16 py-10">
+          <div>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-misau-medium mb-5">
               Agenda do Evento
             </h1>
-            <p className="text-gray-600 text-lg mb-6">{eventConfig.title}</p>
+            <p className="text-gray-600 text-xl md:text-2xl lg:text-3xl mb-8">
+              {eventConfig.title}
+            </p>
             <EventDateLocationBadges />
           </div>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-12">
+      <div className="w-full max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-16 py-12">
         <AgendaDayTabs
           days={eventAgenda}
           selectedDay={selectedDay}
@@ -42,7 +44,7 @@ export default function AgendaPage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="max-w-4xl mx-auto"
+            className="w-full"
           >
             <AgendaDayContent day={selected} calendarUrl={calendarUrl} />
           </motion.div>
@@ -53,7 +55,7 @@ export default function AgendaPage() {
         <div className="text-center mt-12">
           <a
             href="/contacto"
-            className="inline-block bg-misau-gold hover:bg-misau-medium text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+            className="inline-block bg-misau-gold hover:bg-misau-medium text-white text-lg font-semibold px-10 py-4 rounded-xl transition-all duration-300"
           >
             Precisa de mais informações? Entre em contacto
           </a>
