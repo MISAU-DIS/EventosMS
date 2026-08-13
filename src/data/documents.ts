@@ -5,13 +5,29 @@ export const meetingDocuments: DocumentSection[] = [
     id: "dia1",
     title: "Documentos do 1.º dia",
     description: "Apresentações e materiais do primeiro dia da reunião.",
-    documents: [],
+    documents: [
+      {
+        id: "apresentacao1",
+        title: "Apresentação1.pptx",
+        description: "Apresentação do primeiro dia da reunião.",
+        fileUrl: "/documentos/dia1/apresentacao1.pptx",
+        fileType: "pptx",
+      },
+    ],
   },
   {
     id: "dia2",
     title: "Documentos do 2.º dia",
     description: "Apresentações e materiais do segundo dia da reunião.",
-    documents: [],
+    documents: [
+      {
+        id: "presentation2",
+        title: "Presentation2.pptx",
+        description: "Apresentação do segundo dia da reunião.",
+        fileUrl: "/documentos/dia2/presentation2.pptx",
+        fileType: "pptx",
+      },
+    ],
   },
   {
     id: "dia3",
