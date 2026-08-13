@@ -1,95 +1,71 @@
-'use client';
+"use client";
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import React from 'react';
 import { eventConfig } from "@/data";
-import DecorativeBackground from "@/components/layout/DecorativeBackground";
+import InstitutionalBackground from "@/components/layout/InstitutionalBackground";
+import EvaluationDayTabs from "@/components/event/EvaluationDayTabs";
+import { useDayComments } from "@/hooks/useDayComments";
+import {
+  evaluationDays,
+  type EvaluationDayId,
+  type NewCommentInput,
+} from "@/types/comments";
 
-interface Comment {
-  id: number;
-  name: string;
-  role: string;
-  organization: string;
-  rating: number;
-  comment: string;
-  date: string;
-  avatar: string;
+function renderStars(rating: number) {
+  return Array.from({ length: 5 }, (_, i) => (
+    <span
+      key={i}
+      className={`text-lg ${i < rating ? "text-yellow-400" : "text-gray-300"}`}
+    >
+      ⭐
+    </span>
+  ));
 }
 
-interface NewComment {
-  name: string;
-  role: string;
-  organization: string;
-  rating: number;
-  comment: string;
-}
+const emptyComment: NewCommentInput = {
+  name: "",
+  role: "",
+  organization: "",
+  rating: 5,
+  comment: "",
+};
 
-export default function Comentarios(): React.ReactElement {
-  const [comments, setComments] = useState<Comment[]>([]);
+export default function ComentariosPage() {
+  const [selectedDay, setSelectedDay] = useState<EvaluationDayId>("dia1");
+  const { comments, addComment } = useDayComments(selectedDay);
+  const [newComment, setNewComment] = useState<NewCommentInput>(emptyComment);
+  const [showForm, setShowForm] = useState(false);
 
-  const [newComment, setNewComment] = useState<NewComment>({
-    name: "",
-    role: "",
-    organization: "",
-    rating: 5,
-    comment: ""
-  });
+  const activeDay = evaluationDays.find((day) => day.id === selectedDay)!;
+  const averageRating = comments.length
+    ? comments.reduce((acc, c) => acc + c.rating, 0) / comments.length
+    : 0;
 
-  const [showForm, setShowForm] = useState<boolean>(false);
-
-  const handleSubmit = (e: React.FormEvent): void => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!newComment.name || !newComment.comment) {
-      alert("Por favor, preencha pelo menos o nome e o comentário.");
+    if (!newComment.comment.trim()) {
+      alert("Por favor, escreva o seu comentário.");
       return;
     }
-
-    const comment: Comment = {
-      id: comments.length + 1,
-      ...newComment,
-      date: new Date().toISOString().split('T')[0],
-      avatar: newComment.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)
-    };
-
-    setComments([comment, ...comments]);
-    setNewComment({
-      name: "",
-      role: "",
-      organization: "",
-      rating: 5,
-      comment: ""
-    });
+    addComment(newComment);
+    setNewComment(emptyComment);
     setShowForm(false);
   };
-
-  const renderStars = (rating: number): React.ReactElement[] => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <span
-        key={i}
-        className={`text-lg ${i < rating ? 'text-yellow-400' : 'text-gray-300'}`}
-      >
-        ⭐
-      </span>
-    ));
-  };
-
-  const averageRating = comments.length
-    ? comments.reduce((acc, comment) => acc + comment.rating, 0) / comments.length
-    : 0;
 
   return (
     <>
       <title>Comentários do Evento - {eventConfig.shortTitle} MISAU 2026</title>
-      <meta name="description" content={`Comentários e feedback sobre o ${eventConfig.title}`} />
+      <meta
+        name="description"
+        content={`Comentários e avaliações sobre o ${eventConfig.title}`}
+      />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-      <main className="relative z-10 min-h-screen bg-gradient-to-b from-white to-misau-50">
-        <DecorativeBackground variant="extended" />
+      <main className="relative z-10 min-h-screen">
+        <InstitutionalBackground variant="extended" />
 
-        {/* Hero Section */}
-        <div className="pt-24 pb-16 px-4 bg-gradient-to-r text-misau-dark">
+        <div className="relative pt-24 pb-16 px-4 text-misau-dark">
           <div className="container mx-auto text-center">
             <motion.h1
               initial={{ opacity: 0, y: -50 }}
@@ -97,134 +73,135 @@ export default function Comentarios(): React.ReactElement {
               transition={{ duration: 0.8 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4"
             >
-              Comentários do Evento
+              Avaliações da Reunião
             </motion.h1>
-
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
               className="text-xl sm:text-2xl mb-2 text-gray-700"
             >
-              {eventConfig.title} — Feedback dos Participantes
+              {eventConfig.title}
             </motion.p>
-
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-lg text-misau-medium"
+              className="text-lg text-misau-medium max-w-2xl mx-auto"
             >
-              Compartilhe sua experiência e leia os comentários de outros participantes
+              Partilhe a sua avaliação por dia ou registe a avaliação geral do
+              evento
             </motion.p>
           </div>
         </div>
 
-        <div className="container mx-auto px-4 py-12 max-w-6xl">
-          {/* Estatísticas */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
-          >
+        <div className="relative container mx-auto px-4 py-12 max-w-6xl">
+          <EvaluationDayTabs
+            selectedDay={selectedDay}
+            onSelect={setSelectedDay}
+          />
+
+          <p className="text-center text-gray-600 mb-8">{activeDay.description}</p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             <div className="bg-white rounded-xl shadow-lg p-6 text-center">
-              <div className="text-3xl font-bold text-misau-dark">{comments.length}</div>
-              <div className="text-gray-600 font-medium">Comentários</div>
+              <div className="text-3xl font-bold text-misau-dark">
+                {comments.length}
+              </div>
+              <div className="text-gray-600 font-medium">Avaliações</div>
             </div>
             <div className="bg-white rounded-xl shadow-lg p-6 text-center">
               <div className="text-3xl font-bold text-misau-dark">
                 {comments.length ? averageRating.toFixed(1) : "—"}
               </div>
-              <div className="text-gray-600 font-medium">Avaliação Média</div>
+              <div className="text-gray-600 font-medium">Média — {activeDay.label}</div>
               <div className="flex justify-center mt-2">
                 {renderStars(Math.round(averageRating))}
               </div>
             </div>
-            <div className="bg-white rounded-xl shadow-lg p-6 text-center border-l-4">
-              <div className="text-3xl font-bold text-misau-dark">
-                {comments.length ? "100%" : "—"}
-              </div>
-              <div className="text-gray-600 font-medium">Participação</div>
+            <div className="bg-white rounded-xl shadow-lg p-6 text-center">
+              <div className="text-3xl font-bold text-misau-dark">4</div>
+              <div className="text-gray-600 font-medium">Secções de avaliação</div>
             </div>
-          </motion.div>
-
-          {/* Botão para adicionar comentário */}
-          <div className="text-center mb-12">
-            <motion.button
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              onClick={() => setShowForm(!showForm)}
-              className="bg-misau-medium hover:bg-misau-dark text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-            >
-              {showForm ? 'Cancelar' : 'Deixar Comentário'}
-            </motion.button>
           </div>
 
-          {/* Formulário de comentário */}
-          {showForm && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.5 }}
-              className="bg-white rounded-xl shadow-lg p-8 mb-12"
+          <div className="text-center mb-12">
+            <button
+              type="button"
+              onClick={() => setShowForm(!showForm)}
+              className="bg-misau-medium hover:bg-misau-dark text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
             >
-              <h3 className="text-2xl font-bold text-misau-dark mb-6">Deixe seu Comentário</h3>
+              {showForm ? "Cancelar" : `Avaliar — ${activeDay.label}`}
+            </button>
+          </div>
+
+          {showForm && (
+            <div className="bg-white rounded-xl shadow-lg p-8 mb-12">
+              <h3 className="text-2xl font-bold text-misau-dark mb-6">
+                Avaliação — {activeDay.label}
+              </h3>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-gray-700 font-medium mb-2">
-                      Nome Completo <span className="text-gray-500 text-sm">(opcional)</span>
+                      Nome completo (opcional)
                     </label>
                     <input
                       type="text"
                       value={newComment.name}
-                      onChange={(e) => setNewComment({ ...newComment, name: e.target.value })}
-                      className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-misau-light focus:border-transparent transition-all"
+                      onChange={(e) =>
+                        setNewComment({ ...newComment, name: e.target.value })
+                      }
+                      className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-misau-light"
                       placeholder="Ex: Dr. Maria Silva"
                     />
                   </div>
                   <div>
                     <label className="block text-gray-700 font-medium mb-2">
-                      Cargo/Função <span className="text-gray-500 text-sm">(opcional)</span>
+                      Cargo/função (opcional)
                     </label>
                     <input
                       type="text"
                       value={newComment.role}
-                      onChange={(e) => setNewComment({ ...newComment, role: e.target.value })}
-                      className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-misau-light focus:border-transparent transition-all"
-                      placeholder="Ex: Diretor de Saúde"
+                      onChange={(e) =>
+                        setNewComment({ ...newComment, role: e.target.value })
+                      }
+                      className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-misau-light"
                     />
                   </div>
                 </div>
-
                 <div>
                   <label className="block text-gray-700 font-medium mb-2">
-                    Organização/Instituição <span className="text-gray-500 text-sm">(opcional)</span>
+                    Organização (opcional)
                   </label>
                   <input
                     type="text"
                     value={newComment.organization}
-                    onChange={(e) => setNewComment({ ...newComment, organization: e.target.value })}
-                    className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-misau-light focus:border-transparent transition-all"
-                    placeholder="Ex: MISAU - Província de Maputo"
+                    onChange={(e) =>
+                      setNewComment({
+                        ...newComment,
+                        organization: e.target.value,
+                      })
+                    }
+                    className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-misau-light"
                   />
                 </div>
-
                 <div>
                   <label className="block text-gray-700 font-medium mb-2">
-                    Avaliação do Evento
+                    Classificação
                   </label>
                   <div className="flex gap-2">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <button
                         key={star}
                         type="button"
-                        onClick={() => setNewComment({ ...newComment, rating: star })}
-                        className={`text-2xl transition-all hover:scale-110 ${
-                          star <= newComment.rating ? 'text-yellow-400' : 'text-gray-300'
+                        onClick={() =>
+                          setNewComment({ ...newComment, rating: star })
+                        }
+                        className={`text-2xl ${
+                          star <= newComment.rating
+                            ? "text-yellow-400"
+                            : "text-gray-300"
                         }`}
                       >
                         ⭐
@@ -232,110 +209,73 @@ export default function Comentarios(): React.ReactElement {
                     ))}
                   </div>
                 </div>
-
                 <div>
                   <label className="block text-gray-700 font-medium mb-2">
-                    Comentário <span className="text-red-500 text-sm">*</span>
+                    Comentário *
                   </label>
                   <textarea
                     value={newComment.comment}
-                    onChange={(e) => setNewComment({ ...newComment, comment: e.target.value })}
+                    onChange={(e) =>
+                      setNewComment({ ...newComment, comment: e.target.value })
+                    }
                     rows={4}
-                    className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-misau-light focus:border-transparent transition-all resize-none"
-                    placeholder="Compartilhe sua experiência sobre o evento..."
                     required
+                    className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-misau-light resize-none"
+                    placeholder="Partilhe a sua avaliação..."
                   />
                 </div>
-
-                <div className="flex gap-4">
-                  <button
-                    type="submit"
-                    className="bg-misau-medium hover:bg-misau-dark text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
-                  >
-                    Enviar Comentário
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setShowForm(false)}
-                    className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300"
-                  >
-                    Cancelar
-                  </button>
-                </div>
+                <button
+                  type="submit"
+                  className="bg-misau-medium hover:bg-misau-dark text-white px-6 py-3 rounded-lg font-semibold"
+                >
+                  Enviar avaliação
+                </button>
               </form>
-            </motion.div>
+            </div>
           )}
 
-          {/* Lista de comentários */}
           <div className="space-y-6">
             <h3 className="text-3xl font-bold text-misau-dark text-center mb-8">
-              Comentários dos Participantes
+              Avaliações — {activeDay.label}
             </h3>
-
-            {comments.length === 0 && (
+            {comments.length === 0 ? (
               <div className="bg-white rounded-xl shadow-lg p-8 text-center text-gray-600">
-                Ainda não há comentários publicados. Seja o primeiro a partilhar
-                a sua experiência sobre o evento.
+                Ainda não há avaliações para {activeDay.label.toLowerCase()}.
               </div>
-            )}
-            
-            {comments.map((comment, index) => (
-              <motion.div
-                key={comment.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6"
-              >
-                <div className="flex flex-col md:flex-row md:items-start gap-4">
-                  {/* Avatar */}
-                  <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-misau-medium text-white rounded-full flex items-center justify-center font-bold text-lg">
+            ) : (
+              comments.map((comment) => (
+                <div
+                  key={comment.id}
+                  className="bg-white rounded-xl shadow-lg p-6"
+                >
+                  <div className="flex gap-4">
+                    <div className="w-14 h-14 bg-misau-medium text-white rounded-full flex items-center justify-center font-bold">
                       {comment.avatar}
                     </div>
-                  </div>
-
-                  {/* Conteúdo */}
-                  <div className="flex-grow">
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
-                      <div>
-                        <h4 className="text-xl font-semibold text-gray-800">{comment.name}</h4>
-                        <p className="text-misau-dark font-medium">{comment.role}</p>
-                        <p className="text-gray-500 text-sm">{comment.organization}</p>
-                      </div>
-                      <div className="flex flex-col items-start sm:items-end mt-2 sm:mt-0">
-                        <div className="flex">{renderStars(comment.rating)}</div>
-                        <span className="text-gray-400 text-sm mt-1">
-                          {new Date(comment.date).toLocaleDateString('pt-PT')}
-                        </span>
-                      </div>
+                    <div className="flex-grow">
+                      <h4 className="text-lg font-semibold">
+                        {comment.name || "Participante"}
+                      </h4>
+                      {comment.role && (
+                        <p className="text-misau-dark text-sm">{comment.role}</p>
+                      )}
+                      {comment.organization && (
+                        <p className="text-gray-500 text-sm">
+                          {comment.organization}
+                        </p>
+                      )}
+                      <div className="flex mt-2">{renderStars(comment.rating)}</div>
+                      <p className="text-gray-700 mt-3 leading-relaxed">
+                        {comment.comment}
+                      </p>
                     </div>
-                    
-                    <p className="text-gray-700 leading-relaxed">{comment.comment}</p>
                   </div>
                 </div>
-              </motion.div>
-            ))}
+              ))
+            )}
           </div>
-
-          {/* Call to Action
-          <div className="text-center mt-16 bg-gradient-to-r from-blue-800 to-blue-800 text-white py-12 px-6 rounded-2xl">
-            <h3 className="text-2xl font-bold mb-4">Quer saber mais sobre o evento?</h3>
-            <p className="text-lg mb-6 text-misau-bright">
-              Para mais informações sobre o MISAU 2025 e futuros eventos, entre em contato connosco.
-            </p>
-            <Link
-              href="/contacto"
-              className="bg-white text-misau-dark hover:bg-misau-50 px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block"
-            >
-              Entrar em Contato
-            </Link>
-          </div> */}
         </div>
-
-       
       </main>
     </>
   );
 }
-
