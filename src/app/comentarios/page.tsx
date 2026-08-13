@@ -5,6 +5,7 @@ import { useState } from "react";
 import { eventConfig } from "@/data";
 import InstitutionalBackground from "@/components/layout/InstitutionalBackground";
 import EvaluationDayTabs from "@/components/event/EvaluationDayTabs";
+import StarRating, { StarRatingDisplay } from "@/components/event/StarRating";
 import { useDayComments } from "@/hooks/useDayComments";
 import {
   evaluationDays,
@@ -13,21 +14,14 @@ import {
 } from "@/types/comments";
 
 function renderStars(rating: number) {
-  return Array.from({ length: 5 }, (_, i) => (
-    <span
-      key={i}
-      className={`text-lg ${i < rating ? "text-yellow-400" : "text-gray-300"}`}
-    >
-      ⭐
-    </span>
-  ));
+  return <StarRatingDisplay rating={rating} />;
 }
 
 const emptyComment: NewCommentInput = {
   name: "",
   role: "",
   organization: "",
-  rating: 5,
+  rating: 0,
   comment: "",
 };
 
@@ -46,6 +40,10 @@ export default function ComentariosPage() {
     e.preventDefault();
     if (!newComment.comment.trim()) {
       alert("Por favor, escreva o seu comentário.");
+      return;
+    }
+    if (newComment.rating < 1) {
+      alert("Por favor, seleccione uma classificação de 1 a 5 estrelas.");
       return;
     }
     addComment(newComment);
@@ -95,7 +93,7 @@ export default function ComentariosPage() {
           </div>
         </div>
 
-        <div className="relative container mx-auto px-4 py-12 max-w-6xl">
+        <div className="relative w-full max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-16 py-12">
           <EvaluationDayTabs
             selectedDay={selectedDay}
             onSelect={setSelectedDay}
@@ -104,13 +102,13 @@ export default function ComentariosPage() {
           <p className="text-center text-gray-600 mb-8">{activeDay.description}</p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div className="bg-white rounded-xl shadow-lg p-6 text-center">
+            <div className="bg-white rounded-xl border border-misau-100 p-6 text-center">
               <div className="text-3xl font-bold text-misau-dark">
                 {comments.length}
               </div>
               <div className="text-gray-600 font-medium">Avaliações</div>
             </div>
-            <div className="bg-white rounded-xl shadow-lg p-6 text-center">
+            <div className="bg-white rounded-xl border border-misau-100 p-6 text-center">
               <div className="text-3xl font-bold text-misau-dark">
                 {comments.length ? averageRating.toFixed(1) : "—"}
               </div>
@@ -119,7 +117,7 @@ export default function ComentariosPage() {
                 {renderStars(Math.round(averageRating))}
               </div>
             </div>
-            <div className="bg-white rounded-xl shadow-lg p-6 text-center">
+            <div className="bg-white rounded-xl border border-misau-100 p-6 text-center">
               <div className="text-3xl font-bold text-misau-dark">4</div>
               <div className="text-gray-600 font-medium">Secções de avaliação</div>
             </div>
@@ -129,14 +127,14 @@ export default function ComentariosPage() {
             <button
               type="button"
               onClick={() => setShowForm(!showForm)}
-              className="bg-misau-medium hover:bg-misau-dark text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="bg-misau-medium hover:bg-misau-dark text-white px-8 py-4 rounded-full font-semibold transition-all duration-300"
             >
               {showForm ? "Cancelar" : `Avaliar — ${activeDay.label}`}
             </button>
           </div>
 
           {showForm && (
-            <div className="bg-white rounded-xl shadow-lg p-8 mb-12">
+            <div className="bg-white rounded-xl border border-misau-100 p-8 mb-12">
               <h3 className="text-2xl font-bold text-misau-dark mb-6">
                 Avaliação — {activeDay.label}
               </h3>
@@ -188,26 +186,14 @@ export default function ComentariosPage() {
                 </div>
                 <div>
                   <label className="block text-gray-700 font-medium mb-2">
-                    Classificação
+                    Classificação *
                   </label>
-                  <div className="flex gap-2">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <button
-                        key={star}
-                        type="button"
-                        onClick={() =>
-                          setNewComment({ ...newComment, rating: star })
-                        }
-                        className={`text-2xl ${
-                          star <= newComment.rating
-                            ? "text-yellow-400"
-                            : "text-gray-300"
-                        }`}
-                      >
-                        ⭐
-                      </button>
-                    ))}
-                  </div>
+                  <StarRating
+                    value={newComment.rating}
+                    onChange={(rating) =>
+                      setNewComment({ ...newComment, rating })
+                    }
+                  />
                 </div>
                 <div>
                   <label className="block text-gray-700 font-medium mb-2">
@@ -239,14 +225,14 @@ export default function ComentariosPage() {
               Avaliações — {activeDay.label}
             </h3>
             {comments.length === 0 ? (
-              <div className="bg-white rounded-xl shadow-lg p-8 text-center text-gray-600">
+              <div className="bg-white rounded-xl border border-misau-100 p-8 text-center text-gray-600">
                 Ainda não há avaliações para {activeDay.label.toLowerCase()}.
               </div>
             ) : (
               comments.map((comment) => (
                 <div
                   key={comment.id}
-                  className="bg-white rounded-xl shadow-lg p-6"
+                  className="bg-white rounded-xl border border-misau-100 p-6"
                 >
                   <div className="flex gap-4">
                     <div className="w-14 h-14 bg-misau-medium text-white rounded-full flex items-center justify-center font-bold">
