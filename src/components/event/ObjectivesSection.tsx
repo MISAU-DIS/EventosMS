@@ -5,9 +5,9 @@ import { eventConfig } from "@/data";
 
 export default function ObjectivesSection() {
   return (
-    <section className="py-16 px-4 bg-gradient-to-b from-misau-50 to-white">
-      <div className="container mx-auto max-w-7xl">
-        <h2 className="text-3xl sm:text-4xl font-bold text-misau-medium mb-12 text-center">
+    <section className="py-12 sm:py-16 px-4 sm:px-6 bg-gradient-to-b from-misau-50 to-white">
+      <div className="w-full max-w-[1600px] mx-auto">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-misau-medium mb-8 sm:mb-12 text-center">
           Objectivos da Reunião
         </h2>
 
@@ -16,12 +16,14 @@ export default function ObjectivesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="bg-misau-medium text-white rounded-xl p-6 sm:p-8 shadow-lg mb-10"
+          className="bg-misau-medium text-white rounded-xl p-5 sm:p-8 mb-8 sm:mb-10"
         >
-          <p className="text-xl sm:text-2xl leading-relaxed">{eventConfig.generalObjective}</p>
+          <p className="text-base sm:text-xl md:text-2xl leading-relaxed">
+            {eventConfig.generalObjective}
+          </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           {eventConfig.specificObjectives.map((objective, index) => (
             <motion.div
               key={objective}
@@ -29,12 +31,14 @@ export default function ObjectivesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
               viewport={{ once: true }}
-              className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-white rounded-xl p-5 sm:p-6 border border-misau-100"
             >
               <span className="inline-flex items-center justify-center w-8 h-8 bg-misau-bright text-misau-medium rounded-lg font-bold text-sm mb-3">
                 {index + 1}
               </span>
-              <p className="text-gray-600 text-lg sm:text-xl leading-relaxed">{objective}</p>
+              <p className="text-gray-600 text-base sm:text-lg md:text-xl leading-relaxed">
+                {objective}
+              </p>
             </motion.div>
           ))}
         </div>
