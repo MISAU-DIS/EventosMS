@@ -35,7 +35,7 @@ export default function DocumentosPage() {
           </motion.p>
         </div>
 
-        <div className="container mx-auto max-w-5xl px-4 sm:px-8 py-12 space-y-12">
+        <div className="w-full max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-16 py-12 space-y-10">
           {meetingDocuments.map((section, index) => (
             <motion.section
               key={section.id}
@@ -43,7 +43,7 @@ export default function DocumentosPage() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
               viewport={{ once: true, amount: 0.2 }}
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-lg border border-misau-100"
+              className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-misau-100"
             >
               <h2 className="text-2xl sm:text-3xl font-bold text-misau-medium mb-2">
                 {section.title}
