@@ -5,14 +5,9 @@ import { useState } from "react";
 import { eventConfig } from "@/data";
 import InstitutionalBackground from "@/components/layout/InstitutionalBackground";
 import PageContainer from "@/components/layout/PageContainer";
-import EvaluationDayTabs from "@/components/event/EvaluationDayTabs";
 import StarRating, { StarRatingDisplay } from "@/components/event/StarRating";
 import { useDayComments } from "@/hooks/useDayComments";
-import {
-  evaluationDays,
-  type EvaluationDayId,
-  type NewCommentInput,
-} from "@/types/comments";
+import { evaluationDay, type NewCommentInput } from "@/types/comments";
 
 const emptyComment: NewCommentInput = {
   name: "",
@@ -23,12 +18,10 @@ const emptyComment: NewCommentInput = {
 };
 
 export default function ComentariosPage() {
-  const [selectedDay, setSelectedDay] = useState<EvaluationDayId>("dia1");
-  const { comments, addComment } = useDayComments(selectedDay);
+  const { comments, addComment } = useDayComments(evaluationDay.id);
   const [newComment, setNewComment] = useState<NewCommentInput>(emptyComment);
   const [showForm, setShowForm] = useState(false);
 
-  const activeDay = evaluationDays.find((day) => day.id === selectedDay)!;
   const averageRating = comments.length
     ? comments.reduce((acc, c) => acc + c.rating, 0) / comments.length
     : 0;
@@ -83,44 +76,35 @@ export default function ComentariosPage() {
               transition={{ delay: 0.4, duration: 0.8 }}
               className="text-sm sm:text-base md:text-lg text-misau-medium max-w-2xl mx-auto"
             >
-              Partilhe a sua avaliação por dia ou registe a avaliação geral do
-              evento
+              Partilhe a sua avaliação no último dia do evento, na conclusão
+              da reunião
             </motion.p>
           </div>
         </div>
 
         <PageContainer className="relative pb-12">
-          <EvaluationDayTabs
-            selectedDay={selectedDay}
-            onSelect={setSelectedDay}
-          />
-
           <p className="text-center text-sm sm:text-base text-gray-600 mb-6 sm:mb-8 px-2">
-            {activeDay.description}
+            {evaluationDay.description}
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12 max-w-2xl mx-auto">
             <div className="bg-white rounded-xl border border-misau-100 p-5 sm:p-6 text-center">
               <div className="text-2xl sm:text-3xl font-bold text-misau-dark">
                 {comments.length}
               </div>
-              <div className="text-gray-600 font-medium text-sm sm:text-base">Avaliações</div>
+              <div className="text-gray-600 font-medium text-sm sm:text-base">
+                Avaliações
+              </div>
             </div>
             <div className="bg-white rounded-xl border border-misau-100 p-5 sm:p-6 text-center">
               <div className="text-2xl sm:text-3xl font-bold text-misau-dark">
                 {comments.length ? averageRating.toFixed(1) : "—"}
               </div>
               <div className="text-gray-600 font-medium text-sm sm:text-base">
-                Média — {activeDay.label}
+                Média — {evaluationDay.label}
               </div>
               <div className="flex justify-center mt-2">
                 <StarRatingDisplay rating={Math.round(averageRating)} />
-              </div>
-            </div>
-            <div className="bg-white rounded-xl border border-misau-100 p-5 sm:p-6 text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-misau-dark">4</div>
-              <div className="text-gray-600 font-medium text-sm sm:text-base">
-                Secções de avaliação
               </div>
             </div>
           </div>
@@ -131,14 +115,14 @@ export default function ComentariosPage() {
               onClick={() => setShowForm(!showForm)}
               className="bg-misau-medium hover:bg-misau-dark text-white px-5 sm:px-8 py-3.5 sm:py-4 rounded-full font-semibold transition-all duration-300 w-full sm:w-auto max-w-md mx-auto text-sm sm:text-base"
             >
-              {showForm ? "Cancelar" : `Avaliar — ${activeDay.label}`}
+              {showForm ? "Cancelar" : `Avaliar — ${evaluationDay.label}`}
             </button>
           </div>
 
           {showForm && (
             <div className="bg-white rounded-xl border border-misau-100 p-5 sm:p-8 mb-8 sm:mb-12">
               <h3 className="text-xl sm:text-2xl font-bold text-misau-dark mb-5 sm:mb-6">
-                Avaliação — {activeDay.label}
+                Avaliação — {evaluationDay.label}
               </h3>
               <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
@@ -224,11 +208,11 @@ export default function ComentariosPage() {
 
           <div className="space-y-4 sm:space-y-6">
             <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-misau-dark text-center mb-6 sm:mb-8">
-              Avaliações — {activeDay.label}
+              Avaliações — {evaluationDay.label}
             </h3>
             {comments.length === 0 ? (
               <div className="bg-white rounded-xl border border-misau-100 p-6 sm:p-8 text-center text-gray-600 text-sm sm:text-base">
-                Ainda não há avaliações para {activeDay.label.toLowerCase()}.
+                Ainda não há avaliações para o {evaluationDay.label.toLowerCase()}.
               </div>
             ) : (
               comments.map((comment) => (
@@ -245,7 +229,9 @@ export default function ComentariosPage() {
                         {comment.name || "Participante"}
                       </h4>
                       {comment.role && (
-                        <p className="text-misau-dark text-sm break-words">{comment.role}</p>
+                        <p className="text-misau-dark text-sm break-words">
+                          {comment.role}
+                        </p>
                       )}
                       {comment.organization && (
                         <p className="text-gray-500 text-sm break-words">
