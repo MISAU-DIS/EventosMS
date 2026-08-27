@@ -20,7 +20,7 @@ export default function FotografiasPage() {
       <main className="min-h-screen bg-gradient-to-b from-misau-50 via-white to-misau-50">
         <PageHero
           title="Fotografias Oficiais"
-          description="Registo fotográfico da reunião, a publicar pelo Departamento de Comunicação e Imagem"
+          description="Registo fotográfico oficial da reunião do LI Conselho Coordenador de Saúde"
         />
 
         <PageContainer className="py-8 sm:py-12">
@@ -52,7 +52,7 @@ export default function FotografiasPage() {
                     alt={photo.alt}
                     width={600}
                     height={400}
-                    className="w-full h-48 sm:h-56 object-cover"
+                    className="w-full h-52 sm:h-64 md:h-72 object-cover object-center"
                   />
                   <figcaption className="p-3 sm:p-4 text-sm font-medium text-misau-dark">
                     {photo.title}
