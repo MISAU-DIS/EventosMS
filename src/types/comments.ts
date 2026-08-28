@@ -8,9 +8,9 @@ export type EvaluationDay = {
 
 export const evaluationDay: EvaluationDay = {
   id: "dia3",
-  label: "3.º dia",
+  label: "Avaliação final",
   description:
-    "Avaliação na conclusão da reunião — último dia do evento (11 Set 2026).",
+    "Registe a sua avaliação na conclusão da reunião.",
 };
 
 export type StoredComment = {

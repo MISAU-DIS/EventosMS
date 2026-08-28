@@ -60,7 +60,7 @@ export default function ComentariosPage() {
               transition={{ duration: 0.8 }}
               className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-3 sm:mb-4 leading-tight"
             >
-              Avaliações da Reunião
+              Avaliação Final
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -76,8 +76,7 @@ export default function ComentariosPage() {
               transition={{ delay: 0.4, duration: 0.8 }}
               className="text-sm sm:text-base md:text-lg text-misau-medium max-w-2xl mx-auto"
             >
-              Partilhe a sua avaliação no último dia do evento, na conclusão
-              da reunião
+              Partilhe a sua avaliação final na conclusão da reunião
             </motion.p>
           </div>
         </div>
@@ -101,7 +100,7 @@ export default function ComentariosPage() {
                 {comments.length ? averageRating.toFixed(1) : "—"}
               </div>
               <div className="text-gray-600 font-medium text-sm sm:text-base">
-                Média — {evaluationDay.label}
+                Classificação média
               </div>
               <div className="flex justify-center mt-2">
                 <StarRatingDisplay rating={Math.round(averageRating)} />
@@ -115,14 +114,14 @@ export default function ComentariosPage() {
               onClick={() => setShowForm(!showForm)}
               className="bg-misau-medium hover:bg-misau-dark text-white px-5 sm:px-8 py-3.5 sm:py-4 rounded-full font-semibold transition-all duration-300 w-full sm:w-auto max-w-md mx-auto text-sm sm:text-base"
             >
-              {showForm ? "Cancelar" : `Avaliar — ${evaluationDay.label}`}
+              {showForm ? "Cancelar" : "Submeter avaliação"}
             </button>
           </div>
 
           {showForm && (
             <div className="bg-white rounded-xl border border-misau-100 p-5 sm:p-8 mb-8 sm:mb-12">
               <h3 className="text-xl sm:text-2xl font-bold text-misau-dark mb-5 sm:mb-6">
-                Avaliação — {evaluationDay.label}
+                Avaliação final
               </h3>
               <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
@@ -208,11 +207,11 @@ export default function ComentariosPage() {
 
           <div className="space-y-4 sm:space-y-6">
             <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-misau-dark text-center mb-6 sm:mb-8">
-              Avaliações — {evaluationDay.label}
+              Avaliações registadas
             </h3>
             {comments.length === 0 ? (
               <div className="bg-white rounded-xl border border-misau-100 p-6 sm:p-8 text-center text-gray-600 text-sm sm:text-base">
-                Ainda não há avaliações para o {evaluationDay.label.toLowerCase()}.
+                Ainda não há avaliações registadas.
               </div>
             ) : (
               comments.map((comment) => (
