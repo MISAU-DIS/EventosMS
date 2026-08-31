@@ -5,8 +5,6 @@ import { motion } from 'framer-motion';
 import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/lib/firebase"; 
 
 
 interface LoginForm {
@@ -44,17 +42,22 @@ export default function Login(): React.ReactElement {
   setIsLoading(true);
 
   try {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      formData.email,
-      formData.password
-    );
+    const response = await fetch("/api/admin/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: formData.email,
+        password: formData.password,
+      }),
+    });
 
-    console.log("Usuário logado:", userCredential.user.email);
-    // Redirecionar
-    window.location.href = '/AdminDashboard';
+    if (!response.ok) {
+      setError("Email ou senha inválidos");
+      return;
+    }
 
-  } 
+    window.location.href = "/AdminDashboard";
+  }
   catch (error: unknown) {
   const err = error as { message?: string };
   console.error("Erro no login:", err.message);

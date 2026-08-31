@@ -19,11 +19,10 @@ import {
   Menu,
   X,
   Home,
+  FileText,
 } from 'lucide-react';
 import Image from 'next/image';
-import { auth } from '@/lib/firebase';
-import { signOut } from 'firebase/auth';
-import { onAuthStateChanged } from 'firebase/auth';
+import DocumentsAdminPanel from '@/components/admin/DocumentsAdminPanel';
 
 interface DashboardStats {
   totalParticipants: number;
@@ -59,7 +58,7 @@ export default function AdminDashboard(): React.ReactElement {
 
 const handleLogout = async () => {
   try {
-    await signOut(auth);
+    await fetch('/api/admin/logout', { method: 'POST' });
     router.push('/Login');
   } catch (error) {
     console.error('Erro ao fazer logout:', error);
@@ -67,15 +66,16 @@ const handleLogout = async () => {
 };
 
 useEffect(() => {
-  const unsubscribe = onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      router.push('/Login');
-    } else {
-      setLoading(false); 
-    }
-  });
-
-  return () => unsubscribe();
+  fetch('/api/admin/session')
+    .then((res) => res.json())
+    .then((data: { authenticated?: boolean }) => {
+      if (!data.authenticated) {
+        router.push('/Login');
+      } else {
+        setLoading(false);
+      }
+    })
+    .catch(() => router.push('/Login'));
 }, [router]);
 
   // Mock data
@@ -133,6 +133,7 @@ useEffect(() => {
 
   const menuItems = [
     { id: 'overview', label: 'Visão Geral', icon: Home },
+    { id: 'documents', label: 'Documentos', icon: FileText },
     { id: 'participants', label: 'Participantes', icon: Users },
     { id: 'agenda', label: 'Agenda', icon: Calendar },
     { id: 'comments', label: 'Comentários', icon: MessageSquare },
@@ -392,6 +393,8 @@ useEffect(() => {
     switch (activeTab) {
       case 'overview':
         return <OverviewTab />;
+      case 'documents':
+        return <DocumentsAdminPanel />;
       case 'comments':
         return <CommentsTab />;
       case 'participants':
