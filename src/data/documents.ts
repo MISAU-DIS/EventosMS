@@ -21,10 +21,12 @@ export const meetingDocuments: DocumentSection[] = [
     description: "Apresentações e materiais do segundo dia da reunião.",
     documents: [
       {
-        id: "presentation2",
-        title: "Presentation2.pptx",
-        description: "Apresentação do segundo dia da reunião.",
-        fileUrl: "/documentos/dia2/presentation2.pptx",
+        id: "drh-plano-operacional",
+        title: "Plano operacional — rácio de profissionais de saúde (Nampula, Zambézia e Tete)",
+        description:
+          "Apresentação da DRH sobre o plano operacional para a melhoria do rácio de profissionais de saúde (sessão 37, 2.º dia).",
+        fileUrl:
+          "/documentos/dia2/drh-plano-operacional-racio-profissionais-saude.pptx",
         fileType: "pptx",
       },
     ],
