@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { eventConfig } from "@/data";
 import { meetingDocuments } from "@/data/documents";
 import DocumentList from "@/components/event/DocumentList";
+import AgendaPdfDownloadButton from "@/components/event/AgendaPdfDownloadButton";
 import PageContainer from "@/components/layout/PageContainer";
 import { PageHero } from "@/components/layout/PageContainer";
 
@@ -39,6 +40,11 @@ export default function DocumentosPage() {
                 <p className="text-gray-600 mb-5 sm:mb-6 text-sm sm:text-base">
                   {section.description}
                 </p>
+              )}
+              {section.id === "gerais" && (
+                <div className="mb-4">
+                  <AgendaPdfDownloadButton />
+                </div>
               )}
               <DocumentList documents={section.documents} />
             </motion.section>
