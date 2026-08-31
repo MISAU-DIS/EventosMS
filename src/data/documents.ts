@@ -43,6 +43,14 @@ export const meetingDocuments: DocumentSection[] = [
     description: "Sínteses, comunicados e outros documentos de referência.",
     documents: [
       {
+        id: "agenda-programa",
+        title: "Agenda e Programa — LI Conselho Coordenador de Saúde",
+        description:
+          "Documento oficial com a agenda de temas e o programa detalhado da reunião (9–11 Set 2026, Beira). Versão de 27/08/2026.",
+        fileUrl: "/documentos/gerais/agenda-programa-li-ccs-2026.xlsx",
+        fileType: "xlsx",
+      },
+      {
         id: "documento-teste",
         title: "Documento de teste — validação da plataforma",
         description:

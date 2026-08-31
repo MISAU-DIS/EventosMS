@@ -9,6 +9,7 @@ const fileTypeLabels: Record<MeetingDocument["fileType"], string> = {
   pdf: "PDF",
   pptx: "PowerPoint",
   docx: "Word",
+  xlsx: "Excel",
   other: "Ficheiro",
 };
 

@@ -3,7 +3,7 @@ export type MeetingDocument = {
   title: string;
   description?: string;
   fileUrl: string;
-  fileType: "pdf" | "pptx" | "docx" | "other";
+  fileType: "pdf" | "pptx" | "docx" | "xlsx" | "other";
 };
 
 export type DocumentSection = {
