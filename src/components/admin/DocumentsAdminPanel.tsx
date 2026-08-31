@@ -1,7 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Download, FileUp, RefreshCw, Trash2 } from "lucide-react";
+import Swal from "sweetalert2";
 import {
   documentSectionLabels,
   type DocumentSectionId,
@@ -15,8 +16,8 @@ export default function DocumentsAdminPanel() {
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
   const [filter, setFilter] = useState<DocumentSectionId | "all">("all");
-  const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [form, setForm] = useState({
     sectionId: "dia1" as DocumentSectionId,
     title: "",
@@ -46,13 +47,17 @@ export default function DocumentsAdminPanel() {
   const handleUpload = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!form.file) {
-      setError("Seleccione um ficheiro.");
+      await Swal.fire({
+        icon: "warning",
+        title: "Ficheiro em falta",
+        text: "Seleccione um ficheiro para publicar.",
+        confirmButtonColor: "#059669",
+      });
       return;
     }
 
     setUploading(true);
     setError(null);
-    setMessage(null);
 
     try {
       const body = new FormData();
@@ -72,29 +77,71 @@ export default function DocumentsAdminPanel() {
       }
 
       setForm({ sectionId: "dia1", title: "", description: "", file: null });
-      setMessage("Documento adicionado com sucesso.");
+      if (fileInputRef.current) fileInputRef.current.value = "";
+
+      await Swal.fire({
+        icon: "success",
+        title: "Documento publicado",
+        text: "O documento já está disponível na plataforma.",
+        confirmButtonColor: "#059669",
+        timer: 2200,
+        timerProgressBar: true,
+      });
+
       await loadDocuments();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Erro no upload.");
+      await Swal.fire({
+        icon: "error",
+        title: "Não foi possível publicar",
+        text: err instanceof Error ? err.message : "Erro no upload.",
+        confirmButtonColor: "#059669",
+      });
     } finally {
       setUploading(false);
     }
   };
 
-  const handleDelete = async (id: string, title: string) => {
-    if (!window.confirm(`Remover «${title}»?`)) return;
+  const handleDelete = async (doc: StoredDocumentRecord) => {
+    const dayLabel = documentSectionLabels[doc.sectionId];
+
+    const result = await Swal.fire({
+      icon: "warning",
+      title: "Remover documento?",
+      html: `Tem certeza que deseja remover o documento <strong>«${doc.title}»</strong> do <strong>${dayLabel}</strong>?`,
+      showCancelButton: true,
+      confirmButtonText: "Sim, remover",
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: "#dc2626",
+      cancelButtonColor: "#6b7280",
+      reverseButtons: true,
+    });
+
+    if (!result.isConfirmed) return;
 
     setError(null);
-    setMessage(null);
     try {
-      const response = await fetch(`/api/admin/documents/${id}`, {
+      const response = await fetch(`/api/admin/documents/${doc.id}`, {
         method: "DELETE",
       });
       if (!response.ok) throw new Error("Não foi possível remover.");
-      setMessage("Documento removido.");
+
+      await Swal.fire({
+        icon: "success",
+        title: "Documento removido",
+        text: "O ficheiro foi apagado da plataforma.",
+        confirmButtonColor: "#059669",
+        timer: 2000,
+        timerProgressBar: true,
+      });
+
       await loadDocuments();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Erro ao remover.");
+      await Swal.fire({
+        icon: "error",
+        title: "Erro ao remover",
+        text: err instanceof Error ? err.message : "Tente novamente.",
+        confirmButtonColor: "#059669",
+      });
     }
   };
 
@@ -109,7 +156,7 @@ export default function DocumentsAdminPanel() {
         <div>
           <h2 className="text-2xl font-bold text-gray-900">Gestão de Documentos</h2>
           <p className="text-gray-600 text-sm mt-1">
-            Upload local para <code className="text-xs bg-gray-100 px-1 rounded">public/documentos/</code>
+            Publicar e remover documentos por dia da reunião.
           </p>
         </div>
         <button
@@ -122,11 +169,6 @@ export default function DocumentsAdminPanel() {
         </button>
       </div>
 
-      {message && (
-        <div className="rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-emerald-800 text-sm">
-          {message}
-        </div>
-      )}
       {error && (
         <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-red-700 text-sm">
           {error}
@@ -141,7 +183,7 @@ export default function DocumentsAdminPanel() {
         <form onSubmit={handleUpload} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Dia / secção
+              Dia / secção <span className="text-red-500">*</span>
             </label>
             <select
               value={form.sectionId}
@@ -152,6 +194,7 @@ export default function DocumentsAdminPanel() {
                 }))
               }
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              required
             >
               {sectionOptions.map((id) => (
                 <option key={id} value={id}>
@@ -162,9 +205,10 @@ export default function DocumentsAdminPanel() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Ficheiro
+              Ficheiro <span className="text-red-500">*</span>
             </label>
             <input
+              ref={fileInputRef}
               type="file"
               accept=".pdf,.ppt,.pptx,.doc,.docx,.xls,.xlsx,.txt"
               onChange={(e) =>
@@ -179,7 +223,7 @@ export default function DocumentsAdminPanel() {
           </div>
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Título
+              Título <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -278,7 +322,7 @@ export default function DocumentsAdminPanel() {
                   </a>
                   <button
                     type="button"
-                    onClick={() => handleDelete(doc.id, doc.title)}
+                    onClick={() => handleDelete(doc)}
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-red-200 text-red-600 hover:bg-red-50 text-sm"
                   >
                     <Trash2 className="w-4 h-4" />

@@ -1,17 +1,14 @@
 import { NextResponse } from "next/server";
-import { adminAuth, isValidAdminLogin } from "@/config/admin";
+import { adminAuth, isValidAdminPassword } from "@/config/admin";
 
 export async function POST(request: Request) {
-  const body = (await request.json()) as { email?: string; password?: string };
+  const body = (await request.json()) as { password?: string };
 
-  if (!body.email || !body.password || !isValidAdminLogin(body.email, body.password)) {
-    return NextResponse.json(
-      { error: "Email ou senha inválidos." },
-      { status: 401 },
-    );
+  if (!body.password || !isValidAdminPassword(body.password)) {
+    return NextResponse.json({ error: "Senha inválida." }, { status: 401 });
   }
 
-  const response = NextResponse.json({ ok: true, email: adminAuth.email });
+  const response = NextResponse.json({ ok: true });
   response.cookies.set(adminAuth.cookieName, adminAuth.sessionToken, {
     httpOnly: true,
     sameSite: "lax",
