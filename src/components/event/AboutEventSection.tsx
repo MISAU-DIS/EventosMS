@@ -41,8 +41,8 @@ export default function AboutEventSection() {
             className="lg:col-span-7 relative min-h-[220px] sm:min-h-[320px] md:min-h-[420px] lg:min-h-[520px] order-1 lg:order-2"
           >
             <Image
-              src="/fotografias/grupo-conselho-coordenador-saude.jpg"
-              alt="Participantes do LI Conselho Coordenador de Saúde em frente ao painel oficial do evento"
+              src={eventConfig.aboutEventImage}
+              alt={eventConfig.aboutEventImageAlt}
               fill
               sizes="(max-width: 1024px) 100vw, 60vw"
               className="rounded-xl sm:rounded-2xl border border-misau-100 object-cover object-center"

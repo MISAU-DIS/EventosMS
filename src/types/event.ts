@@ -53,6 +53,10 @@ export type EventConfig = {
   readonly calendarDates: string;
   readonly organizer: string;
   readonly aboutEventText: string;
+  readonly heroImage: string;
+  readonly heroImageAlt: string;
+  readonly aboutEventImage: string;
+  readonly aboutEventImageAlt: string;
   readonly generalObjective: string;
   readonly specificObjectives: readonly string[];
   readonly expectedResults: readonly string[];

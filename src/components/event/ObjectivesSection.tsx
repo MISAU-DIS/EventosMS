@@ -18,10 +18,17 @@ export default function ObjectivesSection() {
           viewport={{ once: true }}
           className="bg-misau-medium text-white rounded-xl p-5 sm:p-8 mb-8 sm:mb-10"
         >
+          <p className="text-xs sm:text-sm uppercase tracking-wider text-misau-gold font-bold mb-3">
+            Objectivo geral
+          </p>
           <p className="text-base sm:text-xl md:text-2xl leading-relaxed">
             {eventConfig.generalObjective}
           </p>
         </motion.div>
+
+        <h3 className="text-lg sm:text-xl font-semibold text-misau-medium mb-6 sm:mb-8 text-center">
+          Objectivos específicos
+        </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           {eventConfig.specificObjectives.map((objective, index) => (

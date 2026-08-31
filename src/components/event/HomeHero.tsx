@@ -48,6 +48,24 @@ export default function HomeHero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15, duration: 0.8 }}
+          className="mt-6 sm:mt-8 w-full max-w-5xl"
+        >
+          <div className="relative aspect-[16/9] sm:aspect-[21/9] w-full overflow-hidden rounded-xl sm:rounded-2xl border border-misau-gold/30 shadow-lg">
+            <Image
+              src={eventConfig.heroImage}
+              alt={eventConfig.heroImageAlt}
+              fill
+              priority
+              sizes="(max-width: 1280px) 100vw, 1024px"
+              className="object-cover object-center"
+            />
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}
           className="mt-6 sm:mt-10 md:mt-12 w-full max-w-6xl rounded-xl sm:rounded-2xl border border-misau-gold/30 bg-white/85 backdrop-blur-sm px-4 py-6 sm:px-8 sm:py-8 md:px-12 md:py-10"
         >
