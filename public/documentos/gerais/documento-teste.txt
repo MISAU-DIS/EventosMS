@@ -1,6 +1,0 @@
-DOCUMENTO DE TESTE — LI CCS 2026
-Plataforma Online do Conselho Coordenador de Saúde
-
-Este ficheiro serve para validar o descarregamento de documentos na plataforma.
-
-Ministério da Saúde — Repartição de Desenvolvimento e Manutenção de SIS

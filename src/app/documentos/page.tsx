@@ -41,12 +41,10 @@ export default function DocumentosPage() {
                   {section.description}
                 </p>
               )}
-              {section.id === "gerais" && (
-                <div className="mb-4">
-                  <AgendaPdfDownloadButton />
-                </div>
+              {section.id === "gerais" && <AgendaPdfDownloadButton />}
+              {section.documents.length > 0 && (
+                <DocumentList documents={section.documents} />
               )}
-              <DocumentList documents={section.documents} />
             </motion.section>
           ))}
         </PageContainer>
