@@ -17,35 +17,35 @@ export const eventProgram: EventProgramDay[] = [
         "order": 2,
         "time": "08:40h",
         "title": "Chegada de S.Excia Presidente do Município da Beira",
-        "type": "Cerimónia",
+        "type": "Protocolo",
         "speaker": "Protocolo"
       },
       {
         "order": 3,
         "time": "08:45h",
         "title": "Chegada de S.Excia Governador de Província",
-        "type": "Cerimónia",
+        "type": "Protocolo",
         "speaker": "Protocolo"
       },
       {
         "order": 3,
         "time": "08:50h",
         "title": "Chegada de S.Excia Secretário de Estado na Provincia",
-        "type": "Cerimónia",
+        "type": "Protocolo",
         "speaker": "Protocolo"
       },
       {
         "order": 4,
         "time": "08:55h",
         "title": "Chegada de S.Excia Ministro da Saúde",
-        "type": "Cerimónia",
+        "type": "Protocolo",
         "speaker": "Protocolo"
       },
       {
         "order": 5,
         "time": "09:00h",
         "title": "Entrada do Presidium",
-        "type": "Cerimónia",
+        "type": "Protocolo",
         "speaker": "Protocolo"
       },
       {
@@ -243,12 +243,12 @@ export const eventProgram: EventProgramDay[] = [
         "title": "Fim dos trabalhos",
         "type": "Encerramento",
         "speaker": ""
-      }
+      },
     ]
   },
   {
     "id": "dia2",
-    "label": "2° DIA: 10 de Setembro de 2026",
+    "label": "2° DIA:  10 de Setembro de 2026",
     "date": "10 de Setembro de 2026",
     "sessions": [
       {
@@ -425,12 +425,12 @@ export const eventProgram: EventProgramDay[] = [
         "title": "Fim dos trabalhos",
         "type": "Encerramento",
         "speaker": ""
-      }
+      },
     ]
   },
   {
     "id": "dia3",
-    "label": "3° DIA: 11 de Setembro de 2026",
+    "label": "3° DIA:  11 de Setembro de 2026",
     "date": "11 de Setembro de 2026",
     "sessions": [
       {
@@ -442,97 +442,104 @@ export const eventProgram: EventProgramDay[] = [
       },
       {
         "order": 60,
-        "time": "09:00 - 09:30h",
+        "time": "09:00 - 11:00h",
+        "title": "Eficiência no sector da saúde - painel",
+        "type": "Painel",
+        "speaker": "DPC"
+      },
+      {
+        "order": 61,
+        "time": "11:00 - 11:30h",
+        "title": "Pausa para o café",
+        "type": "Intervalo",
+        "speaker": ""
+      },
+      {
+        "order": 62,
+        "time": "11:30 - 12:00h",
         "title": "Lei do Sistema Nacional de Saúde - inovações e perspectivas de implementação",
         "type": "Apresentação",
         "speaker": "Unidade de Reformas"
       },
       {
-        "order": 61,
-        "time": "09:30 - 10:00h",
-        "title": "Discussão",
-        "type": "Discussão",
-        "speaker": "S.Excia Ministro"
-      },
-      {
-        "order": 62,
-        "time": "10:00 - 10:20h",
-        "title": "Plano Estratégico do Sector da Saúde 2026-2035: linhas estratégicas",
-        "type": "Apresentação",
-        "speaker": "DPC"
-      },
-      {
         "order": 63,
-        "time": "10:20 - 10:40h",
+        "time": "12:00 - 12:30h",
         "title": "Discussão",
         "type": "Discussão",
         "speaker": "S.Excia Ministro"
       },
       {
         "order": 64,
-        "time": "10:40 - 11:10h",
-        "title": "Pausa para o café",
-        "type": "Intervalo",
-        "speaker": ""
-      },
-      {
-        "order": 65,
-        "time": "11:10 - 11:30h",
-        "title": "Proposta do PESOE 2027: prioridades e linhas estratégicas e alocação do orçamento",
+        "time": "12:30 - 12:50h",
+        "title": "Plano Estratégico do Sector da Saúde 2026-2035: linhas estratégicas",
         "type": "Apresentação",
         "speaker": "DPC"
       },
       {
-        "order": 66,
-        "time": "11:30 - 11:50h",
+        "order": 65,
+        "time": "12:50 - 13:10h",
         "title": "Discussão",
         "type": "Discussão",
         "speaker": "S.Excia Ministro"
       },
       {
+        "order": 66,
+        "time": "13:10 - 13:30h",
+        "title": "Proposta do PESOE 2027: prioridades e linhas estratégicas e alocação do orçamento",
+        "type": "Apresentação",
+        "speaker": "DPC"
+      },
+      {
         "order": 67,
-        "time": "11:50 - 13:20h",
-        "title": "Eficiência no sector da saúde - painel",
-        "type": "Painel",
-        "speaker": "DPC/DNSP"
+        "time": "13:30 - 13:50h",
+        "title": "Discussão",
+        "type": "Discussão",
+        "speaker": "S.Excia Ministro"
       },
       {
         "order": 68,
-        "time": "13:20 - 14:20h",
+        "time": "13:50 - 15:50h",
         "title": "Pausa para o almoço",
         "type": "Intervalo",
         "speaker": ""
       },
       {
         "order": 69,
-        "time": "14:20 - 14:35h",
+        "time": "15:50 - 16:10h",
         "title": "Momento cultural",
         "type": "Cerimónia",
         "speaker": "Grupo Cultural"
       },
       {
         "order": 70,
-        "time": "14:35 - 14:50h",
-        "title": "Leitura do comunicado final",
+        "time": "16:10 - 16:40h",
+        "title": "Premiações",
         "type": "Cerimónia",
-        "speaker": "Secretariado"
+        "speaker": "S.Excia Ministro"
       },
       {
         "order": 71,
-        "time": "14:50 - 15:10h",
+        "time": "16:40 - 16:55h",
+        "title": "Leitura do comunicado final",
+        "type": "Organização",
+        "speaker": "Secretariado"
+      },
+      {
+        "order": 72,
+        "time": "16:55 - 17:15h",
         "title": "Discurso de encerramento",
         "type": "Cerimónia",
         "speaker": "S.Excia Ministro"
       },
       {
-        "order": 72,
-        "time": "15:10h",
+        "order": 73,
+        "time": "17:15h",
         "title": "Fim do evento",
         "type": "Encerramento",
         "speaker": ""
-      }
+      },
     ]
-  }
+  },
 ];
 
 /** @deprecated Use eventProgram */

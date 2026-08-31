@@ -45,7 +45,7 @@ export const eventAgenda: EventAgendaDay[] = [
         "order": 8,
         "title": "Excecução orçamental do sector da saúde",
         "responsible": "DAF"
-      }
+      },
     ]
   },
   {
@@ -107,7 +107,7 @@ export const eventAgenda: EventAgendaDay[] = [
         "order": 19,
         "title": "Análise de sistemas e abordagem de melhoria para optimizar a cascata de tratamento em saúde mental em Manica e Sofala (ensaio randomizado de Cluster) 2022-2026",
         "responsible": "Sofala"
-      }
+      },
     ]
   },
   {
@@ -117,26 +117,26 @@ export const eventAgenda: EventAgendaDay[] = [
     "themes": [
       {
         "order": 20,
+        "title": "Eficiência no sector da saúde - painel",
+        "responsible": "DPC"
+      },
+      {
+        "order": 21,
         "title": "Lei do Sistema Nacional de Saúde - inovações e perspectivas de implementação",
         "responsible": "Unidade de Reformas"
       },
       {
-        "order": 21,
+        "order": 22,
         "title": "Plano Estratégico do Sector da Saúde 2026-2035: linhas estratégicas",
         "responsible": "DPC"
       },
       {
-        "order": 22,
+        "order": 23,
         "title": "Proposta do PESOE 2027: Prioridades e Linhas estratégicas e alocação do orçamento",
         "responsible": "DPC"
       },
-      {
-        "order": 23,
-        "title": "Eficiência no sector da saúde - painel",
-        "responsible": "DPC"
-      }
     ]
-  }
+  },
 ];
 
 /** @deprecated Use eventAgenda */
