@@ -1,9 +1,13 @@
-import { eventAgenda, eventProgram, eventConfig } from "@/data";
+import { eventProgram, eventConfig } from "@/data";
 
 const GOLD: [number, number, number] = [222, 178, 59];
 const GREEN: [number, number, number] = [0, 100, 80];
 
-function addHeader(doc: import("jspdf").jsPDF, title: string) {
+type JsPDFWithAutoTable = import("jspdf").jsPDF & {
+  lastAutoTable: { finalY: number };
+};
+
+function addHeader(doc: import("jspdf").jsPDF) {
   const pageWidth = doc.internal.pageSize.getWidth();
   doc.setTextColor(40, 40, 40);
   doc.setFontSize(10);
@@ -27,7 +31,7 @@ function addHeader(doc: import("jspdf").jsPDF, title: string) {
   doc.text(lemaLines, pageWidth / 2, 52, { align: "center" });
   doc.setFontSize(13);
   doc.setTextColor(GREEN[0], GREEN[1], GREEN[2]);
-  doc.text(title, pageWidth / 2, 64, { align: "center" });
+  doc.text("PROGRAMA DETALHADO", pageWidth / 2, 64, { align: "center" });
   doc.setTextColor(0, 0, 0);
   return 72;
 }
@@ -37,37 +41,7 @@ export async function generateAgendaPdf() {
   const { default: autoTable } = await import("jspdf-autotable");
 
   const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
-  let startY = addHeader(doc, "AGENDA");
-
-  for (const day of eventAgenda) {
-    autoTable(doc, {
-      startY,
-      head: [[day.label]],
-      body: day.themes.map((t) => [
-        String(t.order),
-        t.title,
-        t.responsible,
-      ]),
-      columnStyles: {
-        0: { cellWidth: 14 },
-        1: { cellWidth: "auto" },
-        2: { cellWidth: 38 },
-      },
-      headStyles: {
-        fillColor: GOLD,
-        textColor: [255, 255, 255],
-        fontStyle: "bold",
-        halign: "left",
-      },
-      styles: { fontSize: 8, cellPadding: 2, overflow: "linebreak" },
-      theme: "grid",
-      margin: { left: 14, right: 14 },
-    });
-    startY = (doc as import("jspdf").jsPDF & { lastAutoTable: { finalY: number } }).lastAutoTable.finalY + 8;
-  }
-
-  doc.addPage();
-  startY = addHeader(doc, "PROGRAMA DETALHADO");
+  let startY = addHeader(doc);
 
   for (const day of eventProgram) {
     autoTable(doc, {
@@ -83,7 +57,7 @@ export async function generateAgendaPdf() {
       theme: "plain",
       margin: { left: 14, right: 14 },
     });
-    startY = (doc as import("jspdf").jsPDF & { lastAutoTable: { finalY: number } }).lastAutoTable.finalY + 2;
+    startY = (doc as JsPDFWithAutoTable).lastAutoTable.finalY + 2;
 
     autoTable(doc, {
       startY,
@@ -109,7 +83,7 @@ export async function generateAgendaPdf() {
       theme: "grid",
       margin: { left: 14, right: 14 },
     });
-    startY = (doc as import("jspdf").jsPDF & { lastAutoTable: { finalY: number } }).lastAutoTable.finalY + 10;
+    startY = (doc as JsPDFWithAutoTable).lastAutoTable.finalY + 10;
   }
 
   const totalPages = doc.getNumberOfPages();

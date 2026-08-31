@@ -28,14 +28,14 @@ export default function AgendaPdfDownloadButton() {
         </div>
         <div className="min-w-0 flex-1">
           <h4 className="font-semibold text-misau-dark text-base sm:text-lg break-words">
-            Agenda e Programa — versão PDF
+            Agenda e Programa — LI Conselho Coordenador de Saúde (PDF)
           </h4>
           <p className="text-sm text-gray-600 mt-1 break-words">
-            PDF gerado a partir dos dados actuais do site (agenda e programa
-            detalhado). Útil para consulta offline sem Excel.
+            Programa detalhado da reunião (9–11 Set 2026, Beira), gerado a
+            partir dos dados actuais do site.
           </p>
           <span className="inline-block mt-2 text-xs font-medium uppercase tracking-wide text-misau-medium bg-misau-50 px-2 py-1 rounded">
-            PDF · gerado no browser
+            PDF
           </span>
         </div>
       </div>
@@ -55,7 +55,7 @@ export default function AgendaPdfDownloadButton() {
         ) : (
           <Download className="w-4 h-4 shrink-0" />
         )}
-        {loading ? "A gerar PDF…" : "Gerar e descarregar PDF"}
+        {loading ? "A descarregar…" : "Descarregar"}
       </button>
     </div>
   );
