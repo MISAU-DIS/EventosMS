@@ -29,8 +29,8 @@ async function writeStore(store: DocumentsStoreFile) {
 
 export async function listStoredDocuments() {
   const store = await ensureStore();
-  return store.documents.sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+  return store.documents.sort((a, b) =>
+    a.title.localeCompare(b.title, "pt", { sensitivity: "base" }),
   );
 }
 
