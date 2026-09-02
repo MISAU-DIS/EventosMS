@@ -24,9 +24,9 @@ export const eventConfig = {
   organizer: "Direcção de Planificação e Cooperação (DPC)",
   aboutEventText:
     "O Conselho Coordenador de Saúde constitui um órgão consultivo de elevada relevância para o sector, convocado e presidido pelo Ministro da Saúde. Por seu intermédio, assegura-se a articulação, a planificação estratégica e o acompanhamento da implementação das políticas e intervenções, garantindo coerência e alinhamento dos objectivos em todos os níveis.",
-  heroImage: "/fotografias/grupo-conselho-coordenador-saude.jpg",
+  heroImage: "/fotografias/recepcao-chegada-oficial.jpg",
   heroImageAlt:
-    "Participantes do LI Conselho Coordenador de Saúde em frente ao painel oficial do evento",
+    "Recepção oficial com acolhimento dos participantes à chegada do evento",
   aboutEventImage: "/fotografias/grupo-capulana-conselho-hospitalar.jpg",
   aboutEventImageAlt:
     "Equipa do evento com a capulana oficial do XIII Conselho Hospitalar e Conselho Coordenador de Saúde",

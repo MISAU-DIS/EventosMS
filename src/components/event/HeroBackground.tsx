@@ -17,6 +17,11 @@ export default function HeroBackground({ children }: HeroBackgroundProps) {
         }}
         aria-hidden
       />
+      <div
+        className="absolute inset-0 opacity-[0.14] bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/edificio_MISAU.png')" }}
+        aria-hidden
+      />
       <div className="relative z-10">{children}</div>
     </section>
   );

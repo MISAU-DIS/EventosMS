@@ -13,7 +13,7 @@ import HomeCtaSection from "@/components/event/HomeCtaSection";
 export default function Home() {
   return (
     <>
-      <title>Eventos MISAU - {eventConfig.shortTitle}</title>
+      <title>{`Eventos MISAU - ${eventConfig.shortTitle}`}</title>
       <meta name="description" content={eventConfig.description} />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 

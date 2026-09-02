@@ -10,7 +10,7 @@ export default function InstitutionalBackground({
       <div className="absolute inset-0 bg-gradient-to-br from-misau-50 via-white to-misau-100" />
       <div
         className="absolute inset-0 opacity-[0.12] bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/misau-edificio.jpg')" }}
+        style={{ backgroundImage: "url('/edificio_MISAU.png')" }}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-transparent to-misau-50/40" />
       {variant === "extended" && (
