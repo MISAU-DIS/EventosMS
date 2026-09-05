@@ -32,12 +32,16 @@ export default function Header() {
     };
   }, [isMenuOpen]);
 
+  const isHome = pathname === "/";
+
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b border-white/10 ${
         scrolled
           ? "bg-misau-dark/95 backdrop-blur-sm py-2"
-          : "bg-misau-medium py-3 sm:py-4"
+          : isHome
+            ? "bg-misau-medium py-2 lg:py-2.5"
+            : "bg-misau-medium py-3 sm:py-4"
       } text-white`}
     >
       <div className="w-full max-w-[1600px] mx-auto flex items-center justify-between gap-3 px-4 sm:px-6 md:px-10 lg:px-16">
@@ -47,7 +51,7 @@ export default function Header() {
             alt="Logo Moçambique"
             width={36}
             height={36}
-            className="rounded-full bg-white p-1 shrink-0 w-8 h-8 sm:w-9 sm:h-9"
+            className="rounded-full bg-white p-1 shrink-0 w-8 h-8 sm:w-9 sm:h-9 lg:w-8 lg:h-8"
           />
 
           <Link

@@ -4,7 +4,7 @@ type HeroBackgroundProps = {
 
 export default function HeroBackground({ children }: HeroBackgroundProps) {
   return (
-    <section className="relative w-full overflow-hidden border-b border-misau-gold/20">
+    <section className="relative w-full overflow-hidden border-b border-misau-gold/20 lg:min-h-[100dvh] lg:max-h-[100dvh]">
       <div
         className="absolute inset-0 bg-gradient-to-br from-misau-50 via-white to-misau-100"
         aria-hidden
@@ -22,7 +22,7 @@ export default function HeroBackground({ children }: HeroBackgroundProps) {
         style={{ backgroundImage: "url('/edificio_MISAU.png')" }}
         aria-hidden
       />
-      <div className="relative z-10">{children}</div>
+      <div className="relative z-10 lg:flex lg:flex-col lg:min-h-[100dvh] lg:h-[100dvh]">{children}</div>
     </section>
   );
 }
