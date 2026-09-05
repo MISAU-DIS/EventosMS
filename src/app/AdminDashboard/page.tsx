@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 import DocumentsAdminPanel from '@/components/admin/DocumentsAdminPanel';
+import AgendaProgramAdminPanel from '@/components/admin/AgendaProgramAdminPanel';
 
 interface DashboardStats {
   totalParticipants: number;
@@ -405,12 +406,7 @@ useEffect(() => {
           </div>
         );
       case 'agenda':
-        return (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">Gestão da Agenda</h2>
-            <p className="text-gray-600">Funcionalidade em desenvolvimento...</p>
-          </div>
-        );
+        return <AgendaProgramAdminPanel />;
       case 'reports':
         return (
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">

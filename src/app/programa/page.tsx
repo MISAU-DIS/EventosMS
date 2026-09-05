@@ -1,16 +1,26 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { eventConfig, eventProgram } from "@/data";
+import { eventConfig } from "@/data";
+import { useEventProgram } from "@/hooks/useEventProgram";
 import { useSelectedEventDay } from "@/hooks/useSelectedEventDay";
 import EventDateLocationBadges from "@/components/event/EventDateLocationBadges";
 import ProgramDayTabs from "@/components/event/ProgramDayTabs";
 import ProgramDayContent from "@/components/event/ProgramDayContent";
 
 export default function ProgramaPage() {
+  const { days: eventProgram, loading } = useEventProgram();
   const { selectedDay, setSelectedDay } = useSelectedEventDay();
-  const selected = eventProgram.find((day) => day.id === selectedDay)!;
+  const selected = eventProgram.find((day) => day.id === selectedDay) ?? eventProgram[0];
   const dayIndex = eventProgram.findIndex((day) => day.id === selectedDay);
+
+  if (loading || !selected) {
+    return (
+      <main className="min-h-screen bg-slate-50 flex items-center justify-center">
+        <p className="text-gray-600">A carregar programa...</p>
+      </main>
+    );
+  }
 
   return (
     <>

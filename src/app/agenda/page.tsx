@@ -1,7 +1,8 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { eventAgenda, eventConfig } from "@/data";
+import { eventConfig } from "@/data";
+import { useEventAgenda } from "@/hooks/useEventAgenda";
 import { useSelectedEventDay } from "@/hooks/useSelectedEventDay";
 import { buildGoogleCalendarUrl } from "@/lib/calendar";
 import EventDateLocationBadges from "@/components/event/EventDateLocationBadges";
@@ -11,9 +12,18 @@ import EventLemaBlock from "@/components/event/EventLemaBlock";
 import PageContainer from "@/components/layout/PageContainer";
 
 export default function AgendaPage() {
+  const { days: eventAgenda, loading } = useEventAgenda();
   const { selectedDay, setSelectedDay } = useSelectedEventDay();
-  const selected = eventAgenda.find((day) => day.id === selectedDay)!;
+  const selected = eventAgenda.find((day) => day.id === selectedDay) ?? eventAgenda[0];
   const calendarUrl = buildGoogleCalendarUrl(eventConfig);
+
+  if (loading || !selected) {
+    return (
+      <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-misau-50 flex items-center justify-center">
+        <p className="text-gray-600">A carregar agenda...</p>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-misau-50">
