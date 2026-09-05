@@ -1,0 +1,24 @@
+{
+  "events": [
+    {
+      "id": "li-ccs-2026",
+      "slug": "li-ccs-2026",
+      "status": "active",
+      "edition": 51,
+      "title": "LI Conselho Coordenador de Saúde",
+      "shortTitle": "LI CCS",
+      "description": "LI Conselho Coordenador de Saúde – Ministério da Saúde de Moçambique",
+      "lema": "Por um Serviço Nacional de Saúde de Qualidade e Humanizado para Todos",
+      "slogan": "O NOSSO MAIOR VALOR É A VIDA",
+      "location": "Cidade da Beira",
+      "province": "Província da Sofala",
+      "country": "Moçambique",
+      "dateRange": "09 - 11 de Setembro de 2026",
+      "startDate": "2026-09-09",
+      "endDate": "2026-09-11",
+      "heroImage": "/fotografias/recepcao-chegada-oficial.jpg",
+      "createdAt": "2026-09-05T17:48:15.594Z",
+      "updatedAt": "2026-09-05T17:48:15.594Z"
+    }
+  ]
+}

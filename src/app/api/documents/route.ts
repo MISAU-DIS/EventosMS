@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { API_VERSION } from "@/config/api";
 import { documentSectionMeta } from "@/config/document-sections";
 import { listStoredDocuments } from "@/server/documents-store";
 import { toPublicDocument } from "@/types/stored-documents";
@@ -14,5 +15,14 @@ export async function GET() {
       .map(toPublicDocument),
   }));
 
-  return NextResponse.json({ sections });
+  return NextResponse.json(
+    { sections },
+    {
+      headers: {
+        "X-API-Legacy": "true",
+        "X-API-Version": API_VERSION,
+        "X-API-Preferred": "/api/v1/events/li-ccs-2026/documents",
+      },
+    },
+  );
 }

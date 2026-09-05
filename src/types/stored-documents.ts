@@ -3,6 +3,7 @@ import type { DocumentSectionId } from "@/config/document-sections";
 
 export type StoredDocumentRecord = {
   id: string;
+  eventId?: string;
   sectionId: DocumentSectionId;
   title: string;
   description?: string;

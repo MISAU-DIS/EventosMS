@@ -1,5 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
+import { DEFAULT_EVENT_ID } from "@/config/api";
 import type {
   DocumentsStoreFile,
   StoredDocumentRecord,
@@ -10,26 +11,48 @@ import type { DocumentSectionId } from "@/config/document-sections";
 const storePath = path.join(process.cwd(), "data/documents-store.json");
 const publicDocsRoot = path.join(process.cwd(), "public/documentos");
 
-async function ensureStore(): Promise<DocumentsStoreFile> {
-  try {
-    const raw = await fs.readFile(storePath, "utf8");
-    return JSON.parse(raw) as DocumentsStoreFile;
-  } catch {
-    const empty: DocumentsStoreFile = { documents: [] };
-    await fs.mkdir(path.dirname(storePath), { recursive: true });
-    await fs.writeFile(storePath, JSON.stringify(empty, null, 2));
-    return empty;
-  }
-}
-
 async function writeStore(store: DocumentsStoreFile) {
   await fs.mkdir(path.dirname(storePath), { recursive: true });
   await fs.writeFile(storePath, JSON.stringify(store, null, 2));
 }
 
-export async function listStoredDocuments() {
+/** Migração não-destrutiva: adiciona eventId aos registos antigos sem apagar ficheiros. */
+async function migrateStore(store: DocumentsStoreFile): Promise<DocumentsStoreFile> {
+  let changed = false;
+  for (const doc of store.documents) {
+    if (!doc.eventId) {
+      doc.eventId = DEFAULT_EVENT_ID;
+      changed = true;
+    }
+  }
+  if (changed) await writeStore(store);
+  return store;
+}
+
+async function ensureStore(): Promise<DocumentsStoreFile> {
+  try {
+    const raw = await fs.readFile(storePath, "utf8");
+    const parsed = JSON.parse(raw) as DocumentsStoreFile;
+    if (parsed.documents) return migrateStore(parsed);
+  } catch {
+    const empty: DocumentsStoreFile = { documents: [] };
+    await writeStore(empty);
+    return empty;
+  }
+
+  const empty: DocumentsStoreFile = { documents: [] };
+  await writeStore(empty);
+  return empty;
+}
+
+export async function listStoredDocuments(eventId?: string) {
   const store = await ensureStore();
-  return store.documents.sort((a, b) =>
+  const filtered = eventId
+    ? store.documents.filter(
+        (doc) => doc.eventId === eventId || (!doc.eventId && eventId === DEFAULT_EVENT_ID),
+      )
+    : store.documents;
+  return filtered.sort((a, b) =>
     a.title.localeCompare(b.title, "pt", { sensitivity: "base" }),
   );
 }
@@ -53,6 +76,7 @@ export async function addStoredDocument(input: {
 
   const record: StoredDocumentRecord = {
     id,
+    eventId: DEFAULT_EVENT_ID,
     sectionId: input.sectionId,
     title: input.title.trim(),
     description: input.description?.trim() || undefined,
