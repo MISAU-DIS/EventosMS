@@ -8,7 +8,7 @@ import HeroBackground from "@/components/event/HeroBackground";
 export default function HomeHero() {
   return (
     <HeroBackground>
-      <div className="flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-8 lg:px-12 w-full max-w-[1600px] mx-auto pt-20 sm:pt-24 pb-8 sm:pb-10 lg:flex-1 lg:min-h-0 lg:py-12 lg:pb-5 gap-2 lg:gap-2.5">
+      <div className="flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-8 lg:px-12 w-full max-w-[1600px] mx-auto pt-24 sm:pt-28 pb-8 sm:pb-10 lg:flex-1 lg:min-h-0 lg:pt-[5.75rem] lg:pb-4 gap-2 lg:gap-2.5">
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
