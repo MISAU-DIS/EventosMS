@@ -67,13 +67,13 @@ export default function HomeHero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}
-          className="mt-6 sm:mt-10 md:mt-12 w-full max-w-6xl rounded-xl sm:rounded-2xl border border-misau-gold/30 bg-white/85 backdrop-blur-sm px-4 py-6 sm:px-8 sm:py-8 md:px-12 md:py-10"
+          className="mt-6 sm:mt-8 w-full max-w-4xl px-2"
         >
-          <p className="text-xs sm:text-sm uppercase tracking-[0.15em] sm:tracking-[0.2em] text-misau-gold font-bold mb-3">
+          <p className="text-xs sm:text-sm uppercase tracking-[0.15em] sm:tracking-[0.2em] text-misau-gold font-semibold mb-2">
             Lema do evento
           </p>
-          <p className="text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-misau-dark font-bold leading-snug">
-            <i>{eventConfig.lema}</i>
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-misau-dark font-medium leading-relaxed italic">
+            {eventConfig.lema}
           </p>
         </motion.div>
       </div>
