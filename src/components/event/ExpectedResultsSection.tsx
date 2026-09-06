@@ -20,9 +20,6 @@ export default function ExpectedResultsSection() {
               viewport={{ once: true }}
               className="bg-misau-50 border-l-4 border-misau-gold p-4 sm:p-5 rounded-r-lg"
             >
-              <span className="inline-flex items-center justify-center w-7 h-7 bg-misau-gold text-white rounded-full font-bold text-sm mb-3">
-                {index + 1}
-              </span>
               <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
                 {result}
               </p>

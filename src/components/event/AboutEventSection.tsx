@@ -26,9 +26,9 @@ export default function AboutEventSection() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true, amount: 0.2 }}
-            className="lg:col-span-5 flex items-center order-2 lg:order-1"
+            className="lg:col-span-5 order-2 lg:order-1 self-stretch flex flex-col justify-start lg:min-h-[520px]"
           >
-            <p className="text-gray-700 text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-justify w-full">
+            <p className="text-gray-700 text-base sm:text-lg md:text-xl lg:text-[1.45rem] xl:text-[1.6rem] 2xl:text-[1.75rem] leading-relaxed lg:leading-[1.85] text-justify w-full">
               {eventConfig.aboutEventText}
             </p>
           </motion.div>

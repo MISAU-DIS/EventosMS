@@ -40,12 +40,14 @@ export default function ObjectivesSection() {
               viewport={{ once: true }}
               className="bg-white rounded-xl p-5 sm:p-6 border border-misau-100"
             >
-              <span className="inline-flex items-center justify-center w-8 h-8 bg-misau-bright text-misau-medium rounded-lg font-bold text-sm mb-3">
-                {index + 1}
-              </span>
-              <p className="font-semibold text-misau-dark text-base sm:text-lg leading-snug mb-3">
-                {objective.title}
-              </p>
+              <div className="flex items-start gap-2.5 sm:gap-3 mb-3">
+                <span className="inline-flex shrink-0 items-center justify-center w-8 h-8 bg-misau-bright text-misau-medium rounded-lg font-bold text-sm">
+                  {index + 1}
+                </span>
+                <p className="font-semibold text-misau-dark text-base sm:text-lg leading-snug pt-0.5">
+                  {objective.title}
+                </p>
+              </div>
               <p className="text-gray-600 text-sm sm:text-base leading-relaxed pl-4 border-l-2 border-misau-gold/40">
                 {objective.description}
               </p>
