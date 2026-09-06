@@ -24,6 +24,7 @@ export default function ComentariosPage() {
   const [role, setRole] = useState("");
   const [organization, setOrganization] = useState("");
   const [submittedDays, setSubmittedDays] = useState<number[]>([]);
+  const [eventClosed, setEventClosed] = useState(false);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
@@ -43,6 +44,12 @@ export default function ComentariosPage() {
 
   useEffect(() => {
     setSubmittedDays(getSubmittedDays());
+    fetch("/api/v1/events/active")
+      .then((r) => r.json())
+      .then((d: { event?: { status: string } }) => {
+        if (d.event?.status !== "active") setEventClosed(true);
+      })
+      .catch(() => {});
     loadCriteria(dayNumber);
   }, [dayNumber, loadCriteria]);
 
@@ -123,6 +130,11 @@ export default function ComentariosPage() {
 
             {loading ? (
               <p className="text-center text-gray-600">A carregar critérios...</p>
+            ) : eventClosed ? (
+              <div className="bg-white rounded-xl p-8 text-center border border-misau-100">
+                <p className="text-lg font-semibold text-misau-medium">Evento encerrado</p>
+                <p className="text-gray-600 mt-2">As avaliações não estão disponíveis para eventos arquivados.</p>
+              </div>
             ) : alreadySubmitted ? (
               <div className="bg-white rounded-xl p-8 text-center border border-misau-100">
                 <p className="text-lg font-semibold text-misau-medium">Já submeteu a avaliação deste dia.</p>

@@ -70,3 +70,35 @@ export async function saveEvents(events: StoredEvent[]): Promise<StoredEvent[]> 
   await writeStore(store);
   return events;
 }
+
+export async function archiveEvent(eventId: string): Promise<StoredEvent | null> {
+  const store = await ensureStore();
+  const event = store.events.find((e) => e.id === eventId || e.slug === eventId);
+  if (!event) return null;
+  const now = new Date().toISOString();
+  event.status = "archived";
+  event.archivedAt = now;
+  event.updatedAt = now;
+  await writeStore(store);
+  return event;
+}
+
+export async function activateEvent(eventId: string): Promise<StoredEvent | null> {
+  const store = await ensureStore();
+  const target = store.events.find((e) => e.id === eventId || e.slug === eventId);
+  if (!target) return null;
+  const now = new Date().toISOString();
+  for (const event of store.events) {
+    if (event.id === target.id) {
+      event.status = "active";
+      event.archivedAt = undefined;
+      event.updatedAt = now;
+    } else if (event.status === "active") {
+      event.status = "archived";
+      event.archivedAt = now;
+      event.updatedAt = now;
+    }
+  }
+  await writeStore(store);
+  return target;
+}

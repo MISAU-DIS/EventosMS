@@ -32,6 +32,10 @@ export default function Footer() {
               Política de Privacidade
             </Link>
 
+            <Link href="/arquivo" className="hover:text-misau-200 transition py-2">
+              Arquivo
+            </Link>
+
             <Link href="/Login" className="hover:text-misau-200 transition py-2">
               Entrar
             </Link>

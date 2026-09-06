@@ -27,6 +27,7 @@ import DocumentsAdminPanel from '@/components/admin/DocumentsAdminPanel';
 import AgendaProgramAdminPanel from '@/components/admin/AgendaProgramAdminPanel';
 import PhotosAdminPanel from '@/components/admin/PhotosAdminPanel';
 import EvaluationsAdminPanel from '@/components/admin/EvaluationsAdminPanel';
+import EventsAdminPanel from '@/components/admin/EventsAdminPanel';
 
 interface DashboardStats {
   totalParticipants: number;
@@ -421,12 +422,7 @@ useEffect(() => {
           </div>
         );
       case 'settings':
-        return (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">Configurações do Sistema</h2>
-            <p className="text-gray-600">Funcionalidade em desenvolvimento...</p>
-          </div>
-        );
+        return <EventsAdminPanel />;
       default:
         return <OverviewTab />;
     }
