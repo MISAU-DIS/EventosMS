@@ -1,0 +1,13 @@
+services:
+  app:
+    build: .
+    container_name: eventos-ms
+    ports:
+      - "${APP_PORT:-8080}:3000"
+    environment:
+      NODE_ENV: production
+    volumes:
+      - ./data:/app/data
+      - ./public/documentos:/app/public/documentos
+      - ./public/fotografias:/app/public/fotografias
+    restart: unless-stopped
