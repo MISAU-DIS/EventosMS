@@ -20,10 +20,12 @@ import {
   X,
   Home,
   FileText,
+  Camera,
 } from 'lucide-react';
 import Image from 'next/image';
 import DocumentsAdminPanel from '@/components/admin/DocumentsAdminPanel';
 import AgendaProgramAdminPanel from '@/components/admin/AgendaProgramAdminPanel';
+import PhotosAdminPanel from '@/components/admin/PhotosAdminPanel';
 
 interface DashboardStats {
   totalParticipants: number;
@@ -137,7 +139,8 @@ useEffect(() => {
     { id: 'documents', label: 'Documentos', icon: FileText },
     { id: 'participants', label: 'Participantes', icon: Users },
     { id: 'agenda', label: 'Agenda', icon: Calendar },
-    { id: 'comments', label: 'Comentários', icon: MessageSquare },
+    { id: 'photos', label: 'Fotografias', icon: Camera },
+    { id: 'comments', label: 'Avaliações', icon: MessageSquare },
     { id: 'reports', label: 'Relatórios', icon: BarChart3 },
     { id: 'settings', label: 'Configurações', icon: Settings }
   ];
@@ -396,6 +399,8 @@ useEffect(() => {
         return <OverviewTab />;
       case 'documents':
         return <DocumentsAdminPanel />;
+      case 'photos':
+        return <PhotosAdminPanel />;
       case 'comments':
         return <CommentsTab />;
       case 'participants':

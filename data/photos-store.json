@@ -1,0 +1,40 @@
+{
+  "photos": [
+    {
+      "id": "grupo-conselho-coordenador",
+      "eventId": "li-ccs-2026",
+      "title": "Grupo oficial — Conselho Coordenador de Saúde",
+      "alt": "Participantes em frente ao painel do XIII Conselho Hospitalar e LI Conselho Coordenador de Saúde",
+      "fileName": "grupo-conselho-coordenador-saude.jpg",
+      "order": 1,
+      "uploadedAt": "2026-09-06T03:54:27.007Z"
+    },
+    {
+      "id": "grupo-capulana",
+      "eventId": "li-ccs-2026",
+      "title": "Equipa com capulana do evento",
+      "alt": "Grupo de participantes com vestuário da capulana do XIII Conselho Hospitalar",
+      "fileName": "grupo-capulana-conselho-hospitalar.jpg",
+      "order": 2,
+      "uploadedAt": "2026-09-06T03:54:27.007Z"
+    },
+    {
+      "id": "mesa-presidencia",
+      "eventId": "li-ccs-2026",
+      "title": "Mesa da presidência",
+      "alt": "Mesa da presidência durante a reunião do Conselho Coordenador de Saúde",
+      "fileName": "mesa-presidencia-conselho-coordenador.jpg",
+      "order": 3,
+      "uploadedAt": "2026-09-06T03:54:27.007Z"
+    },
+    {
+      "id": "recepcao-chegada",
+      "eventId": "li-ccs-2026",
+      "title": "Recepção e chegada oficial",
+      "alt": "Recepção oficial com acolhimento dos participantes à chegada do evento",
+      "fileName": "recepcao-chegada-oficial.jpg",
+      "order": 4,
+      "uploadedAt": "2026-09-06T03:54:27.007Z"
+    }
+  ]
+}
