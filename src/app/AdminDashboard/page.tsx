@@ -26,6 +26,7 @@ import Image from 'next/image';
 import DocumentsAdminPanel from '@/components/admin/DocumentsAdminPanel';
 import AgendaProgramAdminPanel from '@/components/admin/AgendaProgramAdminPanel';
 import PhotosAdminPanel from '@/components/admin/PhotosAdminPanel';
+import EvaluationsAdminPanel from '@/components/admin/EvaluationsAdminPanel';
 
 interface DashboardStats {
   totalParticipants: number;
@@ -402,7 +403,7 @@ useEffect(() => {
       case 'photos':
         return <PhotosAdminPanel />;
       case 'comments':
-        return <CommentsTab />;
+        return <EvaluationsAdminPanel />;
       case 'participants':
         return (
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">

@@ -1,0 +1,60 @@
+{
+  "criteria": [
+    {
+      "id": "viagem",
+      "eventId": "li-ccs-2026",
+      "label": "Viagem",
+      "group": "first_day_only",
+      "order": 1,
+      "active": true
+    },
+    {
+      "id": "alojamento",
+      "eventId": "li-ccs-2026",
+      "label": "Alojamento",
+      "group": "first_day_only",
+      "order": 2,
+      "active": true
+    },
+    {
+      "id": "protocolo",
+      "eventId": "li-ccs-2026",
+      "label": "Protocolo",
+      "group": "continuous",
+      "order": 3,
+      "active": true
+    },
+    {
+      "id": "alimentacao",
+      "eventId": "li-ccs-2026",
+      "label": "Alimentação",
+      "group": "continuous",
+      "order": 4,
+      "active": true
+    },
+    {
+      "id": "internet",
+      "eventId": "li-ccs-2026",
+      "label": "Internet",
+      "group": "continuous",
+      "order": 5,
+      "active": true
+    },
+    {
+      "id": "apresentacoes",
+      "eventId": "li-ccs-2026",
+      "label": "Apresentações",
+      "group": "continuous",
+      "order": 6,
+      "active": true
+    },
+    {
+      "id": "debates",
+      "eventId": "li-ccs-2026",
+      "label": "Debates",
+      "group": "continuous",
+      "order": 7,
+      "active": true
+    }
+  ]
+}

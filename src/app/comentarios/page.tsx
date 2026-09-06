@@ -1,255 +1,160 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import { eventConfig } from "@/data";
 import InstitutionalBackground from "@/components/layout/InstitutionalBackground";
 import PageContainer from "@/components/layout/PageContainer";
-import StarRating, { StarRatingDisplay } from "@/components/event/StarRating";
-import { useDayComments } from "@/hooks/useDayComments";
-import { evaluationDay, type NewCommentInput } from "@/types/comments";
-
-const emptyComment: NewCommentInput = {
-  name: "",
-  role: "",
-  organization: "",
-  rating: 0,
-  comment: "",
-};
+import ScoreScale from "@/components/event/ScoreScale";
+import {
+  getEvaluationFingerprint,
+  getSubmittedDays,
+  markDaySubmitted,
+} from "@/lib/eval-fingerprint";
+import type { EvaluationCriterion } from "@/types/evaluations";
+import { EVALUATION_DAYS } from "@/types/evaluations";
 
 export default function ComentariosPage() {
-  const { comments, addComment } = useDayComments(evaluationDay.id);
-  const [newComment, setNewComment] = useState<NewCommentInput>(emptyComment);
-  const [showForm, setShowForm] = useState(false);
+  const [dayNumber, setDayNumber] = useState(1);
+  const [criteria, setCriteria] = useState<EvaluationCriterion[]>([]);
+  const [scores, setScores] = useState<Record<string, number>>({});
+  const [comment, setComment] = useState("");
+  const [name, setName] = useState("");
+  const [role, setRole] = useState("");
+  const [organization, setOrganization] = useState("");
+  const [submittedDays, setSubmittedDays] = useState<number[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
 
-  const averageRating = comments.length
-    ? comments.reduce((acc, c) => acc + c.rating, 0) / comments.length
-    : 0;
+  const alreadySubmitted = submittedDays.includes(dayNumber);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const loadCriteria = useCallback(async (day: number) => {
+    setLoading(true);
+    try {
+      const r = await fetch(`/api/evaluation-criteria?day=${day}`);
+      const d = (await r.json()) as { criteria: EvaluationCriterion[] };
+      setCriteria(d.criteria);
+      setScores({});
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    setSubmittedDays(getSubmittedDays());
+    loadCriteria(dayNumber);
+  }, [dayNumber, loadCriteria]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newComment.comment.trim()) {
-      alert("Por favor, escreva o seu comentário.");
-      return;
+    if (alreadySubmitted) return;
+
+    for (const c of criteria) {
+      if (scores[c.id] === undefined) {
+        await Swal.fire({ icon: "warning", title: `Avalie «${c.label}» (0–5)`, confirmButtonColor: "#059669" });
+        return;
+      }
     }
-    if (newComment.rating < 1) {
-      alert("Por favor, seleccione uma classificação de 1 a 5 estrelas.");
-      return;
+
+    setSubmitting(true);
+    try {
+      const fingerprint = getEvaluationFingerprint();
+      const r = await fetch("/api/evaluations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          dayNumber,
+          fingerprint,
+          scores,
+          comment: comment.trim() || undefined,
+          respondentName: name.trim() || undefined,
+          role: role.trim() || undefined,
+          organization: organization.trim() || undefined,
+        }),
+      });
+      const d = (await r.json()) as { error?: string };
+      if (!r.ok) throw new Error(d.error || "Erro ao submeter");
+
+      markDaySubmitted(dayNumber);
+      setSubmittedDays(getSubmittedDays());
+      await Swal.fire({ icon: "success", title: "Avaliação registada", text: "Obrigado pelo seu feedback.", confirmButtonColor: "#059669" });
+      setComment("");
+    } catch (err) {
+      await Swal.fire({ icon: "error", title: "Não foi possível submeter", text: err instanceof Error ? err.message : "", confirmButtonColor: "#059669" });
+    } finally {
+      setSubmitting(false);
     }
-    addComment(newComment);
-    setNewComment(emptyComment);
-    setShowForm(false);
   };
 
   return (
     <>
-      <title>{`Comentários do Evento - ${eventConfig.shortTitle} MISAU 2026`}</title>
-      <meta
-        name="description"
-        content={`Comentários e avaliações sobre o ${eventConfig.title}`}
-      />
+      <title>{`Avaliações - ${eventConfig.shortTitle} MISAU 2026`}</title>
+      <meta name="description" content={`Avaliação diária do ${eventConfig.title}`} />
 
       <main className="relative z-10 min-h-screen">
         <InstitutionalBackground variant="extended" />
 
         <div className="relative pt-24 sm:pt-28 pb-10 sm:pb-16 px-4 sm:px-6 text-misau-dark">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.h1
-              initial={{ opacity: 0, y: -50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-3 sm:mb-4 leading-tight"
-            >
-              Avaliação Final
+          <div className="max-w-3xl mx-auto text-center mb-8">
+            <motion.h1 initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-2xl sm:text-4xl font-extrabold mb-2">
+              Avaliação Diária
             </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              className="text-base sm:text-xl md:text-2xl mb-2 text-gray-700"
-            >
-              {eventConfig.title}
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-sm sm:text-base md:text-lg text-misau-medium max-w-2xl mx-auto"
-            >
-              Partilhe a sua avaliação final na conclusão da reunião
-            </motion.p>
-          </div>
-        </div>
-
-        <PageContainer className="relative pb-12">
-          <p className="text-center text-sm sm:text-base text-gray-600 mb-6 sm:mb-8 px-2">
-            {evaluationDay.description}
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12 max-w-2xl mx-auto">
-            <div className="bg-white rounded-xl border border-misau-100 p-5 sm:p-6 text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-misau-dark">
-                {comments.length}
-              </div>
-              <div className="text-gray-600 font-medium text-sm sm:text-base">
-                Avaliações
-              </div>
-            </div>
-            <div className="bg-white rounded-xl border border-misau-100 p-5 sm:p-6 text-center">
-              <div className="text-2xl sm:text-3xl font-bold text-misau-dark">
-                {comments.length ? averageRating.toFixed(1) : "—"}
-              </div>
-              <div className="text-gray-600 font-medium text-sm sm:text-base">
-                Classificação média
-              </div>
-              <div className="flex justify-center mt-2">
-                <StarRatingDisplay rating={Math.round(averageRating)} />
-              </div>
-            </div>
+            <p className="text-gray-600">{eventConfig.title}</p>
+            <p className="text-sm text-misau-medium mt-2">Escala 0–5 por critério · 1 avaliação por dia</p>
           </div>
 
-          <div className="text-center mb-8 sm:mb-12">
-            <button
-              type="button"
-              onClick={() => setShowForm(!showForm)}
-              className="bg-misau-medium hover:bg-misau-dark text-white px-5 sm:px-8 py-3.5 sm:py-4 rounded-full font-semibold transition-all duration-300 w-full sm:w-auto max-w-md mx-auto text-sm sm:text-base"
-            >
-              {showForm ? "Cancelar" : "Submeter avaliação"}
-            </button>
-          </div>
-
-          {showForm && (
-            <div className="bg-white rounded-xl border border-misau-100 p-5 sm:p-8 mb-8 sm:mb-12">
-              <h3 className="text-xl sm:text-2xl font-bold text-misau-dark mb-5 sm:mb-6">
-                Avaliação final
-              </h3>
-              <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                  <div>
-                    <label className="block text-gray-700 font-medium mb-2 text-sm sm:text-base">
-                      Nome completo (opcional)
-                    </label>
-                    <input
-                      type="text"
-                      value={newComment.name}
-                      onChange={(e) =>
-                        setNewComment({ ...newComment, name: e.target.value })
-                      }
-                      className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-misau-light"
-                      placeholder="Ex: Dr. Maria Silva"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-gray-700 font-medium mb-2 text-sm sm:text-base">
-                      Cargo/função (opcional)
-                    </label>
-                    <input
-                      type="text"
-                      value={newComment.role}
-                      onChange={(e) =>
-                        setNewComment({ ...newComment, role: e.target.value })
-                      }
-                      className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-misau-light"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-gray-700 font-medium mb-2 text-sm sm:text-base">
-                    Organização (opcional)
-                  </label>
-                  <input
-                    type="text"
-                    value={newComment.organization}
-                    onChange={(e) =>
-                      setNewComment({
-                        ...newComment,
-                        organization: e.target.value,
-                      })
-                    }
-                    className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-misau-light"
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-700 font-medium mb-2 text-sm sm:text-base">
-                    Classificação *
-                  </label>
-                  <StarRating
-                    value={newComment.rating}
-                    onChange={(rating) =>
-                      setNewComment({ ...newComment, rating })
-                    }
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-700 font-medium mb-2 text-sm sm:text-base">
-                    Comentário *
-                  </label>
-                  <textarea
-                    value={newComment.comment}
-                    onChange={(e) =>
-                      setNewComment({ ...newComment, comment: e.target.value })
-                    }
-                    rows={4}
-                    required
-                    className="w-full text-gray-700 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-misau-light resize-none"
-                    placeholder="Partilhe a sua avaliação..."
-                  />
-                </div>
+          <PageContainer className="max-w-2xl">
+            <div className="flex flex-wrap gap-2 mb-6 justify-center">
+              {EVALUATION_DAYS.map((d) => (
                 <button
-                  type="submit"
-                  className="bg-misau-medium hover:bg-misau-dark text-white px-6 py-3 rounded-lg font-semibold w-full sm:w-auto"
+                  key={d.number}
+                  type="button"
+                  onClick={() => setDayNumber(d.number)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                    dayNumber === d.number ? "bg-misau-gold text-white" : "bg-white border border-misau-100"
+                  }`}
                 >
-                  Enviar avaliação
+                  {d.label}
+                  {submittedDays.includes(d.number) && " ✓"}
                 </button>
-              </form>
+              ))}
             </div>
-          )}
 
-          <div className="space-y-4 sm:space-y-6">
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-misau-dark text-center mb-6 sm:mb-8">
-              Avaliações registadas
-            </h3>
-            {comments.length === 0 ? (
-              <div className="bg-white rounded-xl border border-misau-100 p-6 sm:p-8 text-center text-gray-600 text-sm sm:text-base">
-                Ainda não há avaliações registadas.
+            {loading ? (
+              <p className="text-center text-gray-600">A carregar critérios...</p>
+            ) : alreadySubmitted ? (
+              <div className="bg-white rounded-xl p-8 text-center border border-misau-100">
+                <p className="text-lg font-semibold text-misau-medium">Já submeteu a avaliação deste dia.</p>
+                <p className="text-gray-600 mt-2">Seleccione outro dia se ainda não avaliou.</p>
               </div>
             ) : (
-              comments.map((comment) => (
-                <div
-                  key={comment.id}
-                  className="bg-white rounded-xl border border-misau-100 p-5 sm:p-6"
-                >
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-misau-medium text-white rounded-full flex items-center justify-center font-bold shrink-0">
-                      {comment.avatar}
-                    </div>
-                    <div className="flex-grow min-w-0">
-                      <h4 className="text-base sm:text-lg font-semibold break-words">
-                        {comment.name || "Participante"}
-                      </h4>
-                      {comment.role && (
-                        <p className="text-misau-dark text-sm break-words">
-                          {comment.role}
-                        </p>
-                      )}
-                      {comment.organization && (
-                        <p className="text-gray-500 text-sm break-words">
-                          {comment.organization}
-                        </p>
-                      )}
-                      <div className="flex mt-2">
-                        <StarRatingDisplay rating={comment.rating} />
-                      </div>
-                      <p className="text-gray-700 mt-3 leading-relaxed text-sm sm:text-base break-words">
-                        {comment.comment}
-                      </p>
-                    </div>
+              <form onSubmit={handleSubmit} className="bg-white rounded-xl p-6 sm:p-8 border border-misau-100 space-y-6 shadow-sm">
+                {criteria.map((c) => (
+                  <div key={c.id}>
+                    <p className="font-semibold text-misau-dark mb-2">{c.label}</p>
+                    <ScoreScale value={scores[c.id] ?? null} onChange={(v) => setScores({ ...scores, [c.id]: v })} />
                   </div>
+                ))}
+
+                <label className="block">
+                  <span className="text-sm font-medium text-gray-700">Comentário global (opcional)</span>
+                  <textarea value={comment} onChange={(e) => setComment(e.target.value)} rows={3} className="mt-1 w-full border rounded-lg px-3 py-2" placeholder="Partilhe observações sobre o dia..." />
+                </label>
+
+                <div className="grid sm:grid-cols-3 gap-3">
+                  <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Nome (opcional)" className="border rounded-lg px-3 py-2 text-sm" />
+                  <input value={role} onChange={(e) => setRole(e.target.value)} placeholder="Função (opcional)" className="border rounded-lg px-3 py-2 text-sm" />
+                  <input value={organization} onChange={(e) => setOrganization(e.target.value)} placeholder="Organização (opcional)" className="border rounded-lg px-3 py-2 text-sm" />
                 </div>
-              ))
+
+                <button type="submit" disabled={submitting} className="w-full bg-misau-gold hover:bg-misau-medium text-white py-3 rounded-full font-semibold disabled:opacity-60">
+                  {submitting ? "A submeter..." : "Submeter avaliação"}
+                </button>
+              </form>
             )}
-          </div>
-        </PageContainer>
+          </PageContainer>
+        </div>
       </main>
     </>
   );
