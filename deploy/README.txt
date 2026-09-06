@@ -1,29 +1,58 @@
-# Deploy produção (Docker) — EventosMS completo (site + API Next.js)
+# Deploy produção — front (nginx) + app (Next.js)
 
-Requisitos: Docker 20+, Docker Compose v2.
+## Estrutura no servidor: `/opt/eventos-ms-deploy`
 
-## Variáveis (.env na raiz do projecto)
+```
+eventos-ms-deploy/
+├── docker-compose.yml
+├── front/
+│   ├── Dockerfile
+│   └── nginx.conf      ← actualizar via scp
+└── app/                ← cópia do EventosMS (site + API)
+    ├── Dockerfile
+    ├── data/
+    └── public/documentos|fotografias/
+```
 
-APP_PORT=8080    # porta exposta no host (proxy DTIC → esta porta)
+## Sincronizar da máquina local para o pacote deploy
 
-## Arrancar
+```bash
+rsync -a --delete \
+  --exclude node_modules --exclude .next --exclude .git --exclude deploy \
+  ~/MISAU/EventosMS/ ~/MISAU/eventos-ms-deploy/app/
+```
 
+## Enviar para o servidor (actualização completa)
+
+```bash
+rsync -a --delete \
+  --exclude node_modules --exclude .next \
+  ~/MISAU/eventos-ms-deploy/ portal@192.168.10.114:/opt/eventos-ms-deploy/
+```
+
+No servidor:
+```bash
+cd /opt/eventos-ms-deploy
 docker compose up -d --build
+```
 
-## Verificar
+## Só nginx (fluxo habitual)
 
-docker compose ps
-docker compose logs -f app
-curl -s http://localhost:8080/api/health
+```bash
+scp ~/MISAU/eventos-ms-deploy/front/nginx.conf portal@192.168.10.114:~/
+```
 
-## Dados persistentes (volumes)
+No servidor:
+```bash
+sudo cp ~/nginx.conf /opt/eventos-ms-deploy/front/nginx.conf
+cd /opt/eventos-ms-deploy
+docker compose up -d --build front
+```
 
-data/                      — agenda, programa, documentos, fotos, avaliações
-public/documentos/         — ficheiros uploaded (PDF, PPT, etc.)
-public/fotografias/        — fotografias uploaded
+## Só código (site + API)
 
-## Actualizar no servidor
-
-cd /opt/eventos-ms-deploy   # ou pasta onde clonou o repo
-git pull origin main
-docker compose up -d --build
+No servidor:
+```bash
+cd /opt/eventos-ms-deploy
+docker compose up -d --build app
+```

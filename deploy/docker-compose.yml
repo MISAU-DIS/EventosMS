@@ -1,0 +1,33 @@
+services:
+  front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    container_name: eventos-ms-front
+    ports:
+      - "${FRONT_PORT:-8080}:80"
+    depends_on:
+      app:
+        condition: service_healthy
+    restart: unless-stopped
+
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: eventos-ms-app
+    environment:
+      NODE_ENV: production
+    volumes:
+      - ./app/data:/app/data
+      - ./app/public/documentos:/app/public/documentos
+      - ./app/public/fotografias:/app/public/fotografias
+    expose:
+      - "3000"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
