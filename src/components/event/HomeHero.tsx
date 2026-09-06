@@ -8,12 +8,12 @@ import HeroBackground from "@/components/event/HeroBackground";
 export default function HomeHero() {
   return (
     <HeroBackground>
-      <div className="flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-8 lg:px-12 w-full max-w-[1600px] mx-auto pt-24 sm:pt-28 pb-8 sm:pb-10 lg:flex-1 lg:min-h-0 lg:pt-[5.75rem] lg:pb-4 gap-2 lg:gap-2.5">
+      <div className="flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-8 lg:px-12 w-full max-w-[1600px] mx-auto pt-20 sm:pt-24 pb-8 sm:pb-10 lg:flex-1 lg:min-h-0 lg:pt-[4.75rem] lg:pb-4 gap-2 lg:gap-2.5">
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="shrink-0 mb-3 sm:mb-4 lg:mb-1"
+          className="shrink-0 mb-2 sm:mb-3 lg:mb-0.5"
         >
           <Image
             src="/Emblem_of_Mozambique.svg"
@@ -69,10 +69,7 @@ export default function HomeHero() {
           transition={{ delay: 0.3, duration: 0.8 }}
           className="shrink-0 mt-4 sm:mt-6 lg:mt-2 w-full max-w-3xl xl:max-w-4xl px-2"
         >
-          <p className="text-xs sm:text-sm uppercase tracking-[0.15em] sm:tracking-[0.2em] text-misau-gold font-semibold mb-1 lg:mb-1.5">
-            Lema do evento
-          </p>
-          <p className="text-sm sm:text-base md:text-lg lg:text-base xl:text-lg text-misau-dark font-medium leading-snug lg:leading-relaxed italic">
+          <p className="text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl 2xl:text-[1.65rem] text-misau-dark font-semibold leading-snug lg:leading-relaxed italic">
             {eventConfig.lema}
           </p>
         </motion.div>

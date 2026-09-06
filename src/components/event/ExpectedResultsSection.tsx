@@ -10,7 +10,7 @@ export default function ExpectedResultsSection() {
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-misau-medium mb-8 sm:mb-12 text-center">
           Resultados Esperados
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           {eventConfig.expectedResults.map((result, index) => (
             <motion.div
               key={result}
@@ -20,7 +20,10 @@ export default function ExpectedResultsSection() {
               viewport={{ once: true }}
               className="bg-misau-50 border-l-4 border-misau-gold p-4 sm:p-5 rounded-r-lg"
             >
-              <p className="text-gray-700 text-base sm:text-lg md:text-xl leading-relaxed">
+              <span className="inline-flex items-center justify-center w-7 h-7 bg-misau-gold text-white rounded-full font-bold text-sm mb-3">
+                {index + 1}
+              </span>
+              <p className="text-gray-700 text-base sm:text-lg leading-relaxed">
                 {result}
               </p>
             </motion.div>

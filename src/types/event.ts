@@ -26,6 +26,11 @@ export type EventProgramDay = {
   sessions: EventSession[];
 };
 
+export type StructuredObjective = {
+  title: string;
+  description: string;
+};
+
 export type EventMethodology = {
   readonly format: string;
   readonly dynamics: readonly string[];
@@ -58,7 +63,7 @@ export type EventConfig = {
   readonly aboutEventImage: string;
   readonly aboutEventImageAlt: string;
   readonly generalObjective: string;
-  readonly specificObjectives: readonly string[];
+  readonly specificObjectives: readonly StructuredObjective[];
   readonly expectedResults: readonly string[];
   readonly methodology: EventMethodology;
 };

@@ -30,10 +30,10 @@ export default function ObjectivesSection() {
           Objectivos específicos
         </h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {eventConfig.specificObjectives.map((objective, index) => (
             <motion.div
-              key={objective}
+              key={objective.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
@@ -43,8 +43,11 @@ export default function ObjectivesSection() {
               <span className="inline-flex items-center justify-center w-8 h-8 bg-misau-bright text-misau-medium rounded-lg font-bold text-sm mb-3">
                 {index + 1}
               </span>
-              <p className="text-gray-600 text-base sm:text-lg md:text-xl leading-relaxed">
-                {objective}
+              <p className="font-semibold text-misau-dark text-base sm:text-lg leading-snug mb-3">
+                {objective.title}
+              </p>
+              <p className="text-gray-600 text-sm sm:text-base leading-relaxed pl-4 border-l-2 border-misau-gold/40">
+                {objective.description}
               </p>
             </motion.div>
           ))}

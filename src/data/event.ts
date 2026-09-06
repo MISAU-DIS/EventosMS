@@ -23,7 +23,7 @@ export const eventConfig = {
   calendarDates: "20260909T060000Z/20260911T150000Z",
   organizer: "Direcção de Planificação e Cooperação (DPC)",
   aboutEventText:
-    "O Conselho Coordenador de Saúde constitui um órgão consultivo de elevada relevância para o sector, convocado e presidido pelo Ministro da Saúde. Por seu intermédio, assegura-se a articulação, a planificação estratégica e o acompanhamento da implementação das políticas e intervenções, garantindo coerência e alinhamento dos objectivos em todos os níveis.",
+    "O Conselho Coordenador de Saúde é um órgão consultivo estratégico, convocado e presidido pelo Ministro da Saúde. A sua actuação visa assegurar a articulação, a planificação estratégica e a monitoria da implementação das políticas do sector, garantindo o alinhamento dos objectivos em todos os níveis de intervenção.",
   heroImage: "/fotografias/hero-evento.jpeg",
   heroImageAlt:
     "Imagem oficial do LI Conselho Coordenador de Saúde",
@@ -31,24 +31,28 @@ export const eventConfig = {
   aboutEventImageAlt:
     "Momento do LI Conselho Coordenador de Saúde — sobre o evento",
   generalObjective:
-    "Avaliar o desempenho do sector da Saúde em 2025 e no primeiro semestre de 2026 e definir orientações estratégicas e prioridades para a elaboração do PESOE 2027, em alinhamento com o PQG 2025–2029 e o PESS 2026–2035.",
+    "Avaliar o desempenho sectorial e estabelecer as directrizes estratégicas para o desenvolvimento da saúde, assegurando o alinhamento das políticas e compromissos institucionais com vista à promoção da eficiência e sustentabilidade do sector.",
   specificObjectives: [
-    "Avaliar o grau de cumprimento das recomendações do L Conselho Coordenador de Saúde e definir medidas de seguimento",
-    "Avaliar o desempenho do sector em 2025 e no primeiro semestre de 2026, identificando os principais resultados, desafios e medidas correctivas",
-    "Apreciar o grau de implementação do PQG 2025–2029 e identificar prioridades para acelerar o alcance das metas sectoriais",
-    "Definir as prioridades e linhas estratégicas do sector para orientar a elaboração do PESOE 2027",
-    "Alinhar as prioridades sectoriais com as linhas estratégicas do PESS 2026–2035",
-    "Harmonizar intervenções, responsabilidades e compromissos, com vista ao reforço da eficiência e sustentabilidade do sector",
-    "Deliberar sobre outras matérias estratégicas relevantes para o desempenho e desenvolvimento do sector da Saúde",
+    {
+      title: "Avaliar o desempenho e o cumprimento de metas sectoriais",
+      description:
+        "Avaliar o desempenho do sector (2025–2026) e o nível de implementação do PQG 2025–2029 e das recomendações do conselho anterior, identificando resultados, desafios e medidas correctivas.",
+    },
+    {
+      title: "Planificar e orientar as prioridades estratégicas futuras",
+      description:
+        "Definir as prioridades e linhas estratégicas do sector para orientar a elaboração do PESOE 2027, garantindo o alinhamento com o PESS 2026–2035.",
+    },
+    {
+      title: "Fortalecer a eficiência institucional e deliberar sobre matérias estratégicas",
+      description:
+        "Harmonizar intervenções, responsabilidades e compromissos para reforçar a eficiência e sustentabilidade do sector.",
+    },
   ],
   expectedResults: [
-    "Avaliado o grau de cumprimento das recomendações do L Conselho Coordenador de Saúde e definidas as medidas de seguimento",
-    "Apreciado o desempenho do sector em 2025 e no primeiro semestre de 2026 e identificados os principais desafios e medidas correctivas",
-    "Apreciado o grau de implementação do PQG 2025–2029 e definidas as prioridades para acelerar o alcance das metas sectoriais",
-    "Aprovadas as prioridades e linhas estratégicas para a elaboração do PESOE 2027",
-    "Alinhadas as prioridades sectoriais com as linhas estratégicas do PESS 2026–2035",
-    "Harmonizadas as intervenções, responsabilidades e compromissos, visando reforçar a eficiência, coordenação e sustentabilidade do sector",
-    "Adoptadas as deliberações sobre outras matérias estratégicas relevantes para o sector da Saúde",
+    "Grau de cumprimento das recomendações anteriores e desempenho do sector (2025 – 2026) devidamente analisados, com os principais sucessos e estrangulamentos identificados.",
+    "Linhas estratégicas e prioridades sectoriais claramente definidas para orientar o processo de elaboração do PESOE 2027.",
+    "Intervenções, papéis e compromissos partilhados entre os diferentes actores harmonizados com vista a aumentar a eficiência e sustentabilidade do sector.",
   ],
   methodology: {
     format: "presencial",
