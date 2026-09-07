@@ -34,15 +34,24 @@ echo "==> No SERVIDOR (ssh ${HOST}):"
 cat <<'SERVER'
 
 cd /opt/eventos-ms-deploy
+
+# Backup (só dados — não fotografias)
+sudo tar czf ~/backup-eventos-$(date +%Y%m%d-%H%M).tar.gz \
+  -C /opt/eventos-ms-deploy front/data front/public/documentos api/data api/storage 2>/dev/null
+
 sudo tar xzf ~/ccs-update-*.tar.gz -C /opt/eventos-ms-deploy
 
-# Fundir documentos de produção (api/) com front/ — NUNCA cp -n aqui
-sudo chmod +x merge-production-documents.sh
+# Restaurar SÓ JSON + documentos (NÃO fotografias — volume Docker)
+sudo tar xzf ~/backup-eventos-*.tar.gz -C /opt/eventos-ms-deploy front/data front/public/documentos
+
+# O extract acima já traz sobre-o-evento.jpeg (Beira2) — verificar tamanho ~247241 bytes
+ls -la front/public/fotografias/sobre-o-evento.jpeg
 sudo ./merge-production-documents.sh /opt/eventos-ms-deploy
 
 docker compose stop api 2>/dev/null || true
 docker compose build front && docker compose up -d front
 docker compose ps
-curl -s http://localhost:8080/api/health
+curl -s http://localhost:8080/manifest.webmanifest | python3 -c "import json,sys; m=json.load(sys.stdin); print('PWA:', m.get('name'))"
+ls -la front/public/fotografias/sobre-o-evento.jpeg
 
 SERVER
