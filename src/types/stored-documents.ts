@@ -35,12 +35,16 @@ export function inferFileType(fileName: string): MeetingDocument["fileType"] {
   }
 }
 
-export function toPublicDocument(record: StoredDocumentRecord): MeetingDocument {
+export function toPublicDocument(
+  record: StoredDocumentRecord,
+  baseUrl?: string,
+): MeetingDocument {
+  const path = `/documentos/${record.sectionId}/${record.fileName}`;
   return {
     id: record.id,
     title: record.title,
     description: record.description,
-    fileUrl: `/documentos/${record.sectionId}/${record.fileName}`,
+    fileUrl: baseUrl ? `${baseUrl.replace(/\/$/, "")}${path}` : path,
     fileType: record.fileType,
   };
 }

@@ -17,6 +17,8 @@ export function getOpenApiSpec(baseUrl = "") {
       { name: "Documents", description: "Documentos por evento" },
       { name: "Agenda", description: "Agenda por evento" },
       { name: "Program", description: "Programa por evento" },
+      { name: "Photos", description: "Fotografias por evento" },
+      { name: "Evaluations", description: "Avaliações do evento" },
     ],
     components: {
       securitySchemes: {
@@ -24,6 +26,11 @@ export function getOpenApiSpec(baseUrl = "") {
           type: "apiKey",
           in: "cookie",
           name: "ccs_admin_session",
+        },
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          description: "Token devolvido por POST /auth/login (campo token)",
         },
       },
       schemas: {
@@ -56,6 +63,13 @@ export function getOpenApiSpec(baseUrl = "") {
       },
     },
     paths: {
+      "/health": {
+        get: {
+          tags: ["Meta"],
+          summary: "Estado da API",
+          responses: { "200": { description: "OK" } },
+        },
+      },
       "/meta": {
         get: {
           tags: ["Meta"],
@@ -80,7 +94,9 @@ export function getOpenApiSpec(baseUrl = "") {
             },
           },
           responses: {
-            "200": { description: "Sessão iniciada" },
+            "200": {
+              description: "Sessão iniciada; corpo inclui token para mobile",
+            },
             "401": { description: "Senha inválida" },
           },
         },
@@ -132,7 +148,15 @@ export function getOpenApiSpec(baseUrl = "") {
         get: {
           tags: ["Documents"],
           summary: "Documentos do evento agrupados por secção",
-          parameters: [{ name: "eventId", in: "path", required: true, schema: { type: "string" } }],
+          parameters: [
+            { name: "eventId", in: "path", required: true, schema: { type: "string" } },
+            {
+              name: "absolute",
+              in: "query",
+              schema: { type: "boolean" },
+              description: "URLs absolutas para mobile",
+            },
+          ],
           responses: { "200": { description: "OK" } },
         },
       },
@@ -150,6 +174,46 @@ export function getOpenApiSpec(baseUrl = "") {
           summary: "Programa do evento",
           parameters: [{ name: "eventId", in: "path", required: true, schema: { type: "string" } }],
           responses: { "200": { description: "OK" } },
+        },
+      },
+      "/events/{eventId}/photos": {
+        get: {
+          tags: ["Photos"],
+          summary: "Fotografias do evento",
+          parameters: [
+            { name: "eventId", in: "path", required: true, schema: { type: "string" } },
+            { name: "absolute", in: "query", schema: { type: "boolean" } },
+          ],
+          responses: { "200": { description: "OK" } },
+        },
+      },
+      "/events/{eventId}/evaluation-criteria": {
+        get: {
+          tags: ["Evaluations"],
+          summary: "Critérios de avaliação por dia",
+          parameters: [
+            { name: "eventId", in: "path", required: true, schema: { type: "string" } },
+            { name: "day", in: "query", schema: { type: "integer", minimum: 1, maximum: 3 } },
+          ],
+          responses: { "200": { description: "OK" } },
+        },
+      },
+      "/events/{eventId}/evaluations": {
+        get: {
+          tags: ["Evaluations"],
+          summary: "Verificar se já submeteu avaliação",
+          parameters: [
+            { name: "eventId", in: "path", required: true, schema: { type: "string" } },
+            { name: "day", in: "query", schema: { type: "integer" } },
+            { name: "fingerprint", in: "query", schema: { type: "string" } },
+          ],
+          responses: { "200": { description: "OK" } },
+        },
+        post: {
+          tags: ["Evaluations"],
+          summary: "Submeter avaliação",
+          parameters: [{ name: "eventId", in: "path", required: true, schema: { type: "string" } }],
+          responses: { "201": { description: "Criada" }, "409": { description: "Já submeteu" } },
         },
       },
     },

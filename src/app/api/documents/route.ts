@@ -12,7 +12,7 @@ export async function GET() {
     ...section,
     documents: records
       .filter((record) => record.sectionId === section.id)
-      .map(toPublicDocument),
+      .map((record) => toPublicDocument(record)),
   }));
 
   return NextResponse.json(

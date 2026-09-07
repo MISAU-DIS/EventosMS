@@ -4,5 +4,5 @@ import { toPublicPhoto } from "@/types/photos-store";
 
 export async function GET() {
   const photos = await listPhotos();
-  return NextResponse.json({ photos: photos.map(toPublicPhoto) });
+  return NextResponse.json({ photos: photos.map((photo) => toPublicPhoto(photo)) });
 }

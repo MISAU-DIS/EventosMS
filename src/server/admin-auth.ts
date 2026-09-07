@@ -1,8 +1,13 @@
 import { NextResponse } from "next/server";
 import { adminAuth, isValidAdminPassword } from "@/config/admin";
 
-export function adminLoginResponse() {
-  const response = NextResponse.json({ ok: true });
+export function adminLoginResponse(options?: { includeToken?: boolean }) {
+  const response = NextResponse.json({
+    ok: true,
+    ...(options?.includeToken
+      ? { token: adminAuth.sessionToken, expiresIn: adminAuth.maxAgeSeconds }
+      : {}),
+  });
   response.cookies.set(adminAuth.cookieName, adminAuth.sessionToken, {
     httpOnly: true,
     sameSite: "lax",

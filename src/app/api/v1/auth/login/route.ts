@@ -6,7 +6,7 @@ export async function POST(request: Request) {
   if (!password) {
     return v1Error("AUTH_INVALID", "Senha inválida.", 401);
   }
-  const response = adminLoginResponse();
+  const response = adminLoginResponse({ includeToken: true });
   response.headers.set("X-API-Version", "1.0.0");
   response.headers.set("X-API-Deprecated", "false");
   return response;

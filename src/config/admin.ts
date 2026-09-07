@@ -1,9 +1,10 @@
 /**
- * Credenciais admin locais (fase de testes — substituir antes de produção MISAU).
+ * Credenciais admin — usar variáveis de ambiente em produção.
  */
 export const adminAuth = {
-  password: "Misau.2025",
-  sessionToken: "misau-ccs-admin-local-session",
+  password: process.env.ADMIN_PASSWORD ?? "Misau.2025",
+  sessionToken:
+    process.env.ADMIN_SESSION_TOKEN ?? "misau-ccs-admin-local-session",
   cookieName: "ccs_admin_session",
   maxAgeSeconds: 60 * 60 * 8,
 } as const;

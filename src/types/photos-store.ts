@@ -12,12 +12,13 @@ export type PhotosStoreFile = {
   photos: StoredPhoto[];
 };
 
-export function toPublicPhoto(photo: StoredPhoto) {
+export function toPublicPhoto(photo: StoredPhoto, baseUrl?: string) {
+  const path = `/fotografias/${photo.fileName}`;
   return {
     id: photo.id,
     title: photo.title,
     alt: photo.alt,
-    src: `/fotografias/${photo.fileName}`,
+    src: baseUrl ? `${baseUrl.replace(/\/$/, "")}${path}` : path,
     order: photo.order,
   };
 }

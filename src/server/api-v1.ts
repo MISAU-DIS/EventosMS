@@ -33,3 +33,9 @@ export function v1Error(
   const body: ApiErrorBody = { error: { code, message, details } };
   return NextResponse.json(body, { status, headers: v1Headers() });
 }
+
+export { getPublicBaseUrl, toAbsoluteUrl } from "@/lib/public-url";
+
+export function wantsAbsoluteUrls(request: Request): boolean {
+  return new URL(request.url).searchParams.get("absolute") === "true";
+}

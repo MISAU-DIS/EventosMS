@@ -1,4 +1,4 @@
-export const API_VERSION = "1.0.0";
+export const API_VERSION = "1.1.0";
 export const API_VERSION_PREFIX = "/api/v1";
 export const DEFAULT_EVENT_ID = "li-ccs-2026";
 
