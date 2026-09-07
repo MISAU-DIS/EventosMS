@@ -27,7 +27,7 @@ type PageHeroProps = {
 export function PageHero({ title, description, className = "" }: PageHeroProps) {
   return (
     <div
-      className={`pt-24 sm:pt-28 pb-10 sm:pb-12 px-4 sm:px-6 bg-gradient-to-r from-misau-medium to-misau-dark text-white text-center ${className}`}
+      className={`pt-24 sm:pt-28 pb-10 sm:pb-12 px-4 sm:px-6 misau-gradient-band text-white text-center ${className}`}
     >
       <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold mb-3 sm:mb-4 leading-tight">
         {title}

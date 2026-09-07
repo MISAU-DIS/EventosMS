@@ -3,7 +3,7 @@ import { eventConfig } from "@/data";
 
 export default function HomeCtaSection() {
   return (
-    <section className="py-12 sm:py-16 px-4 sm:px-6 bg-gradient-to-r from-misau-medium to-misau-dark text-white text-center">
+    <section className="misau-gradient-band py-12 sm:py-16 px-4 sm:px-6 text-white text-center">
       <div className="w-full max-w-4xl mx-auto">
         <p className="text-lg sm:text-2xl md:text-3xl font-bold mb-6 sm:mb-8 text-misau-bright uppercase tracking-wide leading-snug">
           {eventConfig.slogan}

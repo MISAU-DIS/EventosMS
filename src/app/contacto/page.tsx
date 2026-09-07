@@ -147,7 +147,7 @@ export default function Contacto(): React.ReactElement {
         </PageContainer>
       </main>
 
-      <div className="bg-gradient-to-r from-misau-gold to-misau-medium text-white py-12 sm:py-16 px-4 sm:px-6">
+      <div className="misau-gradient-band-gold text-white py-12 sm:py-16 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
