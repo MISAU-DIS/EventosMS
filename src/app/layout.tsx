@@ -36,6 +36,7 @@ export default function RootLayout({
   return (
     <html lang="pt">
       <body className="antialiased overflow-x-hidden">
+        <WarmOfflineCache />
         <ClientLayout>{children}</ClientLayout>
         <Toaster position="top-right" />
       </body>
