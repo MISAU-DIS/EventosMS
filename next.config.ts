@@ -3,9 +3,13 @@ import { spawnSync } from "node:child_process";
 import withSerwistInit from "@serwist/next";
 import type { NextConfig } from "next";
 
-const revision =
-  spawnSync("git", ["rev-parse", "HEAD"], { encoding: "utf-8" }).stdout.trim() ||
-  randomUUID();
+function getBuildRevision() {
+  const result = spawnSync("git", ["rev-parse", "HEAD"], { encoding: "utf-8" });
+  const hash = result.stdout?.trim();
+  return hash || randomUUID();
+}
+
+const revision = getBuildRevision();
 
 const withSerwist = withSerwistInit({
   swSrc: "src/app/sw.ts",
