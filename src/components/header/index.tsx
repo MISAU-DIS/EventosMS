@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { eventConfig } from "@/data";
 import { navLinks } from "@/config/navigation";
 
-export default function Header() {
+export default function Header({ offline = false }: { offline?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -36,7 +36,9 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b border-white/10 ${
+      className={`fixed left-0 w-full z-50 transition-all duration-300 border-b border-white/10 ${
+        offline ? "top-10" : "top-0"
+      } ${
         scrolled
           ? "bg-misau-dark/95 backdrop-blur-sm py-2"
           : isHome

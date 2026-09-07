@@ -12,10 +12,12 @@ import {
   getSubmittedDays,
   markDaySubmitted,
 } from "@/lib/eval-fingerprint";
+import { useOffline } from "@/hooks/useOffline";
 import type { EvaluationCriterion } from "@/types/evaluations";
 import { EVALUATION_DAYS } from "@/types/evaluations";
 
 export default function ComentariosPage() {
+  const offline = useOffline();
   const [dayNumber, setDayNumber] = useState(1);
   const [criteria, setCriteria] = useState<EvaluationCriterion[]>([]);
   const [scores, setScores] = useState<Record<string, number>>({});
@@ -55,7 +57,7 @@ export default function ComentariosPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (alreadySubmitted) return;
+    if (alreadySubmitted || offline) return;
 
     for (const c of criteria) {
       if (scores[c.id] === undefined) {
@@ -142,6 +144,11 @@ export default function ComentariosPage() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="bg-white rounded-xl p-6 sm:p-8 border border-misau-100 space-y-6 shadow-sm">
+                {offline && (
+                  <p className="text-sm text-amber-800 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3">
+                    O envio de avaliações requer ligação à internet.
+                  </p>
+                )}
                 {criteria.map((c) => (
                   <div key={c.id}>
                     <p className="font-semibold text-misau-dark mb-2">{c.label}</p>
@@ -160,8 +167,8 @@ export default function ComentariosPage() {
                   <input value={organization} onChange={(e) => setOrganization(e.target.value)} placeholder="Organização (opcional)" className="border rounded-lg px-3 py-2 text-sm" />
                 </div>
 
-                <button type="submit" disabled={submitting} className="w-full bg-misau-gold hover:bg-misau-medium text-white py-3 rounded-full font-semibold disabled:opacity-60">
-                  {submitting ? "A submeter..." : "Submeter avaliação"}
+                <button type="submit" disabled={submitting || offline} className="w-full bg-misau-gold hover:bg-misau-medium text-white py-3 rounded-full font-semibold disabled:opacity-60">
+                  {offline ? "Indisponível offline" : submitting ? "A submeter..." : "Submeter avaliação"}
                 </button>
               </form>
             )}

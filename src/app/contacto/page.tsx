@@ -7,14 +7,20 @@ import toast from "react-hot-toast";
 import { Calendar, MapPin } from "lucide-react";
 import { eventConfig } from "@/data";
 import { sendContactEmail } from "@/lib/emailjs";
+import { useOffline } from "@/hooks/useOffline";
 import InstitutionalBackground from "@/components/layout/InstitutionalBackground";
 import PageContainer from "@/components/layout/PageContainer";
 
 export default function Contacto(): React.ReactElement {
   const [sending, setSending] = useState(false);
+  const offline = useOffline();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (offline) {
+      toast.error("O envio de mensagens requer ligação à internet.");
+      return;
+    }
     setSending(true);
 
     try {
@@ -69,6 +75,11 @@ export default function Contacto(): React.ReactElement {
         </PageContainer>
 
         <PageContainer className="relative z-10 max-w-4xl bg-white rounded-xl border border-misau-100 p-5 sm:p-8 mb-12 sm:mb-16">
+          {offline && (
+            <p className="text-sm text-amber-800 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3 mb-5">
+              O formulário de contacto requer ligação à internet.
+            </p>
+          )}
           <form className="space-y-5 sm:space-y-6" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               <div>
@@ -126,10 +137,10 @@ export default function Contacto(): React.ReactElement {
             <div className="text-center">
               <button
                 type="submit"
-                disabled={sending}
+                disabled={sending || offline}
                 className="bg-misau-gold hover:bg-misau-medium text-white px-8 py-3 rounded-full font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
               >
-                {sending ? "Enviando..." : "Enviar Mensagem"}
+                {offline ? "Indisponível offline" : sending ? "Enviando..." : "Enviar Mensagem"}
               </button>
             </div>
           </form>
