@@ -1,13 +1,6 @@
-import { randomUUID } from "node:crypto";
-import { spawnSync } from "node:child_process";
 import withSerwistInit from "@serwist/next";
 import type { NextConfig } from "next";
-
-function getBuildRevision() {
-  const result = spawnSync("git", ["rev-parse", "HEAD"], { encoding: "utf-8" });
-  const hash = result.stdout?.trim();
-  return hash || randomUUID();
-}
+import { getBuildRevision } from "@/lib/build-revision";
 
 const revision = getBuildRevision();
 
@@ -27,6 +20,23 @@ const withSerwist = withSerwistInit({
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  experimental: {
+    proxyClientMaxBodySize: "100mb",
+  },
+  async headers() {
+    return [
+      {
+        source: "/sw.js",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "no-cache, no-store, must-revalidate",
+          },
+          { key: "Service-Worker-Allowed", value: "/" },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return [
       {

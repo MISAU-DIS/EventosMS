@@ -42,6 +42,23 @@ export function middleware(request: NextRequest) {
   return response;
 }
 
+// Excluir uploads multipart — o middleware faz buffer do body (limite ~10 MB por defeito)
+// e ficheiros PPT/PDF grandes falham com 500 antes de chegar ao route handler.
 export const config = {
-  matcher: "/api/:path*",
+  matcher: [
+    "/api/v1/:path*",
+    "/api/health",
+    "/api/documents",
+    "/api/agenda",
+    "/api/program",
+    "/api/photos",
+    "/api/evaluations",
+    "/api/admin/login",
+    "/api/admin/logout",
+    "/api/admin/session",
+    "/api/admin/agenda",
+    "/api/admin/program",
+    "/api/admin/evaluations",
+    "/api/admin/documents/:id",
+  ],
 };

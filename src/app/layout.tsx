@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Toaster } from "react-hot-toast";
 import ClientLayout from "@/components/layout/ClientLayout";
 import InstallPrompt from "@/components/pwa/InstallPrompt";
+import ServiceWorkerReloader from "@/components/pwa/ServiceWorkerReloader";
 import WarmOfflineCache from "@/components/pwa/WarmOfflineCache";
 import "./globals.css";
 
@@ -37,6 +38,7 @@ export default function RootLayout({
   return (
     <html lang="pt">
       <body className="antialiased overflow-x-hidden">
+        <ServiceWorkerReloader />
         <WarmOfflineCache />
         <ClientLayout>{children}</ClientLayout>
         <InstallPrompt />

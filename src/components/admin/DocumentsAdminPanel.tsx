@@ -11,6 +11,24 @@ import type { StoredDocumentRecord } from "@/types/stored-documents";
 
 const sectionOptions: DocumentSectionId[] = ["dia1", "dia2", "dia3", "gerais"];
 
+async function readApiError(response: Response): Promise<string> {
+  const contentType = response.headers.get("content-type") ?? "";
+  if (contentType.includes("application/json")) {
+    const data = (await response.json()) as { error?: string };
+    return data.error || `Erro ${response.status}.`;
+  }
+  if (response.status === 413) {
+    return "Ficheiro demasiado grande (limite ~100 MB). Comprima o ficheiro ou contacte o suporte.";
+  }
+  if (response.status === 401) {
+    return "Sessão expirada. Volte a iniciar sessão no painel admin.";
+  }
+  if (response.status >= 500) {
+    return "Erro interno ao gravar o ficheiro. Se o ficheiro for grande (>10 MB), faça deploy da versão mais recente ou comprima o PPT/PDF e tente novamente.";
+  }
+  return `Erro do servidor (${response.status}). Tente novamente.`;
+}
+
 export default function DocumentsAdminPanel() {
   const [documents, setDocuments] = useState<StoredDocumentRecord[]>([]);
   const [loading, setLoading] = useState(true);
@@ -72,8 +90,7 @@ export default function DocumentsAdminPanel() {
       });
 
       if (!response.ok) {
-        const data = (await response.json()) as { error?: string };
-        throw new Error(data.error || "Upload falhou.");
+        throw new Error(await readApiError(response));
       }
 
       setForm({ sectionId: "dia1", title: "", description: "", file: null });

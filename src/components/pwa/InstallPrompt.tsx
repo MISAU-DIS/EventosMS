@@ -4,7 +4,8 @@ import { Download, Share, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const SESSION_KEY = "misau-pwa-install-dismissed-session";
+const DISMISS_KEY = "misau-pwa-install-dismissed";
+const INSTALLED_KEY = "misau-pwa-install-done";
 
 type BeforeInstallPromptEvent = Event & {
   prompt: () => Promise<void>;
@@ -25,8 +26,32 @@ function isIOSDevice() {
   );
 }
 
-function isMobileDevice() {
-  return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+function shouldHideInstallPrompt() {
+  if (isStandaloneMode()) return true;
+  try {
+    if (localStorage.getItem(INSTALLED_KEY)) return true;
+    if (localStorage.getItem(DISMISS_KEY)) return true;
+  } catch {
+    return false;
+  }
+  return false;
+}
+
+function markInstallPromptSeen() {
+  try {
+    localStorage.setItem(DISMISS_KEY, "1");
+  } catch {
+    // storage indisponível
+  }
+}
+
+function markAppInstalled() {
+  try {
+    localStorage.setItem(INSTALLED_KEY, "1");
+    localStorage.setItem(DISMISS_KEY, "1");
+  } catch {
+    // storage indisponível
+  }
 }
 
 export default function InstallPrompt() {
@@ -38,13 +63,19 @@ export default function InstallPrompt() {
   const [canInstall, setCanInstall] = useState(false);
 
   useEffect(() => {
-    if (pathname !== "/" || isStandaloneMode()) return;
-    if (sessionStorage.getItem(SESSION_KEY)) return;
+    if (pathname !== "/" || shouldHideInstallPrompt()) return;
 
     const ios = isIOSDevice();
     setIsIOS(ios);
 
+    const onInstalled = () => {
+      markAppInstalled();
+      setVisible(false);
+    };
+    window.addEventListener("appinstalled", onInstalled);
+
     const handler = (event: Event) => {
+      if (shouldHideInstallPrompt()) return;
       event.preventDefault();
       setDeferredPrompt(event as BeforeInstallPromptEvent);
       setCanInstall(true);
@@ -54,18 +85,19 @@ export default function InstallPrompt() {
     window.addEventListener("beforeinstallprompt", handler);
 
     const timer = window.setTimeout(() => {
-      if (isStandaloneMode() || sessionStorage.getItem(SESSION_KEY)) return;
-      if (ios || isMobileDevice()) setVisible(true);
+      if (shouldHideInstallPrompt()) return;
+      if (ios) setVisible(true);
     }, 1200);
 
     return () => {
       window.removeEventListener("beforeinstallprompt", handler);
+      window.removeEventListener("appinstalled", onInstalled);
       window.clearTimeout(timer);
     };
   }, [pathname]);
 
-  const dismissForSession = () => {
-    sessionStorage.setItem(SESSION_KEY, "1");
+  const dismissPermanently = () => {
+    markInstallPromptSeen();
     setVisible(false);
   };
 
@@ -74,7 +106,8 @@ export default function InstallPrompt() {
     await deferredPrompt.prompt();
     const choice = await deferredPrompt.userChoice;
     setDeferredPrompt(null);
-    if (choice.outcome === "accepted") setVisible(false);
+    if (choice.outcome === "accepted") markAppInstalled();
+    setVisible(false);
   };
 
   if (pathname !== "/" || !visible) return null;
@@ -108,7 +141,7 @@ export default function InstallPrompt() {
           </div>
           <button
             type="button"
-            onClick={dismissForSession}
+            onClick={dismissPermanently}
             className="shrink-0 p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
             aria-label="Fechar"
           >
@@ -147,7 +180,7 @@ export default function InstallPrompt() {
           )}
           <button
             type="button"
-            onClick={dismissForSession}
+            onClick={dismissPermanently}
             className="sm:w-auto w-full py-2.5 px-4 rounded-full text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors"
           >
             Agora não

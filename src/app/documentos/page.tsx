@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { eventConfig } from "@/data";
 import DocumentList from "@/components/event/DocumentList";
 import AgendaPdfDownloadButton from "@/components/event/AgendaPdfDownloadButton";
@@ -9,16 +9,52 @@ import PageContainer from "@/components/layout/PageContainer";
 import { PageHero } from "@/components/layout/PageContainer";
 import type { DocumentSection } from "@/types/documents";
 
+async function fetchDocumentSections(): Promise<DocumentSection[]> {
+  const response = await fetch(`/api/documents?_=${Date.now()}`, {
+    cache: "no-store",
+  });
+  if (!response.ok) throw new Error("Falha ao carregar documentos.");
+  const data = (await response.json()) as { sections: DocumentSection[] };
+  return data.sections;
+}
+
 export default function DocumentosPage() {
   const [sections, setSections] = useState<DocumentSection[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetch("/api/documents")
-      .then((res) => res.json())
-      .then((data: { sections: DocumentSection[] }) => setSections(data.sections))
-      .finally(() => setLoading(false));
+  const loadDocuments = useCallback(async () => {
+    setLoading(true);
+    try {
+      setSections(await fetchDocumentSections());
+    } catch {
+      setSections([]);
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    loadDocuments();
+
+    const onPageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) loadDocuments();
+    };
+    const onVisible = () => {
+      if (document.visibilityState === "visible" && navigator.onLine) {
+        loadDocuments();
+      }
+    };
+
+    window.addEventListener("pageshow", onPageShow);
+    window.addEventListener("online", loadDocuments);
+    document.addEventListener("visibilitychange", onVisible);
+
+    return () => {
+      window.removeEventListener("pageshow", onPageShow);
+      window.removeEventListener("online", loadDocuments);
+      document.removeEventListener("visibilitychange", onVisible);
+    };
+  }, [loadDocuments]);
 
   return (
     <>

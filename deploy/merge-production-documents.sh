@@ -47,5 +47,12 @@ if [ -d "${API_FILES}" ]; then
   echo "Ficheiros copiados de api/storage/documentos → front/public/documentos"
 fi
 
+# Container Next.js corre como uid 1001 (nextjs)
+sudo chown -R 1001:1001 "$(dirname "${FRONT_JSON}")" "${FRONT_FILES}" 2>/dev/null || true
+FOTO_DIR="${ROOT}/front/public/fotografias"
+if [ -d "${FOTO_DIR}" ]; then
+  sudo chown -R 1001:1001 "${FOTO_DIR}"
+fi
+
 echo "Concluído. Verificar:"
 echo "  curl -s http://localhost:8080/api/documents | python3 -m json.tool | head -40"

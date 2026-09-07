@@ -4,16 +4,20 @@ COPY package.json package-lock.json ./
 RUN npm ci
 
 FROM node:20-alpine AS builder
+ARG BUILD_REVISION
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV BUILD_REVISION=${BUILD_REVISION}
 RUN npm run build
 
 FROM node:20-alpine AS runner
 WORKDIR /app
+ARG BUILD_REVISION
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV BUILD_REVISION=${BUILD_REVISION}
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
 

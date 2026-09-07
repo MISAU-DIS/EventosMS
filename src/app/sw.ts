@@ -9,6 +9,7 @@ import type {
 import {
   ExpirationPlugin,
   NetworkFirst,
+  NetworkOnly,
   Serwist,
   StaleWhileRevalidate,
 } from "serwist";
@@ -21,10 +22,35 @@ declare global {
 
 declare const self: ServiceWorkerGlobalScope;
 
+const adminApiPassthrough: RuntimeCaching = {
+  matcher: ({ sameOrigin, url }) =>
+    sameOrigin && url.pathname.startsWith("/api/admin/"),
+  handler: new NetworkOnly(),
+};
+
+const documentsListCache: RuntimeCaching = {
+  matcher: ({ sameOrigin, url, request }) =>
+    sameOrigin &&
+    url.pathname === "/api/documents" &&
+    request.method === "GET",
+  handler: new NetworkFirst({
+    cacheName: "eventos-documents-list",
+    networkTimeoutSeconds: 8,
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 4,
+        maxAgeSeconds: 5 * 60,
+        maxAgeFrom: "last-used",
+      }),
+    ],
+  }),
+};
+
 const apiCache: RuntimeCaching = {
   matcher: ({ sameOrigin, url }) =>
     sameOrigin &&
     url.pathname.startsWith("/api/") &&
+    url.pathname !== "/api/documents" &&
     !url.pathname.startsWith("/api/admin/") &&
     !url.pathname.startsWith("/api/v1/auth/"),
   handler: new NetworkFirst({
@@ -66,7 +92,13 @@ const serwist = new Serwist({
   clientsClaim: true,
   navigationPreload: true,
   disableDevLogs: true,
-  runtimeCaching: [apiCache, mediaCache, ...defaultCache],
+  runtimeCaching: [
+    adminApiPassthrough,
+    documentsListCache,
+    apiCache,
+    mediaCache,
+    ...defaultCache,
+  ],
   fallbacks: {
     entries: [
       {
