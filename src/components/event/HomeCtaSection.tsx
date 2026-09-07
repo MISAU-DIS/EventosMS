@@ -11,13 +11,13 @@ export default function HomeCtaSection() {
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
           <Link
             href="/agenda"
-            className="bg-white text-misau-medium hover:bg-misau-50 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-semibold transition-all duration-300 w-full sm:w-auto"
+            className="bg-white text-misau-dark hover:bg-misau-50 active:bg-misau-100 active:text-misau-shadow px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-semibold transition-colors duration-200 w-full sm:w-auto touch-manipulation [@media(hover:hover)]:hover:bg-misau-50"
           >
             Consultar Agenda
           </Link>
           <Link
             href="/contacto"
-            className="border-2 border-white text-white hover:bg-white hover:text-misau-medium px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-semibold transition-all duration-300 w-full sm:w-auto"
+            className="border-2 border-white text-white bg-transparent active:bg-misau-bright active:text-misau-dark active:border-misau-bright px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-semibold transition-colors duration-200 w-full sm:w-auto touch-manipulation [@media(hover:hover)]:hover:bg-white [@media(hover:hover)]:hover:text-misau-dark"
           >
             Contactar Organização
           </Link>
