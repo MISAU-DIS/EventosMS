@@ -1,9 +1,10 @@
 "use client";
 
-import { Download, Share, Smartphone, X } from "lucide-react";
+import { Download, Share, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const STORAGE_KEY = "misau-pwa-install-dismissed";
+const SESSION_KEY = "misau-pwa-install-dismissed-session";
 
 type BeforeInstallPromptEvent = Event & {
   prompt: () => Promise<void>;
@@ -29,6 +30,7 @@ function isMobileDevice() {
 }
 
 export default function InstallPrompt() {
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
@@ -36,7 +38,8 @@ export default function InstallPrompt() {
   const [canInstall, setCanInstall] = useState(false);
 
   useEffect(() => {
-    if (isStandaloneMode() || localStorage.getItem(STORAGE_KEY)) return;
+    if (pathname !== "/" || isStandaloneMode()) return;
+    if (sessionStorage.getItem(SESSION_KEY)) return;
 
     const ios = isIOSDevice();
     setIsIOS(ios);
@@ -51,30 +54,30 @@ export default function InstallPrompt() {
     window.addEventListener("beforeinstallprompt", handler);
 
     const timer = window.setTimeout(() => {
-      if (isStandaloneMode() || localStorage.getItem(STORAGE_KEY)) return;
+      if (isStandaloneMode() || sessionStorage.getItem(SESSION_KEY)) return;
       if (ios || isMobileDevice()) setVisible(true);
-    }, 1500);
+    }, 1200);
 
     return () => {
       window.removeEventListener("beforeinstallprompt", handler);
       window.clearTimeout(timer);
     };
-  }, []);
+  }, [pathname]);
 
-  const dismiss = () => {
-    localStorage.setItem(STORAGE_KEY, "1");
+  const dismissForSession = () => {
+    sessionStorage.setItem(SESSION_KEY, "1");
     setVisible(false);
   };
 
   const install = async () => {
     if (!deferredPrompt) return;
     await deferredPrompt.prompt();
-    await deferredPrompt.userChoice;
+    const choice = await deferredPrompt.userChoice;
     setDeferredPrompt(null);
-    dismiss();
+    if (choice.outcome === "accepted") setVisible(false);
   };
 
-  if (!visible) return null;
+  if (pathname !== "/" || !visible) return null;
 
   return (
     <div
@@ -84,8 +87,12 @@ export default function InstallPrompt() {
     >
       <div className="bg-white rounded-2xl shadow-xl border border-misau-100 p-5 sm:p-6">
         <div className="flex items-start gap-3">
-          <div className="shrink-0 w-11 h-11 rounded-xl bg-misau-gold/15 flex items-center justify-center">
-            <Smartphone className="w-6 h-6 text-misau-medium" aria-hidden />
+          <div className="shrink-0 w-11 h-11 rounded-xl bg-white border border-misau-100 p-1.5 flex items-center justify-center">
+            <img
+              src="/Emblem_of_Mozambique.svg"
+              alt=""
+              className="w-full h-full object-contain"
+            />
           </div>
           <div className="flex-1 min-w-0">
             <h2
@@ -95,13 +102,13 @@ export default function InstallPrompt() {
               Instale a app LI CCS
             </h2>
             <p className="text-sm text-gray-600 mt-1 leading-relaxed">
-              Recomendamos instalar no tablet ou telemóvel para acesso rápido e
-              uso offline durante o evento.
+              Recomendamos instalar no tablet para acesso rápido e uso offline
+              durante o evento.
             </p>
           </div>
           <button
             type="button"
-            onClick={dismiss}
+            onClick={dismissForSession}
             className="shrink-0 p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
             aria-label="Fechar"
           >
@@ -128,15 +135,19 @@ export default function InstallPrompt() {
               </span>
             </p>
           ) : (
-            <p className="flex-1 text-sm text-gray-600 bg-misau-50 border border-misau-100 rounded-xl px-4 py-3">
-              No browser, abra o menu e escolha{" "}
-              <strong>Instalar app</strong> ou{" "}
-              <strong>Adicionar ao ecrã inicial</strong>.
-            </p>
+            <button
+              type="button"
+              onClick={canInstall ? install : undefined}
+              disabled={!canInstall}
+              className="inline-flex items-center justify-center gap-2 flex-1 bg-misau-gold hover:bg-misau-medium text-white py-2.5 px-4 rounded-full font-semibold text-sm transition-colors disabled:opacity-70"
+            >
+              <Download className="w-4 h-4" aria-hidden />
+              Instalar app
+            </button>
           )}
           <button
             type="button"
-            onClick={dismiss}
+            onClick={dismissForSession}
             className="sm:w-auto w-full py-2.5 px-4 rounded-full text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors"
           >
             Agora não

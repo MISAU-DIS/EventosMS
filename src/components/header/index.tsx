@@ -32,18 +32,16 @@ export default function Header({ offline = false }: { offline?: boolean }) {
     };
   }, [isMenuOpen]);
 
-  const isHome = pathname === "/";
+  const solidHeader = isMenuOpen || scrolled;
 
   return (
     <header
       className={`fixed left-0 w-full z-50 transition-all duration-300 border-b border-white/10 ${
         offline ? "top-10" : "top-0"
       } ${
-        scrolled
-          ? "bg-misau-dark/95 backdrop-blur-sm py-2"
-          : isHome
-            ? "bg-misau-medium py-2 lg:py-2.5"
-            : "bg-misau-medium py-3 sm:py-4"
+        solidHeader
+          ? "bg-misau-dark shadow-md py-2"
+          : "bg-misau-medium py-2 sm:py-3 lg:py-2.5"
       } text-white`}
     >
       <div className="w-full max-w-[1600px] mx-auto flex items-center justify-between gap-3 px-4 sm:px-6 md:px-10 lg:px-16">
@@ -104,13 +102,13 @@ export default function Header({ offline = false }: { offline?: boolean }) {
       </div>
 
       <div
-        className={`xl:hidden absolute top-full left-0 w-full max-h-[calc(100dvh-4.5rem)] overflow-y-auto bg-misau-dark/98 backdrop-blur-sm shadow-lg transition-all duration-300 ${
+        className={`xl:hidden absolute top-full left-0 w-full max-h-[calc(100dvh-4.5rem)] overflow-y-auto bg-misau-dark shadow-xl transition-all duration-300 ${
           isMenuOpen
             ? "opacity-100 visible"
             : "opacity-0 invisible pointer-events-none"
         }`}
       >
-        <nav className="h-full overflow-y-auto px-4 py-4 pb-8">
+        <nav className="h-full overflow-y-auto px-4 py-4 pb-8 bg-misau-dark">
           <ul className="space-y-1">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
@@ -118,10 +116,10 @@ export default function Header({ offline = false }: { offline?: boolean }) {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className={`block py-3.5 px-4 text-base font-medium rounded-lg transition-all duration-200 min-h-[44px] ${
+                    className={`block py-3.5 px-4 text-base font-medium rounded-lg transition-all duration-200 min-h-[44px] text-white ${
                       isActive
-                        ? "bg-white/15 text-misau-bright"
-                        : "hover:bg-white/10"
+                        ? "bg-white/20 text-misau-bright"
+                        : "hover:bg-white/10 hover:text-misau-bright"
                     }`}
                     onClick={() => setIsMenuOpen(false)}
                   >

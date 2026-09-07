@@ -49,16 +49,16 @@ export default function HomeHero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15, duration: 0.8 }}
-          className="mt-4 sm:mt-6 lg:mt-2 w-full max-w-4xl xl:max-w-5xl flex-1 min-h-[140px] lg:min-h-0 flex flex-col"
+          className="mt-4 sm:mt-6 lg:mt-2 w-full max-w-5xl xl:max-w-6xl flex-1 min-h-0 flex flex-col"
         >
-          <div className="relative w-full flex-1 min-h-[140px] max-h-[42vh] lg:max-h-none overflow-hidden rounded-xl sm:rounded-2xl border border-misau-gold/30 shadow-lg">
+          <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] md:aspect-[2.1/1] lg:aspect-auto lg:flex-1 lg:min-h-[180px] lg:max-h-none overflow-hidden rounded-xl sm:rounded-2xl border border-misau-gold/30 shadow-lg">
             <Image
               src={eventConfig.heroImage}
               alt={eventConfig.heroImageAlt}
               fill
               priority
-              sizes="(max-width: 1280px) 100vw, 1024px"
-              className="object-cover object-center"
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1024px"
+              className="object-cover object-center md:object-[center_35%]"
             />
           </div>
         </motion.div>
