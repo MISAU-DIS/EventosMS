@@ -28,7 +28,7 @@ export default function MethodologySection() {
                 Formato da reunião
               </h3>
             </div>
-            <p className="text-gray-700 capitalize text-base sm:text-lg">
+            <p className="text-gray-700 text-base sm:text-lg">
               {methodology.format}
             </p>
           </motion.div>
@@ -63,7 +63,7 @@ export default function MethodologySection() {
             <div className="flex items-center gap-3 mb-4">
               <ClipboardList className="w-6 h-6 text-misau-gold shrink-0" />
               <h3 className="text-lg sm:text-xl font-bold text-misau-medium">
-                Discussão em Plenária
+                Temas
               </h3>
             </div>
             <ul className="space-y-2">

@@ -55,13 +55,11 @@ export const eventConfig = {
     "Intervenções, papéis e compromissos partilhados entre os diferentes actores harmonizados com vista a aumentar a eficiência e sustentabilidade do sector.",
   ],
   methodology: {
-    format: "presencial",
-    dynamics: ["Apresentações em PowerPoint e painel de discussão"],
-    plenaryTopics: [
-      "Temas de prestação de contas",
-      "Temas de planificação e discussão",
-      "Temas informativos",
+    format: "Presencial",
+    dynamics: [
+      "Discussões em plenária e painéis de discussão, com apresentações em PPT",
     ],
+    plenaryTopics: ["Prestação de contas, discussão e informativos"],
   },
 } as const satisfies EventConfig;
 
