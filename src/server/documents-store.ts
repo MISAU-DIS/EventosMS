@@ -3,6 +3,7 @@ import path from "path";
 import { DEFAULT_EVENT_ID } from "@/config/api";
 import type {
   DocumentsStoreFile,
+  OrphanDocumentFile,
   StoredDocumentRecord,
 } from "@/types/stored-documents";
 import { inferFileType, slugifyFileName } from "@/types/stored-documents";
@@ -10,6 +11,12 @@ import type { DocumentSectionId } from "@/config/document-sections";
 
 const storePath = path.join(process.cwd(), "data/documents-store.json");
 const publicDocsRoot = path.join(process.cwd(), "public/documentos");
+
+const VALID_SECTIONS = new Set<DocumentSectionId>(["dia1", "dia2", "dia3", "gerais"]);
+
+export function isValidDocumentSection(value: string): value is DocumentSectionId {
+  return VALID_SECTIONS.has(value as DocumentSectionId);
+}
 
 async function writeStore(store: DocumentsStoreFile) {
   await fs.mkdir(path.dirname(storePath), { recursive: true });
@@ -106,6 +113,154 @@ export async function deleteStoredDocument(id: string) {
     // ficheiro já removido manualmente
   }
 
+  await writeStore(store);
+  return true;
+}
+
+/** Ficheiros em public/documentos/ sem entrada no JSON (ex.: cópia manual). */
+export async function listOrphanDocumentFiles(): Promise<OrphanDocumentFile[]> {
+  const store = await ensureStore();
+  const registered = new Set(
+    store.documents.map((doc) => `${doc.sectionId}/${doc.fileName}`),
+  );
+  const orphans: OrphanDocumentFile[] = [];
+
+  for (const sectionId of VALID_SECTIONS) {
+    const sectionDir = path.join(publicDocsRoot, sectionId);
+    let entries: string[] = [];
+    try {
+      entries = await fs.readdir(sectionDir);
+    } catch {
+      continue;
+    }
+
+    for (const fileName of entries) {
+      const relativePath = `${sectionId}/${fileName}`;
+      if (registered.has(relativePath)) continue;
+
+      const filePath = path.join(sectionDir, fileName);
+      const stat = await fs.stat(filePath);
+      if (!stat.isFile()) continue;
+
+      orphans.push({
+        sectionId,
+        fileName,
+        relativePath,
+        size: stat.size,
+        modifiedAt: stat.mtime.toISOString(),
+      });
+    }
+  }
+
+  return orphans.sort((a, b) =>
+    a.fileName.localeCompare(b.fileName, "pt", { sensitivity: "base" }),
+  );
+}
+
+/** Registos no JSON cujo ficheiro já não existe no disco. */
+export async function listBrokenDocuments(): Promise<StoredDocumentRecord[]> {
+  const store = await ensureStore();
+  const broken: StoredDocumentRecord[] = [];
+
+  for (const doc of store.documents) {
+    const filePath = path.join(publicDocsRoot, doc.sectionId, doc.fileName);
+    try {
+      await fs.access(filePath);
+    } catch {
+      broken.push(doc);
+    }
+  }
+
+  return broken;
+}
+
+/** Registar ficheiro existente no disco (upload manual anterior). */
+export async function registerOrphanDocument(input: {
+  sectionId: DocumentSectionId;
+  fileName: string;
+  title: string;
+  description?: string;
+}) {
+  if (!isValidDocumentSection(input.sectionId)) {
+    throw new Error("Secção inválida.");
+  }
+
+  if (input.fileName.includes("/") || input.fileName.includes("..")) {
+    throw new Error("Nome de ficheiro inválido.");
+  }
+
+  const filePath = path.join(publicDocsRoot, input.sectionId, input.fileName);
+  await fs.access(filePath);
+
+  const store = await ensureStore();
+  if (
+    store.documents.some(
+      (doc) => doc.sectionId === input.sectionId && doc.fileName === input.fileName,
+    )
+  ) {
+    throw new Error("Documento já registado.");
+  }
+
+  const ext = path.extname(input.fileName);
+  const base = slugifyFileName(path.basename(input.fileName, ext)) || "documento";
+  const id = `${base}-imported-${Date.now()}`;
+
+  const record: StoredDocumentRecord = {
+    id,
+    eventId: DEFAULT_EVENT_ID,
+    sectionId: input.sectionId,
+    title: input.title.trim(),
+    description: input.description?.trim() || undefined,
+    fileName: input.fileName,
+    fileType: inferFileType(input.fileName),
+    createdAt: new Date().toISOString(),
+  };
+
+  store.documents.push(record);
+  await writeStore(store);
+  return record;
+}
+
+/** Apagar ficheiro órfão (só disco, sem registo JSON). */
+export async function deleteOrphanDocumentFile(
+  sectionId: DocumentSectionId,
+  fileName: string,
+) {
+  if (!isValidDocumentSection(sectionId) || fileName.includes("/") || fileName.includes("..")) {
+    throw new Error("Parâmetros inválidos.");
+  }
+
+  const store = await ensureStore();
+  if (
+    store.documents.some(
+      (doc) => doc.sectionId === sectionId && doc.fileName === fileName,
+    )
+  ) {
+    throw new Error("Documento registado — use Remover na lista principal.");
+  }
+
+  await fs.unlink(path.join(publicDocsRoot, sectionId, fileName));
+  return true;
+}
+
+/** Remover registo JSON quando o ficheiro já não existe. */
+export async function deleteBrokenDocumentRecord(id: string) {
+  const store = await ensureStore();
+  const index = store.documents.findIndex((doc) => doc.id === id);
+  if (index === -1) return false;
+
+  const doc = store.documents[index];
+  const filePath = path.join(publicDocsRoot, doc.sectionId, doc.fileName);
+  try {
+    await fs.access(filePath);
+    throw new Error("O ficheiro ainda existe — use Remover na lista principal.");
+  } catch (error) {
+    if (error instanceof Error && error.message.includes("lista principal")) {
+      throw error;
+    }
+  }
+
+  store.documents.splice(index, 1);
   await writeStore(store);
   return true;
 }

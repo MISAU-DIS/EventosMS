@@ -16,6 +16,14 @@ export type DocumentsStoreFile = {
   documents: StoredDocumentRecord[];
 };
 
+export type OrphanDocumentFile = {
+  sectionId: DocumentSectionId;
+  fileName: string;
+  relativePath: string;
+  size: number;
+  modifiedAt: string;
+};
+
 export function inferFileType(fileName: string): MeetingDocument["fileType"] {
   const ext = fileName.split(".").pop()?.toLowerCase();
   switch (ext) {
