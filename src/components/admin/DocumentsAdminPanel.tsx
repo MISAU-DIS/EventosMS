@@ -7,7 +7,7 @@ import {
   documentSectionLabels,
   type DocumentSectionId,
 } from "@/config/document-sections";
-import type { StoredDocumentRecord } from "@/types/stored-documents";
+import type { OrphanDocumentFile, StoredDocumentRecord } from "@/types/stored-documents";
 
 const sectionOptions: DocumentSectionId[] = ["dia1", "dia2", "dia3", "gerais"];
 
@@ -31,6 +31,8 @@ async function readApiError(response: Response): Promise<string> {
 
 export default function DocumentsAdminPanel() {
   const [documents, setDocuments] = useState<StoredDocumentRecord[]>([]);
+  const [orphans, setOrphans] = useState<OrphanDocumentFile[]>([]);
+  const [broken, setBroken] = useState<StoredDocumentRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
   const [filter, setFilter] = useState<DocumentSectionId | "all">("all");
@@ -47,10 +49,25 @@ export default function DocumentsAdminPanel() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch("/api/admin/documents");
-      if (!response.ok) throw new Error("Falha ao carregar documentos.");
-      const data = (await response.json()) as { documents: StoredDocumentRecord[] };
-      setDocuments(data.documents);
+      const [docsRes, orphansRes] = await Promise.all([
+        fetch("/api/admin/documents"),
+        fetch("/api/admin/documents/orphans"),
+      ]);
+      if (!docsRes.ok) throw new Error("Falha ao carregar documentos.");
+      const docsData = (await docsRes.json()) as { documents: StoredDocumentRecord[] };
+      setDocuments(docsData.documents);
+
+      if (orphansRes.ok) {
+        const orphansData = (await orphansRes.json()) as {
+          orphans: OrphanDocumentFile[];
+          broken: StoredDocumentRecord[];
+        };
+        setOrphans(orphansData.orphans);
+        setBroken(orphansData.broken);
+      } else {
+        setOrphans([]);
+        setBroken([]);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Erro desconhecido.");
     } finally {
@@ -162,6 +179,110 @@ export default function DocumentsAdminPanel() {
     }
   };
 
+  const handleRegisterOrphan = async (orphan: OrphanDocumentFile) => {
+    const result = await Swal.fire({
+      icon: "question",
+      title: "Registar ficheiro manual",
+      html: `Ficheiro: <strong>${orphan.fileName}</strong><br/>Secção: ${documentSectionLabels[orphan.sectionId]}`,
+      input: "text",
+      inputLabel: "Título na plataforma",
+      inputValue: orphan.fileName.replace(/\.[^.]+$/, "").replace(/-/g, " "),
+      showCancelButton: true,
+      confirmButtonText: "Registar",
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: "#059669",
+    });
+
+    if (!result.isConfirmed || typeof result.value !== "string" || !result.value.trim()) {
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/admin/documents/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sectionId: orphan.sectionId,
+          fileName: orphan.fileName,
+          title: result.value.trim(),
+        }),
+      });
+      if (!response.ok) throw new Error(await readApiError(response));
+      await Swal.fire({
+        icon: "success",
+        title: "Documento registado",
+        text: "Já pode gerir este ficheiro na lista principal.",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+      await loadDocuments();
+    } catch (err) {
+      await Swal.fire({
+        icon: "error",
+        title: "Erro",
+        text: err instanceof Error ? err.message : "Não foi possível registar.",
+        confirmButtonColor: "#059669",
+      });
+    }
+  };
+
+  const handleDeleteOrphan = async (orphan: OrphanDocumentFile) => {
+    const result = await Swal.fire({
+      icon: "warning",
+      title: "Apagar ficheiro do disco?",
+      html: `Remove <strong>${orphan.fileName}</strong> (não está no registo JSON).`,
+      showCancelButton: true,
+      confirmButtonText: "Apagar ficheiro",
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: "#dc2626",
+    });
+    if (!result.isConfirmed) return;
+
+    try {
+      const response = await fetch(
+        `/api/admin/documents/orphans?sectionId=${encodeURIComponent(orphan.sectionId)}&fileName=${encodeURIComponent(orphan.fileName)}`,
+        { method: "DELETE" },
+      );
+      if (!response.ok) throw new Error(await readApiError(response));
+      await loadDocuments();
+    } catch (err) {
+      await Swal.fire({
+        icon: "error",
+        title: "Erro ao apagar",
+        text: err instanceof Error ? err.message : "Tente novamente.",
+        confirmButtonColor: "#059669",
+      });
+    }
+  };
+
+  const handleDeleteBroken = async (doc: StoredDocumentRecord) => {
+    const result = await Swal.fire({
+      icon: "warning",
+      title: "Remover registo fantasma?",
+      html: `«${doc.title}» — o ficheiro já não existe no disco.`,
+      showCancelButton: true,
+      confirmButtonText: "Remover registo",
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: "#dc2626",
+    });
+    if (!result.isConfirmed) return;
+
+    try {
+      const response = await fetch(`/api/admin/documents/broken/${doc.id}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) throw new Error(await readApiError(response));
+      await loadDocuments();
+    } catch (err) {
+      await Swal.fire({
+        icon: "error",
+        title: "Erro",
+        text: err instanceof Error ? err.message : "Tente novamente.",
+        confirmButtonColor: "#059669",
+      });
+    }
+  };
+
   const visibleDocuments =
     filter === "all"
       ? documents
@@ -189,6 +310,90 @@ export default function DocumentsAdminPanel() {
       {error && (
         <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-red-700 text-sm">
           {error}
+        </div>
+      )}
+
+      <div className="rounded-lg border border-blue-100 bg-blue-50 px-4 py-3 text-sm text-blue-900">
+        <strong>Agenda e programa dinâmicos:</strong> o botão «Agenda e Programa — PDF» em
+        Documentos gerais é gerado automaticamente a partir dos dados actuais do site — não
+        aparece nesta lista. Ficheiros antigos de agenda/programa colocados manualmente em{" "}
+        <code className="text-xs">public/documentos/gerais/</code> surgem abaixo como{" "}
+        <em>ficheiros manuais</em> — registe ou apague.
+      </div>
+
+      {!loading && (orphans.length > 0 || broken.length > 0) && (
+        <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 space-y-4">
+          <h3 className="font-semibold text-amber-900">Manutenção — ficheiros desalinhados</h3>
+
+          {orphans.length > 0 && (
+            <div>
+              <p className="text-sm text-amber-800 mb-2">
+                Ficheiros no disco sem registo (aparecem no site só se alguém souber o URL
+                directo; registe para listar e gerir):
+              </p>
+              <ul className="space-y-2">
+                {orphans.map((orphan) => (
+                  <li
+                    key={orphan.relativePath}
+                    className="flex flex-col sm:flex-row sm:items-center gap-2 bg-white rounded-lg p-3 border border-amber-100"
+                  >
+                    <div className="flex-1 min-w-0 text-sm">
+                      <span className="font-medium">{documentSectionLabels[orphan.sectionId]}</span>
+                      <span className="text-gray-500"> — </span>
+                      <span className="break-all">{orphan.fileName}</span>
+                      <span className="text-gray-400 text-xs ml-2">
+                        ({Math.round(orphan.size / 1024)} KB)
+                      </span>
+                    </div>
+                    <div className="flex gap-2 shrink-0">
+                      <button
+                        type="button"
+                        onClick={() => handleRegisterOrphan(orphan)}
+                        className="text-sm px-3 py-1.5 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700"
+                      >
+                        Registar
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteOrphan(orphan)}
+                        className="text-sm px-3 py-1.5 rounded-lg border border-red-200 text-red-600 hover:bg-red-50"
+                      >
+                        Apagar ficheiro
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {broken.length > 0 && (
+            <div>
+              <p className="text-sm text-amber-800 mb-2">
+                Registos no portal cujo ficheiro já não existe (remova o registo fantasma):
+              </p>
+              <ul className="space-y-2">
+                {broken.map((doc) => (
+                  <li
+                    key={doc.id}
+                    className="flex flex-col sm:flex-row sm:items-center gap-2 bg-white rounded-lg p-3 border border-amber-100"
+                  >
+                    <div className="flex-1 text-sm">
+                      <strong>{doc.title}</strong>
+                      <span className="text-gray-500"> — {doc.fileName}</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteBroken(doc)}
+                      className="text-sm px-3 py-1.5 rounded-lg border border-red-200 text-red-600 hover:bg-red-50 shrink-0"
+                    >
+                      Remover registo
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       )}
 
