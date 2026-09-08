@@ -13,7 +13,7 @@ BUILD_REVISION="$(git -C "${SRC}" rev-parse --short HEAD 2>/dev/null || echo loc
 
 echo "==> Preparar pacote local (código apenas — sem data/)"
 rm -rf "${STAGE}"
-mkdir -p "${STAGE}/front"
+mkdir -p "${STAGE}/front" "${STAGE}/api"
 
 cp -a "${SRC}/src" "${STAGE}/front/"
 cp -a "${SRC}/public" "${STAGE}/front/"
@@ -21,6 +21,9 @@ cp "${SRC}/package.json" "${SRC}/package-lock.json" "${STAGE}/front/"
 cp "${SRC}/next.config.ts" "${SRC}/tsconfig.json" "${STAGE}/front/"
 cp "${SRC}/postcss.config.mjs" "${SRC}/eslint.config.mjs" "${STAGE}/front/"
 cp "${SRC}/Dockerfile" "${STAGE}/front/Dockerfile"
+cp -a "${SRC}/api/src" "${STAGE}/api/"
+cp "${SRC}/api/package.json" "${SRC}/api/tsconfig.json" "${SRC}/api/Dockerfile" "${STAGE}/api/"
+cp "${SRC}/api/.dockerignore" "${STAGE}/api/" 2>/dev/null || true
 cp "${DEPLOY}/docker-compose.yml" "${STAGE}/docker-compose.yml"
 cp "${SRC}/deploy/merge-production-documents.sh" "${STAGE}/merge-production-documents.sh"
 cp "${SRC}/deploy/backup-production-full.sh" "${STAGE}/backup-production-full.sh"
@@ -70,13 +73,10 @@ sudo chown -R 1001:1001 front/data front/public/documentos front/public/fotograf
 
 export BUILD_REVISION="$(cat BUILD_REVISION.txt 2>/dev/null || date +%Y%m%d)"
 echo "Build revision: ${BUILD_REVISION}"
-docker compose stop api 2>/dev/null || true
-docker compose build front && docker compose up -d front
+docker compose build front api && docker compose up -d front api
 
-# BunkerWeb (ccs.misau.gov.mz): permitir POST multipart em /api/admin/*
-# e client_max_body_size 100m — senão upload devolve HTML 500 do WAF.
-
-curl -s http://localhost:8080/api/documents | python3 -c "import json,sys; d=json.load(sys.stdin); print('Docs:', sum(len(s['documents']) for s in d['sections']))"
-curl -s http://localhost:8080/api/agenda | python3 -c "import json,sys; d=json.load(sys.stdin); print('Agenda dias:', len(d.get('days',[])))"
+curl -s http://localhost:8080/api/documents | python3 -c "import json,sys; d=json.load(sys.stdin); print('Front docs:', sum(len(s['documents']) for s in d['sections']))"
+curl -s http://localhost:4000/api/documents | python3 -c "import json,sys; d=json.load(sys.stdin); print('API docs:', sum(len(s['documents']) for s in d['sections']))"
+curl -s http://localhost:4000/api/v1/health | python3 -m json.tool | head -8
 
 SERVER

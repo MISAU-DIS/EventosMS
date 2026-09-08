@@ -19,3 +19,26 @@ services:
       - ./front/public/documentos:/app/public/documentos
       - ./front/public/fotografias:/app/public/fotografias
     restart: unless-stopped
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+      args:
+        BUILD_REVISION: ${BUILD_REVISION:-local}
+    container_name: eventos-ms-api
+    ports:
+      - "${API_PORT:-4000}:4000"
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-https://ccs.misau.gov.mz}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-Misau.2025}
+      ADMIN_SESSION_TOKEN: ${ADMIN_SESSION_TOKEN:-misau-ccs-admin-local-session}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-*}
+      BUILD_REVISION: ${BUILD_REVISION:-local}
+    volumes:
+      - ./front/data:/app/data
+      - ./front/public/documentos:/app/public/documentos
+      - ./front/public/fotografias:/app/public/fotografias
+    restart: unless-stopped
