@@ -8,7 +8,8 @@ HOST="portal@192.168.10.114"
 SRC="/home/rodrigues/MISAU/EventosMS"
 DEPLOY="/home/rodrigues/MISAU/eventos-ms-deploy"
 STAGE="${DEPLOY}/.staging"
-REMOTE_TAR="ccs-update-$(date +%Y%m%d).tar.gz"
+REMOTE_TAR="ccs-update-$(date +%Y%m%d-%H%M).tar.gz"
+BUILD_REVISION="$(git -C "${SRC}" rev-parse --short HEAD 2>/dev/null || echo local)"
 
 echo "==> Preparar pacote local (código apenas — sem data/)"
 rm -rf "${STAGE}"
@@ -22,7 +23,10 @@ cp "${SRC}/postcss.config.mjs" "${SRC}/eslint.config.mjs" "${STAGE}/front/"
 cp "${SRC}/Dockerfile" "${STAGE}/front/Dockerfile"
 cp "${DEPLOY}/docker-compose.yml" "${STAGE}/docker-compose.yml"
 cp "${SRC}/deploy/merge-production-documents.sh" "${STAGE}/merge-production-documents.sh"
+cp "${SRC}/deploy/backup-production-full.sh" "${STAGE}/backup-production-full.sh"
 cp "${SRC}/deploy/restore-production-data.sh" "${STAGE}/restore-production-data.sh"
+cp "${SRC}/deploy/inspect-server.sh" "${STAGE}/inspect-server.sh"
+echo "${BUILD_REVISION}" > "${STAGE}/BUILD_REVISION.txt"
 
 echo "==> Criar tarball"
 tar czf "/home/rodrigues/${REMOTE_TAR}" -C "${STAGE}" .
@@ -36,12 +40,19 @@ cat <<'SERVER'
 
 cd /opt/eventos-ms-deploy
 
-# 1. Backup dos dados actuais (por segurança)
-sudo tar czf ~/backup-eventos-$(date +%Y%m%d-%H%M).tar.gz \
-  -C /opt/eventos-ms-deploy front/data front/public/documentos api/data api/storage 2>/dev/null
+# 1. Backup COMPLETO (script no tarball ou tar manual)
+if [ -x backup-production-full.sh ]; then
+  sudo ./backup-production-full.sh /opt/eventos-ms-deploy
+else
+  sudo tar czf ~/backup-eventos-$(date +%Y%m%d-%H%M)-FULL.tar.gz \
+    -C /opt/eventos-ms-deploy \
+    front/data front/public/documentos front/public/fotografias docker-compose.yml
+fi
 
-# 2. Actualizar SÓ código (tarball já NÃO traz front/data)
-sudo tar xzf ~/ccs-update-*.tar.gz -C /opt/eventos-ms-deploy
+# 2. Actualizar SÓ código — UM tarball (nunca usar glob com vários ficheiros)
+TAR="$(ls -t ~/ccs-update-*.tar.gz | head -1)"
+echo "A extrair: ${TAR}"
+sudo tar xzf "${TAR}" -C /opt/eventos-ms-deploy
 
 # 3. Se dados se perderam, restaurar backup bom (exemplo):
 # sudo chmod +x restore-production-data.sh
@@ -57,7 +68,8 @@ sudo ./merge-production-documents.sh /opt/eventos-ms-deploy
 # Permissões de escrita para uploads admin (uid nextjs no container)
 sudo chown -R 1001:1001 front/data front/public/documentos front/public/fotografias
 
-export BUILD_REVISION="$(git -C front rev-parse HEAD 2>/dev/null || date +%Y%m%d)"
+export BUILD_REVISION="$(cat BUILD_REVISION.txt 2>/dev/null || date +%Y%m%d)"
+echo "Build revision: ${BUILD_REVISION}"
 docker compose stop api 2>/dev/null || true
 docker compose build front && docker compose up -d front
 

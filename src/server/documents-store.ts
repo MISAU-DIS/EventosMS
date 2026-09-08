@@ -72,7 +72,9 @@ export async function addStoredDocument(input: {
   const sectionDir = path.join(publicDocsRoot, input.sectionId);
 
   await fs.mkdir(sectionDir, { recursive: true });
-  await fs.writeFile(path.join(sectionDir, fileName), input.fileBuffer);
+  const absolutePath = path.join(sectionDir, fileName);
+  await fs.writeFile(absolutePath, input.fileBuffer);
+  await fs.access(absolutePath);
 
   const record: StoredDocumentRecord = {
     id,
