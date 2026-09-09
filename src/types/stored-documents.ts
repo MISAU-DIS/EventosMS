@@ -10,10 +10,15 @@ export type StoredDocumentRecord = {
   fileName: string;
   fileType: MeetingDocument["fileType"];
   createdAt: string;
+  /** Oculto da listagem pública; ficheiro mantém-se no disco. */
+  hidden?: boolean;
+  hiddenAt?: string;
 };
 
 export type DocumentsStoreFile = {
   documents: StoredDocumentRecord[];
+  /** Ficheiros órfãos ignorados na manutenção (não apagados). */
+  ignoredOrphanPaths?: string[];
 };
 
 export type OrphanDocumentFile = {

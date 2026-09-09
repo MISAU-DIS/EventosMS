@@ -18,7 +18,7 @@ const validSections = new Set<DocumentSectionId>([
 
 export async function GET() {
   if (!(await isAdminSessionValid())) return unauthorizedResponse();
-  const documents = await listStoredDocuments();
+  const documents = await listStoredDocuments(undefined, { includeHidden: true });
   return NextResponse.json({ documents });
 }
 

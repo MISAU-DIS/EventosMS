@@ -7,6 +7,7 @@ import { useSelectedEventDay } from "@/hooks/useSelectedEventDay";
 import EventDateLocationBadges from "@/components/event/EventDateLocationBadges";
 import ProgramDayTabs from "@/components/event/ProgramDayTabs";
 import ProgramDayContent from "@/components/event/ProgramDayContent";
+import PageContainer from "@/components/layout/PageContainer";
 
 export default function ProgramaPage() {
   const { days: eventProgram, loading } = useEventProgram();
@@ -30,19 +31,20 @@ export default function ProgramaPage() {
         content={`Programa completo do ${eventConfig.title} - MISAU 2026`}
       />
 
-      <main className="min-h-screen bg-slate-50">
-        <div className="bg-white shadow-sm border-b">
-          <div className="container mx-auto mt-20 px-4 py-8">
-            <div className="text-center">
-              <h1 className="text-3xl md:text-4xl font-bold text-misau-medium mb-2">
-                Programa
-              </h1>
-              <EventDateLocationBadges variant="inline" />
-            </div>
-          </div>
+      <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-misau-50">
+        <div className="bg-white border-b">
+          <PageContainer className="mt-20 sm:mt-24 py-8 sm:py-10 text-center">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-misau-medium mb-3 sm:mb-5">
+              Programa
+            </h1>
+            <p className="text-gray-600 text-base sm:text-xl mb-6 sm:mb-8">
+              {eventConfig.title}
+            </p>
+            <EventDateLocationBadges variant="inline" />
+          </PageContainer>
         </div>
 
-        <div className="container mx-auto px-4 py-8">
+        <PageContainer className="py-8 sm:py-12">
           <ProgramDayTabs
             days={eventProgram}
             selectedDay={selectedDay}
@@ -62,7 +64,7 @@ export default function ProgramaPage() {
               totalDays={eventProgram.length}
             />
           </motion.div>
-        </div>
+        </PageContainer>
       </main>
     </>
   );

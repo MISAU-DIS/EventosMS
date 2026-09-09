@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Download, FileUp, RefreshCw, Trash2 } from "lucide-react";
+import { Download, Eye, EyeOff, FileUp, RefreshCw, Trash2 } from "lucide-react";
 import Swal from "sweetalert2";
 import {
   documentSectionLabels,
@@ -135,15 +135,65 @@ export default function DocumentsAdminPanel() {
     }
   };
 
+  const handleHide = async (doc: StoredDocumentRecord, hidden: boolean) => {
+    const action = hidden ? "ocultar" : "mostrar";
+    const result = await Swal.fire({
+      icon: hidden ? "question" : "info",
+      title: hidden ? "Ocultar do site?" : "Mostrar no site?",
+      html: hidden
+        ? `«<strong>${doc.title}</strong>» deixa de aparecer na listagem pública. O ficheiro <em>não é apagado</em> — pode restaurar depois.`
+        : `«<strong>${doc.title}</strong>» volta a aparecer na plataforma.`,
+      showCancelButton: true,
+      confirmButtonText: hidden ? "Ocultar" : "Mostrar",
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: hidden ? "#d97706" : "#059669",
+      cancelButtonColor: "#6b7280",
+      reverseButtons: true,
+    });
+
+    if (!result.isConfirmed) return;
+
+    setError(null);
+    try {
+      const response = await fetch(`/api/admin/documents/${doc.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ hidden }),
+      });
+      if (!response.ok) throw new Error(await readApiError(response));
+
+      await Swal.fire({
+        icon: "success",
+        title: hidden ? "Documento oculto" : "Documento visível",
+        text: hidden
+          ? "Já não aparece no site. Continua listado aqui no admin."
+          : "O documento está novamente na plataforma.",
+        confirmButtonColor: "#059669",
+        timer: 2000,
+        timerProgressBar: true,
+      });
+
+      await loadDocuments();
+    } catch (err) {
+      await Swal.fire({
+        icon: "error",
+        title: `Erro ao ${action}`,
+        text: err instanceof Error ? err.message : "Tente novamente.",
+        confirmButtonColor: "#059669",
+      });
+    }
+  };
+
   const handleDelete = async (doc: StoredDocumentRecord) => {
     const dayLabel = documentSectionLabels[doc.sectionId];
 
     const result = await Swal.fire({
       icon: "warning",
-      title: "Remover documento?",
-      html: `Tem certeza que deseja remover o documento <strong>«${doc.title}»</strong> do <strong>${dayLabel}</strong>?`,
+      title: "Apagar permanentemente?",
+      html: `Remove o ficheiro e o registo de <strong>«${doc.title}»</strong> (${dayLabel}).<br/><br/>
+        <small>Prefere só tirar do site? Use <strong>Ocultar</strong> — é reversível.</small>`,
       showCancelButton: true,
-      confirmButtonText: "Sim, remover",
+      confirmButtonText: "Sim, apagar tudo",
       cancelButtonText: "Cancelar",
       confirmButtonColor: "#dc2626",
       cancelButtonColor: "#6b7280",
@@ -157,12 +207,12 @@ export default function DocumentsAdminPanel() {
       const response = await fetch(`/api/admin/documents/${doc.id}`, {
         method: "DELETE",
       });
-      if (!response.ok) throw new Error("Não foi possível remover.");
+      if (!response.ok) throw new Error("Não foi possível apagar.");
 
       await Swal.fire({
         icon: "success",
-        title: "Documento removido",
-        text: "O ficheiro foi apagado da plataforma.",
+        title: "Documento apagado",
+        text: "Ficheiro e registo removidos.",
         confirmButtonColor: "#059669",
         timer: 2000,
         timerProgressBar: true,
@@ -170,12 +220,19 @@ export default function DocumentsAdminPanel() {
 
       await loadDocuments();
     } catch (err) {
-      await Swal.fire({
-        icon: "error",
-        title: "Erro ao remover",
-        text: err instanceof Error ? err.message : "Tente novamente.",
-        confirmButtonColor: "#059669",
+      const fallback = await Swal.fire({
+        icon: "warning",
+        title: "Não foi possível apagar",
+        html: `${err instanceof Error ? err.message : "Erro desconhecido."}<br/><br/>
+          Quer <strong>ocultar do site</strong> em vez disso? O ficheiro fica no servidor mas deixa de aparecer na listagem.`,
+        showCancelButton: true,
+        confirmButtonText: "Ocultar do site",
+        cancelButtonText: "Fechar",
+        confirmButtonColor: "#d97706",
       });
+      if (fallback.isConfirmed) {
+        await handleHide(doc, true);
+      }
     }
   };
 
@@ -226,11 +283,45 @@ export default function DocumentsAdminPanel() {
     }
   };
 
+  const handleIgnoreOrphan = async (orphan: OrphanDocumentFile) => {
+    const result = await Swal.fire({
+      icon: "info",
+      title: "Ignorar na listagem?",
+      html: `«<strong>${orphan.fileName}</strong>» deixa de aparecer nesta secção de manutenção. O ficheiro <em>não é apagado</em>.`,
+      showCancelButton: true,
+      confirmButtonText: "Ignorar",
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: "#d97706",
+    });
+    if (!result.isConfirmed) return;
+
+    try {
+      const response = await fetch("/api/admin/documents/orphans/ignore", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sectionId: orphan.sectionId,
+          fileName: orphan.fileName,
+        }),
+      });
+      if (!response.ok) throw new Error(await readApiError(response));
+      await loadDocuments();
+    } catch (err) {
+      await Swal.fire({
+        icon: "error",
+        title: "Erro",
+        text: err instanceof Error ? err.message : "Não foi possível ignorar.",
+        confirmButtonColor: "#059669",
+      });
+    }
+  };
+
   const handleDeleteOrphan = async (orphan: OrphanDocumentFile) => {
     const result = await Swal.fire({
       icon: "warning",
       title: "Apagar ficheiro do disco?",
-      html: `Remove <strong>${orphan.fileName}</strong> (não está no registo JSON).`,
+      html: `Remove <strong>${orphan.fileName}</strong> (não está no registo).<br/><br/>
+        <small>Se tiver dúvidas, use <strong>Ignorar</strong> — só tira da listagem.</small>`,
       showCancelButton: true,
       confirmButtonText: "Apagar ficheiro",
       cancelButtonText: "Cancelar",
@@ -246,12 +337,19 @@ export default function DocumentsAdminPanel() {
       if (!response.ok) throw new Error(await readApiError(response));
       await loadDocuments();
     } catch (err) {
-      await Swal.fire({
-        icon: "error",
-        title: "Erro ao apagar",
-        text: err instanceof Error ? err.message : "Tente novamente.",
-        confirmButtonColor: "#059669",
+      const fallback = await Swal.fire({
+        icon: "warning",
+        title: "Não foi possível apagar",
+        html: `${err instanceof Error ? err.message : "Erro desconhecido."}<br/><br/>
+          Quer <strong>ignorar na listagem</strong> para não ver mais este ficheiro aqui?`,
+        showCancelButton: true,
+        confirmButtonText: "Ignorar na listagem",
+        cancelButtonText: "Fechar",
+        confirmButtonColor: "#d97706",
       });
+      if (fallback.isConfirmed) {
+        await handleIgnoreOrphan(orphan);
+      }
     }
   };
 
@@ -323,13 +421,13 @@ export default function DocumentsAdminPanel() {
 
       {!loading && (orphans.length > 0 || broken.length > 0) && (
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 space-y-4">
-          <h3 className="font-semibold text-amber-900">Manutenção — ficheiros desalinhados</h3>
+          <h3 className="font-semibold text-amber-900">Manutenção — ficheiros extra no disco</h3>
 
           {orphans.length > 0 && (
             <div>
               <p className="text-sm text-amber-800 mb-2">
-                Ficheiros no disco sem registo (aparecem no site só se alguém souber o URL
-                directo; registe para listar e gerir):
+                Ficheiros no disco sem registo. Pode <strong>registar</strong>,{" "}
+                <strong>ignorar</strong> (só tira da listagem) ou <strong>apagar</strong> do disco.
               </p>
               <ul className="space-y-2">
                 {orphans.map((orphan) => (
@@ -345,13 +443,20 @@ export default function DocumentsAdminPanel() {
                         ({Math.round(orphan.size / 1024)} KB)
                       </span>
                     </div>
-                    <div className="flex gap-2 shrink-0">
+                    <div className="flex flex-wrap gap-2 shrink-0">
                       <button
                         type="button"
                         onClick={() => handleRegisterOrphan(orphan)}
                         className="text-sm px-3 py-1.5 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700"
                       >
                         Registar
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleIgnoreOrphan(orphan)}
+                        className="text-sm px-3 py-1.5 rounded-lg border border-amber-300 text-amber-800 hover:bg-amber-100"
+                      >
+                        Ignorar
                       </button>
                       <button
                         type="button"
@@ -486,7 +591,7 @@ export default function DocumentsAdminPanel() {
       <div className="bg-white rounded-xl shadow-sm border border-gray-200">
         <div className="p-6 border-b border-gray-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <h3 className="text-lg font-semibold text-gray-900">
-            Documentos publicados ({visibleDocuments.length})
+            Documentos ({visibleDocuments.length})
           </h3>
           <select
             value={filter}
@@ -513,7 +618,7 @@ export default function DocumentsAdminPanel() {
             {visibleDocuments.map((doc) => (
               <div
                 key={doc.id}
-                className="p-6 flex flex-col lg:flex-row lg:items-center gap-4"
+                className={`p-6 flex flex-col lg:flex-row lg:items-center gap-4 ${doc.hidden ? "bg-gray-50" : ""}`}
               >
                 <div className="flex-grow min-w-0">
                   <div className="flex flex-wrap items-center gap-2 mb-1">
@@ -523,6 +628,11 @@ export default function DocumentsAdminPanel() {
                     <span className="text-xs uppercase bg-gray-100 text-gray-600 px-2 py-1 rounded">
                       {doc.fileType}
                     </span>
+                    {doc.hidden && (
+                      <span className="text-xs font-semibold uppercase tracking-wide bg-amber-100 text-amber-800 px-2 py-1 rounded">
+                        Oculto no site
+                      </span>
+                    )}
                   </div>
                   <h4 className="font-semibold text-gray-900 break-words">{doc.title}</h4>
                   {doc.description && (
@@ -532,23 +642,44 @@ export default function DocumentsAdminPanel() {
                   )}
                   <p className="text-xs text-gray-400 mt-2">{doc.fileName}</p>
                 </div>
-                <div className="flex gap-2 shrink-0">
-                  <a
-                    href={`/documentos/${doc.sectionId}/${doc.fileName}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 text-sm"
-                  >
-                    <Download className="w-4 h-4" />
-                    Ver
-                  </a>
+                <div className="flex flex-wrap gap-2 shrink-0">
+                  {!doc.hidden && (
+                    <a
+                      href={`/documentos/${doc.sectionId}/${doc.fileName}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 text-sm"
+                    >
+                      <Download className="w-4 h-4" />
+                      Ver
+                    </a>
+                  )}
+                  {doc.hidden ? (
+                    <button
+                      type="button"
+                      onClick={() => handleHide(doc, false)}
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-emerald-200 text-emerald-700 hover:bg-emerald-50 text-sm"
+                    >
+                      <Eye className="w-4 h-4" />
+                      Mostrar no site
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => handleHide(doc, true)}
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-amber-200 text-amber-800 hover:bg-amber-50 text-sm"
+                    >
+                      <EyeOff className="w-4 h-4" />
+                      Ocultar
+                    </button>
+                  )}
                   <button
                     type="button"
                     onClick={() => handleDelete(doc)}
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-red-200 text-red-600 hover:bg-red-50 text-sm"
                   >
                     <Trash2 className="w-4 h-4" />
-                    Remover
+                    Apagar
                   </button>
                 </div>
               </div>

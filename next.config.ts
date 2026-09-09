@@ -37,15 +37,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  async redirects() {
-    return [
-      {
-        source: "/programa",
-        destination: "/agenda",
-        permanent: false,
-      },
-    ];
-  },
 };
 
 export default withSerwist(nextConfig);

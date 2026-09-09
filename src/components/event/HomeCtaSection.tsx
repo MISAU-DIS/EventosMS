@@ -16,6 +16,12 @@ export default function HomeCtaSection() {
             Consultar Agenda
           </Link>
           <Link
+            href="/programa"
+            className="border-2 border-white text-white bg-transparent active:bg-misau-bright active:text-misau-dark active:border-misau-bright px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-semibold transition-colors duration-200 w-full sm:w-auto touch-manipulation [@media(hover:hover)]:hover:bg-white [@media(hover:hover)]:hover:text-misau-dark"
+          >
+            Ver Programa
+          </Link>
+          <Link
             href="/contacto"
             className="border-2 border-white text-white bg-transparent active:bg-misau-bright active:text-misau-dark active:border-misau-bright px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-semibold transition-colors duration-200 w-full sm:w-auto touch-manipulation [@media(hover:hover)]:hover:bg-white [@media(hover:hover)]:hover:text-misau-dark"
           >

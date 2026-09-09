@@ -26,6 +26,10 @@ async function writeStore(store: DocumentsStoreFile) {
 /** Migração não-destrutiva: adiciona eventId aos registos antigos sem apagar ficheiros. */
 async function migrateStore(store: DocumentsStoreFile): Promise<DocumentsStoreFile> {
   let changed = false;
+  if (!store.ignoredOrphanPaths) {
+    store.ignoredOrphanPaths = [];
+    changed = true;
+  }
   for (const doc of store.documents) {
     if (!doc.eventId) {
       doc.eventId = DEFAULT_EVENT_ID;
@@ -42,23 +46,44 @@ async function ensureStore(): Promise<DocumentsStoreFile> {
     const parsed = JSON.parse(raw) as DocumentsStoreFile;
     if (parsed.documents) return migrateStore(parsed);
   } catch {
-    const empty: DocumentsStoreFile = { documents: [] };
+    const empty: DocumentsStoreFile = { documents: [], ignoredOrphanPaths: [] };
     await writeStore(empty);
     return empty;
   }
 
-  const empty: DocumentsStoreFile = { documents: [] };
+  const empty: DocumentsStoreFile = { documents: [], ignoredOrphanPaths: [] };
   await writeStore(empty);
   return empty;
 }
 
-export async function listStoredDocuments(eventId?: string) {
+/** Registo por secção/ficheiro (para bloquear URLs de documentos ocultos). */
+export async function findStoredDocumentByFile(
+  sectionId: DocumentSectionId,
+  fileName: string,
+) {
   const store = await ensureStore();
-  const filtered = eventId
+  return (
+    store.documents.find(
+      (doc) => doc.sectionId === sectionId && doc.fileName === fileName,
+    ) ?? null
+  );
+}
+
+export async function listStoredDocuments(
+  eventId?: string,
+  options?: { includeHidden?: boolean },
+) {
+  const store = await ensureStore();
+  let filtered = eventId
     ? store.documents.filter(
         (doc) => doc.eventId === eventId || (!doc.eventId && eventId === DEFAULT_EVENT_ID),
       )
     : store.documents;
+
+  if (!options?.includeHidden) {
+    filtered = filtered.filter((doc) => !doc.hidden);
+  }
+
   return filtered.sort((a, b) =>
     a.title.localeCompare(b.title, "pt", { sensitivity: "base" }),
   );
@@ -117,13 +142,29 @@ export async function deleteStoredDocument(id: string) {
   return true;
 }
 
+/** Ocultar ou voltar a mostrar no site (não apaga o ficheiro). */
+export async function setDocumentHidden(id: string, hidden: boolean) {
+  const store = await ensureStore();
+  const doc = store.documents.find((item) => item.id === id);
+  if (!doc) return null;
+
+  doc.hidden = hidden;
+  doc.hiddenAt = hidden ? new Date().toISOString() : undefined;
+  if (!hidden) delete doc.hiddenAt;
+
+  await writeStore(store);
+  return doc;
+}
+
 /** Ficheiros em public/documentos/ sem entrada no JSON (ex.: cópia manual). */
 export async function listOrphanDocumentFiles(): Promise<OrphanDocumentFile[]> {
   const store = await ensureStore();
+  const ignored = new Set(store.ignoredOrphanPaths ?? []);
+  const orphans: OrphanDocumentFile[] = [];
+
   const registered = new Set(
     store.documents.map((doc) => `${doc.sectionId}/${doc.fileName}`),
   );
-  const orphans: OrphanDocumentFile[] = [];
 
   for (const sectionId of VALID_SECTIONS) {
     const sectionDir = path.join(publicDocsRoot, sectionId);
@@ -136,7 +177,7 @@ export async function listOrphanDocumentFiles(): Promise<OrphanDocumentFile[]> {
 
     for (const fileName of entries) {
       const relativePath = `${sectionId}/${fileName}`;
-      if (registered.has(relativePath)) continue;
+      if (registered.has(relativePath) || ignored.has(relativePath)) continue;
 
       const filePath = path.join(sectionDir, fileName);
       const stat = await fs.stat(filePath);
@@ -240,6 +281,33 @@ export async function deleteOrphanDocumentFile(
   }
 
   await fs.unlink(path.join(publicDocsRoot, sectionId, fileName));
+  return true;
+}
+
+/** Ignorar órfão na listagem de manutenção (não apaga o ficheiro). */
+export async function ignoreOrphanDocumentFile(
+  sectionId: DocumentSectionId,
+  fileName: string,
+) {
+  if (!isValidDocumentSection(sectionId) || fileName.includes("/") || fileName.includes("..")) {
+    throw new Error("Parâmetros inválidos.");
+  }
+
+  const store = await ensureStore();
+  const relativePath = `${sectionId}/${fileName}`;
+  if (
+    store.documents.some(
+      (doc) => doc.sectionId === sectionId && doc.fileName === fileName,
+    )
+  ) {
+    throw new Error("Documento registado — use Ocultar do site.");
+  }
+
+  if (!store.ignoredOrphanPaths) store.ignoredOrphanPaths = [];
+  if (!store.ignoredOrphanPaths.includes(relativePath)) {
+    store.ignoredOrphanPaths.push(relativePath);
+    await writeStore(store);
+  }
   return true;
 }
 
