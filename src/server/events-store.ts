@@ -65,6 +65,22 @@ export async function getActiveEvent(): Promise<StoredEvent | null> {
   return store.events.find((event) => event.status === "active") ?? store.events[0] ?? null;
 }
 
+/** Evento activo, ou o último evento relevante (para dashboard admin). */
+export async function getDashboardEvent(): Promise<StoredEvent | null> {
+  const store = await ensureStore();
+  const active = store.events.find((event) => event.status === "active");
+  if (active) return active;
+
+  const fallback = [...store.events]
+    .filter((event) => event.status !== "draft")
+    .sort(
+      (a, b) =>
+        new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
+    );
+
+  return fallback[0] ?? store.events[0] ?? null;
+}
+
 export async function saveEvents(events: StoredEvent[]): Promise<StoredEvent[]> {
   const store: EventsStoreFile = { events };
   await writeStore(store);
