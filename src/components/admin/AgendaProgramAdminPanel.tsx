@@ -1,16 +1,26 @@
 "use client";
 
 import { useState } from "react";
+import AdminEventBanner from "@/components/admin/AdminEventBanner";
 import AgendaAdminPanel from "@/components/admin/AgendaAdminPanel";
 import ProgramAdminPanel from "@/components/admin/ProgramAdminPanel";
+import { useAdminEventContext } from "@/hooks/useAdminEventContext";
 
 type SubTab = "agenda" | "program";
 
 export default function AgendaProgramAdminPanel() {
   const [subTab, setSubTab] = useState<SubTab>("agenda");
+  const { context } = useAdminEventContext();
 
   return (
     <div className="space-y-6">
+      {context && (
+        <AdminEventBanner
+          event={context.event}
+          eventId={context.eventId}
+          isFallback={context.isFallback}
+        />
+      )}
       <div className="flex gap-2 border-b border-gray-200 pb-4">
         <button
           type="button"

@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { DEFAULT_EVENT_ID } from "@/config/api";
+import { resolveActiveEventId } from "@/server/active-event";
 import type {
   CriteriaStoreFile,
   CriterionGroup,
@@ -72,9 +73,17 @@ export async function listCriteria(eventId = DEFAULT_EVENT_ID) {
   return store.criteria.filter((c) => c.eventId === eventId).sort((a, b) => a.order - b.order);
 }
 
-export async function saveCriteria(criteria: EvaluationCriterion[]) {
-  await writeCriteria({ criteria });
-  return criteria;
+export async function saveCriteria(
+  criteria: EvaluationCriterion[],
+  eventId?: string,
+) {
+  const id = eventId ?? (await resolveActiveEventId());
+  const store = await ensureCriteria();
+  const others = store.criteria.filter((c) => c.eventId !== id);
+  const normalized = criteria.map((c) => ({ ...c, eventId: id }));
+  const merged = [...others, ...normalized];
+  await writeCriteria({ criteria: merged });
+  return normalized;
 }
 
 export async function listSubmissions(eventId = DEFAULT_EVENT_ID) {

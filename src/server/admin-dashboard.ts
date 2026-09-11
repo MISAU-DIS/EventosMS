@@ -18,7 +18,7 @@ export async function getAdminDashboardOverview(): Promise<DashboardOverview> {
   const eventRecord = await getDashboardEvent();
   const eventId = eventRecord?.id;
 
-  const scopedEventId = eventId ?? (await import("@/server/active-event").then((m) => m.resolveActiveEventId()));
+  const scopedEventId = eventId ?? (await resolveActiveEventId());
 
   const [agendaDays, programDays, documents, photos, submissions] = await Promise.all([
     getAgendaDays(scopedEventId),

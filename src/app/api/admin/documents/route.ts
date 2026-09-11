@@ -3,6 +3,7 @@ import {
   addStoredDocument,
   listStoredDocuments,
 } from "@/server/documents-store";
+import { getAdminEventContext } from "@/server/active-event";
 import {
   isAdminSessionValid,
   unauthorizedResponse,
@@ -18,14 +19,16 @@ const validSections = new Set<DocumentSectionId>([
 
 export async function GET() {
   if (!(await isAdminSessionValid())) return unauthorizedResponse();
-  const documents = await listStoredDocuments(undefined, { includeHidden: true });
-  return NextResponse.json({ documents });
+  const ctx = await getAdminEventContext();
+  const documents = await listStoredDocuments(ctx.eventId, { includeHidden: true });
+  return NextResponse.json({ ...ctx, documents });
 }
 
 export async function POST(request: Request) {
   if (!(await isAdminSessionValid())) return unauthorizedResponse();
 
   try {
+    const ctx = await getAdminEventContext();
     const formData = await request.formData();
     const sectionId = formData.get("sectionId");
     const title = formData.get("title");
@@ -53,9 +56,10 @@ export async function POST(request: Request) {
       description: typeof description === "string" ? description : undefined,
       originalFileName: file.name,
       fileBuffer: buffer,
+      eventId: ctx.eventId,
     });
 
-    return NextResponse.json({ document: record }, { status: 201 });
+    return NextResponse.json({ ...ctx, document: record }, { status: 201 });
   } catch (error) {
     const code =
       error instanceof Error && "code" in error

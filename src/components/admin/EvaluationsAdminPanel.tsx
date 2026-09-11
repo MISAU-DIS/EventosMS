@@ -3,10 +3,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { RefreshCw, Save } from "lucide-react";
 import Swal from "sweetalert2";
+import AdminEventBanner from "@/components/admin/AdminEventBanner";
+import { useAdminEventContext } from "@/hooks/useAdminEventContext";
 import type { EvaluationCriterion, EvaluationSubmission } from "@/types/evaluations";
 import { EVALUATION_DAYS } from "@/types/evaluations";
 
 export default function EvaluationsAdminPanel() {
+  const { context } = useAdminEventContext();
   const [criteria, setCriteria] = useState<EvaluationCriterion[]>([]);
   const [submissions, setSubmissions] = useState<EvaluationSubmission[]>([]);
   const [filterDay, setFilterDay] = useState<number | "all">("all");
@@ -59,6 +62,13 @@ export default function EvaluationsAdminPanel() {
 
   return (
     <div className="space-y-6">
+      {context && (
+        <AdminEventBanner
+          event={context.event}
+          eventId={context.eventId}
+          isFallback={context.isFallback}
+        />
+      )}
       <div className="flex flex-wrap gap-2 border-b pb-4">
         <button type="button" onClick={() => setTab("submissions")} className={`px-4 py-2 rounded-lg text-sm font-medium ${tab === "submissions" ? "bg-emerald-600 text-white" : "bg-gray-100"}`}>Submissões</button>
         <button type="button" onClick={() => setTab("criteria")} className={`px-4 py-2 rounded-lg text-sm font-medium ${tab === "criteria" ? "bg-emerald-600 text-white" : "bg-gray-100"}`}>Critérios</button>

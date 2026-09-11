@@ -59,6 +59,8 @@ export const config = {
     "/api/admin/agenda",
     "/api/admin/program",
     "/api/admin/dashboard",
+    "/api/admin/event",
+    "/api/admin/reports",
     "/api/admin/evaluations",
     "/api/admin/documents/:id",
   ],

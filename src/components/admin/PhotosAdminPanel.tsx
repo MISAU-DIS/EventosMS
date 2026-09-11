@@ -3,9 +3,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ImagePlus, RefreshCw, Trash2 } from "lucide-react";
 import Swal from "sweetalert2";
+import AdminEventBanner from "@/components/admin/AdminEventBanner";
+import { useAdminEventContext } from "@/hooks/useAdminEventContext";
 import type { StoredPhoto } from "@/types/photos-store";
 
 export default function PhotosAdminPanel() {
+  const { context } = useAdminEventContext();
   const [photos, setPhotos] = useState<StoredPhoto[]>([]);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
@@ -71,6 +74,13 @@ export default function PhotosAdminPanel() {
 
   return (
     <div className="space-y-6">
+      {context && (
+        <AdminEventBanner
+          event={context.event}
+          eventId={context.eventId}
+          isFallback={context.isFallback}
+        />
+      )}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <h2 className="text-2xl font-bold text-gray-900">Gestão de Fotografias</h2>
         <button type="button" onClick={load} className="inline-flex items-center gap-2 px-4 py-2 border rounded-lg">

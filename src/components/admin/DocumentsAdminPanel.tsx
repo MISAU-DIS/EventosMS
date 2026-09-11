@@ -7,6 +7,8 @@ import {
   documentSectionLabels,
   type DocumentSectionId,
 } from "@/config/document-sections";
+import AdminEventBanner from "@/components/admin/AdminEventBanner";
+import { useAdminEventContext } from "@/hooks/useAdminEventContext";
 import type { OrphanDocumentFile, StoredDocumentRecord } from "@/types/stored-documents";
 
 const sectionOptions: DocumentSectionId[] = ["dia1", "dia2", "dia3", "gerais"];
@@ -38,6 +40,7 @@ export default function DocumentsAdminPanel() {
   const [filter, setFilter] = useState<DocumentSectionId | "all">("all");
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { context } = useAdminEventContext();
   const [form, setForm] = useState({
     sectionId: "dia1" as DocumentSectionId,
     title: "",
@@ -55,7 +58,7 @@ export default function DocumentsAdminPanel() {
       ]);
       if (!docsRes.ok) throw new Error("Falha ao carregar documentos.");
       const docsData = (await docsRes.json()) as { documents: StoredDocumentRecord[] };
-      setDocuments(docsData.documents);
+      setDocuments(docsData.documents ?? []);
 
       if (orphansRes.ok) {
         const orphansData = (await orphansRes.json()) as {
@@ -388,6 +391,13 @@ export default function DocumentsAdminPanel() {
 
   return (
     <div className="space-y-6">
+      {context && (
+        <AdminEventBanner
+          event={context.event}
+          eventId={context.eventId}
+          isFallback={context.isFallback}
+        />
+      )}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h2 className="text-2xl font-bold text-gray-900">Gestão de Documentos</h2>
