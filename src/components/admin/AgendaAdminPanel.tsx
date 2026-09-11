@@ -1,8 +1,10 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { Plus, RefreshCw, Save, Trash2 } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { RefreshCw, Trash2 } from "lucide-react";
 import Swal from "sweetalert2";
+import AdminItemFooter from "@/components/admin/AdminItemFooter";
+import { handleRowOrderBlur, scrollToRowIndex } from "@/lib/admin-row-order";
 import { applyOrderAt, renumberOrders, sortByOrder } from "@/lib/content-order";
 import type { EventAgendaDay, EventTheme } from "@/types/event";
 
@@ -12,6 +14,8 @@ export default function AgendaAdminPanel() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const pendingScrollIndex = useRef<number | null>(null);
 
   const loadAgenda = useCallback(async () => {
     setLoading(true);
@@ -40,6 +44,13 @@ export default function AgendaAdminPanel() {
     loadAgenda();
   }, [loadAgenda]);
 
+  useEffect(() => {
+    if (pendingScrollIndex.current === null) return;
+    const index = pendingScrollIndex.current;
+    pendingScrollIndex.current = null;
+    scrollToRowIndex(rowRefs, index);
+  }, [days]);
+
   const selectedDay = days.find((day) => day.id === selectedDayId);
 
   const updateDay = (updater: (day: EventAgendaDay) => EventAgendaDay) => {
@@ -58,6 +69,11 @@ export default function AgendaAdminPanel() {
   };
 
   const applyThemeOrder = (index: number, newOrder: number) => {
+    const count = selectedDay?.themes.length ?? 0;
+    const target = Math.max(1, Math.min(Math.round(newOrder) || 1, count));
+    if (target === index + 1) return;
+
+    pendingScrollIndex.current = target - 1;
     updateDay((day) => ({
       ...day,
       themes: applyOrderAt(sortByOrder(day.themes), index, newOrder),
@@ -145,25 +161,14 @@ export default function AgendaAdminPanel() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <h2 className="text-2xl font-bold text-gray-900">Gestão da Agenda</h2>
-        <div className="flex gap-2">
-          <button
-            type="button"
-            onClick={loadAgenda}
-            className="inline-flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
-          >
-            <RefreshCw className="w-4 h-4" />
-            Actualizar
-          </button>
-          <button
-            type="button"
-            onClick={handleSave}
-            disabled={saving}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 disabled:opacity-60"
-          >
-            <Save className="w-4 h-4" />
-            {saving ? "A guardar..." : "Guardar alterações"}
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={loadAgenda}
+          className="inline-flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+        >
+          <RefreshCw className="w-4 h-4" />
+          Actualizar
+        </button>
       </div>
 
       {error && (
@@ -216,15 +221,22 @@ export default function AgendaAdminPanel() {
             </label>
           </div>
 
-          <p className="text-sm text-gray-500">
-            Altere o número de ordem e clique fora do campo — os temas deslocam-se
-            automaticamente (ex.: ordem 6 empurra o anterior 6 para 7).
-          </p>
-
           <div className="space-y-4">
             {sortByOrder(selectedDay.themes).map((theme, index) => (
               <div
-                key={`${selectedDay.id}-${index}`}
+                key={`${selectedDay.id}-${theme.order}-${index}`}
+                ref={(el) => {
+                  rowRefs.current[index] = el;
+                }}
+                onBlur={(e) =>
+                  handleRowOrderBlur(
+                    e,
+                    index,
+                    theme.order,
+                    selectedDay.themes.length,
+                    applyThemeOrder,
+                  )
+                }
                 className="grid grid-cols-1 lg:grid-cols-12 gap-3 p-4 bg-gray-50 rounded-lg border border-gray-200"
               >
                 <label className="lg:col-span-1 block">
@@ -236,9 +248,6 @@ export default function AgendaAdminPanel() {
                     value={theme.order}
                     onChange={(e) =>
                       updateTheme(index, "order", Number(e.target.value) || 1)
-                    }
-                    onBlur={(e) =>
-                      applyThemeOrder(index, Number(e.target.value) || theme.order)
                     }
                     className="mt-1 w-full border border-gray-300 rounded-lg px-2 py-2"
                   />
@@ -275,14 +284,12 @@ export default function AgendaAdminPanel() {
             ))}
           </div>
 
-          <button
-            type="button"
-            onClick={addTheme}
-            className="inline-flex items-center gap-2 text-emerald-700 hover:text-emerald-800 font-medium"
-          >
-            <Plus className="w-4 h-4" />
-            Adicionar tema
-          </button>
+          <AdminItemFooter
+            addLabel="Adicionar tema"
+            onAdd={addTheme}
+            onSave={handleSave}
+            saving={saving}
+          />
         </div>
       )}
     </div>

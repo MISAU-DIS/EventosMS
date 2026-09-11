@@ -1,8 +1,10 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { Plus, RefreshCw, Save, Trash2 } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { RefreshCw, Trash2 } from "lucide-react";
 import Swal from "sweetalert2";
+import AdminItemFooter from "@/components/admin/AdminItemFooter";
+import { handleRowOrderBlur, scrollToRowIndex } from "@/lib/admin-row-order";
 import { applyOrderAt, renumberOrders, sortByOrder } from "@/lib/content-order";
 import type { EventProgramDay, EventSession } from "@/types/event";
 
@@ -12,6 +14,8 @@ export default function ProgramAdminPanel() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const pendingScrollIndex = useRef<number | null>(null);
 
   const loadProgram = useCallback(async () => {
     setLoading(true);
@@ -40,6 +44,13 @@ export default function ProgramAdminPanel() {
     loadProgram();
   }, [loadProgram]);
 
+  useEffect(() => {
+    if (pendingScrollIndex.current === null) return;
+    const index = pendingScrollIndex.current;
+    pendingScrollIndex.current = null;
+    scrollToRowIndex(rowRefs, index);
+  }, [days]);
+
   const selectedDay = days.find((day) => day.id === selectedDayId);
 
   const updateDay = (updater: (day: EventProgramDay) => EventProgramDay) => {
@@ -62,6 +73,11 @@ export default function ProgramAdminPanel() {
   };
 
   const applySessionOrder = (index: number, newOrder: number) => {
+    const count = selectedDay?.sessions.length ?? 0;
+    const target = Math.max(1, Math.min(Math.round(newOrder) || 1, count));
+    if (target === index + 1) return;
+
+    pendingScrollIndex.current = target - 1;
     updateDay((day) => ({
       ...day,
       sessions: applyOrderAt(sortByOrder(day.sessions), index, newOrder),
@@ -158,25 +174,14 @@ export default function ProgramAdminPanel() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <h2 className="text-2xl font-bold text-gray-900">Gestão do Programa</h2>
-        <div className="flex gap-2">
-          <button
-            type="button"
-            onClick={loadProgram}
-            className="inline-flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
-          >
-            <RefreshCw className="w-4 h-4" />
-            Actualizar
-          </button>
-          <button
-            type="button"
-            onClick={handleSave}
-            disabled={saving}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 disabled:opacity-60"
-          >
-            <Save className="w-4 h-4" />
-            {saving ? "A guardar..." : "Guardar alterações"}
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={loadProgram}
+          className="inline-flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+        >
+          <RefreshCw className="w-4 h-4" />
+          Actualizar
+        </button>
       </div>
 
       {error && (
@@ -229,15 +234,22 @@ export default function ProgramAdminPanel() {
             </label>
           </div>
 
-          <p className="text-sm text-gray-500">
-            Altere o número de ordem e clique fora do campo — as sessões deslocam-se
-            automaticamente (ex.: ordem 6 empurra o anterior 6 para 7).
-          </p>
-
           <div className="space-y-4">
             {sortByOrder(selectedDay.sessions).map((session, index) => (
               <div
-                key={`${selectedDay.id}-${index}`}
+                key={`${selectedDay.id}-${session.order}-${index}`}
+                ref={(el) => {
+                  rowRefs.current[index] = el;
+                }}
+                onBlur={(e) =>
+                  handleRowOrderBlur(
+                    e,
+                    index,
+                    session.order,
+                    selectedDay.sessions.length,
+                    applySessionOrder,
+                  )
+                }
                 className="grid grid-cols-1 lg:grid-cols-12 gap-3 p-4 bg-gray-50 rounded-lg border border-gray-200"
               >
                 <label className="lg:col-span-1 block">
@@ -249,9 +261,6 @@ export default function ProgramAdminPanel() {
                     value={session.order}
                     onChange={(e) =>
                       updateSession(index, "order", Number(e.target.value) || 1)
-                    }
-                    onBlur={(e) =>
-                      applySessionOrder(index, Number(e.target.value) || session.order)
                     }
                     className="mt-1 w-full border border-gray-300 rounded-lg px-2 py-2"
                   />
@@ -306,14 +315,12 @@ export default function ProgramAdminPanel() {
             ))}
           </div>
 
-          <button
-            type="button"
-            onClick={addSession}
-            className="inline-flex items-center gap-2 text-emerald-700 hover:text-emerald-800 font-medium"
-          >
-            <Plus className="w-4 h-4" />
-            Adicionar sessão
-          </button>
+          <AdminItemFooter
+            addLabel="Adicionar sessão"
+            onAdd={addSession}
+            onSave={handleSave}
+            saving={saving}
+          />
         </div>
       )}
     </div>
