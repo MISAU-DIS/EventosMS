@@ -1,5 +1,6 @@
 import { documentSectionLabels, type DocumentSectionId } from "@/config/document-sections";
 import type { DashboardActivity, DashboardOverview } from "@/types/admin-dashboard";
+import { resolveActiveEventId } from "@/server/active-event";
 import { getAgendaDays } from "@/server/agenda-store";
 import { listStoredDocuments } from "@/server/documents-store";
 import { listSubmissions } from "@/server/evaluations-store";
@@ -17,12 +18,14 @@ export async function getAdminDashboardOverview(): Promise<DashboardOverview> {
   const eventRecord = await getDashboardEvent();
   const eventId = eventRecord?.id;
 
+  const scopedEventId = eventId ?? (await import("@/server/active-event").then((m) => m.resolveActiveEventId()));
+
   const [agendaDays, programDays, documents, photos, submissions] = await Promise.all([
-    getAgendaDays(),
-    getProgramDays(),
-    listStoredDocuments(eventId),
-    listPhotos(eventId),
-    listSubmissions(eventId),
+    getAgendaDays(scopedEventId),
+    getProgramDays(scopedEventId),
+    listStoredDocuments(scopedEventId),
+    listPhotos(scopedEventId),
+    listSubmissions(scopedEventId),
   ]);
 
   const allScores = submissions.flatMap((s) => Object.values(s.scores));
