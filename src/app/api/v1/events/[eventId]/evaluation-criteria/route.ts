@@ -13,7 +13,7 @@ export async function GET(request: Request, context: RouteContext) {
 
   const { searchParams } = new URL(request.url);
   const day = Number(searchParams.get("day") ?? "1");
-  const all = await listCriteria();
+  const all = await listCriteria(event.id);
   const criteria = criteriaForDay(all, day);
 
   return v1Json({ eventId: event.id, dayNumber: day, criteria });

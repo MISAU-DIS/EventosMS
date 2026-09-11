@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { DEFAULT_EVENT_ID } from "@/config/api";
+import { resolveActiveEventId } from "@/server/active-event";
 import { officialPhotos } from "@/data/photos";
 import type { PhotosStoreFile, StoredPhoto } from "@/types/photos-store";
 import { slugifyFileName } from "@/types/stored-documents";
@@ -67,9 +68,11 @@ export async function addPhoto(input: {
   await fs.mkdir(photosRoot, { recursive: true });
   await fs.writeFile(path.join(photosRoot, fileName), input.fileBuffer);
 
+  const eventId = input.eventId ?? (await resolveActiveEventId());
+
   const record: StoredPhoto = {
     id,
-    eventId: input.eventId ?? DEFAULT_EVENT_ID,
+    eventId,
     title: input.title.trim(),
     alt: input.alt.trim() || input.title.trim(),
     fileName,

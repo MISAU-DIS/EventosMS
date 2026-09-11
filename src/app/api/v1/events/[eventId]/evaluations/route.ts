@@ -19,7 +19,7 @@ export async function GET(request: Request, context: RouteContext) {
     return v1Json({ eventId: event.id, submitted: false });
   }
 
-  const submitted = await hasSubmitted(day, fingerprint);
+  const submitted = await hasSubmitted(day, fingerprint, event.id);
   return v1Json({ eventId: event.id, dayNumber: day, submitted });
 }
 
@@ -49,11 +49,12 @@ export async function POST(request: Request, context: RouteContext) {
       return v1Error("EVAL_INVALID_DAY", "Dia inválido.", 400);
     }
 
-    if (await hasSubmitted(body.dayNumber, body.fingerprint)) {
+    if (await hasSubmitted(body.dayNumber, body.fingerprint, event.id)) {
       return v1Error("EVAL_ALREADY_SUBMITTED", "Já avaliou este dia.", 409);
     }
 
     const record = await addSubmission({
+      eventId: event.id,
       dayNumber: body.dayNumber,
       fingerprint: body.fingerprint,
       scores: body.scores,

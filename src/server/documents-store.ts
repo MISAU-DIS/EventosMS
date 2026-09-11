@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { DEFAULT_EVENT_ID } from "@/config/api";
+import { resolveActiveEventId } from "@/server/active-event";
 import type {
   DocumentsStoreFile,
   OrphanDocumentFile,
@@ -95,7 +96,9 @@ export async function addStoredDocument(input: {
   description?: string;
   originalFileName: string;
   fileBuffer: Buffer;
+  eventId?: string;
 }) {
+  const eventId = input.eventId ?? (await resolveActiveEventId());
   const store = await ensureStore();
   const ext = path.extname(input.originalFileName) || "";
   const base = slugifyFileName(path.basename(input.originalFileName, ext)) || "documento";
@@ -110,7 +113,7 @@ export async function addStoredDocument(input: {
 
   const record: StoredDocumentRecord = {
     id,
-    eventId: DEFAULT_EVENT_ID,
+    eventId,
     sectionId: input.sectionId,
     title: input.title.trim(),
     description: input.description?.trim() || undefined,
@@ -221,7 +224,9 @@ export async function registerOrphanDocument(input: {
   fileName: string;
   title: string;
   description?: string;
+  eventId?: string;
 }) {
+  const eventId = input.eventId ?? (await resolveActiveEventId());
   if (!isValidDocumentSection(input.sectionId)) {
     throw new Error("Secção inválida.");
   }
@@ -248,7 +253,7 @@ export async function registerOrphanDocument(input: {
 
   const record: StoredDocumentRecord = {
     id,
-    eventId: DEFAULT_EVENT_ID,
+    eventId,
     sectionId: input.sectionId,
     title: input.title.trim(),
     description: input.description?.trim() || undefined,
