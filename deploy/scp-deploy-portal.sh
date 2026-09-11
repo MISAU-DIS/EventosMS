@@ -25,11 +25,13 @@ cp -a "${SRC}/api/src" "${STAGE}/api/"
 cp "${SRC}/api/package.json" "${SRC}/api/tsconfig.json" "${SRC}/api/Dockerfile" "${STAGE}/api/"
 cp "${SRC}/api/.dockerignore" "${STAGE}/api/" 2>/dev/null || true
 cp "${DEPLOY}/docker-compose.yml" "${STAGE}/docker-compose.yml"
-cp "${SRC}/deploy/merge-production-documents.sh" "${STAGE}/merge-production-documents.sh"
 cp "${SRC}/deploy/backup-production-full.sh" "${STAGE}/backup-production-full.sh"
+cp "${SRC}/deploy/deploy-server.sh" "${STAGE}/deploy-server.sh"
 cp "${SRC}/deploy/restore-production-data.sh" "${STAGE}/restore-production-data.sh"
 cp "${SRC}/deploy/inspect-manual-documents.sh" "${STAGE}/inspect-manual-documents.sh"
 cp "${SRC}/deploy/cleanup-manual-documents.sh" "${STAGE}/cleanup-manual-documents.sh"
+mkdir -p "${STAGE}/scripts"
+cp "${SRC}/scripts/ensure-event-binding.mjs" "${STAGE}/scripts/ensure-event-binding.mjs"
 echo "${BUILD_REVISION}" > "${STAGE}/BUILD_REVISION.txt"
 
 echo "==> Criar tarball"
@@ -60,24 +62,27 @@ sudo tar xzf "${TAR}" -C /opt/eventos-ms-deploy
 
 # 3. Se dados se perderam, restaurar backup bom (exemplo):
 # sudo chmod +x restore-production-data.sh
-# sudo ./restore-production-data.sh /opt/eventos-ms-deploy ~/backup-eventos-20260907-1140.tar.gz
+# sudo ./restore-production-data.sh /opt/eventos-ms-deploy ~/backup-eventos-YYYYMMDD-HHMM-FULL.tar.gz
 
-# 4. Beira2 no volume de fotografias
-sudo cp front/public/fotografias/sobre-o-evento.jpeg front/public/fotografias/sobre-o-evento.jpeg 2>/dev/null || \
-  sudo cp /tmp/sobre-o-evento.jpeg front/public/fotografias/sobre-o-evento.jpeg 2>/dev/null || true
+# 4. Migrar agenda/programa para byEvent + preencher eventId em falta (NÃO apaga dados)
+sudo node scripts/ensure-event-binding.mjs /opt/eventos-ms-deploy
 
-sudo chmod +x merge-production-documents.sh
-sudo ./merge-production-documents.sh /opt/eventos-ms-deploy
-
-# Permissões de escrita para uploads admin (uid nextjs no container)
+# 5. Permissões de escrita para uploads admin (uid nextjs no container)
 sudo chown -R 1001:1001 front/data front/public/documentos front/public/fotografias
 
 export BUILD_REVISION="$(cat BUILD_REVISION.txt 2>/dev/null || date +%Y%m%d)"
 echo "Build revision: ${BUILD_REVISION}"
 docker compose build front && docker compose up -d front
 
+echo "==> Verificação pós-deploy"
 curl -sI http://localhost:8080/programa | head -3
-curl -s http://localhost:8080/api/documents | python3 -c "import json,sys; d=json.load(sys.stdin); print('Front docs:', sum(len(s['documents']) for s in d['sections']))"
+curl -s http://localhost:8080/api/documents | python3 -c "import json,sys; d=json.load(sys.stdin); print('Docs API:', sum(len(s['documents']) for s in d['sections']))"
 curl -s http://localhost:8080/api/program | python3 -c "import json,sys; d=json.load(sys.stdin); print('Program days:', len(d.get('days',[])))"
+curl -s http://localhost:8080/api/agenda | python3 -c "import json,sys; d=json.load(sys.stdin); print('Agenda days:', len(d.get('days',[])))"
+curl -s http://localhost:8080/api/admin/dashboard -H "Cookie: admin_session=misau-ccs-admin-local-session" | python3 -c "import json,sys; d=json.load(sys.stdin); print('Dashboard OK:', 'documents' in d)" 2>/dev/null || echo "Dashboard: verificar login admin manualmente"
+
+# 6. Limpar tarballs antigos (manter 2 mais recentes)
+ls -t ~/ccs-update-*.tar.gz 2>/dev/null | tail -n +3 | xargs -r rm -f
+ls -t ~/backup-eventos-*-FULL.tar.gz 2>/dev/null | tail -n +3 | xargs -r rm -f
 
 SERVER

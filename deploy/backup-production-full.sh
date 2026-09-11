@@ -48,12 +48,19 @@ manifest = {
     "api": {},
 }
 
+def count_days(store):
+    if "byEvent" in store:
+        return sum(len(v) for v in store["byEvent"].values())
+    return len(store.get("days", []))
+
 stores = {
     "documents-store.json": lambda d: len(d.get("documents", [])),
-    "agenda-store.json": lambda d: len(d.get("days", [])),
-    "program-store.json": lambda d: len(d.get("days", [])),
+    "agenda-store.json": count_days,
+    "program-store.json": count_days,
     "photos-store.json": lambda d: len(d.get("photos", [])),
-    "evaluations-store.json": lambda d: len(d.get("evaluations", [])),
+    "evaluations-store.json": lambda d: len(
+        d.get("submissions", d.get("evaluations", []))
+    ),
     "events-store.json": lambda d: len(d.get("events", [])),
 }
 for name, counter in stores.items():
