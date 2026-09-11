@@ -27,20 +27,20 @@ else
 fi
 
 echo "==> 2. Extrair tarball mais recente"
-TAR="$(ls -t ~/ccs-update-*.tar.gz | head -1)"
+TAR="$(find_latest_tar)"
 echo "A extrair: ${TAR}"
-sudo tar xzf "${TAR}" -C "${ROOT}"
+tar xzf "${TAR}" -C "${ROOT}"
 
 echo "==> 3. Vincular dados ao evento activo (byEvent + eventId)"
 if command -v node >/dev/null 2>&1; then
   sudo node scripts/ensure-event-binding.mjs "${ROOT}"
 else
   echo "    node ausente no host — migração via python3"
-  sudo python3 <<'PY'
+  python3 <<PY
 import json
 from pathlib import Path
 
-root = Path("/opt/eventos-ms-deploy")
+root = Path("${ROOT}")
 data = root / "front" / "data"
 event_id = "li-ccs-2026"
 
@@ -90,7 +90,9 @@ curl -s http://localhost:8080/api/agenda | python3 -c \
   "import json,sys; d=json.load(sys.stdin); print('Agenda days:', len(d.get('days',[])))"
 
 echo "==> 7. Limpar tarballs antigos (manter 2)"
-ls -t ~/ccs-update-*.tar.gz 2>/dev/null | tail -n +3 | xargs -r rm -f
-ls -t ~/backup-eventos-*-FULL.tar.gz 2>/dev/null | tail -n +3 | xargs -r rm -f
+for dir in /home/portal /root; do
+  ls -t "${dir}"/ccs-update-*.tar.gz 2>/dev/null | tail -n +3 | xargs -r rm -f
+  ls -t "${dir}"/backup-eventos-*-FULL.tar.gz 2>/dev/null | tail -n +3 | xargs -r rm -f
+done
 
 echo "==> Deploy concluído"
