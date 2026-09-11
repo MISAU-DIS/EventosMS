@@ -23,6 +23,7 @@ import PhotosAdminPanel from '@/components/admin/PhotosAdminPanel';
 import EvaluationsAdminPanel from '@/components/admin/EvaluationsAdminPanel';
 import EventsAdminPanel from '@/components/admin/EventsAdminPanel';
 import DashboardOverviewPanel from '@/components/admin/DashboardOverviewPanel';
+import ReportsAdminPanel from '@/components/admin/ReportsAdminPanel';
 import type { DashboardOverview } from '@/types/admin-dashboard';
 
 export default function AdminDashboard(): React.ReactElement {
@@ -157,12 +158,7 @@ export default function AdminDashboard(): React.ReactElement {
       case 'agenda':
         return <AgendaProgramAdminPanel />;
       case 'reports':
-        return (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">Relatórios e Análises</h2>
-            <p className="text-gray-600">Funcionalidade em desenvolvimento...</p>
-          </div>
-        );
+        return <ReportsAdminPanel />;
       case 'settings':
         return <EventsAdminPanel />;
       default:
