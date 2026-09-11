@@ -1,12 +1,14 @@
 import { NextResponse } from "next/server";
 import { API_VERSION } from "@/config/api";
 import { documentSectionMeta } from "@/config/document-sections";
+import { resolveActiveEventId } from "@/server/active-event";
 import { listStoredDocuments } from "@/server/documents-store";
 import { toPublicDocument } from "@/types/stored-documents";
 import type { DocumentSection } from "@/types/documents";
 
 export async function GET() {
-  const records = await listStoredDocuments();
+  const eventId = await resolveActiveEventId();
+  const records = await listStoredDocuments(eventId);
 
   const sections: DocumentSection[] = documentSectionMeta.map((section) => ({
     ...section,
@@ -16,12 +18,12 @@ export async function GET() {
   }));
 
   return NextResponse.json(
-    { sections },
+    { eventId, sections },
     {
       headers: {
         "X-API-Legacy": "true",
         "X-API-Version": API_VERSION,
-        "X-API-Preferred": "/api/v1/events/li-ccs-2026/documents",
+        "X-API-Preferred": `/api/v1/events/${eventId}/documents`,
       },
     },
   );

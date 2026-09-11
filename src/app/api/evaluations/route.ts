@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
+import { resolveActiveEventId } from "@/server/active-event";
 import { addSubmission, hasSubmitted } from "@/server/evaluations-store";
 
 export async function POST(request: Request) {
   try {
+    const eventId = await resolveActiveEventId();
     const body = (await request.json()) as {
       dayNumber?: number;
       fingerprint?: string;
@@ -21,11 +23,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Dia inválido." }, { status: 400 });
     }
 
-    if (await hasSubmitted(body.dayNumber, body.fingerprint)) {
+    if (await hasSubmitted(body.dayNumber, body.fingerprint, eventId)) {
       return NextResponse.json({ error: "Já avaliou este dia." }, { status: 409 });
     }
 
     const record = await addSubmission({
+      eventId,
       dayNumber: body.dayNumber,
       fingerprint: body.fingerprint,
       scores: body.scores,
@@ -35,7 +38,7 @@ export async function POST(request: Request) {
       organization: body.organization,
     });
 
-    return NextResponse.json({ ok: true, submission: record }, { status: 201 });
+    return NextResponse.json({ eventId, ok: true, submission: record }, { status: 201 });
   } catch (error) {
     return NextResponse.json(
       { error: error instanceof Error ? error.message : "Erro ao submeter." },
@@ -45,12 +48,13 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
+  const eventId = await resolveActiveEventId();
   const { searchParams } = new URL(request.url);
   const day = Number(searchParams.get("day") ?? "0");
   const fingerprint = searchParams.get("fingerprint") ?? "";
   if (!day || !fingerprint) {
-    return NextResponse.json({ submitted: false });
+    return NextResponse.json({ eventId, submitted: false });
   }
-  const submitted = await hasSubmitted(day, fingerprint);
-  return NextResponse.json({ submitted });
+  const submitted = await hasSubmitted(day, fingerprint, eventId);
+  return NextResponse.json({ eventId, submitted });
 }
