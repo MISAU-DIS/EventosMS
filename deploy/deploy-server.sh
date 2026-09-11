@@ -5,6 +5,18 @@ set -euo pipefail
 ROOT="${1:-/opt/eventos-ms-deploy}"
 cd "${ROOT}"
 
+find_latest_tar() {
+  for dir in /home/portal "${HOME}" /root; do
+    # shellcheck disable=SC2086
+    if compgen -G "${dir}/ccs-update-*.tar.gz" >/dev/null 2>&1; then
+      ls -t "${dir}"/ccs-update-*.tar.gz | head -1
+      return 0
+    fi
+  done
+  echo "ERRO: tarball ccs-update-*.tar.gz não encontrado em /home/portal nem ~" >&2
+  return 1
+}
+
 echo "==> 1. Backup completo"
 if [ -x backup-production-full.sh ]; then
   ./backup-production-full.sh "${ROOT}"
