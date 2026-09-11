@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getAdminEventContext } from "@/server/active-event";
 import { registerOrphanDocument } from "@/server/documents-store";
 import {
   isAdminSessionValid,
@@ -33,11 +34,13 @@ export async function POST(request: Request) {
       );
     }
 
+    const ctx = await getAdminEventContext();
     const document = await registerOrphanDocument({
       sectionId: body.sectionId as DocumentSectionId,
       fileName: body.fileName.trim(),
       title: body.title,
       description: body.description,
+      eventId: ctx.eventId,
     });
 
     return NextResponse.json({ document }, { status: 201 });
