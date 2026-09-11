@@ -68,7 +68,8 @@ export function criteriaForDay(criteria: EvaluationCriterion[], dayNumber: numbe
     .sort((a, b) => a.order - b.order);
 }
 
-export async function listCriteria(eventId = DEFAULT_EVENT_ID) {
+export async function listCriteria(eventId?: string | null) {
+  if (!eventId) return [];
   const store = await ensureCriteria();
   return store.criteria.filter((c) => c.eventId === eventId).sort((a, b) => a.order - b.order);
 }
@@ -78,6 +79,7 @@ export async function saveCriteria(
   eventId?: string,
 ) {
   const id = eventId ?? (await resolveActiveEventId());
+  if (!id) throw new Error("Nenhum evento activo.");
   const store = await ensureCriteria();
   const others = store.criteria.filter((c) => c.eventId !== id);
   const normalized = criteria.map((c) => ({ ...c, eventId: id }));

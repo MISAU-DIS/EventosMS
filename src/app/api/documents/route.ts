@@ -8,7 +8,7 @@ import type { DocumentSection } from "@/types/documents";
 
 export async function GET() {
   const eventId = await resolveActiveEventId();
-  const records = await listStoredDocuments(eventId);
+  const records = eventId ? await listStoredDocuments(eventId) : [];
 
   const sections: DocumentSection[] = documentSectionMeta.map((section) => ({
     ...section,

@@ -5,6 +5,9 @@ import { addSubmission, hasSubmitted } from "@/server/evaluations-store";
 export async function POST(request: Request) {
   try {
     const eventId = await resolveActiveEventId();
+    if (!eventId) {
+      return NextResponse.json({ error: "Nenhum evento activo." }, { status: 403 });
+    }
     const body = (await request.json()) as {
       dayNumber?: number;
       fingerprint?: string;
@@ -52,7 +55,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const day = Number(searchParams.get("day") ?? "0");
   const fingerprint = searchParams.get("fingerprint") ?? "";
-  if (!day || !fingerprint) {
+  if (!eventId || !day || !fingerprint) {
     return NextResponse.json({ eventId, submitted: false });
   }
   const submitted = await hasSubmitted(day, fingerprint, eventId);

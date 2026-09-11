@@ -4,6 +4,6 @@ import { getProgramDays } from "@/server/program-store";
 
 export async function GET() {
   const eventId = await resolveActiveEventId();
-  const days = await getProgramDays(eventId);
-  return NextResponse.json({ eventId, days });
+  const days = eventId ? await getProgramDays(eventId) : [];
+  return NextResponse.json({ eventId, hasActiveEvent: Boolean(eventId), days });
 }

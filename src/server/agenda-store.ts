@@ -62,8 +62,10 @@ async function ensureStore(): Promise<AgendaStoreFile> {
   }
 }
 
-export async function getAgendaDays(eventId?: string): Promise<EventAgendaDay[]> {
+export async function getAgendaDays(eventId?: string | null): Promise<EventAgendaDay[]> {
+  if (eventId === null) return [];
   const id = eventId ?? (await resolveActiveEventId());
+  if (!id) return [];
   const store = await ensureStore();
   const days = store.byEvent[id];
   if (days?.length) return normalizeAgendaDays(days);
@@ -80,6 +82,7 @@ export async function saveAgendaDays(
   }
 
   const id = eventId ?? (await resolveActiveEventId());
+  if (!id) throw new Error("Nenhum evento activo.");
   const store = await ensureStore();
   store.byEvent[id] = normalizeAgendaDays(days);
   await writeStore(store);

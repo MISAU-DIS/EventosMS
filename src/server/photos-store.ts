@@ -44,7 +44,8 @@ async function ensureStore(): Promise<PhotosStoreFile> {
   return seed;
 }
 
-export async function listPhotos(eventId = DEFAULT_EVENT_ID): Promise<StoredPhoto[]> {
+export async function listPhotos(eventId?: string | null): Promise<StoredPhoto[]> {
+  if (!eventId) return [];
   const store = await ensureStore();
   return store.photos
     .filter((p) => p.eventId === eventId)
@@ -69,6 +70,7 @@ export async function addPhoto(input: {
   await fs.writeFile(path.join(photosRoot, fileName), input.fileBuffer);
 
   const eventId = input.eventId ?? (await resolveActiveEventId());
+  if (!eventId) throw new Error("Nenhum evento activo.");
 
   const record: StoredPhoto = {
     id,

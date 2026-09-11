@@ -2,13 +2,10 @@ import { DEFAULT_EVENT_ID } from "@/config/api";
 import { getActiveEvent, getDashboardEvent } from "@/server/events-store";
 import type { StoredEvent } from "@/types/event-record";
 
-/** ID do evento activo; fallback para o último evento relevante ou DEFAULT. */
-export async function resolveActiveEventId(): Promise<string> {
+/** ID do evento activo no portal público (null se nenhum activo). */
+export async function resolveActiveEventId(): Promise<string | null> {
   const active = await getActiveEvent();
-  if (active) return active.id;
-
-  const fallback = await getDashboardEvent();
-  return fallback?.id ?? DEFAULT_EVENT_ID;
+  return active?.id ?? null;
 }
 
 /** Contexto do evento para admin (activo ou último relevante). */

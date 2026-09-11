@@ -62,7 +62,7 @@ export async function getEventById(eventId: string): Promise<StoredEvent | null>
 
 export async function getActiveEvent(): Promise<StoredEvent | null> {
   const store = await ensureStore();
-  return store.events.find((event) => event.status === "active") ?? store.events[0] ?? null;
+  return store.events.find((event) => event.status === "active") ?? null;
 }
 
 /** Evento activo, ou o último evento relevante (para dashboard admin). */

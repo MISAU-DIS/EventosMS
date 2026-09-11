@@ -20,7 +20,45 @@ echo "A extrair: ${TAR}"
 sudo tar xzf "${TAR}" -C "${ROOT}"
 
 echo "==> 3. Vincular dados ao evento activo (byEvent + eventId)"
-sudo node scripts/ensure-event-binding.mjs "${ROOT}"
+if command -v node >/dev/null 2>&1; then
+  sudo node scripts/ensure-event-binding.mjs "${ROOT}"
+else
+  echo "    node ausente no host — migração via python3"
+  sudo python3 <<'PY'
+import json
+from pathlib import Path
+
+root = Path("/opt/eventos-ms-deploy")
+data = root / "front" / "data"
+event_id = "li-ccs-2026"
+
+for name in ["agenda-store.json", "program-store.json"]:
+    p = data / name
+    if not p.exists():
+        continue
+    raw = json.loads(p.read_text())
+    if "byEvent" in raw:
+        continue
+    migrated = {"byEvent": {event_id: raw.get("days", [])}}
+    p.write_text(json.dumps(migrated, indent=2) + "\n")
+
+for store in ["documents-store.json", "photos-store.json"]:
+    p = data / store
+    if not p.exists():
+        continue
+    raw = json.loads(p.read_text())
+    key = "documents" if "documents" in raw else "photos"
+    changed = False
+    for item in raw.get(key, []):
+        if not item.get("eventId"):
+            item["eventId"] = event_id
+            changed = True
+    if changed:
+        p.write_text(json.dumps(raw, indent=2) + "\n")
+
+print("Migração byEvent/eventId concluída.")
+PY
+fi
 
 echo "==> 4. Permissões uploads admin"
 sudo chown -R 1001:1001 front/data front/public/documentos front/public/fotografias

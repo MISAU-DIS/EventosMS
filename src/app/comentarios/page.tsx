@@ -8,10 +8,12 @@ import InstitutionalBackground from "@/components/layout/InstitutionalBackground
 import PageContainer from "@/components/layout/PageContainer";
 import ScoreScale from "@/components/event/ScoreScale";
 import {
+  getDaySubmissionSummary,
   getEvaluationFingerprint,
   getSubmittedDays,
   markDaySubmitted,
 } from "@/lib/eval-fingerprint";
+import { averageScores, formatRating, ratingColor } from "@/lib/evaluation-stats";
 import { useOffline } from "@/hooks/useOffline";
 import type { EvaluationCriterion } from "@/types/evaluations";
 import { EVALUATION_DAYS } from "@/types/evaluations";
@@ -31,6 +33,10 @@ export default function ComentariosPage() {
   const [submitting, setSubmitting] = useState(false);
 
   const alreadySubmitted = submittedDays.includes(dayNumber);
+  const filledScores = Object.values(scores).filter((v) => typeof v === "number");
+  const liveAverage = averageScores(filledScores);
+  const allCriteriaFilled = criteria.length > 0 && criteria.every((c) => scores[c.id] !== undefined);
+  const savedSummary = alreadySubmitted ? getDaySubmissionSummary(dayNumber) : null;
 
   const loadCriteria = useCallback(async (day: number) => {
     setLoading(true);
@@ -47,11 +53,15 @@ export default function ComentariosPage() {
   useEffect(() => {
     setSubmittedDays(getSubmittedDays());
     fetch("/api/v1/events/active")
-      .then((r) => r.json())
-      .then((d: { event?: { status: string } }) => {
+      .then(async (r) => {
+        if (!r.ok) {
+          setEventClosed(true);
+          return;
+        }
+        const d = (await r.json()) as { event?: { status: string } };
         if (d.event?.status !== "active") setEventClosed(true);
       })
-      .catch(() => {});
+      .catch(() => setEventClosed(true));
     loadCriteria(dayNumber);
   }, [dayNumber, loadCriteria]);
 
@@ -85,9 +95,17 @@ export default function ComentariosPage() {
       const d = (await r.json()) as { error?: string };
       if (!r.ok) throw new Error(d.error || "Erro ao submeter");
 
-      markDaySubmitted(dayNumber);
+      const avg = averageScores(Object.values(scores));
+      markDaySubmitted(dayNumber, { average: avg ?? 0, scores: { ...scores } });
       setSubmittedDays(getSubmittedDays());
-      await Swal.fire({ icon: "success", title: "Avaliação registada", text: "Obrigado pelo seu feedback.", confirmButtonColor: "#059669" });
+      await Swal.fire({
+        icon: "success",
+        title: "Avaliação registada",
+        html: avg !== null
+          ? `<p>Obrigado pelo seu feedback.</p><p class="mt-2 text-lg font-bold text-emerald-700">Média do dia: ${formatRating(avg)}/5</p>`
+          : "Obrigado pelo seu feedback.",
+        confirmButtonColor: "#059669",
+      });
       setComment("");
     } catch (err) {
       await Swal.fire({ icon: "error", title: "Não foi possível submeter", text: err instanceof Error ? err.message : "", confirmButtonColor: "#059669" });
@@ -138,9 +156,36 @@ export default function ComentariosPage() {
                 <p className="text-gray-600 mt-2">As avaliações não estão disponíveis para eventos arquivados.</p>
               </div>
             ) : alreadySubmitted ? (
-              <div className="bg-white rounded-xl p-8 text-center border border-misau-100">
-                <p className="text-lg font-semibold text-misau-medium">Já submeteu a avaliação deste dia.</p>
-                <p className="text-gray-600 mt-2">Seleccione outro dia se ainda não avaliou.</p>
+              <div className="bg-white rounded-xl p-6 sm:p-8 border border-misau-100 shadow-sm space-y-4">
+                <div className="text-center">
+                  <p className="text-lg font-semibold text-misau-medium">Avaliação deste dia registada</p>
+                  <p className="text-gray-600 mt-2 text-sm">Seleccione outro dia se ainda não avaliou.</p>
+                </div>
+                {savedSummary && (
+                  <div className="rounded-xl bg-emerald-50 border border-emerald-200 p-4 text-center">
+                    <p className="text-sm text-emerald-800">A sua média neste dia</p>
+                    <p className="text-3xl font-bold text-emerald-700 tabular-nums">{formatRating(savedSummary.average)}/5</p>
+                  </div>
+                )}
+                {savedSummary && criteria.length > 0 && (
+                  <ul className="space-y-2">
+                    {criteria.map((c) => {
+                      const score = savedSummary.scores[c.id];
+                      if (score === undefined) return null;
+                      return (
+                        <li key={c.id}>
+                          <div className="flex justify-between text-sm mb-0.5">
+                            <span>{c.label}</span>
+                            <span className="font-semibold">{score}/5</span>
+                          </div>
+                          <div className="h-2 rounded-full bg-gray-100 overflow-hidden">
+                            <div className={`h-full rounded-full ${ratingColor(score)}`} style={{ width: `${(score / 5) * 100}%` }} />
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="bg-white rounded-xl p-6 sm:p-8 border border-misau-100 space-y-6 shadow-sm">
@@ -150,11 +195,25 @@ export default function ComentariosPage() {
                   </p>
                 )}
                 {criteria.map((c) => (
-                  <div key={c.id}>
+                  <div key={c.id} className="rounded-xl bg-misau-50/50 border border-misau-100 p-4">
                     <p className="font-semibold text-misau-dark mb-2">{c.label}</p>
                     <ScoreScale value={scores[c.id] ?? null} onChange={(v) => setScores({ ...scores, [c.id]: v })} />
                   </div>
                 ))}
+
+                {criteria.length > 0 && (
+                  <div className={`rounded-xl border p-4 transition-colors ${allCriteriaFilled ? "bg-emerald-50 border-emerald-200" : "bg-gray-50 border-gray-200"}`}>
+                    <p className="text-sm text-gray-600">Média do seu dia (pré-visualização)</p>
+                    <p className="text-2xl font-bold text-misau-dark tabular-nums mt-1">
+                      {liveAverage !== null ? `${formatRating(liveAverage)}/5` : "—"}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      {allCriteriaFilled
+                        ? "Todos os critérios avaliados — pode submeter."
+                        : `Faltam ${criteria.filter((c) => scores[c.id] === undefined).length} critério(s).`}
+                    </p>
+                  </div>
+                )}
 
                 <label className="block">
                   <span className="text-sm font-medium text-gray-700">Comentário global (opcional)</span>

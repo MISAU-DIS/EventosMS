@@ -5,9 +5,10 @@ import { toPublicPhoto } from "@/types/photos-store";
 
 export async function GET() {
   const eventId = await resolveActiveEventId();
-  const photos = await listPhotos(eventId);
+  const photos = eventId ? await listPhotos(eventId) : [];
   return NextResponse.json({
     eventId,
+    hasActiveEvent: Boolean(eventId),
     photos: photos.map((photo) => toPublicPhoto(photo)),
   });
 }

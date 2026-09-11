@@ -71,9 +71,10 @@ export async function findStoredDocumentByFile(
 }
 
 export async function listStoredDocuments(
-  eventId?: string,
+  eventId?: string | null,
   options?: { includeHidden?: boolean },
 ) {
+  if (eventId === null) return [];
   const store = await ensureStore();
   let filtered = eventId
     ? store.documents.filter(
@@ -99,6 +100,7 @@ export async function addStoredDocument(input: {
   eventId?: string;
 }) {
   const eventId = input.eventId ?? (await resolveActiveEventId());
+  if (!eventId) throw new Error("Nenhum evento activo.");
   const store = await ensureStore();
   const ext = path.extname(input.originalFileName) || "";
   const base = slugifyFileName(path.basename(input.originalFileName, ext)) || "documento";
@@ -227,6 +229,7 @@ export async function registerOrphanDocument(input: {
   eventId?: string;
 }) {
   const eventId = input.eventId ?? (await resolveActiveEventId());
+  if (!eventId) throw new Error("Nenhum evento activo.");
   if (!isValidDocumentSection(input.sectionId)) {
     throw new Error("Secção inválida.");
   }

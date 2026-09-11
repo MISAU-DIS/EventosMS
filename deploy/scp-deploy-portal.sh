@@ -45,44 +45,11 @@ echo "==> No SERVIDOR (ssh ${HOST}):"
 cat <<'SERVER'
 
 cd /opt/eventos-ms-deploy
+sudo chmod +x deploy-server.sh
+sudo ./deploy-server.sh /opt/eventos-ms-deploy
 
-# 1. Backup COMPLETO (script no tarball ou tar manual)
-if [ -x backup-production-full.sh ]; then
-  sudo ./backup-production-full.sh /opt/eventos-ms-deploy
-else
-  sudo tar czf ~/backup-eventos-$(date +%Y%m%d-%H%M)-FULL.tar.gz \
-    -C /opt/eventos-ms-deploy \
-    front/data front/public/documentos front/public/fotografias docker-compose.yml
-fi
-
-# 2. Actualizar SÓ código — UM tarball (nunca usar glob com vários ficheiros)
-TAR="$(ls -t ~/ccs-update-*.tar.gz | head -1)"
-echo "A extrair: ${TAR}"
-sudo tar xzf "${TAR}" -C /opt/eventos-ms-deploy
-
-# 3. Se dados se perderam, restaurar backup bom (exemplo):
-# sudo chmod +x restore-production-data.sh
+# Rollback se necessário:
 # sudo ./restore-production-data.sh /opt/eventos-ms-deploy ~/backup-eventos-YYYYMMDD-HHMM-FULL.tar.gz
-
-# 4. Migrar agenda/programa para byEvent + preencher eventId em falta (NÃO apaga dados)
-sudo node scripts/ensure-event-binding.mjs /opt/eventos-ms-deploy
-
-# 5. Permissões de escrita para uploads admin (uid nextjs no container)
-sudo chown -R 1001:1001 front/data front/public/documentos front/public/fotografias
-
-export BUILD_REVISION="$(cat BUILD_REVISION.txt 2>/dev/null || date +%Y%m%d)"
-echo "Build revision: ${BUILD_REVISION}"
-docker compose build front && docker compose up -d front
-
-echo "==> Verificação pós-deploy"
-curl -sI http://localhost:8080/programa | head -3
-curl -s http://localhost:8080/api/documents | python3 -c "import json,sys; d=json.load(sys.stdin); print('Docs API:', sum(len(s['documents']) for s in d['sections']))"
-curl -s http://localhost:8080/api/program | python3 -c "import json,sys; d=json.load(sys.stdin); print('Program days:', len(d.get('days',[])))"
-curl -s http://localhost:8080/api/agenda | python3 -c "import json,sys; d=json.load(sys.stdin); print('Agenda days:', len(d.get('days',[])))"
-curl -s http://localhost:8080/api/admin/dashboard -H "Cookie: admin_session=misau-ccs-admin-local-session" | python3 -c "import json,sys; d=json.load(sys.stdin); print('Dashboard OK:', 'documents' in d)" 2>/dev/null || echo "Dashboard: verificar login admin manualmente"
-
-# 6. Limpar tarballs antigos (manter 2 mais recentes)
-ls -t ~/ccs-update-*.tar.gz 2>/dev/null | tail -n +3 | xargs -r rm -f
-ls -t ~/backup-eventos-*-FULL.tar.gz 2>/dev/null | tail -n +3 | xargs -r rm -f
+# docker compose restart front
 
 SERVER

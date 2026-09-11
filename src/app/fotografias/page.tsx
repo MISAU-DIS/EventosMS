@@ -1,15 +1,24 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Camera } from "lucide-react";
 import { eventConfig } from "@/data";
 import { useEventPhotos } from "@/hooks/useEventPhotos";
+import { useActiveEventStatus } from "@/hooks/useActiveEventStatus";
 import PageContainer from "@/components/layout/PageContainer";
 import { PageHero } from "@/components/layout/PageContainer";
+import PhotoLightboxModal from "@/components/event/PhotoLightboxModal";
+import NoActiveEventNotice from "@/components/event/NoActiveEventNotice";
 
 export default function FotografiasPage() {
   const { photos, loading } = useEventPhotos();
+  const { loading: eventLoading, hasActiveEvent } = useActiveEventStatus();
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const showEmpty = !eventLoading && !hasActiveEvent;
+  const showGallery = hasActiveEvent && !loading && photos.length > 0;
 
   return (
     <>
@@ -26,8 +35,10 @@ export default function FotografiasPage() {
         />
 
         <PageContainer className="py-8 sm:py-12">
-          {loading ? (
+          {eventLoading || loading ? (
             <p className="text-center text-gray-600">A carregar fotografias...</p>
+          ) : showEmpty ? (
+            <NoActiveEventNotice />
           ) : photos.length === 0 ? (
             <div className="bg-white rounded-xl sm:rounded-2xl p-8 sm:p-12 text-center border border-misau-100">
               <Camera className="w-12 h-12 sm:w-16 sm:h-16 text-misau-gold mx-auto mb-4 sm:mb-6" />
@@ -48,15 +59,22 @@ export default function FotografiasPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.05 }}
                   viewport={{ once: true }}
-                  className="bg-white rounded-xl overflow-hidden border border-misau-100"
+                  className="bg-white rounded-xl overflow-hidden border border-misau-100 group"
                 >
-                  <Image
-                    src={photo.src}
-                    alt={photo.alt}
-                    width={600}
-                    height={400}
-                    className="w-full h-52 sm:h-64 md:h-72 object-cover object-center"
-                  />
+                  <button
+                    type="button"
+                    onClick={() => setLightboxIndex(index)}
+                    className="block w-full text-left cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-misau-gold"
+                    aria-label={`Ampliar ${photo.title}`}
+                  >
+                    <Image
+                      src={photo.src}
+                      alt={photo.alt}
+                      width={600}
+                      height={400}
+                      className="w-full h-52 sm:h-64 md:h-72 object-cover object-center transition-transform duration-300 group-hover:scale-[1.02]"
+                    />
+                  </button>
                   <figcaption className="p-3 sm:p-4 text-sm font-medium text-misau-dark">
                     {photo.title}
                   </figcaption>
@@ -66,6 +84,16 @@ export default function FotografiasPage() {
           )}
         </PageContainer>
       </main>
+
+      {showGallery && lightboxIndex !== null && (
+        <PhotoLightboxModal
+          photos={photos}
+          index={lightboxIndex}
+          open={lightboxIndex !== null}
+          onClose={() => setLightboxIndex(null)}
+          onIndexChange={setLightboxIndex}
+        />
+      )}
     </>
   );
 }

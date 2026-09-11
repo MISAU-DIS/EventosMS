@@ -1,6 +1,6 @@
 import { documentSectionLabels, type DocumentSectionId } from "@/config/document-sections";
 import type { DashboardActivity, DashboardOverview } from "@/types/admin-dashboard";
-import { resolveActiveEventId } from "@/server/active-event";
+import { DEFAULT_EVENT_ID } from "@/config/api";
 import { getAgendaDays } from "@/server/agenda-store";
 import { listStoredDocuments } from "@/server/documents-store";
 import { listSubmissions } from "@/server/evaluations-store";
@@ -18,7 +18,7 @@ export async function getAdminDashboardOverview(): Promise<DashboardOverview> {
   const eventRecord = await getDashboardEvent();
   const eventId = eventRecord?.id;
 
-  const scopedEventId = eventId ?? (await resolveActiveEventId());
+  const scopedEventId = eventRecord?.id ?? DEFAULT_EVENT_ID;
 
   const [agendaDays, programDays, documents, photos, submissions] = await Promise.all([
     getAgendaDays(scopedEventId),

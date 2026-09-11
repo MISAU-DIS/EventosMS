@@ -62,8 +62,10 @@ async function ensureStore(): Promise<ProgramStoreFile> {
   }
 }
 
-export async function getProgramDays(eventId?: string): Promise<EventProgramDay[]> {
+export async function getProgramDays(eventId?: string | null): Promise<EventProgramDay[]> {
+  if (eventId === null) return [];
   const id = eventId ?? (await resolveActiveEventId());
+  if (!id) return [];
   const store = await ensureStore();
   const days = store.byEvent[id];
   if (days?.length) return normalizeProgramDays(days);
@@ -80,6 +82,7 @@ export async function saveProgramDays(
   }
 
   const id = eventId ?? (await resolveActiveEventId());
+  if (!id) throw new Error("Nenhum evento activo.");
   const store = await ensureStore();
   store.byEvent[id] = normalizeProgramDays(days);
   await writeStore(store);

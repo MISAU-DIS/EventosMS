@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import OfflineBanner from "@/components/pwa/OfflineBanner";
+import PublicEventStatusBanner from "@/components/event/PublicEventStatusBanner";
 import { useOffline } from "@/hooks/useOffline";
 
 const NO_HEADER_FOOTER_ROUTES = ["/Login", "/AdminDashboard", "/register"];
@@ -20,6 +21,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
   return (
     <>
       {!hideHeaderFooter && <OfflineBanner />}
+      {!hideHeaderFooter && <PublicEventStatusBanner />}
       {!hideHeaderFooter && <Header offline={offline} />}
       {children}
       {!hideHeaderFooter && <Footer />}

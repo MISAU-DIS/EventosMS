@@ -26,7 +26,11 @@ export function useEventPhotos() {
   useEffect(() => {
     fetch("/api/photos")
       .then((r) => r.json())
-      .then((d: { photos: PublicPhoto[] }) => {
+      .then((d: { photos: PublicPhoto[]; hasActiveEvent?: boolean }) => {
+        if (d.hasActiveEvent === false) {
+          setPhotos([]);
+          return;
+        }
         if (d.photos?.length) setPhotos(d.photos);
       })
       .catch(() => {})
