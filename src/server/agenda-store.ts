@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { eventAgenda } from "@/data/agenda";
+import { normalizeAgendaDays } from "@/lib/content-order";
 import type { AgendaStoreFile } from "@/types/content-store";
 import type { EventAgendaDay } from "@/types/event";
 
@@ -27,7 +28,7 @@ async function ensureStore(): Promise<AgendaStoreFile> {
 
 export async function getAgendaDays(): Promise<EventAgendaDay[]> {
   const store = await ensureStore();
-  return store.days;
+  return normalizeAgendaDays(store.days);
 }
 
 export async function saveAgendaDays(days: EventAgendaDay[]): Promise<EventAgendaDay[]> {
@@ -35,7 +36,7 @@ export async function saveAgendaDays(days: EventAgendaDay[]): Promise<EventAgend
     throw new Error("Agenda inválida.");
   }
 
-  const store: AgendaStoreFile = { days };
+  const store: AgendaStoreFile = { days: normalizeAgendaDays(days) };
   await writeStore(store);
   return store.days;
 }

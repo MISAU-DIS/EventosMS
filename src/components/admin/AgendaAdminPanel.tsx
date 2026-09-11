@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Plus, RefreshCw, Save, Trash2 } from "lucide-react";
 import Swal from "sweetalert2";
+import { applyOrderAt, renumberOrders, sortByOrder } from "@/lib/content-order";
 import type { EventAgendaDay, EventTheme } from "@/types/event";
 
 export default function AgendaAdminPanel() {
@@ -19,7 +20,12 @@ export default function AgendaAdminPanel() {
       const response = await fetch("/api/admin/agenda");
       if (!response.ok) throw new Error("Falha ao carregar agenda.");
       const data = (await response.json()) as { days: EventAgendaDay[] };
-      setDays(data.days);
+      setDays(
+        data.days.map((day) => ({
+          ...day,
+          themes: sortByOrder(day.themes),
+        })),
+      );
       if (data.days.length && !data.days.find((d) => d.id === selectedDayId)) {
         setSelectedDayId(data.days[0].id);
       }
@@ -43,29 +49,34 @@ export default function AgendaAdminPanel() {
   };
 
   const updateTheme = (index: number, field: keyof EventTheme, value: string | number) => {
+    updateDay((day) => {
+      const themes = sortByOrder(day.themes).map((theme, i) =>
+        i === index ? { ...theme, [field]: value } : theme,
+      );
+      return { ...day, themes };
+    });
+  };
+
+  const applyThemeOrder = (index: number, newOrder: number) => {
     updateDay((day) => ({
       ...day,
-      themes: day.themes.map((theme, i) =>
-        i === index ? { ...theme, [field]: value } : theme,
-      ),
+      themes: applyOrderAt(sortByOrder(day.themes), index, newOrder),
     }));
   };
 
   const addTheme = () => {
     updateDay((day) => {
-      const maxOrder = day.themes.reduce((max, t) => Math.max(max, t.order), 0);
+      const themes = sortByOrder(day.themes);
+      const maxOrder = themes.reduce((max, t) => Math.max(max, t.order), 0);
       return {
         ...day,
-        themes: [
-          ...day.themes,
-          { order: maxOrder + 1, title: "", responsible: "" },
-        ],
+        themes: [...themes, { order: maxOrder + 1, title: "", responsible: "" }],
       };
     });
   };
 
   const removeTheme = async (index: number) => {
-    const theme = selectedDay?.themes[index];
+    const theme = selectedDay ? sortByOrder(selectedDay.themes)[index] : undefined;
     if (!theme) return;
 
     const result = await Swal.fire({
@@ -82,7 +93,7 @@ export default function AgendaAdminPanel() {
 
     updateDay((day) => ({
       ...day,
-      themes: day.themes.filter((_, i) => i !== index),
+      themes: renumberOrders(sortByOrder(day.themes).filter((_, i) => i !== index)),
     }));
   };
 
@@ -100,7 +111,12 @@ export default function AgendaAdminPanel() {
         throw new Error(data.error || "Falha ao guardar.");
       }
       const data = (await response.json()) as { days: EventAgendaDay[] };
-      setDays(data.days);
+      setDays(
+        data.days.map((day) => ({
+          ...day,
+          themes: sortByOrder(day.themes),
+        })),
+      );
       await Swal.fire({
         icon: "success",
         title: "Agenda guardada",
@@ -200,8 +216,13 @@ export default function AgendaAdminPanel() {
             </label>
           </div>
 
+          <p className="text-sm text-gray-500">
+            Altere o número de ordem e clique fora do campo — os temas deslocam-se
+            automaticamente (ex.: ordem 6 empurra o anterior 6 para 7).
+          </p>
+
           <div className="space-y-4">
-            {selectedDay.themes.map((theme, index) => (
+            {sortByOrder(selectedDay.themes).map((theme, index) => (
               <div
                 key={`${selectedDay.id}-${index}`}
                 className="grid grid-cols-1 lg:grid-cols-12 gap-3 p-4 bg-gray-50 rounded-lg border border-gray-200"
@@ -211,9 +232,13 @@ export default function AgendaAdminPanel() {
                   <input
                     type="number"
                     min={1}
+                    max={selectedDay.themes.length}
                     value={theme.order}
                     onChange={(e) =>
                       updateTheme(index, "order", Number(e.target.value) || 1)
+                    }
+                    onBlur={(e) =>
+                      applyThemeOrder(index, Number(e.target.value) || theme.order)
                     }
                     className="mt-1 w-full border border-gray-300 rounded-lg px-2 py-2"
                   />

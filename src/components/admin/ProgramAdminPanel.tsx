@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Plus, RefreshCw, Save, Trash2 } from "lucide-react";
 import Swal from "sweetalert2";
+import { applyOrderAt, renumberOrders, sortByOrder } from "@/lib/content-order";
 import type { EventProgramDay, EventSession } from "@/types/event";
 
 export default function ProgramAdminPanel() {
@@ -19,7 +20,12 @@ export default function ProgramAdminPanel() {
       const response = await fetch("/api/admin/program");
       if (!response.ok) throw new Error("Falha ao carregar programa.");
       const data = (await response.json()) as { days: EventProgramDay[] };
-      setDays(data.days);
+      setDays(
+        data.days.map((day) => ({
+          ...day,
+          sessions: sortByOrder(day.sessions),
+        })),
+      );
       if (data.days.length && !data.days.find((d) => d.id === selectedDayId)) {
         setSelectedDayId(data.days[0].id);
       }
@@ -47,21 +53,29 @@ export default function ProgramAdminPanel() {
     field: keyof EventSession,
     value: string | number,
   ) => {
+    updateDay((day) => {
+      const sessions = sortByOrder(day.sessions).map((session, i) =>
+        i === index ? { ...session, [field]: value } : session,
+      );
+      return { ...day, sessions };
+    });
+  };
+
+  const applySessionOrder = (index: number, newOrder: number) => {
     updateDay((day) => ({
       ...day,
-      sessions: day.sessions.map((session, i) =>
-        i === index ? { ...session, [field]: value } : session,
-      ),
+      sessions: applyOrderAt(sortByOrder(day.sessions), index, newOrder),
     }));
   };
 
   const addSession = () => {
     updateDay((day) => {
-      const maxOrder = day.sessions.reduce((max, s) => Math.max(max, s.order), 0);
+      const sessions = sortByOrder(day.sessions);
+      const maxOrder = sessions.reduce((max, s) => Math.max(max, s.order), 0);
       return {
         ...day,
         sessions: [
-          ...day.sessions,
+          ...sessions,
           {
             order: maxOrder + 1,
             time: "",
@@ -75,7 +89,7 @@ export default function ProgramAdminPanel() {
   };
 
   const removeSession = async (index: number) => {
-    const session = selectedDay?.sessions[index];
+    const session = selectedDay ? sortByOrder(selectedDay.sessions)[index] : undefined;
     if (!session) return;
 
     const result = await Swal.fire({
@@ -92,7 +106,7 @@ export default function ProgramAdminPanel() {
 
     updateDay((day) => ({
       ...day,
-      sessions: day.sessions.filter((_, i) => i !== index),
+      sessions: renumberOrders(sortByOrder(day.sessions).filter((_, i) => i !== index)),
     }));
   };
 
@@ -110,7 +124,12 @@ export default function ProgramAdminPanel() {
         throw new Error(data.error || "Falha ao guardar.");
       }
       const data = (await response.json()) as { days: EventProgramDay[] };
-      setDays(data.days);
+      setDays(
+        data.days.map((day) => ({
+          ...day,
+          sessions: sortByOrder(day.sessions),
+        })),
+      );
       await Swal.fire({
         icon: "success",
         title: "Programa guardado",
@@ -210,8 +229,13 @@ export default function ProgramAdminPanel() {
             </label>
           </div>
 
+          <p className="text-sm text-gray-500">
+            Altere o número de ordem e clique fora do campo — as sessões deslocam-se
+            automaticamente (ex.: ordem 6 empurra o anterior 6 para 7).
+          </p>
+
           <div className="space-y-4">
-            {selectedDay.sessions.map((session, index) => (
+            {sortByOrder(selectedDay.sessions).map((session, index) => (
               <div
                 key={`${selectedDay.id}-${index}`}
                 className="grid grid-cols-1 lg:grid-cols-12 gap-3 p-4 bg-gray-50 rounded-lg border border-gray-200"
@@ -221,9 +245,13 @@ export default function ProgramAdminPanel() {
                   <input
                     type="number"
                     min={1}
+                    max={selectedDay.sessions.length}
                     value={session.order}
                     onChange={(e) =>
                       updateSession(index, "order", Number(e.target.value) || 1)
+                    }
+                    onBlur={(e) =>
+                      applySessionOrder(index, Number(e.target.value) || session.order)
                     }
                     className="mt-1 w-full border border-gray-300 rounded-lg px-2 py-2"
                   />

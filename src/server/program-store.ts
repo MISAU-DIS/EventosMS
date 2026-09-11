@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { eventProgram } from "@/data/program";
+import { normalizeProgramDays } from "@/lib/content-order";
 import type { ProgramStoreFile } from "@/types/content-store";
 import type { EventProgramDay } from "@/types/event";
 
@@ -27,7 +28,7 @@ async function ensureStore(): Promise<ProgramStoreFile> {
 
 export async function getProgramDays(): Promise<EventProgramDay[]> {
   const store = await ensureStore();
-  return store.days;
+  return normalizeProgramDays(store.days);
 }
 
 export async function saveProgramDays(days: EventProgramDay[]): Promise<EventProgramDay[]> {
@@ -35,7 +36,7 @@ export async function saveProgramDays(days: EventProgramDay[]): Promise<EventPro
     throw new Error("Programa inválido.");
   }
 
-  const store: ProgramStoreFile = { days };
+  const store: ProgramStoreFile = { days: normalizeProgramDays(days) };
   await writeStore(store);
   return store.days;
 }

@@ -1,4 +1,5 @@
 import { eventProgram, eventConfig } from "@/data";
+import { sortByOrder } from "@/lib/content-order";
 
 const GOLD: [number, number, number] = [222, 178, 59];
 const GREEN: [number, number, number] = [0, 100, 80];
@@ -62,7 +63,7 @@ export async function generateAgendaPdf() {
     autoTable(doc, {
       startY,
       head: [["N.º", "Tempo", "Actividade/Tema", "Responsável"]],
-      body: day.sessions.map((s) => [
+      body: sortByOrder(day.sessions).map((s) => [
         String(s.order),
         s.time,
         s.title,

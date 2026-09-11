@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Clock, Users } from "lucide-react";
+import { sortByOrder } from "@/lib/content-order";
 import { getSessionColor } from "@/lib/session-colors";
 import type { EventProgramDay } from "@/types/event";
 import { eventConfig } from "@/data";
@@ -37,7 +38,7 @@ export default function ProgramDayContent({
         <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-misau-200" />
 
         <div className="space-y-6">
-          {day.sessions.map((session, index) => (
+          {sortByOrder(day.sessions).map((session, index) => (
             <motion.div
               key={`${session.order}-${session.time}-${index}`}
               initial={{ opacity: 0, x: -20 }}

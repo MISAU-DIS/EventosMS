@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Calendar } from "lucide-react";
+import { sortByOrder } from "@/lib/content-order";
 import type { EventAgendaDay } from "@/types/event";
 
 type AgendaDayContentProps = {
@@ -41,7 +42,7 @@ export default function AgendaDayContent({
         </h3>
 
         <div className="space-y-3 sm:space-y-4">
-          {day.themes.map((theme, index) => (
+          {sortByOrder(day.themes).map((theme, index) => (
             <motion.div
               key={theme.order}
               initial={{ opacity: 0, x: -20 }}

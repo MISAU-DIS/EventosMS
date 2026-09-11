@@ -74,10 +74,10 @@ sudo chown -R 1001:1001 front/data front/public/documentos front/public/fotograf
 
 export BUILD_REVISION="$(cat BUILD_REVISION.txt 2>/dev/null || date +%Y%m%d)"
 echo "Build revision: ${BUILD_REVISION}"
-docker compose build front api && docker compose up -d front api
+docker compose build front && docker compose up -d front
 
+curl -sI http://localhost:8080/programa | head -3
 curl -s http://localhost:8080/api/documents | python3 -c "import json,sys; d=json.load(sys.stdin); print('Front docs:', sum(len(s['documents']) for s in d['sections']))"
-curl -s http://localhost:4000/api/documents | python3 -c "import json,sys; d=json.load(sys.stdin); print('API docs:', sum(len(s['documents']) for s in d['sections']))"
-curl -s http://localhost:4000/api/v1/health | python3 -m json.tool | head -8
+curl -s http://localhost:8080/api/program | python3 -c "import json,sys; d=json.load(sys.stdin); print('Program days:', len(d.get('days',[])))"
 
 SERVER
